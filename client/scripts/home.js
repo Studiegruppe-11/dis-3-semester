@@ -10,7 +10,7 @@ function login() {
   axios
     .post("http://localhost:3000/customer/login", user)
     .then(function (response) {
-      location.href = "/chat";
+      location.href = "/pages/index.html";
     })
     .catch(function (error) {
       console.log(error);

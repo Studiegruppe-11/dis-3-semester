@@ -19,7 +19,7 @@ async function getWeather(latitude, longitude) {
       }
     }, 2000);
   });
-
+  
   return promise;
 }
 

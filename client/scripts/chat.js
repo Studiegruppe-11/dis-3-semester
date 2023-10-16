@@ -1,4 +1,4 @@
-const socket = io();
+/*const socket = io();
 
 const messages = document.getElementById("messages");
 const input = document.getElementById("input");
@@ -62,3 +62,4 @@ function seChat() {
 function serverBesked() {
   socket.emit("hola", "Besked til server her.");
 }
+*/

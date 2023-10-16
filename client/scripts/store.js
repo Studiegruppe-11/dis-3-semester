@@ -22,7 +22,7 @@ function addToCookie(itemName) {
       "bagItems=" + existingItems + (existingItems ? "," : "") + itemName;
   }
 }
-
+ 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -35,6 +35,17 @@ function checkout() {
     .then(function (response) {})
     .catch(function (error) {});
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // Extra ting (behøves ikke):
 
