@@ -43,6 +43,6 @@ app.get('/testdb', (req, res) => {
 });
 
 // Start serveren på port 3000
-app.listen(8000, () => {
-  console.log('Serveren kører på port 3000.');
-});
+app.listen(8000, '164.90.228.42', () => {
+    console.log('Serveren kører på IP-adressen 164.90.228.42 og port 8000.');
+  });
