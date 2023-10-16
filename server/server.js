@@ -73,10 +73,9 @@ app.use('/cart', cartRoute);
 
 // Start server
 
-app.listen(3000, () => {
+http.listen(3000, "164.90.228.42", () => {
   console.log("Server open on port 3000");
 });
-
 // Socket IO
 
 // ################### CHAT FRA TIMERNE (MÅ IKKE BRUGES) 
