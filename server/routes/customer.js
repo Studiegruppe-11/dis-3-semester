@@ -12,6 +12,7 @@ customerRoutes.get("/", (req, res) => {
   res.send(customers);
 });
 
+// GET
 customerRoutes.get("/:username", (req, res) => {
   const user = customers.find(
     (customer) => customer.username === req.params.username
@@ -21,6 +22,7 @@ customerRoutes.get("/:username", (req, res) => {
   else res.send("Ingen person med dette username").status(404);
 });
 
+// POST
 customerRoutes.post("/", (req, res) => {
   const newCustomer = req.body;
   customers.push(newCustomer);
@@ -28,6 +30,7 @@ customerRoutes.post("/", (req, res) => {
   res.status(201).json(newCustomer);
 });
 
+// PUT
 customerRoutes.put("/:username", (req, res) => {
   const username = req.params.username;
   const updatedCustomer = req.body;
@@ -44,6 +47,7 @@ customerRoutes.put("/:username", (req, res) => {
   res.json(updatedCustomer);
 });
 
+// DELETE
 customerRoutes.delete("/:username", (req, res) => {
   const username = req.params.username;
 

@@ -5,6 +5,9 @@ const path = require("path");
 const app = express();
 const customerRoute = require("./routes/customer");
 const storeRoutes = require("./routes/store");
+const adminRoute = require("./routes/adminRoute.js");
+const cartRoute = require('./routes/cartRoute.js');
+
 
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
@@ -31,6 +34,31 @@ app.get("/store", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/store.html"));
 });
 
+
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
+});
+
+app.get("/admin/data", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/adminData.html"));
+});
+
+app.get("/admin/orders", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/adminOrders.html"));
+});
+
+app.get("/store/checkout", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/checkout.html"));
+});
+
+
+
+
+
+
+
+
+
 // app.get("/chatlog", (req, res) => {
 //   res.send(chatLog);
 // });
@@ -39,6 +67,9 @@ app.get("/store", (req, res) => {
 
 app.use("/customer", customerRoute);
 app.use("/store", storeRoutes);
+app.use("/admins", adminRoute);
+app.use('/cart', cartRoute);
+
 
 // Start server
 
