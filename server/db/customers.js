@@ -2,7 +2,7 @@ const customers = [
   {
     username: "hans",
     email: "hanshansen@gmail.com",
-    password: "hansemanse",
+    password: "hans",
   },
   {
     username: "jens",

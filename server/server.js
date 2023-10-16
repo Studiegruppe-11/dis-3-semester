@@ -9,7 +9,7 @@ const storeRoutes = require("./routes/store");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 
-const chatLog = require("./db/chat.js");
+// const chatLog = require("./db/chat.js");
 
 // Middlewares
 
@@ -48,22 +48,23 @@ app.listen(3000, () => {
 
 // Socket IO
 
-io.on("connection", (socket) => {
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
-    chatLog.push(msg);
-    console.log(chatLog);
-  });
-  socket.on("user joined", (username) => {
-    console.log(username + " joined the chat");
-    io.emit("chat message", username + " joined the chat");
-  });
-  socket.on("hola", (besked) => {
-    console.log(besked);
-    io.emit("hola", "besked tilbage til klienten..");
-  });
-});
+// ################### CHAT FRA TIMERNE (MÅ IKKE BRUGES) 
+// io.on("connection", (socket) => {
+//   socket.on("chat message", (msg) => {
+//     io.emit("chat message", msg);
+//     chatLog.push(msg);
+//     console.log(chatLog);
+//   });
+//   socket.on("user joined", (username) => {
+//     console.log(username + " joined the chat");
+//     io.emit("chat message", username + " joined the chat");
+//   });
+//   socket.on("hola", (besked) => {
+//     console.log(besked);
+//     io.emit("hola", "besked tilbage til klienten..");
+//   });
+// });
 
-http.listen(3000, "localhost", () => {
-  console.log(`Socket.IO server running at http://localhost:3000/`);
-});
+// http.listen(3000, "localhost", () => {
+//   console.log(`Socket.IO server running at http://localhost:3000/`);
+// });
