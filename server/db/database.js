@@ -1,11 +1,18 @@
+const fs = require('fs');
 const mysql = require('mysql2');
+const dotenv = require('dotenv');
 
-const connection = mysql.createConnection({
-  host: 'localhost', // Din MySQL-server host, brug 'localhost' hvis din MySQL server kører på samme maskine
-  user: 'root', // Din MySQL-brugernavn
-  password: 'your-password', // Din MySQL-adgangskode
-  database: 'your-database' // Navnet på din database
-});
+// Load environment variables from .env file
+dotenv.config();
+
+// Load and parse the config.json file
+const configJSON = fs.readFileSync('config.json', 'utf8');
+const config = JSON.parse(
+  configJSON.replace(/\$\{(\w+)\}/g, (_, variable) => process.env[variable])
+);
+
+// Create the database connection
+const connection = mysql.createConnection(config);
 
 connection.connect(err => {
   if (err) {
