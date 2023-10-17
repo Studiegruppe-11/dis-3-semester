@@ -13,6 +13,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Global Error Handler:', err.message);
+  res.status(500).send('Server Error');
+});
+
+
 // Routes
 
 const customerRoute = require("./routes/customer");
