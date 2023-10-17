@@ -3,8 +3,7 @@
 const express = require("express");
 const app = express();
 const adminRoute = express.Router();
-
-const admins = require("../db/admins");
+const db = require('../db/database.js');
 
 app.get('/show-table', async (req, res) => {
     try {
