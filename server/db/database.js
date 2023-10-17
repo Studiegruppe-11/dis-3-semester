@@ -12,7 +12,12 @@ const pool = createPool({
 });
 
 pool.query('select * from admins', (error, results, fields) => {
-	return console.log(results);
+	if (error) {
+        return console.error(error.message);
+    } else {
+        console.log(results);
+    }
+    
 });
 
 module.exports = pool.promise();
