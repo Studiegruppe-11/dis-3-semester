@@ -1,3 +1,5 @@
+// root/server/db/database.js
+
 const dotenv = require('dotenv');
 dotenv.config({path: '../../.env'});
 
@@ -28,4 +30,7 @@ const executeQuery = async (query) => {
 executeQuery('SELECT * FROM admins');
 
 // Exporting the pool promise for use in other modules
-module.exports = pool.promise();
+module.exports = {
+    poolPromise: pool.promise(),
+    executeQuery
+};
