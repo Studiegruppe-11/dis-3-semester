@@ -1,10 +1,11 @@
+// root/server/server.js
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
 
-port = 3000;
-
+const port = 3000;
 
 const customerRoute = require("./routes/customer");
 const storeRoutes = require("./routes/store");
@@ -19,7 +20,6 @@ app.use("/store", storeRoutes);
 app.use("/admins", adminRoute);
 app.use('/cart', cartRoute);
 app.use("/show-admins", showAdminsRoute);
-
 
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
@@ -64,19 +64,9 @@ app.get("/store/checkout", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/checkout.html"));
 });
 
-
-
-
-
-
-
-
-
 // app.get("/chatlog", (req, res) => {
 //   res.send(chatLog);
 // });
-
-
 
 
 // Start server på droplet
@@ -86,7 +76,7 @@ app.get("/store/checkout", (req, res) => {
 // });
 
 // start server på pc
-http.listen(port, 'localhost', () => {
+http.listen(port, '164.90.228.42', () => {
   console.log('Server open on port: ' + port);
 });
 
