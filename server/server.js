@@ -1,12 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-
 const app = express();
+
+port = 3000;
+
+
 const customerRoute = require("./routes/customer");
 const storeRoutes = require("./routes/store");
 const adminRoute = require("./routes/adminRoute.js");
 const cartRoute = require('./routes/cartRoute.js');
+const showAdminsRoute = require("./routes/showAdminsRoute.js");
 
 // API
 
@@ -14,6 +18,7 @@ app.use("/customer", customerRoute);
 app.use("/store", storeRoutes);
 app.use("/admins", adminRoute);
 app.use('/cart', cartRoute);
+app.use("/show-admins", showAdminsRoute);
 
 
 const http = require("http").Server(app);
@@ -81,8 +86,8 @@ app.get("/store/checkout", (req, res) => {
 // });
 
 // start server på pc
-http.listen(3000, 'localhost', () => {
-  console.log("Server open on port 3000");
+http.listen(port, 'localhost', () => {
+  console.log('Server open on port: ' + port);
 });
 
 
