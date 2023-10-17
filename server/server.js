@@ -73,14 +73,14 @@ app.use('/cart', cartRoute);
 
 // Start server på droplet
 
-// http.listen(3000, "164.90.228.42", () => {
-//   console.log("Server open on port 3000");
-// });
-
-// start server på pc
-http.listen(3000, 'localhost', () => {
+http.listen(3000, "164.90.228.42", () => {
   console.log("Server open on port 3000");
 });
+
+// start server på pc
+// http.listen(3000, 'localhost', () => {
+//   console.log("Server open on port 3000");
+// });
 
 
 // Socket IO
