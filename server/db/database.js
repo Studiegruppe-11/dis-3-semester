@@ -1,14 +1,28 @@
 // root/server/db/database.js
 
 const mysql = require('mysql2');
-const config = require('../../config.js');
+require('dotenv').config();
 
-const connection = mysql.createConnection({
-    host: config.database.host,
-    user: config.database.user,
-    password: config.database.password,
-    database: config.database.name
-});
+const config = {
+    database: {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        name: process.env.DB_NAME
+    }
+}
+
+console.log(config);
+
+// const config = require('../../config.js');
+// console.log(config.database);
+
+// const connection = mysql.createConnection({
+//     host: config.database.host,
+//     user: config.database.user,
+//     password: config.database.password,
+//     database: config.database.name
+// });
 
 connection.connect(err => {
     if (err) {
