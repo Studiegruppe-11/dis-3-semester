@@ -76,7 +76,7 @@ app.get("/store/checkout", (req, res) => {
 // });
 
 // start server på pc
-http.listen(port, '0.0.0.0', () => {
+http.listen(port, 'localhost', () => {
   console.log('Server open on port: ' + port);
 });
 
