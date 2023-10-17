@@ -3,7 +3,7 @@
 const dotenv = require('dotenv');
 dotenv.config({path: '../../.env'});
 
-const {createPool} = require('mysql2');
+const mysql = require('mysql2/promise');  // Import promise version
 
 // Defining the database configuration using environment variables
 const dbConfig = {
@@ -14,12 +14,12 @@ const dbConfig = {
 };
 
 // Creating a pool of database connections
-const pool = createPool(dbConfig);
+const pool = mysql.createPool(dbConfig);  // Adjusted method name
 
 // Function to execute a query and log the results
 const executeQuery = async (query) => {
     try {
-        const [rows, fields] = await pool.execute(query);
+        const [rows, fields] = await pool.query(query);
         console.log(rows);
     } catch (error) {
         console.error('Database query error:', error.message);
@@ -31,6 +31,6 @@ executeQuery('SELECT * FROM admins');
 
 // Exporting the pool promise for use in other modules
 module.exports = {
-    poolPromise: pool.promise(),
+    poolPromise: pool,
     executeQuery
 };

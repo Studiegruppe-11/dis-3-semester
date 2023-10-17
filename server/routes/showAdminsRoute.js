@@ -1,3 +1,5 @@
+// root/server/routes/showAdminsRoute.js
+
 const express = require("express");
 const adminRoute = express.Router();
 const db = require('../db/database.js');
