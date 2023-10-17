@@ -8,6 +8,13 @@ const storeRoutes = require("./routes/store");
 const adminRoute = require("./routes/adminRoute.js");
 const cartRoute = require('./routes/cartRoute.js');
 
+// API
+
+app.use("/customer", customerRoute);
+app.use("/store", storeRoutes);
+app.use("/admins", adminRoute);
+app.use('/cart', cartRoute);
+
 
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
@@ -25,10 +32,6 @@ app.use(express.static(path.join(__dirname, "../client")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
-
-
-
-
 
 
 app.get("/chat", (req, res) => {
@@ -68,12 +71,7 @@ app.get("/store/checkout", (req, res) => {
 //   res.send(chatLog);
 // });
 
-// API
 
-app.use("/customer", customerRoute);
-app.use("/store", storeRoutes);
-app.use("/admins", adminRoute);
-app.use('/cart', cartRoute);
 
 
 // Start server på droplet
