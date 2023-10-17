@@ -27,10 +27,9 @@ const executeQuery = async (query) => {
 };
 
 // Example usage: Executing a query to select all from the 'admins' table
-executeQuery('SELECT * FROM admins');
+// executeQuery('SELECT * FROM admins');
 
 // Exporting the pool promise for use in other modules
 module.exports = {
-    poolPromise: pool,
-    executeQuery
+    poolPromise: pool
 };
