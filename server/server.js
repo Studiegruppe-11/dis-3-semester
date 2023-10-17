@@ -23,8 +23,13 @@ app.use(express.static(path.join(__dirname, "../client")));
 // Send client files from server
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/home.html"));
+  res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
+
+
+
+
+
 
 app.get("/chat", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/chat.html"));
@@ -71,11 +76,18 @@ app.use("/admins", adminRoute);
 app.use('/cart', cartRoute);
 
 
-// Start server
+// Start server på droplet
 
-http.listen(3000, "164.90.228.42", () => {
+// http.listen(3000, "164.90.228.42", () => {
+//   console.log("Server open on port 3000");
+// });
+
+// start server på pc
+http.listen(3000, 'localhost', () => {
   console.log("Server open on port 3000");
 });
+
+
 // Socket IO
 
 // ################### CHAT FRA TIMERNE (MÅ IKKE BRUGES) 
