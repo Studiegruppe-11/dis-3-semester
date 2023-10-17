@@ -7,9 +7,11 @@ adminRoute.get('/', async (req, res) => {
         const [rows, fields] = await db.execute('SELECT * FROM admins');
         res.json(rows);
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
+        console.error('Error:', error.message);
+        console.error('Stack:', error.stack);
+        res.status(500).send('Server error: ' + error.message);
     }
 });
+
 
 module.exports = adminRoute;

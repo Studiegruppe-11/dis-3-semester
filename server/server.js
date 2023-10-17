@@ -7,6 +7,14 @@ const app = express();
 
 const port = 3000;
 
+// Middlewares
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../client")));
+
+// Routes
+
 const customerRoute = require("./routes/customer");
 const storeRoutes = require("./routes/store");
 const adminRoute = require("./routes/adminRoute.js");
@@ -26,11 +34,7 @@ const io = require("socket.io")(http);
 
 // const chatLog = require("./db/chat.js");
 
-// Middlewares
 
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "../client")));
 
 // Send client files from server
 
