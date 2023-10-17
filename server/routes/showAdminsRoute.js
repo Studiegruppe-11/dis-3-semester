@@ -4,6 +4,8 @@ const express = require("express");
 const adminRoute = express.Router();
 const db = require('../db/database.js');
 
+console.log(db)
+
 adminRoute.get('/', async (req, res) => {
     try {
         const [rows, fields] = await db.poolPromise.query('SELECT * FROM admins');

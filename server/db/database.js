@@ -1,7 +1,10 @@
 // root/server/db/database.js
 
+const path = require('path');  // Require the 'path' module at the top of your file
 const dotenv = require('dotenv');
-dotenv.config({path: '../../.env'});
+
+// Update this line to use an absolute path to your .env file
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const mysql = require('mysql2/promise');  // Import promise version
 
@@ -12,6 +15,11 @@ const dbConfig = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME
 };
+
+console.log(dbConfig.host)
+console.log(dbConfig.user)
+console.log(dbConfig.password)
+console.log(dbConfig.database)
 
 // Creating a pool of database connections
 const pool = mysql.createPool(dbConfig);  // Adjusted method name
