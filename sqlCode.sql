@@ -117,8 +117,6 @@ insert into customers (id, first_name, last_name, country, age, email, gender, s
 insert into customers (id, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city) values (100, 'Devlin', 'Lawlings', 'Colombia', 20, 'dlawlings2r@imdb.com', 'Male', 'Daystar', '1521', '232517', 'San Carlos');
 
 
--- Order data
-
 -- Create the products table
 CREATE TABLE products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -141,3 +139,91 @@ INSERT INTO products (name, description, price) VALUES
 ('Green Shield', 'Apple, Ice, Spinach, Kale, Broccoli, Cucumber, Olive Oil', 69.00),
 ('Herb Tonic', 'Apple, Ginger, Pineapple, Red Bell Pepper, Olive Oil, Pepper, Ice, Turmeric', 69.00);
 
+-- SQL FOR ORDER DATA
+
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    order_time TIME,
+    order_total DECIMAL(10,2),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+CREATE TABLE order_items (
+    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10,2),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+
+-- Inserting data to orders
+
+DELIMITER $$
+CREATE PROCEDURE GenerateOrders()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    DECLARE j INT;
+    DECLARE random_customer_id INT;
+    DECLARE random_product_id INT;
+    DECLARE random_quantity INT;
+    DECLARE product_price DECIMAL(10,2);
+    DECLARE random_order_date DATE;
+    DECLARE random_order_time TIME;
+    
+    WHILE i <= 1000 DO
+        -- Generate random data for an order
+        SET random_customer_id = FLOOR(1 + RAND() * 100);
+        SET random_order_date = DATE_ADD('2023-01-01', INTERVAL FLOOR(RAND() * DAYOFYEAR(CURDATE()) - 1) DAY); -- Date between 2023-01-01 and today's date
+        SET random_order_time = SEC_TO_TIME(FLOOR(28800 + RAND() * 39600));  -- Time between 08:00 and 19:00
+        
+        -- Insert the order into the orders table
+        INSERT INTO orders (customer_id, order_date, order_time)
+        VALUES (random_customer_id, random_order_date, random_order_time);
+        
+        -- Get the order number of the last inserted order
+        SET @order_id = LAST_INSERT_ID();
+        
+        -- Generate a random number of order items (up to 8) for the order
+        SET j = 1;
+        WHILE j <= FLOOR(1 + RAND() * 8) DO
+            -- Select a random product and get its price
+            SET random_product_id = FLOOR(1 + RAND() * (SELECT MAX(product_id) FROM products));
+            SELECT price INTO product_price FROM products WHERE product_id = random_product_id;
+            
+            -- Generate a random quantity for the order item
+            SET random_quantity = FLOOR(1 + RAND() * 5);  -- Random quantity between 1 and 5
+            
+            -- Insert the order item into the order_items table
+            INSERT INTO order_items (order_id, product_id, quantity, price)
+            VALUES (@order_id, random_product_id, random_quantity, product_price);
+            
+            SET j = j + 1;
+        END WHILE;
+        
+        SET i = i + 1;
+    END WHILE;
+END$$
+DELIMITER ;
+
+-- Call the procedure to generate orders and order items
+CALL GenerateOrders();
+
+
+-- Totale pris kom ikke med. Kør denne igen hvis der bliver lavet ændringer i produkt eller ordre data.
+
+ALTER TABLE orders
+ADD COLUMN total_price DECIMAL(10,2);
+
+UPDATE orders o
+JOIN (
+    SELECT order_id, SUM(products.price * quantity) AS total_price
+    FROM order_items
+    JOIN products ON order_items.product_id = products.product_id
+    GROUP BY order_id
+) totals ON o.order_id = totals.order_id
+SET o.total_price = totals.total_price;

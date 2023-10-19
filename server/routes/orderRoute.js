@@ -1,4 +1,4 @@
-// root/server/routes/showAdminsRoute.js
+// root/server/routes/orderRoute.js
 
 const express = require("express");
 const adminRoute = express.Router();
