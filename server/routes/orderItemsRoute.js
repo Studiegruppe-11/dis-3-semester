@@ -1,4 +1,4 @@
-// root/server/routes/itemOrderRoute.js
+// root/server/routes/orderItemsRoute.js
 
 const express = require("express");
 const adminRoute = express.Router();
@@ -6,7 +6,7 @@ const { executeQuery } = require('../db/database.js');  // Destructure to get th
 
 adminRoute.get('/', async (req, res) => {
     try {
-        const rows = await executeQuery('SELECT * FROM item_order');  // Use the executeQuery function
+        const rows = await executeQuery('SELECT * FROM order_items');  // Use the executeQuery function
         res.json(rows);
         console.log('Item_order data has been fetched.')
     } catch (error) {

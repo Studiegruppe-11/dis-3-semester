@@ -38,7 +38,7 @@ const showAdminsRoute = require("./routes/showAdminsRoute.js");
 const orderRoute = require("./routes/orderRoute.js");
 const customerRoute = require("./routes/customerRoute.js");
 const productRoute = require("./routes/productRoute.js");
-const itemOrderRoute = require("./routes/itemOrderRoute.js");
+const orderItemsRoute = require("./routes/orderItemsRoute.js");
 
 // API (endpoints)
 
@@ -50,7 +50,7 @@ app.use("/show-admins", showAdminsRoute);
 app.use("/customers", customerRoute);
 app.use("/orders", orderRoute);
 app.use("/products", productRoute);
-app.use("/item-orders", itemOrderRoute);
+app.use("/order-items", orderItemsRoute);
 
 
 
