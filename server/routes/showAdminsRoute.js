@@ -2,18 +2,17 @@
 
 const express = require("express");
 const adminRoute = express.Router();
-const db = require('../db/database.js');
+const { executeQuery } = require('../db/database.js');  // Destructure to get the executeQuery function
 
-console.log(db)
+console.log(executeQuery)
 
 adminRoute.get('/', async (req, res) => {
     try {
-        const [rows, fields] = await db.poolPromise.query('SELECT * FROM admins');
+        const rows = await executeQuery('SELECT * FROM admins');  // Use the executeQuery function
         res.json(rows);
     } catch (error) {
-        console.error('Stack:', error.code);
-        console.error('Error:', error.message);
-        console.error('Stack:', error.stack);
+        // This catch block will handle any other errors that may occur in this route handler,
+        // or if you decide to throw errors from executeQuery in the future.
         res.status(500).send('Server error: ' + error.message);
     }
 });

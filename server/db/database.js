@@ -29,16 +29,15 @@ const pool = mysql.createPool(dbConfig);  // Adjusted method name
 const executeQuery = async (query) => {
     try {
         const [rows, fields] = await pool.query(query);
-        console.log(rows);
+        return rows;  // Returning the rows to the caller
     } catch (error) {
         console.error('Database query error:', error.message);
+        console.error('Stack:', error.stack);
+        throw error;  // Re-throw the error to be handled by the caller
     }
 };
 
-// Example usage: Executing a query to select all from the 'admins' table
-// executeQuery('SELECT * FROM admins');
-
 // Exporting the pool promise for use in other modules
 module.exports = {
-    poolPromise: pool
+    poolPromise: pool, executeQuery
 };
