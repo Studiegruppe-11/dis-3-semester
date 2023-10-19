@@ -10,6 +10,7 @@ adminRoute.get('/', async (req, res) => {
     try {
         const rows = await executeQuery('SELECT * FROM orders');  // Use the executeQuery function
         res.json(rows);
+        console.log('Order data has been fetched.')
     } catch (error) {
         // This catch block will handle any other errors that may occur in this route handler,
         // or if you decide to throw errors from executeQuery in the future.

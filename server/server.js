@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
 
 // Routes
 
-const customerRoute = require("./routes/customer");
+// const customerRoute = require("./routes/customer");
 const storeRoutes = require("./routes/store");
 const adminRoute = require("./routes/adminRoute.js");
 const cartRoute = require('./routes/cartRoute.js');
@@ -40,7 +40,7 @@ const customerRoute = require("./routes/customerRoute.js");
 
 // API (endpoints)
 
-app.use("/customer", customerRoute);
+// app.use("/customer", customerRoute);
 app.use("/store", storeRoutes);
 app.use("/admins", adminRoute);
 app.use('/cart', cartRoute);
