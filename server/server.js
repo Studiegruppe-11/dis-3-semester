@@ -37,6 +37,7 @@ const cartRoute = require('./routes/cartRoute.js');
 const showAdminsRoute = require("./routes/showAdminsRoute.js");
 const orderRoute = require("./routes/orderRoute.js");
 const customerRoute = require("./routes/customerRoute.js");
+const productRoute = require("./routes/productRoute.js");
 
 // API (endpoints)
 
@@ -47,6 +48,8 @@ app.use('/cart', cartRoute);
 app.use("/show-admins", showAdminsRoute);
 app.use("/customers", customerRoute);
 app.use("/orders", orderRoute);
+app.use("/products", productRoute);
+
 
 
 

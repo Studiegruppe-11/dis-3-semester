@@ -1,4 +1,5 @@
--- Generated with https://www.mockaroo.com/
+-- Generated with https://www.mockaroo.com/ or chatGPT
+
 
 create table customers (
 	id INT,
@@ -114,3 +115,29 @@ insert into customers (id, first_name, last_name, country, age, email, gender, s
 insert into customers (id, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city) values (98, 'Jaye', 'Aldersey', 'Mongolia', 45, 'jaldersey2p@desdev.cn', 'Male', 'Armistice', '3', null, 'Sharga');
 insert into customers (id, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city) values (99, 'Valry', 'Humburton', 'Russia', 74, 'vhumburton2q@cloudflare.com', 'Female', 'Bartillon', '6', '142145', 'Rakhmanovo');
 insert into customers (id, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city) values (100, 'Devlin', 'Lawlings', 'Colombia', 20, 'dlawlings2r@imdb.com', 'Male', 'Daystar', '1521', '232517', 'San Carlos');
+
+
+-- Order data
+
+-- Create the products table
+CREATE TABLE products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    description TEXT,
+    price DECIMAL(10,2)
+);
+
+-- Insert the data
+INSERT INTO products (name, description, price) VALUES
+('JOEs Club', 'Joes Classic Bread, Vegan Pesto, Avocado, Chicken, Tomato', 69.00),
+('Tunacado', 'Joes Classic Bread, Vegan Pesto, Tuna, Avocado, Tomato', 69.00),
+('Serrano', 'Joes Classic Bread, Avocado, Serrano ham, Mozzarella, Tomato, Vegan Pesto', 69.00),
+('VAVO (Vegan Avocado)', 'Avocado, Tomato, Joe’s Classic Bread, Spinach, Vegan Pesto', 69.00),
+('Avocado', 'Joes Classic Bread, Vegan Pesto, Avocado, Mozzarella, Tomato', 69.00),
+('Spicy Tuna', 'Joes Classic Bread, Vegan Pesto, Tuna, Tomato, Jalapenos, Tabasco', 69.00),  -- Assuming name as 'Spicy Tuna' based on ingredients
+('Turkey', 'Joes Classic Bread, Vegan Pesto, Turkey', 69.00),
+('JOEs Green Mile', 'Apple, Ice, Spinach, Avocado, Broccoli', 69.00),
+('JOEs Identity', 'Cucumber, Ice, Spinach, Broccoli, Kale Lemon, Olive Oil', 69.00),
+('Green Shield', 'Apple, Ice, Spinach, Kale, Broccoli, Cucumber, Olive Oil', 69.00),
+('Herb Tonic', 'Apple, Ginger, Pineapple, Red Bell Pepper, Olive Oil, Pepper, Ice, Turmeric', 69.00);
+
