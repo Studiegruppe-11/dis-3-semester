@@ -49,7 +49,7 @@ app.use("/show-admins", showAdminsRoute);
 // const chatLog = require("./db/chat.js");
 
 
-// SOCKET IO
+// ################# SOCKET IO STARTER HER #################
 
 // 
 
@@ -79,6 +79,7 @@ socketHandler(io);  // Initialize the socket handler
 // Tror ikke exporten er nødvendig
 module.exports = socketHandler;
 
+// ################### SOCKET SLUTTER HER ###################
 
 // Send client files from server
 
