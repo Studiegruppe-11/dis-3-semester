@@ -214,11 +214,12 @@ DELIMITER ;
 CALL GenerateOrders();
 
 
--- Totale pris kom ikke med. Kør denne igen hvis der bliver lavet ændringer i produkt eller ordre data.
+-- Totale pris kom ikke med. 
 
 ALTER TABLE orders
 ADD COLUMN total_price DECIMAL(10,2);
 
+-- Kør denne del igen hvis der bliver lavet ændringer i produkt eller ordre data.
 UPDATE orders o
 JOIN (
     SELECT order_id, SUM(products.price * quantity) AS total_price
