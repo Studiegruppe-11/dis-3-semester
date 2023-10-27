@@ -30,37 +30,14 @@ app.use((err, req, res, next) => {
 
 // Routes
 
-// const customerRoute = require("./routes/customer");
-const storeRoutes = require("./routes/store");
-const adminRoute = require("./routes/adminRoute.js");
-const cartRoute = require('./routes/cartRoute.js');
 const showAdminsRoute = require("./routes/showAdminsRoute.js");
-const orderRoute = require("./routes/orderRoute.js");
-const customerRoute = require("./routes/customerRoute.js");
-const productRoute = require("./routes/productRoute.js");
-const orderItemsRoute = require("./routes/orderItemsRoute.js");
 
 // API (endpoints)
 
 // app.use("/customer", customerRoute);
-app.use("/store", storeRoutes);
-app.use("/admins", adminRoute);
-app.use('/cart', cartRoute);
 app.use("/show-admins", showAdminsRoute);
-app.use("/customers", customerRoute);
-app.use("/orders", orderRoute);
-app.use("/products", productRoute);
-app.use("/order-items", orderItemsRoute);
-
-
-
-
-// const chatLog = require("./db/chat.js");
-
 
 // ################# SOCKET IO STARTER HER #################
-
-// 
 
 const socketHandler = (io) => {
   io.on('connection', (socket) => {
@@ -92,72 +69,10 @@ module.exports = socketHandler;
 
 // Send client files from server
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/login.html"));
-});
 
-
-app.get("/chat", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/chat.html"));
-});
-
-app.get("/store", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/store.html"));
-});
-
-
-app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
-});
-
-app.get("/admin/data", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/adminData.html"));
-});
-
-app.get("/admin/orders", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/adminOrders.html"));
-});
-
-app.get("/store/checkout", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/checkout.html"));
-});
-
-// app.get("/chatlog", (req, res) => {
-//   res.send(chatLog);
-// });
-
-
-// Start server på droplet
-
-// http.listen(3000, "164.90.228.42", () => {
-//   console.log("Server open on port 3000");
-// });
 
 // start server på pc
+// Ip kan ændres til ipv4 fremfor 0.0.0.0
 http.listen(port, '0.0.0.0', () => {
   console.log('Server open on port: ' + port);
 });
-
-
-// Socket IO
-
-// ################### CHAT FRA TIMERNE (MÅ IKKE BRUGES) 
-// io.on("connection", (socket) => {
-//   socket.on("chat message", (msg) => {
-//     io.emit("chat message", msg);
-//     chatLog.push(msg);
-//     console.log(chatLog);
-//   });
-//   socket.on("user joined", (username) => {
-//     console.log(username + " joined the chat");
-//     io.emit("chat message", username + " joined the chat");
-//   });
-//   socket.on("hola", (besked) => {
-//     console.log(besked);
-//     io.emit("hola", "besked tilbage til klienten..");
-//   });
-// });
-
-// http.listen(3000, "localhost", () => {
-//   console.log(`Socket.IO server running at http://localhost:3000/`);
-// });
