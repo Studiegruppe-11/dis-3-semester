@@ -25,12 +25,10 @@ app.use(express.static(path.join(__dirname, "../client")));
 // Routes
 
 // lav om i routes så den eksporterer router i stedet for funktionen
-const showAdminsRoute = require("./routes/showAdminsRoute.js");
-app.use("/show-admins", showAdminsRoute);
+const adminRoute = require("./routes/admins.route.js");
+app.use("/", adminRoute);
 
 
-
-// hent alle funktioner fra user.route.js
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
 
