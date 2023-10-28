@@ -10,8 +10,8 @@ const app = express();
 //const db = require('./db/database.js');
 
 // Socket
-//const http = require("http").Server(app);
-//const io = require("socket.io")(http);
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 
 
 // Middlewares
@@ -34,7 +34,9 @@ app.use((err, req, res, next) => {
 const showAdminsRoute = require("./routes/showAdminsRoute.js");
 
 
-
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/create.html"));
+});
 
 
 
