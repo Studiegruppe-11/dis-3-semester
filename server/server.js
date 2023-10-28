@@ -11,7 +11,7 @@ const app = express();
 
 // Socket
 const http = require("http").Server(app);
-const io = require("socket.io")(http);
+//const io = require("socket.io")(http);
 
 
 // Middlewares
