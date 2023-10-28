@@ -35,7 +35,7 @@ const showAdminsRoute = require("./routes/showAdminsRoute.js");
 
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/create.html"));
+  res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
 });
 
 
