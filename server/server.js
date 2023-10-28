@@ -41,6 +41,14 @@ app.get("/users/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
 
+app.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/home.html"));
+});
+
+
+
+
+
 
 
 app.get("/", (req, res) => {
