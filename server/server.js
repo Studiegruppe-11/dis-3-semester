@@ -65,32 +65,32 @@ http.listen(3000, "0.0.0.0", () => {
 
 // ################# SOCKET IO STARTER HER #################
 
-const socketHandler = (io) => {
-  io.on('connection', (socket) => {
-      console.log('New client connected');
+// const socketHandler = (io) => {
+//   io.on('connection', (socket) => {
+//       console.log('New client connected');
 
-      const fetchCustomerData = async () => {
-          try {
-              const rows = await db.executeQuery('SELECT * FROM brugere');
-              socket.emit('customer-data', rows);
-          } catch (error) {
-              console.error('Error fetching customer data:', error.message);
-          }
-      };
+//       const fetchCustomerData = async () => {
+//           try {
+//               const rows = await db.executeQuery('SELECT * FROM brugere');
+//               socket.emit('customer-data', rows);
+//           } catch (error) {
+//               console.error('Error fetching customer data:', error.message);
+//           }
+//       };
 
-      // Initial data fetch
-      fetchCustomerData();
+//       // Initial data fetch
+//       fetchCustomerData();
 
-      // Listen for a 'customer-data-changed' event from your database trigger/stored procedure
-      socket.on('customer-data-changed', fetchCustomerData);
-  });
-};
+//       // Listen for a 'customer-data-changed' event from your database trigger/stored procedure
+//       socket.on('customer-data-changed', fetchCustomerData);
+//   });
+// };
 
-socketHandler(io);  // Initialize the socket handler
+// socketHandler(io);  // Initialize the socket handler
 
-// Tror ikke exporten er nødvendig
-module.exports = socketHandler;
+// // Tror ikke exporten er nødvendig
+// module.exports = socketHandler;
 
-// ################### SOCKET SLUTTER HER ###################
+// // ################### SOCKET SLUTTER HER ###################
 
-// Send client files from server
+// // Send client files from server
