@@ -19,7 +19,40 @@ router.get('/users/customers', async (req, res) => {
     }
 });
 
+// Opret bruger i DB
+router.post('/users/create', async (req, res) => {
+  const {
+    username,
+    password,
+    firstname,
+    lastname,
+    country,
+    age,
+    email,
+    gender,
+    street_name,
+    street_number,
+    postal_code,
+    city
+  } = req.body;
+  try {
+    const pool = await connection.poolPromise;
 
+    // Udfør SQL-forespørgslen her
+    const query = `
+      INSERT INTO customers (username, password, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    const values = [username, password, firstname, lastname, country, age, email, gender, street_name, street_number, postal_code, city];
+
+    const [rows] = await pool.query(query, values);
+
+    res.send(rows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
+});
 
 
  
@@ -69,7 +102,7 @@ router.post("/users/login", async (req, res) => {
       res.status(404).json({ error: "User not found" });
     }
 });
-
+ 
 
 
 
