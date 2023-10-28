@@ -1,5 +1,6 @@
 // root/server/routes/showAdminsRoute.js
 
+const express = require('express'); // Import Express
 const adminRoute = express.Router();
 const { executeQuery } = require('../db/database.js');  // Destructure to get the executeQuery function
 
