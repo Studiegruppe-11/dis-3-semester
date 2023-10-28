@@ -86,7 +86,15 @@ router.post("/users/login", async (req, res) => {
   });
 
 
-  
+
+// Log ud
+
+router.get("/users/logout", async (req, res) => {
+    req.session.destroy();
+    res.json({ loggedOut: true });
+  }
+  );
+ 
 
 
   // vis logget ind bruger
