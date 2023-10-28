@@ -3,9 +3,9 @@ window.addEventListener("DOMContentLoaded", async () => {
       const response = await fetch("/users/show");
       const result = await response.json();
   
-      if (result.userId && result.username) {
+      if (result.userId && result.name) {
         // Viser navn hvis man er logget ind
-        document.getElementById("user").innerHTML = result.username;
+        document.getElementById("user").innerHTML = result.name;
         // Skal ikke vise "opret bruger" hvis man er logget ind.
       }
     } catch (error) {

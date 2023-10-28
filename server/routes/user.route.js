@@ -39,7 +39,7 @@ router.post("/users/login", async (req, res) => {
   
         // Gem brugerens id og navn i express-session
         req.session.userId = user.customer_id;
-        req.session.username = user.username;
+        req.session.name = user.first_name;
   
         // Send svar tilbage til klienten
         res.json({ success: true });
@@ -62,9 +62,9 @@ router.post("/users/login", async (req, res) => {
   // vis bruger
 
   router.get("/users/show", async (req, res) => {
-    const { userId, username } = req.session;
-    if (userId && username) {
-      res.json({ userId, username });
+    const { userId, name } = req.session;
+    if (userId && name) {
+      res.json({ userId, name });
     } else {
       res.status(404).json({ error: "User not found" });
     }
