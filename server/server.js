@@ -23,17 +23,17 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 
 
-// Importer express-session modulet for at gemme brugeroplysninger i sessionen
-const session = require("express-session");
-// Tilføj session middleware til Express appen
-// https://www.npmjs.com/package/express-session
-app.use(
-  session({
-    secret: "my-secret-key",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+// // Importer express-session modulet for at gemme brugeroplysninger i sessionen
+// const session = require("express-session");
+// // Tilføj session middleware til Express appen
+// // https://www.npmjs.com/package/express-session
+// app.use(
+//   session({
+//     secret: "my-secret-key",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
 
 
 
