@@ -52,7 +52,7 @@ document.getElementById("create").addEventListener("click", function () {
         .then((response) => {
           if (response.ok) {
             console.log(response.status);
-            //window.location.href = "/users/login";
+            window.location.href = "/users/login";
           } else {
             console.log(response.status);
           }
