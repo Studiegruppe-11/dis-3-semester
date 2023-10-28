@@ -1,3 +1,5 @@
+// dette er den der bruges
+
 const path = require('path');
 const dotenv = require('dotenv');
 const mysql = require('mysql2/promise');
