@@ -46,11 +46,17 @@ app.get("/home", (req, res) => {
 });
 
 
+app.get('/test-session', (req, res) => {
+  if (req.session.userId && req.session.username) {
+    res.send(`Bruger ID: ${req.session.userId}, Brugernavn: ${req.session.username}`);
+  } else {
+    res.send('Ingen data i sessionen.');
+  }
+});
+ 
 
 
-
-
-
+// definer hvilket html side der skal åbnes når ip adressen åbnes. SKAL stå nederst under øvrige endpoints.
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
 });
