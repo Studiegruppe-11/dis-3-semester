@@ -1,3 +1,5 @@
+// root/client/scripts/login.js
+
 document.getElementById("login").addEventListener("click", async function () {
     // henter username og password fra input felterne og gemmer dem i variablerne username og password.
     let username = document.getElementById("username").value;
@@ -19,7 +21,7 @@ document.getElementById("login").addEventListener("click", async function () {
     const result = await response.json();
     // hvis brugeren er logget ind, så sendes brugeren til index.html
     if (result.success) {
-        window.location.href = "../pages/home.html";
+        window.location.href = "../home";
     } else {
         // hvis brugeren ikke har skrevet rigtigt, så sendes en fejlbesked.
         const errorMessage = result.error || "Forkert brugernavn eller adgangskode";
@@ -28,5 +30,5 @@ document.getElementById("login").addEventListener("click", async function () {
 });
 
 
-
+ 
 

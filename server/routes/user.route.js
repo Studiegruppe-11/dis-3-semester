@@ -1,3 +1,5 @@
+//root/server/routes/user.route.js
+
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
@@ -20,12 +22,11 @@ router.get('/users/customers', async (req, res) => {
 
 
 
-
+ 
 // Undersøg om login er korrekt.
 router.post("/users/login", async (req, res) => {
     const { username, password } = req.body;
     const pool = await connection.poolPromise;
-  
     try {
       // Udfør SQL-forespørgslen
       const [rows] = await pool.query(
