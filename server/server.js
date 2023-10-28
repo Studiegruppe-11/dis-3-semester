@@ -9,13 +9,14 @@ const app = express();
 // 
 //const db = require('./db/database.js');
 
+
+// bruges dette?
 // Socket
 const http = require("http").Server(app);
 //const io = require("socket.io")(http);
 
 
 // Middlewares
-
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
@@ -23,23 +24,28 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 
 // Routes
-
-// lav om i routes så den eksporterer router i stedet for funktionen
 const adminRoute = require("./routes/admins.route.js");
 app.use("/", adminRoute);
-
 
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
 
 
 
+// Send client files from server
+app.get("/users/create", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/create.html"));
+});
 
-// når serverens ip adresse åbner skal den sende admin.html
+app.get("/users/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/login.html"));
+});
+
+
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
 });
-
 
 
 
@@ -55,11 +61,28 @@ http.listen(3000, "0.0.0.0", () => {
 
 
 
+
+
+
+
+
+
 // Global error handling middleware
 app.use((err, req, res, next) => {
   console.error('Global Error Handler:', err.message);
   res.status(500).send('Server Error');
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
