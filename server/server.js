@@ -56,6 +56,10 @@ app.get("/users/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
 
+app.get("/users/create", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/create.html"));
+});
+
 app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/home.html"));
 });
@@ -63,7 +67,6 @@ app.get("/home", (req, res) => {
 
 
 // se hvilken bruger der er gemt i session storage. 
-
 app.get('/test', (req, res) => {
   if (req.session.userId && req.session.name) {
     res.send(`Bruger ID: ${req.session.userId}, Navn: ${req.session.name}`);
@@ -76,7 +79,7 @@ app.get('/test', (req, res) => {
 
 // definer hvilket html side der skal åbnes når ip adressen åbnes. SKAL stå nederst under øvrige endpoints.
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
+  res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
 
 
