@@ -19,12 +19,14 @@ document.getElementById("login").addEventListener("click", async function () {
     const result = await response.json();
     // hvis brugeren er logget ind, så sendes brugeren til index.html
     if (result.success) {
-        window.location.href = "/index.html";
+        window.location.href = "../pages/home.html";
     } else {
         // hvis brugeren ikke har skrevet rigtigt, så sendes en fejlbesked.
         const errorMessage = result.error || "Forkert brugernavn eller adgangskode";
         alert(errorMessage);
     }
 });
+
+
 
 

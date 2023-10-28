@@ -55,6 +55,22 @@ router.post("/users/login", async (req, res) => {
   
 
 
+  // vis logget ind bruger
+
+
+  // vis bruger
+
+  router.get("/users/show", async (req, res) => {
+    const { userId, username } = req.session;
+    if (userId && username) {
+      res.json({ userId, username });
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+});
+
+
+
 
 
 
