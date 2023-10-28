@@ -18,5 +18,3 @@ module.exports = {
     poolPromise: pool
 };
 
-
-console.log(dbConfig.host);
