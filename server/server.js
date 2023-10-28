@@ -65,8 +65,8 @@ app.get("/home", (req, res) => {
 // se hvilken bruger der er gemt i session storage. 
 
 app.get('/test', (req, res) => {
-  if (req.session.userId && req.session.username) {
-    res.send(`Bruger ID: ${req.session.userId}, Brugernavn: ${req.session.username}`);
+  if (req.session.userId && req.session.name) {
+    res.send(`Bruger ID: ${req.session.userId}, Navn: ${req.session.name}`);
   } else {
     res.send('Ingen data i sessionen.');
   }
