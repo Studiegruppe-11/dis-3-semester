@@ -7,19 +7,20 @@ const path = require("path");
 const app = express();
 
 // 
-const db = require('./db/database.js');
+//const db = require('./db/database.js');
 
 // Socket
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
+//const http = require("http").Server(app);
+//const io = require("socket.io")(http);
 
-const port = 3000;
 
 // Middlewares
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
+
+
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
@@ -32,10 +33,33 @@ app.use((err, req, res, next) => {
 
 const showAdminsRoute = require("./routes/showAdminsRoute.js");
 
+
+
+
+
+
+
 // API (endpoints)
 
 // app.use("/customer", customerRoute);
 app.use("/show-admins", showAdminsRoute);
+
+
+
+
+// start server på pc
+// Ip kan ændres til ipv4 fremfor 0.0.0.0
+http.listen(3000, "0.0.0.0", () => {
+  console.log("Serveren er åben på port 3000");
+});
+
+
+
+
+
+
+
+
 
 // ################# SOCKET IO STARTER HER #################
 
@@ -68,11 +92,3 @@ module.exports = socketHandler;
 // ################### SOCKET SLUTTER HER ###################
 
 // Send client files from server
-
-
-
-// start server på pc
-// Ip kan ændres til ipv4 fremfor 0.0.0.0
-http.listen(port, '0.0.0.0', () => {
-  console.log('Server open on port: ' + port);
-});
