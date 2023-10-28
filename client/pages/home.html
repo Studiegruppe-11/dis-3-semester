@@ -4,22 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/admin.css" />
     <title>Home</title>
   </head>
   <body>
     <ul>
-      <li><img src="../img/joeLogo.svg" alt="Logo" /></li>
-      <a href="/users/create">Opret Bruger</a>
-      <li style="float: right">
+        <li><img src="../img/joeLogo.svg" alt="Logo" /></li>
+        <li><a href="/admin" class="active">Home</a></li>
+        <li><a href="/admin/data">Data</a></li>
+        <li><a href="/admin/orders">Orders</a></li>
+        <li style="float: right"></li>
+        <li style="float: right"></li>
+        <li style="float: right">
+            <p style="float: right;" id="user"></p>
+        </li>
     </ul>
-    
-    navn på logget ind bruger    <p id="user"></p>
+       
 
 
   </body>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="../scripts/home.js"></script>
+    <script src="../scripts/home.js"></script>
 </html>
 
