@@ -17,11 +17,6 @@ const dbConfig = {
     port: 3306
 };
 
-console.log(dbConfig.host)
-console.log(dbConfig.user)
-console.log(dbConfig.password)
-console.log(dbConfig.database)
-
 // Creating a pool of database connections
 const pool = mysql.createPool(dbConfig);  // Adjusted method name
 
