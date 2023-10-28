@@ -22,18 +22,22 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 
 
-// Global error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Global Error Handler:', err.message);
-  res.status(500).send('Server Error');
-});
-
-
 // Routes
 
+// lav om i routes så den eksporterer router i stedet for funktionen
 const showAdminsRoute = require("./routes/showAdminsRoute.js");
+app.use("/show-admins", showAdminsRoute);
 
 
+
+// hent alle funktioner fra user.route.js
+const userRoute = require("./routes/user.route");
+app.use("/", userRoute);
+
+
+
+
+// når serverens ip adresse åbner skal den sende admin.html
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
 });
@@ -41,9 +45,6 @@ app.get("/", (req, res) => {
 
 
 
-// API (endpoints)
-
-app.use("/show-admins", showAdminsRoute);
 
 
 
@@ -56,6 +57,11 @@ http.listen(3000, "0.0.0.0", () => {
 
 
 
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Global Error Handler:', err.message);
+  res.status(500).send('Server Error');
+});
 
 
 
