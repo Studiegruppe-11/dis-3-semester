@@ -19,23 +19,6 @@ adminRoute.get('/', async (req, res) => {
 
 
 
-// adminRoute.get('/show-admins', async (req, res) => {
-//     try {
-//       const pool = await connection.poolPromise;
-  
-//       // Udfør SQL-forespørgslen her
-//       const [rows] = await pool.query('SELECT * FROM admins');
-  
-//       res.send(rows);
-//     } catch (error) {
-//       console.log(error);
-//       res.status(500).send(error.message);
-//     }
-//   }
-// );
-  
-
-
 
 
 

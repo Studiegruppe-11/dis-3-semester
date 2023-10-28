@@ -43,11 +43,7 @@ app.get("/", (req, res) => {
 
 // API (endpoints)
 
-// app.use("/customer", customerRoute);
-app.use("/show-admins ", showAdminsRoute);
-
-// const adminRoute = require("./routes/showAdminsRoute.js");
-// app.use("/", userRoute);
+app.use("/show-admins", showAdminsRoute);
 
 
 
