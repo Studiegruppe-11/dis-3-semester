@@ -17,17 +17,12 @@ router.post('/admin/login', async (req, res) => {
     const { username, password } = req.body;
     try {
         const pool = await connection.poolPromise;
-        
-        // Log entire admins table (not recommended)
-        const [allAdmins] = await pool.query('SELECT * FROM admins');
-        console.log('All admins:', allAdmins);
-        
-        // Adjusted query to match against plaintext password
         const [rows] = await pool.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password]);
         if (rows.length > 0) {
             req.session.isAdmin = true;
             req.session.username = username;
-            res.redirect('/admin');
+            res.cookie('username', username); // Bruges til at vise username i admin.html
+            res.json({ username: username });  // Send the username back in the response
         } else {
             res.status(401).json({ error: 'Invalid credentials' });
         }
