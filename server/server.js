@@ -4,7 +4,6 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-const router = express.Router();
 const session = require("express-session");
 
 const connection = require('../db/database1.js');
@@ -34,16 +33,6 @@ app.use(
   })
 );
 
-// Global error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Global Error Handler:', err.message);
-  res.status(500).send('Server Error');
-});
-
-
-
-
-
 // ##### Routes #####
 const adminRoute = require("./routes/adminRoute.js");
 app.use("/", adminRoute);
@@ -62,10 +51,6 @@ app.get("/users/create", (req, res) => {
 
 app.get("/users/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
-});
-
-app.get("/users/create", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/create.html"));
 });
 
 app.get("/home", (req, res) => {
@@ -108,6 +93,12 @@ app.post('/', function (req, res) {
     }
   });
   res.send('POST request to the homepage');
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Global Error Handler:', err.message);
+  res.status(500).send('Server Error');
 });
 
 // start server på pc
