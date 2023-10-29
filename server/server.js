@@ -6,9 +6,12 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 <<<<<<< HEAD
+<<<<<<< HEAD
 const session = require("express-session");
 
 const connection = require('../db/database1.js');
+=======
+>>>>>>> parent of 822d1c5 (admin login)
 =======
 >>>>>>> parent of 822d1c5 (admin login)
 
@@ -42,8 +45,13 @@ app.use(
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // ##### Routes #####
 const adminRoute = require("./routes/adminRoute.js");
+=======
+// Routes
+const adminRoute = require("./routes/admins.route.js");
+>>>>>>> parent of 822d1c5 (admin login)
 =======
 // Routes
 const adminRoute = require("./routes/admins.route.js");
