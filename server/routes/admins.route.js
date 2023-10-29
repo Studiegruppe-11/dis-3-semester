@@ -2,7 +2,6 @@
 
 const express = require('express');
 const router = express.Router();
-const connection = require('../db/database1.js'); // Opdater stien efter behov
 
 
 
