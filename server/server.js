@@ -1,10 +1,13 @@
 // root/server/server.js
 
-// 
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const router = express.Router();
+const session = require("express-session");
+
+const connection = require('../db/database1.js');
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
@@ -18,29 +21,38 @@ const { exec } = require('child_process');
 const http = require("http").Server(app);
 //const io = require("socket.io")(http);
 
-// Middlewares
+// ##### Middlewares #####
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
-// Importer express-session modulet for at gemme brugeroplysninger i sessionen
-const session = require("express-session");
-// Tilføj session middleware til Express appen
-// https://www.npmjs.com/package/express-session
 app.use(
-  session({
+  session({ // RET NEDENSTÅENDE KEY????
     secret: "my-secret-key",
     resave: false,
     saveUninitialized: false,
   })
 );
 
-// Routes
-const adminRoute = require("./routes/admins.route.js");
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Global Error Handler:', err.message);
+  res.status(500).send('Server Error');
+});
+
+
+
+
+
+// ##### Routes #####
+const adminRoute = require("./routes/adminRoute.js");
 app.use("/", adminRoute);
 
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
+
+const dataRoute = require('./routes/dataRoute.js');
+app.use('/', dataRoute);
 
 
 // Send client files from server
@@ -60,8 +72,12 @@ app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/home.html"));
 });
 
+// admin filer
 app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
+});
+app.get('/admin/login', (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/adminLogin.html"));
 });
 
 // se hvilken bruger der er gemt i session storage. 
@@ -79,14 +95,14 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
 
-
+// HUSK AT LAVE DETTE SIKKERT
+// Github webhook for automatisk pull
 app.post('/', function (req, res) {
   exec('sh ../deploy.sh', (err, stdout, stderr) => {
     if (err) {
-      // some err occurred
       console.error(err);
     } else {
-      // the *entire* stdout and stderr (buffered)
+      // hvis der er fejl i pull requesten
       console.log(`stdout: ${stdout}`);
       console.log(`stderr: ${stderr}`);
     }
@@ -99,36 +115,6 @@ app.post('/', function (req, res) {
 http.listen(3000, "0.0.0.0", () => {
   console.log("Serveren er åben på port 3000");
 });
-
-
-
-
-
-
-
-
-
-
-// Global error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Global Error Handler:', err.message);
-  res.status(500).send('Server Error');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ################# SOCKET IO STARTER HER #################
 
