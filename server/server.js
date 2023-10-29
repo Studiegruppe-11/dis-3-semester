@@ -6,6 +6,9 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 
+// Til github webhook for automatisk pull 
+const { exec } = require('child_process');
+
 // 
 //const db = require('./db/database.js');
 
@@ -89,7 +92,19 @@ app.get("/", (req, res) => {
 });
 
 
-
+app.post('/', function (req, res) {
+  exec('sh ../deploy.sh', (err, stdout, stderr) => {
+    if (err) {
+      // some err occurred
+      console.error(err);
+    } else {
+      // the *entire* stdout and stderr (buffered)
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+    }
+  });
+  res.send('POST request to the homepage');
+});
 
 
 
