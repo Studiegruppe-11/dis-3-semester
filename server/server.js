@@ -30,7 +30,7 @@ app.use(
 
 // Routes
 const adminRoute = require("./routes/adminRoute.js");
-app.use("/", adminRoute);
+app.use("/admin", adminRoute);
 
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
@@ -94,35 +94,11 @@ http.listen(3000, "0.0.0.0", () => {
   console.log("Serveren er åben på port 3000");
 });
 
-
-
-
-
-
-
-
-
-
 // Global error handling middleware
 app.use((err, req, res, next) => {
   console.error('Global Error Handler:', err.message);
   res.status(500).send('Server Error');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ################# SOCKET IO STARTER HER #################
 
