@@ -3,6 +3,11 @@ document.getElementById('login').addEventListener('click', async () => {
     try {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
+        
+        // Log user input
+        console.log('Username:', username);
+        console.log('Password:', password);
+        
         const response = await axios.post('/admin/login', { username, password });
         if (response.data.error) {
             document.getElementById('message').innerText = response.data.error;

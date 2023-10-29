@@ -17,6 +17,11 @@ router.post('/admin/login', async (req, res) => {
     const { username, password } = req.body;
     try {
         const pool = await connection.poolPromise;
+        
+        // Log entire admins table (not recommended)
+        const [allAdmins] = await pool.query('SELECT * FROM admins');
+        console.log('All admins:', allAdmins);
+        
         const [rows] = await pool.query('SELECT * FROM admins WHERE username = ? AND password = SHA2(?, 256)', [username, password]);
         if (rows.length > 0) {
             req.session.isAdmin = true;
