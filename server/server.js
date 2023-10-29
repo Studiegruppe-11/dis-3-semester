@@ -1,19 +1,16 @@
 // root/server/server.js
-
-// 
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const session = require("express-session");
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
 
-// 
 //const db = require('./db/database.js');
 
 // bruges dette?
-
 // Socket
 const http = require("http").Server(app);
 //const io = require("socket.io")(http);
@@ -23,10 +20,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
-// Importer express-session modulet for at gemme brugeroplysninger i sessionen
-const session = require("express-session");
-// Tilføj session middleware til Express appen
-// https://www.npmjs.com/package/express-session
 app.use(
   session({
     secret: "my-secret-key",
@@ -36,7 +29,7 @@ app.use(
 );
 
 // Routes
-const adminRoute = require("./routes/admins.route.js");
+const adminRoute = require("./routes/adminRoute.js");
 app.use("/", adminRoute);
 
 const userRoute = require("./routes/user.route");
@@ -50,10 +43,6 @@ app.get("/users/create", (req, res) => {
 
 app.get("/users/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
-});
-
-app.get("/users/create", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/create.html"));
 });
 
 app.get("/home", (req, res) => {
@@ -75,6 +64,8 @@ app.get('/test', (req, res) => {
  
 
 // definer hvilket html side der skal åbnes når ip adressen åbnes. SKAL stå nederst under øvrige endpoints.
+// Hvorfor skal dette stå nederst?
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
