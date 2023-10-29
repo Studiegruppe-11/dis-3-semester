@@ -13,6 +13,7 @@ const { exec } = require('child_process');
 //const db = require('./db/database.js');
 
 // bruges dette?
+
 // Socket
 const http = require("http").Server(app);
 //const io = require("socket.io")(http);
