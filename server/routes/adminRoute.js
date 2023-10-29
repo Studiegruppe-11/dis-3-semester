@@ -17,7 +17,6 @@ router.post('/admin/login', async (req, res) => {
     const { username, password } = req.body;
     const pool = await connection.poolPromise;
     try {
-<<<<<<< HEAD
       // Udfør SQL-forespørgslen
       const [rows] = await pool.query(
         'SELECT * FROM admins WHERE username = ? AND password = ?',
@@ -36,23 +35,6 @@ router.post('/admin/login', async (req, res) => {
       } else {
         res.json({ error: 'Forkert brugernavn eller adgangskode' });
       }
-=======
-        const pool = await connection.poolPromise;
-        
-        // Log entire admins table (not recommended)
-        const [allAdmins] = await pool.query('SELECT * FROM admins');
-        console.log('All admins:', allAdmins);
-        
-        // Adjusted query to match against plaintext password
-        const [rows] = await pool.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password]);
-        if (rows.length > 0) {
-            req.session.isAdmin = true;
-            req.session.username = username;
-            res.redirect('/admin');
-        } else {
-            res.status(401).json({ error: 'Invalid credentials' });
-        }
->>>>>>> 4f1964ae5e6d19b211ccd1470da581d2d17b64fc
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: 'Der opstod en fejl under login.' });
