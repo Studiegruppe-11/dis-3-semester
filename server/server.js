@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const http = require("http").Server(app);
 const app = express();
 const session = require("express-session");
 
@@ -12,14 +13,14 @@ const { exec } = require('child_process');
 
 // bruges dette?
 // Socket
-const http = require("http").Server(app);
 //const io = require("socket.io")(http);
 
-// Middlewares
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
+// Session middleware
 app.use(
   session({
     secret: "my-secret-key",
@@ -28,7 +29,8 @@ app.use(
   })
 );
 
-// Routes
+
+// Ruter
 const adminRoute = require("./routes/adminRoute.js");
 app.use("/", adminRoute);
 
