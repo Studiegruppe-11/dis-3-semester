@@ -60,7 +60,6 @@ app.get("/admin", (req, res) => {
 });
 
 
-
 // se hvilken bruger der er gemt i session storage. 
 app.get('/test', (req, res) => {
   if (req.session.userId && req.session.name) {
@@ -78,7 +77,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
 
-
+// Til automatisk pull fra github
 app.post('/', function (req, res) {
   exec('sh ../deploy.sh', (err, stdout, stderr) => {
     if (err) {
