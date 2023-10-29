@@ -54,14 +54,12 @@ body {
   margin: auto;
   } */
   
-
   .center {
-    display: flex;
     gap: 1%;
     padding: 1%;
     justify-content: space-around; /* Center the dashboard items with some space around */
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: row;
     grid-gap: 20px;
 }
 
@@ -74,6 +72,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;  /* Align content to the start of the div */
+    width: 100%;
 }
 
 
