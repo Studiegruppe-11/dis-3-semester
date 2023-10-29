@@ -5,15 +5,10 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-<<<<<<< HEAD
-<<<<<<< HEAD
 const session = require("express-session");
 
 const connection = require('../db/database1.js');
-=======
->>>>>>> parent of 822d1c5 (admin login)
-=======
->>>>>>> parent of 822d1c5 (admin login)
+
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
@@ -44,18 +39,13 @@ app.use(
   })
 );
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // ##### Routes #####
 const adminRoute = require("./routes/adminRoute.js");
-=======
 // Routes
 const adminRoute = require("./routes/admins.route.js");
->>>>>>> parent of 822d1c5 (admin login)
-=======
+
 // Routes
 const adminRoute = require("./routes/admins.route.js");
->>>>>>> parent of 822d1c5 (admin login)
 app.use("/", adminRoute);
 
 const userRoute = require("./routes/user.route");
@@ -122,34 +112,11 @@ http.listen(3000, "0.0.0.0", () => {
 });
 
 
-
-
-
-
-
-
-
-
 // Global error handling middleware
 app.use((err, req, res, next) => {
   console.error('Global Error Handler:', err.message);
   res.status(500).send('Server Error');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ################# SOCKET IO STARTER HER #################
 
