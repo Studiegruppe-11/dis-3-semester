@@ -55,7 +55,7 @@ app.get("/admin/login", (req, res) => {
 
 
 // Admin filer
-app.get("/admin", isAdmin, (req, res) => {
+app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
 });
 
@@ -71,8 +71,6 @@ app.get('/test', (req, res) => {
  
 
 // definer hvilket html side der skal åbnes når ip adressen åbnes. SKAL stå nederst under øvrige endpoints.
-// Hvorfor skal dette stå nederst? ellers virker det ikke. 
-
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
