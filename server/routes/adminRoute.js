@@ -47,6 +47,7 @@ router.get('/admin/logout', (req, res) => {
 
 // Nedenstående skal ikke være udkommenteret, men kan ikke få den til at virke. Lige nu kører der en "app.get" i server.js, som virker.
 // Problemet er at "isAdmin" funktionen gerne skulle køre som middleware herinde fra. Måske man bare kan bruge app eller router.get i stedet for app.get i server.js
+// har også prøvet med ../../
 // router.get('/admin', isAdmin, (req, res) => {
 //     res.sendFile(path.join(__dirname, "client\pages\admin.html"));
 // });
