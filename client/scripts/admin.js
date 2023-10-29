@@ -1,5 +1,5 @@
 // root/client/scripts/admin.js
-
+console.log('admin.js loaded');
 // Function to get a cookie by name
 function getCookie(name) {
     const value = "; " + document.cookie;
