@@ -32,6 +32,19 @@ router.post('/admin/login', async (req, res) => {
     }
 });
 
+// Admin Log ud
+router.get('/admin/logout', (req, res) => {
+    req.session.destroy(err => {  // Destroy the session
+        if (err) {
+            console.log(err);
+            res.status(500).json({ error: 'An error occurred while logging out' });
+        } else {
+            res.clearCookie('username');  // Clear the username cookie
+            res.redirect('/admin/login');  // Redirect to the login page
+        }
+    });
+});
+
 // router.get('/admin', isAdmin, (req, res) => {
 //     res.sendFile(path.join(__dirname, "../../client/pages/admin.html"));
 //   });
