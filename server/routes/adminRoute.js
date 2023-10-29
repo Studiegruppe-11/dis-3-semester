@@ -31,5 +31,8 @@ router.post('/admin/login', async (req, res) => {
     }
 });
 
+router.get('/admin', isAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, "../../client/pages/admin.html"));
+  });
 
 module.exports = router;

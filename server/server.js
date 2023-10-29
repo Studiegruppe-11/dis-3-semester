@@ -54,9 +54,7 @@ app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
 });
 
-router.get('/admin', isAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/admin.html"));
-});
+
 
 // se hvilken bruger der er gemt i session storage. 
 app.get('/test', (req, res) => {
