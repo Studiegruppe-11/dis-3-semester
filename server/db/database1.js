@@ -1,6 +1,5 @@
 // root/server/db/database1.js
 // dette er den der bruges
-// test kommentar
 
 const path = require('path');
 const dotenv = require('dotenv');
