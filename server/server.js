@@ -12,19 +12,15 @@ const { exec } = require('child_process');
 // 
 //const db = require('./db/database.js');
 
-
 // bruges dette?
 // Socket
 const http = require("http").Server(app);
 //const io = require("socket.io")(http);
 
-
 // Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
-
-
 
 // Importer express-session modulet for at gemme brugeroplysninger i sessionen
 const session = require("express-session");
@@ -38,16 +34,12 @@ app.use(
   })
 );
 
-
-
-
 // Routes
 const adminRoute = require("./routes/admins.route.js");
 app.use("/", adminRoute);
 
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
-
 
 
 // Send client files from server
@@ -71,10 +63,6 @@ app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
 });
 
-
-
-
-
 // se hvilken bruger der er gemt i session storage. 
 app.get('/test', (req, res) => {
   if (req.session.userId && req.session.name) {
@@ -84,7 +72,6 @@ app.get('/test', (req, res) => {
   }
 });
  
-
 
 // definer hvilket html side der skal åbnes når ip adressen åbnes. SKAL stå nederst under øvrige endpoints.
 app.get("/", (req, res) => {
@@ -105,8 +92,6 @@ app.post('/', function (req, res) {
   });
   res.send('POST request to the homepage');
 });
-
-
 
 // start server på pc
 // Ip kan ændres til ipv4 fremfor 0.0.0.0
