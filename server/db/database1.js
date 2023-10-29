@@ -20,4 +20,3 @@ const pool = mysql.createPool(dbConfig);
 module.exports = {
     poolPromise: pool
 };
-
