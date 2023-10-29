@@ -55,9 +55,9 @@ app.get("/admin/login", (req, res) => {
 
 
 // Admin filer
-app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
-});
+// app.get("/admin", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
+// });
 
 
 // se hvilken bruger der er gemt i session storage. 
