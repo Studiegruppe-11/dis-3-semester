@@ -75,3 +75,32 @@ body {
     flex-direction: column;
     justify-content: flex-start;  /* Align content to the start of the div */
 }
+
+
+
+
+
+
+
+
+/* bruges til home*/
+
+#logout {
+  cursor: pointer;
+}
+
+#logout:hover {
+  background-color: blue; /* Ændrer baggrundsfarven til blå ved hover */
+}
+
+
+.vertical-line {
+  border-left: 1px solid grey; /* Tilføj en sort lodret streg til venstre */
+  height: 50px; /* Juster højden efter dine præferencer */
+  margin: 0 10px; /* Tilføj margin til stregen for at skabe afstand */
+}
+
+#user {
+  float: left; /* Placer user helt til venstre */
+  margin-top: 15px; /* Juster topmarginen efter dine præferencer */
+}
