@@ -30,7 +30,7 @@ app.use(
 
 // Routes
 const adminRoute = require("./routes/adminRoute.js");
-app.use("/admin", adminRoute);
+app.use("/", adminRoute);
 
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
