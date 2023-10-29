@@ -49,6 +49,10 @@ app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/home.html"));
 });
 
+app.get("/admin/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/adminLogin.html"));
+});
+
 // Admin filer
 // app.get("/admin", (req, res) => {
 //   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
