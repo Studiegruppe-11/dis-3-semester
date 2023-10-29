@@ -55,9 +55,11 @@ app.get("/admin/login", (req, res) => {
 
 
 // Admin filer
-// app.get("/admin", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
-// });
+// Nedenstående skal udkommenteres og så skal vi bruge den fra adminRoute.js (lige nu  er det omvendt), så kan vi også bruge isAdmin middleware funktionen. 
+// Alternativt kan vi måske bare have den herinde med det andet middleware, ville bare være fedt at have alt admin login i adminRoute.js
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/admin.html"));
+});
 
 
 // se hvilken bruger der er gemt i session storage. 
