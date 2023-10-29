@@ -21,7 +21,7 @@ router.post('/admin/login', async (req, res) => {
         if (rows.length > 0) {
             req.session.isAdmin = true;
             req.session.username = username;
-            res.cookie('username', username); // Bruges til at vise username i admin.html
+            res.cookie('username', username, { httpOnly: false }); // Bruges til at vise username i admin.html
             res.json({ username: username });  // Send the username back in the response
         } else {
             res.status(401).json({ error: 'Invalid credentials' });
