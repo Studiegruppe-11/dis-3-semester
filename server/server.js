@@ -72,7 +72,7 @@ app.get('/test', (req, res) => {
  
 
 // definer hvilket html side der skal åbnes når ip adressen åbnes. SKAL stå nederst under øvrige endpoints.
-// Hvorfor skal dette stå nederst?
+// Hvorfor skal dette stå nederst? ellers virker det ikke. 
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
