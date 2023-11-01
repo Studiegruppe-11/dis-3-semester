@@ -4,15 +4,15 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 const session = require("express-session");
+const http = require("http").Server(app);
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
 
-//const db = require('./db/database.js');
 
-// bruges dette?
+
+
 // Socket
-const http = require("http").Server(app);
 //const io = require("socket.io")(http);
 
 // Middlewares
@@ -20,6 +20,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
+
+// til session storage
 app.use(
   session({
     secret: "my-secret-key",
@@ -104,35 +106,3 @@ app.use((err, req, res, next) => {
   console.error('Global Error Handler:', err.message);
   res.status(500).send('Server Error');
 });
-
-// ################# SOCKET IO STARTER HER #################
-
-// const socketHandler = (io) => {
-//   io.on('connection', (socket) => {
-//       console.log('New client connected');
-
-//       const fetchCustomerData = async () => {
-//           try {
-//               const rows = await db.executeQuery('SELECT * FROM brugere');
-//               socket.emit('customer-data', rows);
-//           } catch (error) {
-//               console.error('Error fetching customer data:', error.message);
-//           }
-//       };
-
-//       // Initial data fetch
-//       fetchCustomerData();
-
-//       // Listen for a 'customer-data-changed' event from your database trigger/stored procedure
-//       socket.on('customer-data-changed', fetchCustomerData);
-//   });
-// };
-
-// socketHandler(io);  // Initialize the socket handler
-
-// // Tror ikke exporten er nødvendig
-// module.exports = socketHandler;
-
-// // ################### SOCKET SLUTTER HER ###################
-
-// // Send client files from server
