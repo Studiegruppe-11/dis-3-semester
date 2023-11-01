@@ -12,7 +12,9 @@ create table customers (
 	street_name VARCHAR(50),
 	street_number VARCHAR(50),
 	postal_code VARCHAR(50),
-	city VARCHAR(50)
+	city VARCHAR(50),
+    username VARCHAR(50),
+    password VARCHAR(50)
 );
 
 insert into customers (id, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city) values (1, 'Walton', 'Bernardo', 'Indonesia', 63, 'wbernardo0@rediff.com', 'Male', 'Delaware', '32', null, 'Balung');
