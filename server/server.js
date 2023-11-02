@@ -4,7 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 const session = require("express-session");
-const http = require("http").Server(app);
+//const http = require("http").Server(app);
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
