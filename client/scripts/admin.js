@@ -9,9 +9,9 @@
 
 function getCookie(name) {
     const value = "; " + document.cookie;
-    console.log('Cookie value:', value);  // Log the entire cookie string
+   // console.log('Cookie value:', value);  // Log the entire cookie string
     const parts = value.split("; " + name + "=");
-    console.log('Split parts:', parts);  // Log the parts after splitting
+   // console.log('Split parts:', parts);  // Log the parts after splitting
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
