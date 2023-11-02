@@ -66,18 +66,24 @@ socket.on('rttUpdate', (data) => {
       document.getElementById('rttInfo').style.color = 'red';
   
       // Send SMS via Twilio
-      const accountSid = 'xxx'; // skal i evn. fil
-      const authToken = '[AuthToken]'; // skal i evn. fil
-      const client = require('twilio')(accountSid, authToken);
+
+      // lige nu udkommenteret da env fil ikke er opdateret og koden derfor ikke virker. 
+
+
+
+
+    //   const accountSid = 'xxx'; // skal i evn. fil
+    //   const authToken = '[AuthToken]'; // skal i evn. fil
+    //   const client = require('twilio')(accountSid, authToken);
   
-      client.messages
-        .create({
-          body: `RTT er over 1000 ms: ${data.rtt} ms`, // finde ud af hvad vi skal skrive
-          from: 'xxxx', // skal i evn. fil
-          to: 'xxx' // skal i evn. fil evt. ved ikke om mobil nummer skal på github
-        })
-        .then(message => console.log(message.sid))
-        .done();
+    //   client.messages
+    //     .create({
+    //       body: `RTT er over 1000 ms: ${data.rtt} ms`, // finde ud af hvad vi skal skrive
+    //       from: 'xxxx', // skal i evn. fil
+    //       to: 'xxx' // skal i evn. fil evt. ved ikke om mobil nummer skal på github
+    //     })
+    //     .then(message => console.log(message.sid))
+    //     .done();
 
 
         // vi skal have at man skal kunne svare på sms'en og så få yderligere info. 
