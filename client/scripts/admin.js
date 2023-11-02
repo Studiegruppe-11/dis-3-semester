@@ -60,6 +60,13 @@ const socket = io();
 socket.on('rttUpdate', (data) => {
   // Opdater HTML-elementet med RTT-oplysninger
   document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
+
+  if (data.rtt < 1000) {
+    document.getElementById('rttInfo').style.color = 'green';
+  } else if (data.rtt > 1000) {
+        document.getElementById('rttInfo').style.color = 'orange';
+    }
+
 });
 
 socket.on('pingUpdate', (data) => {
