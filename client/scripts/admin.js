@@ -74,6 +74,13 @@ socket.on('rttUpdate', (data) => {
 socket.on('pingUpdate', (data) => {
   // Opdater HTML-elementet med ping-oplysninger
   document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
+
+if(data.ping < 500) {
+    document.getElementById('pingInfo').style.color = 'green';
+} else if (data.ping > 500) {
+    document.getElementById('pingInfo').style.color = 'orange';
+}
+
 });
 
 // SOCKET   
