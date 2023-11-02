@@ -40,3 +40,25 @@ window.onload = () => {
 };
 
 
+
+
+
+
+// socket til at vise rtt og ping i real time på admin siden.
+
+// Opret en WebSocket-forbindelse til serveren
+const socket = io();
+
+// Lyt efter opdateringer fra serveren
+socket.on('rttUpdate', (data) => {
+  // Opdater HTML-elementet med RTT-oplysninger
+  document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
+});
+
+socket.on('pingUpdate', (data) => {
+  // Opdater HTML-elementet med ping-oplysninger
+  document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
+});
+
+
+
