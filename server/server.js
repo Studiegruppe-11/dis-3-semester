@@ -12,12 +12,30 @@ const { exec } = require('child_process');
 
 // SOCKET
 //SOCKET TIL RTT OG PING
-// Importér socket.io og opret forbindelsen
-const io = require('socket.io')(http);
 
+const ping = require('ping');
+const io = require('socket.io')(http);
 io.on('connection', (socket) => {
-  console.log('En bruger er forbundet til hovedkanalen');
+  // Funktion til at måle ping og RTT
+  const measurePing = async () => {
+    try {
+      const target = '164.90.228.42'; // Erstat med din servers IP
+      const res = await ping.promise.probe(target);
+      const pingTime = res.time;
+      socket.emit('pingUpdate', { ping: pingTime });
+      // RTT beregnes som dobbelt ping-tid, da det er en round-trip
+      socket.emit('rttUpdate', { rtt: pingTime * 2 });
+    } catch (err) {
+      console.error('Ping error:', err);
+    }
+  };
+
+  // Mål ping og RTT ved forbindelse og derefter hvert 10. sekund
+  measurePing();
+  setInterval(measurePing, 60000);
 });
+
+
 
 
 // SOCKET
