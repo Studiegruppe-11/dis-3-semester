@@ -16,6 +16,7 @@ const { exec } = require('child_process');
 const ping = require('ping');
 const io = require('socket.io')(http);
 io.on('connection', (socket) => {
+  console.log('En klient er tilsluttet via socket.'); // Tilføj denne linje
   // Funktion til at måle ping og RTT
   const measurePing = async () => {
     try {
@@ -35,10 +36,7 @@ io.on('connection', (socket) => {
   setInterval(measurePing, 60000);
 });
 
-
-
-
-// SOCKET
+//SOCKET
 
 
 
