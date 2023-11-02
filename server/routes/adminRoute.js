@@ -32,7 +32,7 @@ function performPingAndRttMeasurement() {
         } catch (error) {
             console.error('Fejl ved måling af RTT og ping:', error);
         }
-    }, 600000); // Måling hvert 10. minut (600000 millisekunder)
+    }, 1000); // Måling hvert 10. minut (600000 millisekunder)
 }
 
 // Udfør målinger ved opstart af serveren
