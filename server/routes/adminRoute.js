@@ -6,6 +6,9 @@
     const io = require('socket.io');
 
 
+    
+// SOCKET
+
 // ping og rtt og socket
 // Funktion til at udføre ping- og RTT-målinger
 function performPingAndRttMeasurement() {
@@ -51,6 +54,7 @@ router.get('/measure', async (req, res) => {
 });
 
 
+// SOCKET
 
 
     // Middleware til at tjekke om brugeren er logget ind som admin
