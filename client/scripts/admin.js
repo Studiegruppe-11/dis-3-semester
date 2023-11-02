@@ -21,15 +21,15 @@ function displayUsername() {
     console.log('Retrieved username:', username);  // Log the retrieved username
     if (username) {
         const usernameDisplay = document.getElementById('usernameDisplay');
-        console.log('usernameDisplay element:', usernameDisplay);  // Log the usernameDisplay element
+        //console.log('usernameDisplay element:', usernameDisplay);  // Log the usernameDisplay element
         if (usernameDisplay) {
             usernameDisplay.innerText = username;
-            console.log('Username displayed');  // Log when username is displayed
+            //console.log('Username displayed');  // Log when username is displayed
         } else {
-            console.log('usernameDisplay element not found');  // Log if usernameDisplay element is not found
+            //console.log('usernameDisplay element not found');  // Log if usernameDisplay element is not found
         }
     } else {
-        console.log('Username not found in cookies');  // Log if username is not found in cookies
+     //   console.log('Username not found in cookies');  // Log if username is not found in cookies
     }
 }
 
