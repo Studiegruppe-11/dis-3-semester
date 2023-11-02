@@ -32,9 +32,8 @@ io.on('connection', (socket) => {
   };
 
   // Mål ping og RTT ved forbindelse og derefter hvert minut. 
-  console.log('Måling af ping og RTT starter nu.'); // Tilføj denne linje
   measurePing();
-  setInterval(measurePing, 60000);
+  setInterval(measurePing, 30000); // Ændret til hvert 30. sekund (30000 ms)
 });
 // SOCKET
 

@@ -60,13 +60,11 @@ const socket = io();
 socket.on('rttUpdate', (data) => {
   // Opdater HTML-elementet med RTT-oplysninger
   document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
-  console.log('RTT opdateret:', data.rtt); // Tilføj denne linje
 });
 
 socket.on('pingUpdate', (data) => {
   // Opdater HTML-elementet med ping-oplysninger
   document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
-  console.log('Ping opdateret:', data.ping); // Tilføj denne linje
 });
 
 // SOCKET   
