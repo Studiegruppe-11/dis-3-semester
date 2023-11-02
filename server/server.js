@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
 
   // Mål ping og RTT ved forbindelse og derefter hvert minut. 
   measurePing();
-  setInterval(measurePing, 30000); // Ændret til hvert 30. sekund (30000 ms)
+  setInterval(measurePing, 10000); // Ændret til hvert 30. sekund (30000 ms)
 });
 // SOCKET
 
