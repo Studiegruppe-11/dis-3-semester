@@ -10,6 +10,15 @@ const http = require("http").Server(app);
 const { exec } = require('child_process');
 
 
+//SOCKET TIL RTT OG PING
+// Importér socket.io og opret forbindelsen
+const io = require('socket.io')(http);
+const rttPingChannel = io.of('/rtt-ping');
+
+// Når der er en forbindelse til socket
+rttPingChannel.on('connection', (socket) => {
+  console.log('En bruger er forbundet til rtt-ping kanalen');
+});
 
 
 // Middlewares
@@ -104,20 +113,5 @@ app.use((err, req, res, next) => {
   res.status(500).send('Server Error');
 });
 
-
-
-
-
-
-// SOCKET
-// Importér socket.io og opret forbindelsen
-const io = require('socket.io')(http);
-// Opret en WebSocket-kanal for RTT og ping
-const rttPingChannel = io.of('/rtt-ping');
-performPingAndRttMeasurement(http);
-// Når der er en forbindelse til socket
-rttPingChannel.on('connection', (socket) => {
-  console.log('En bruger er forbundet til rtt-ping kanalen');
-});
 
 

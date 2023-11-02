@@ -80,23 +80,20 @@ function performPingAndRttMeasurement(http) {
   
   // Udfør målinger ved opstart af serveren
   performPingAndRttMeasurement(http);
-  
-  // Endpoint for at starte måling af RTT og ping
-  router.get('/measure', async (req, res) => {
-    // Udfør en enkelt måling, når brugeren anmoder om det
-    try {
-      const host = '164.90.228.42';
-      const pingResult = await ping.promise.probe(host);
-  
-      // Send RTT og ping-data til HTML-siden som svar på anmodningen
-      res.json({ success: true, rtt: pingResult.time, ping: pingResult.time });
-    } catch (error) {
-      console.error('Fejl ved måling af RTT og ping:', error);
-      res.status(500).json({ success: false, error: 'Der opstod en fejl' });
-    }
-  });
-  
+
+// Endpoint for at starte måling af RTT og ping
+router.get('/measure', async (req, res) => {
+  // Udfør en enkelt måling, når brugeren anmoder om det
+  try {
+    const host = '164.90.228.42';
+    const pingResult = await ping.promise.probe(host);
+
+    // Send RTT og ping-data til HTML-siden som svar på anmodningen
+    res.json({ success: true, rtt: pingResult.time, ping: pingResult.time });
+  } catch (error) {
+    console.error('Fejl ved måling af RTT og ping:', error);
+    res.status(500).json({ success: false, error: 'Der opstod en fejl' });
+  }
+});
+
 module.exports = router;
-
-
-
