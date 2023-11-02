@@ -27,8 +27,8 @@ function performPingAndRttMeasurement() {
             const pingResult = await ping.promise.probe(host);
 
             // Send RTT og ping-data til HTML-siden
-            rttPingChannel.emit('rttUpdate', { rtt: pingResult.time });
-            rttPingChannel.emit('pingUpdate', { ping: pingResult.time });
+            io.emit('rttUpdate', { rtt: pingResult.time });
+            io.emit('pingUpdate', { ping: pingResult.time });            
         } catch (error) {
             console.error('Fejl ved måling af RTT og ping:', error);
         }
