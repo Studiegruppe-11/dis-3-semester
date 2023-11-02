@@ -12,8 +12,18 @@ const { exec } = require('child_process');
 
 
 
-// Socket
-//const io = require("socket.io")(http);
+// SOCKET
+// Importér socket.io og opret forbindelsen
+const io = require('socket.io')(http);
+// Opret en WebSocket-kanal for RTT og ping
+const rttPingChannel = io.of('/rtt-ping');
+// Når der er en forbindelse til socket
+rttPingChannel.on('connection', (socket) => {
+  console.log('En bruger er forbundet til rtt-ping kanalen');
+});
+
+
+
 
 // Middlewares
 app.use(cors());
