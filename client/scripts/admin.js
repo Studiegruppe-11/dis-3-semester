@@ -18,7 +18,7 @@ function getCookie(name) {
 // Function to display the username
 function displayUsername() {
     const username = getCookie('username');
-    console.log('Retrieved username:', username);  // Log the retrieved username
+  //  console.log('Retrieved username:', username);  // Log the retrieved username
     if (username) {
         const usernameDisplay = document.getElementById('usernameDisplay');
         //console.log('usernameDisplay element:', usernameDisplay);  // Log the usernameDisplay element
