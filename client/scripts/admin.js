@@ -1,5 +1,12 @@
 // root/client/scripts/admin.js
 // Function to get a cookie by name
+
+
+
+
+// virkelig meget kode for at vise navn. kan meget lettere gøres som i home.js ved bare at bruge express session. 
+
+
 function getCookie(name) {
     const value = "; " + document.cookie;
     console.log('Cookie value:', value);  // Log the entire cookie string
@@ -31,3 +38,5 @@ window.onload = () => {
     console.log('Page loaded');  // Log when page is loaded
     displayUsername();
 };
+
+
