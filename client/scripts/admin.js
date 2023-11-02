@@ -87,6 +87,14 @@ socket.on('rttUpdate', (data) => {
 
         // vi skal have at man skal kunne svare på sms'en og så få yderligere info. 
 
+
+
+
+
+
+
+
+        
     } else {
       // Hvis RTT er under grænsen, sæt farven til grøn eller orange som tidligere
       if (data.rtt < 1000) {
