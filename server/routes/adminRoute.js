@@ -2,59 +2,6 @@
     const express = require('express');
     const router = express.Router();
     const connection = require('../db/database1.js');
-    const ping = require('ping');
-    const io = require('socket.io');
-
-
-    
-// SOCKET
-
-// ping og rtt og socket
-// Funktion til at udføre ping- og RTT-målinger
-function performPingAndRttMeasurement() {
-    const socket = io(); // Opret forbindelse til socket.io
-
-    const rttPingChannel = socket.of('/rtt-ping');
-
-    rttPingChannel.on('connection', (socket) => {
-        console.log('En bruger er forbundet til rtt-ping kanalen');
-    });
-
-    const host = '164.90.228.42';
-
-    setInterval(async () => {
-        try {
-            const pingResult = await ping.promise.probe(host);
-
-            // Send RTT og ping-data til HTML-siden
-            io.emit('rttUpdate', { rtt: pingResult.time });
-            io.emit('pingUpdate', { ping: pingResult.time });            
-        } catch (error) {
-            console.error('Fejl ved måling af RTT og ping:', error);
-        }
-    }, 600000); // Måling hvert 10. minut (600000 millisekunder)
-}
-
-// Udfør målinger ved opstart af serveren
-performPingAndRttMeasurement();
-
-// Endpoint for at starte måling af RTT og ping
-router.get('/measure', async (req, res) => {
-    // Udfør en enkelt måling, når brugeren anmoder om det
-    try {
-        const host = '164.90.228.42';
-        const pingResult = await ping.promise.probe(host);
-
-        // Send RTT og ping-data til HTML-siden som svar på anmodningen
-        res.json({ success: true, rtt: pingResult.time, ping: pingResult.time });
-    } catch (error) {
-        console.error('Fejl ved måling af RTT og ping:', error);
-        res.status(500).json({ success: false, error: 'Der opstod en fejl' });
-    }
-});
-
-
-// SOCKET
 
 
     // Middleware til at tjekke om brugeren er logget ind som admin
