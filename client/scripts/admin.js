@@ -60,6 +60,7 @@ const socket = io();
 socket.on('rttUpdate', (data) => {
     // Opdater HTML-elementet med RTT-oplysninger
     document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
+    document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
   
     // Hvis data.rtt er over en vis grænse, send en SMS via Twilio
     if (data.rtt > 1000) {
