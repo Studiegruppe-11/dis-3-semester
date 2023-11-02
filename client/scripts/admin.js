@@ -42,7 +42,7 @@ window.onload = () => {
 
 
 
-
+// SOCKET
 
 // socket til at vise rtt og ping i real time på admin siden.
 
@@ -63,3 +63,7 @@ socket.on('pingUpdate', (data) => {
   // Opdater HTML-elementet med ping-oplysninger
   document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
 });
+
+
+
+// SOCKET
