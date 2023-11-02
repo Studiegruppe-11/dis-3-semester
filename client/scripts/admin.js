@@ -61,6 +61,8 @@ socket.on('rttUpdate', (data) => {
   // Opdater HTML-elementet med RTT-oplysninger
   document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
 
+// hvis data.rtt er over en vis grænse så skal vi have twilio til at sende en besked på sms. 
+
   if (data.rtt < 1000) {
     document.getElementById('rttInfo').style.color = 'green';
   } else if (data.rtt > 1000) {
