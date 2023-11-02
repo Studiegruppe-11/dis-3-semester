@@ -31,12 +31,13 @@ io.on('connection', (socket) => {
     }
   };
 
-  // Mål ping og RTT ved forbindelse og derefter hvert 10. sekund
+  // Mål ping og RTT ved forbindelse og derefter hvert minut. 
   measurePing();
   setInterval(measurePing, 60000);
 });
 
 //SOCKET
+
 
 
 
