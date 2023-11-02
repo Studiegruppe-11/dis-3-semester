@@ -9,25 +9,28 @@
 // ping og rtt og socket
 // Funktion til at udføre ping- og RTT-målinger
 function performPingAndRttMeasurement() {
-    const rttPingChannel = io.of('/rtt-ping');
-    
+    const socket = io(); // Opret forbindelse til socket.io
+
+    const rttPingChannel = socket.of('/rtt-ping');
+
+    rttPingChannel.on('connection', (socket) => {
+        console.log('En bruger er forbundet til rtt-ping kanalen');
+    });
+
     const host = '164.90.228.42';
 
     setInterval(async () => {
-    try {
-        const pingResult = await ping.promise.probe(host);
+        try {
+            const pingResult = await ping.promise.probe(host);
 
-        // Send RTT og ping-data til HTML-siden
-        rttPingChannel.emit('rttUpdate', { rtt: pingResult.time });
-        rttPingChannel.emit('pingUpdate', { ping: pingResult.time });
-    } catch (error) {
-        console.error('Fejl ved måling af RTT og ping:', error);
-    }
+            // Send RTT og ping-data til HTML-siden
+            rttPingChannel.emit('rttUpdate', { rtt: pingResult.time });
+            rttPingChannel.emit('pingUpdate', { ping: pingResult.time });
+        } catch (error) {
+            console.error('Fejl ved måling af RTT og ping:', error);
+        }
     }, 600000); // Måling hvert 10. minut (600000 millisekunder)
 }
-
-// Opret forbindelsen til socket.io
-const socket = io(); // Dette er din socket.io-forbindelse
 
 // Udfør målinger ved opstart af serveren
 performPingAndRttMeasurement();
