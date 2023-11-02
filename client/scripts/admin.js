@@ -58,29 +58,42 @@ const socket = io();
 
 // Lyt efter opdateringer fra serveren
 socket.on('rttUpdate', (data) => {
-  // Opdater HTML-elementet med RTT-oplysninger
-  document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
+    // Opdater HTML-elementet med RTT-oplysninger
+    document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
+  
+    // Hvis data.rtt er over en vis grænse, send en SMS via Twilio
+    if (data.rtt > 1000) {
+      document.getElementById('rttInfo').style.color = 'red';
+  
+      // Send SMS via Twilio
+      const accountSid = 'xxx'; // skal i evn. fil
+      const authToken = '[AuthToken]'; // skal i evn. fil
+      const client = require('twilio')(accountSid, authToken);
+  
+      client.messages
+        .create({
+          body: `RTT er over 1000 ms: ${data.rtt} ms`, // finde ud af hvad vi skal skrive
+          from: 'xxxx', // skal i evn. fil
+          to: 'xxx' // skal i evn. fil evt. ved ikke om mobil nummer skal på github
+        })
+        .then(message => console.log(message.sid))
+        .done();
 
-// hvis data.rtt er over en vis grænse så skal vi have twilio til at sende en besked på sms. 
 
-  if (data.rtt < 1000) {
-    document.getElementById('rttInfo').style.color = 'green';
-  } else if (data.rtt > 1000) {
+        // vi skal have at man skal kunne svare på sms'en og så få yderligere info. 
+
+
+
+    } else {
+      // Hvis RTT er under grænsen, sæt farven til grøn eller orange
+      if (data.rtt < 1000) {
+        document.getElementById('rttInfo').style.color = 'green';
+      } else {
         document.getElementById('rttInfo').style.color = 'orange';
+      }
     }
-
-});
-
-socket.on('pingUpdate', (data) => {
-  // Opdater HTML-elementet med ping-oplysninger
-  document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
-
-if(data.ping < 500) {
-    document.getElementById('pingInfo').style.color = 'green';
-} else if (data.ping > 500) {
-    document.getElementById('pingInfo').style.color = 'orange';
-}
-
-});
-
+  });
+  
 // SOCKET   
+
+
