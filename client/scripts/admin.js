@@ -63,3 +63,6 @@ socket.on('pingUpdate', (data) => {
 
 
 // SOCKET
+
+
+console.log('admin.js loaded')
