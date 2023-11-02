@@ -10,13 +10,13 @@ const http = require("http").Server(app);
 const { exec } = require('child_process');
 
 
-// SOCKET
-//SOCKET TIL RTT OG PING
 
+// SOCKET TIL PING OG RTT
 const ping = require('ping');
 const io = require('socket.io')(http);
 io.on('connection', (socket) => {
   console.log('En klient er tilsluttet via socket.'); // Tilføj denne linje
+
   // Funktion til at måle ping og RTT
   const measurePing = async () => {
     try {
@@ -32,11 +32,11 @@ io.on('connection', (socket) => {
   };
 
   // Mål ping og RTT ved forbindelse og derefter hvert minut. 
+  console.log('Måling af ping og RTT starter nu.'); // Tilføj denne linje
   measurePing();
   setInterval(measurePing, 60000);
 });
-
-//SOCKET
+// SOCKET
 
 
 
