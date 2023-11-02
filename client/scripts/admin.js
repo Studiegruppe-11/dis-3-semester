@@ -35,7 +35,7 @@ function displayUsername() {
 
 // Call displayUsername on page load
 window.onload = () => {
-    console.log('Page loaded');  // Log when page is loaded
+ //   console.log('Page loaded');  // Log when page is loaded
     displayUsername();
 };
 
