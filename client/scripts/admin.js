@@ -92,13 +92,20 @@ socket.on('rttUpdate', (data) => {
 
 
     } else {
-      // Hvis RTT er under grænsen, sæt farven til grøn eller orange
+      // Hvis RTT er under grænsen, sæt farven til grøn 
       if (data.rtt < 1000) {
         document.getElementById('rttInfo').style.color = 'green';
-      } else {
-        document.getElementById('rttInfo').style.color = 'orange';
       }
     }
+
+    if(data.ping > 1000){
+        document.getElementById('pingInfo').style.color = 'red';
+    } else {
+        if(data.ping < 1000){
+            document.getElementById('pingInfo').style.color = 'green';
+        }
+    }
+
   });
   
 // SOCKET   
