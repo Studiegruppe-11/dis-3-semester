@@ -128,6 +128,9 @@ socket.on('rttUpdate', (data) => {
       }
     }
   });
+
+
+  console.log("test")
   
 
 
