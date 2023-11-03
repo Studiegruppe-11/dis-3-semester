@@ -19,5 +19,5 @@ client.messages
     from: twilio.twilioPhone,
     to: twilio.myphone
   })
-  .then(message => console.log(`Besked sendt med SID: ${message.sid}`))
+  .then(message => console.log(` Godmorgen! Skriv 'Server Ping' for at teste om serveren kører.`))
   .catch(error => console.error(`Fejl: ${error.message}`));
