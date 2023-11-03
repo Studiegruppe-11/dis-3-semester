@@ -68,8 +68,8 @@ app.use("/", adminRoute);
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
 
-const twilioRoute = require('./routes/twilio.router.js');
-app.use('/', twilioRoute);
+// const twilioRoute = require('./routes/twilio.router.js');
+// app.use('/', twilioRoute);
 
 
 // Send client files from server
@@ -127,6 +127,29 @@ app.post('/', function (req, res) {
   });
   res.send('POST request to the homepage');
 });
+
+
+
+
+
+
+
+// twilio sms 
+
+
+const { MessagingResponse } = require('twilio').twiml;
+
+
+app.post('/sms', (req, res) => {
+  const twiml = new MessagingResponse();
+
+  twiml.message('vi har modtaget din besked');
+
+  res.type('text/xml').send(twiml.toString());
+});
+
+
+
 
 
 // start server
