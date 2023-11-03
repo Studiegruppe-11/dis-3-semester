@@ -55,16 +55,16 @@ window.onload = () => {
 
 
 
-// const path = require('path');
-// const dotenv = require('dotenv');
-// dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-// const twilio = {
-//   myphone: process.env.MY_PHONE,
-//   twilioPhone: process.env.TWILIO_PHONE,
-//   accountSid: process.env.TWILIO_SID,
-//   authToken: process.env.TWILIO_TOKEN
-// };
+const twilio = {
+  myphone: process.env.MY_PHONE,
+  twilioPhone: process.env.TWILIO_PHONE,
+  accountSid: process.env.TWILIO_SID,
+  authToken: process.env.TWILIO_TOKEN
+};
 
 
 // Opret en WebSocket-forbindelse til serveren
@@ -77,8 +77,8 @@ socket.on('rttUpdate', (data) => {
     document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
   
     // Hvis data.rtt er over en vis grænse, send en SMS via Twilio
-    
-    // Send SMS via Twilio
+   
+// Send SMS via Twilio
 
 if (data.rtt > 1000) {
   document.getElementById('rttInfo').style.color = 'red';
@@ -118,7 +118,6 @@ if (data.rtt > 1000) {
     document.getElementById('rttInfo').style.color = 'orange';
   }
 }
-
 
 
 
