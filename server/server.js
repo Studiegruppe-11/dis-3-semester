@@ -125,9 +125,9 @@ app.post('/', function (req, res) {
   res.send('POST request to the homepage');
 });
 
-// start server på pc
-// Ip kan ændres til ipv4 fremfor 0.0.0.0
-http.listen(3000, "0.0.0.0", () => {
+
+// start server
+http.listen(3000, "164.90.228.42", () => {
   console.log("Serveren er åben på port 3000");
 });
 
