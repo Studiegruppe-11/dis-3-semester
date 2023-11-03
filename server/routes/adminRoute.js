@@ -78,10 +78,12 @@
             from: twilio.twilioPhone,
             to: twilio.myphone
 
+            /*
             client.messages.create({
             body: `RTT er over 1000 ms`,
-           // messagingServiceSid: 'MG67041492a1680772daea28349dce713a',
+            messagingServiceSid: 'MG67041492a1680772daea28349dce713a',
             to: twilio.myphone
+            */
             
             
           })
