@@ -132,20 +132,15 @@ app.post('/', function (req, res) {
 
 
 // twilio sms 
+
+
 const { MessagingResponse } = require('twilio').twiml;
+
 
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
-  const incomingMessage = req.body.Body.toLowerCase();
 
-  if (incomingMessage === 'server ping') {
-    // Udfør ping-test her
-    twiml.message('Serveren er online.');
-
-  } else {
-    // Standardhåndtering for ukendte beskeder
-    twiml.message(' Prøv at skriv "server ping" for at teste om serveren er online');
-  }
+  twiml.message('vi har modtaget din besked');
 
   res.type('text/xml').send(twiml.toString());
 });
