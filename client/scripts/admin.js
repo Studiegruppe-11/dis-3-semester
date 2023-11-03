@@ -55,16 +55,16 @@ window.onload = () => {
 
 
 
-const path = require('path');
-const dotenv = require('dotenv');
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+// const path = require('path');
+// const dotenv = require('dotenv');
+// dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-const twilio = {
-  myphone: process.env.MY_PHONE,
-  twilioPhone: process.env.TWILIO_PHONE,
-  accountSid: process.env.TWILIO_SID,
-  authToken: process.env.TWILIO_TOKEN
-};
+// const twilio = {
+//   myphone: process.env.MY_PHONE,
+//   twilioPhone: process.env.TWILIO_PHONE,
+//   accountSid: process.env.TWILIO_SID,
+//   authToken: process.env.TWILIO_TOKEN
+// };
 
 
 // Opret en WebSocket-forbindelse til serveren
