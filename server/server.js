@@ -137,10 +137,29 @@ app.post('/', function (req, res) {
 const { MessagingResponse } = require('twilio').twiml;
 
 
+// app.post('/sms', (req, res) => {
+//   const twiml = new MessagingResponse();
+
+//   twiml.message('vi har modtaget din besked');
+
+//   res.type('text/xml').send(twiml.toString());
+// });
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
 
-  twiml.message('vi har modtaget din besked');
+  if (req.body.Body == 'hello') {
+    twiml.message('Hi!');
+  } else if (req.body.Body == 'bye') {
+    twiml.message('Goodbye');
+  } else {
+    twiml.message(
+      'No Body param match, Twilio sends this in the request to your server.'
+    );
+  }
 
   res.type('text/xml').send(twiml.toString());
 });
