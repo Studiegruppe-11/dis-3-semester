@@ -84,18 +84,18 @@ socket.on('rttUpdate', (data) => {
      
 // Send SMS via Twilio
      
-const accountSid = twilio.accountSid;
-const authToken = twilio.authToken;
-      const client = require('twilio')(accountSid, authToken);
+// const accountSid = twilio.accountSid;
+// const authToken = twilio.authToken;
+//       const client = require('twilio')(accountSid, authToken);
   
-      client.messages
-        .create({
-          body: `RTT er over 1000 ms: ${data.rtt} ms`, // finde ud af hvad vi skal skrive
-          from: twilio.twilioPhone,
-          to: twilio.myphone          
-        })
-        .then(message => console.log(message.sid))
-        .done();
+//       client.messages
+//         .create({
+//           body: `RTT er over 1000 ms: ${data.rtt} ms`, // finde ud af hvad vi skal skrive
+//           from: twilio.twilioPhone,
+//           to: twilio.myphone          
+//         })
+//         .then(message => console.log(message.sid))
+//         .done();
 
         // vi skal have at man skal kunne svare på sms'en og så få yderligere info. 
 
@@ -107,18 +107,18 @@ const authToken = twilio.authToken;
         document.getElementById('rttInfo').style.color = 'green';
 
         
-      const accountSid = accountSid;
-      const authToken = authToken; 
-      const client = require('twilio')(accountSid, authToken);
+      // const accountSid = accountSid;
+      // const authToken = authToken; 
+      // const client = require('twilio')(accountSid, authToken);
   
-      client.messages
-        .create({
-          body: `Server kører godt: ${data.rtt} ms`, 
-          from: twilioPhone,
-          to: myphone 
-        })
-        .then(message => console.log(message.sid))
-        .done();
+      // client.messages
+      //   .create({
+      //     body: `Server kører godt: ${data.rtt} ms`, 
+      //     from: twilioPhone,
+      //     to: myphone 
+      //   })
+      //   .then(message => console.log(message.sid))
+      //   .done();
 
 
 
