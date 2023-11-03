@@ -68,9 +68,6 @@ app.use("/", adminRoute);
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
 
-// const twilioRoute = require('./routes/twilio.router.js');
-// app.use('/', twilioRoute);
-
 
 // Send client files from server
 app.get("/users/create", (req, res) => {
@@ -135,15 +132,20 @@ app.post('/', function (req, res) {
 
 
 // twilio sms 
-
-
 const { MessagingResponse } = require('twilio').twiml;
-
 
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
+  const incomingMessage = req.body.Body.toLowerCase();
 
-  twiml.message('vi har modtaget din besked');
+  if (incomingMessage === 'server ping') {
+    // Udfør ping-test her
+    twiml.message('Serveren er online.');
+
+  } else {
+    // Standardhåndtering for ukendte beskeder
+    twiml.message(' Prøv at skriv "server ping" for at teste om serveren er online');
+  }
 
   res.type('text/xml').send(twiml.toString());
 });
