@@ -107,18 +107,18 @@ const authToken = twilio.authToken;
         document.getElementById('rttInfo').style.color = 'green';
 
         
-      // const accountSid = accountSid;
-      // const authToken = authToken; 
-      // const client = require('twilio')(accountSid, authToken);
+      const accountSid = accountSid;
+      const authToken = authToken; 
+      const client = require('twilio')(accountSid, authToken);
   
-      // client.messages
-      //   .create({
-      //     body: `Server kører godt: ${data.rtt} ms`, 
-      //     from: twilioPhone,
-      //     to: myphone 
-      //   })
-      //   .then(message => console.log(message.sid))
-      //   .done();
+      client.messages
+        .create({
+          body: `Server kører godt: ${data.rtt} ms`, 
+          from: twilioPhone,
+          to: myphone 
+        })
+        .then(message => console.log(message.sid))
+        .done();
 
 
 
