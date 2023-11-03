@@ -4,6 +4,10 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
 
+// Importer function til at sende mail
+const { sendWelcomeEmail } = require('../mailUtility');
+
+
 // Endpoint for getting all customers
 router.get('/users/customers', async (req, res) => {
     try {
