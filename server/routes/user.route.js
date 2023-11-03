@@ -5,7 +5,7 @@ const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
 
 // Importer function til at sende mail
-const { sendWelcomeEmail } = require('../utility/mailUtility');
+const { sendWelcomeEmail } = require('../utility/mailUtility.js');
 
 
 // Endpoint for getting all customers
