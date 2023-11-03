@@ -53,6 +53,20 @@ window.onload = () => {
 
 // socket til at vise rtt og ping i real time på admin siden.
 
+
+
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
+const twilio = {
+  myphone: process.env.MY_PHONE,
+  twilioPhone: process.env.TWILIO_PHONE,
+  accountSid: process.env.TWILIO_SID,
+  authToken: process.env.TWILIO_TOKEN
+};
+
+
 // Opret en WebSocket-forbindelse til serveren
 const socket = io();
 
@@ -69,30 +83,21 @@ socket.on('rttUpdate', (data) => {
   
      
 // Send SMS via Twilio
-      // lige nu udkommenteret da env fil ikke er opdateret og koden derfor ikke virker. 
-
-
-
-    //   const accountSid = 'xxx'; // skal i evn. fil
-    //   const authToken = '[AuthToken]'; // skal i evn. fil
-    //   const client = require('twilio')(accountSid, authToken);
+     
+      const accountSid = accountSid;
+      const authToken = authToken; 
+      const client = require('twilio')(accountSid, authToken);
   
-    //   client.messages
-    //     .create({
-    //       body: `RTT er over 1000 ms: ${data.rtt} ms`, // finde ud af hvad vi skal skrive
-    //       from: 'xxxx', // skal i evn. fil
-    //       to: 'xxx' // skal i evn. fil evt. ved ikke om mobil nummer skal på github
-    //     })
-    //     .then(message => console.log(message.sid))
-    //     .done();
+      client.messages
+        .create({
+          body: `RTT er over 1000 ms: ${data.rtt} ms`, // finde ud af hvad vi skal skrive
+          from: twilioPhone, // skal i evn. fil
+          to: myphone // skal i evn. fil evt. ved ikke om mobil nummer skal på github
+        })
+        .then(message => console.log(message.sid))
+        .done();
 
         // vi skal have at man skal kunne svare på sms'en og så få yderligere info. 
-
-
-
-
-
-
 
 
         
@@ -100,6 +105,24 @@ socket.on('rttUpdate', (data) => {
       // Hvis RTT er under grænsen, sæt farven til grøn eller orange som tidligere
       if (data.rtt < 1000) {
         document.getElementById('rttInfo').style.color = 'green';
+
+        
+      const accountSid = accountSid;
+      const authToken = authToken; 
+      const client = require('twilio')(accountSid, authToken);
+  
+      client.messages
+        .create({
+          body: `Server kører godt: ${data.rtt} ms`, 
+          from: twilioPhone,
+          to: myphone 
+        })
+        .then(message => console.log(message.sid))
+        .done();
+
+
+
+
       } else {
         document.getElementById('rttInfo').style.color = 'orange';
       }
