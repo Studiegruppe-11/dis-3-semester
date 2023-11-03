@@ -73,25 +73,45 @@ socket.on('rttUpdate', (data) => {
 if (data.rtt > 1000) {
   document.getElementById('rttInfo').style.color = 'red';
 
+
+
+
+  
+  fetch('/lowping') // Foretag en GET-anmodning til /lowping
+  .then(response => {
+    if (response.ok) {
+      return response.text();
+    } else {
+      throw new Error('An error occurred while making the request.');
+    }
+  })
+  .then(data => {
+    console.log(data); // Log besked fra serveren (f.eks., 'Message sent.')
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
+
+
+
+
 } else {
   // Hvis RTT er under grænsen, sæt farven til grøn eller orange som tidligere
   if (data.rtt < 1000) {
     document.getElementById('rttInfo').style.color = 'green';
 
-    // fetch('/lowping') // Foretag en GET-anmodning til /lowping
-    // .then(response => {
-    //   if (response.ok) {
-    //     return response.text();
-    //   } else {
-    //     throw new Error('An error occurred while making the request.');
-    //   }
-    // })
-    // .then(data => {
-    //   console.log(data); // Log besked fra serveren (f.eks., 'Message sent.')
-    // })
-    // .catch(error => {
-    //   console.error('Error:', error);
-    // });
+
+
+    
+
+
+
+
+
+
+
 
 
 } 

@@ -39,25 +39,50 @@ router.post('/users/create', async (req, res) => {
     postal_code,
     city
   } = req.body;
-  try {
-    const pool = await connection.poolPromise;
+//   try {
+//     const pool = await connection.poolPromise;
 
-    // Udfør SQL-forespørgslen her
-    const query = `
-      INSERT INTO customers (username, password, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
-    const values = [username, password, firstname, lastname, country, age, email, gender, street_name, street_number, postal_code, city];
+//     // Udfør SQL-forespørgslen her
+//     const query = `
+//       INSERT INTO customers (username, password, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city)
+//       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+//     `;
+//     const values = [username, password, firstname, lastname, country, age, email, gender, street_name, street_number, postal_code, city];
 
-    const [rows] = await pool.query(query, values);
+//     const [rows] = await pool.query(query, values);
 
-    res.send(rows);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
+//     res.send(rows);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send(error.message);
+//   }
+// });
+try {
+  const pool = await connection.poolPromise;
+  const query = `
+    INSERT INTO customers (username, password, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+  const values = [username, password, firstname, lastname, country, age, email, gender, street_name, street_number, postal_code, city];
+  
+  // Insert the user into the database
+  const [rows] = await pool.query(query, values);
+
+  // If the insert was successful and we have an inserted user's id
+  if (rows.insertId) {
+    // Call your sendWelcomeEmail function here
+    // Assuming sendWelcomeEmail is an async function and takes the user's email and name as parameters
+    await sendWelcomeEmail(email, firstname + ' ' + lastname);
   }
+  
+  // Send a response back to the client
+  res.status(201).json({ message: 'User created and email sent' });
+} catch (error) {
+  // If sending the email throws an error, you would catch it here as well
+  console.log(error);
+  res.status(500).send(error.message);
+}
 });
-
 
  
 // Undersøg om login er korrekt.
