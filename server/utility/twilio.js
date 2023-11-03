@@ -15,9 +15,9 @@ const client = require('twilio')(accountSid, authToken);
 
 client.messages
   .create({
-    body: 'Dette er en testbesked',
+    body: 'Godmorgen! Skriv "Server Ping" for at teste om serveren kører',
     from: twilio.twilioPhone,
     to: twilio.myphone
   })
-  .then(message => console.log(` Godmorgen! Skriv 'Server Ping' for at teste om serveren kører.`))
+  .then(message => console.log(` Besked sendt `))
   .catch(error => console.error(`Fejl: ${error.message}`));
