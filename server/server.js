@@ -68,6 +68,9 @@ app.use("/", adminRoute);
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
 
+const twilioRoute = require('./routes/twilio.router.js');
+app.use('/', twilioRoute);
+
 
 // Send client files from server
 app.get("/users/create", (req, res) => {
