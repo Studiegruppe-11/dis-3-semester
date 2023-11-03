@@ -65,6 +65,7 @@ socket.on('rttUpdate', (data) => {
     // Hvis data.rtt er over en vis grænse, send en SMS via Twilio
     if (data.rtt > 1000) {
       document.getElementById('rttInfo').style.color = 'red';
+
   
      
 // Send SMS via Twilio
