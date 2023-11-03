@@ -78,20 +78,20 @@ if (data.rtt > 1000) {
   if (data.rtt < 1000) {
     document.getElementById('rttInfo').style.color = 'green';
 
-    fetch('/lowping') // Foretag en GET-anmodning til /lowping
-    .then(response => {
-      if (response.ok) {
-        return response.text();
-      } else {
-        throw new Error('An error occurred while making the request.');
-      }
-    })
-    .then(data => {
-      console.log(data); // Log besked fra serveren (f.eks., 'Message sent.')
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+    // fetch('/lowping') // Foretag en GET-anmodning til /lowping
+    // .then(response => {
+    //   if (response.ok) {
+    //     return response.text();
+    //   } else {
+    //     throw new Error('An error occurred while making the request.');
+    //   }
+    // })
+    // .then(data => {
+    //   console.log(data); // Log besked fra serveren (f.eks., 'Message sent.')
+    // })
+    // .catch(error => {
+    //   console.error('Error:', error);
+    // });
 
 
 } 
