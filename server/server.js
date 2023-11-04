@@ -152,13 +152,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
 
-  if (req.body.Body == 'hello') {
-    twiml.message('Hi!');
-  } else if (req.body.Body == 'bye') {
-    twiml.message('Goodbye');
+  if (req.body.Body == 'serverstatus') {
+    // her skal serverping laves
+    twiml.message(' Serveren er online.');
+  } else if (req.body.Body == 'dagens omsætning') {
+    twiml.message(' Snart vil du kunne modtage dagens omsætning.');
   } else {
     twiml.message(
-      'No Body param match, Twilio sends this in the request to your server.'
+      'Prøv at skriv noget andet.'
     );
   }
 
