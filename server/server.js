@@ -153,7 +153,6 @@ app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
 
   if (req.body.Body == 'serverstatus') {
-    // her skal serverping laves
     twiml.message(' Serveren er online.');
   } else if (req.body.Body == 'dagens omsætning') {
     twiml.message(' Snart vil du kunne modtage dagens omsætning.');
