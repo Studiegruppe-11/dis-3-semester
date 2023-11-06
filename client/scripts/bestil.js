@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             let menuItem = document.createElement("div");
             menuItem.classList.add("menu-item");
 
-            let img = document.createElement("img");
-            img.src = sandwich.imageURL;
-            menuItem.appendChild(img);
+            // let img = document.createElement("img");
+            // img.src = sandwich.imageURL;
+            // menuItem.appendChild(img);
 
             let name = document.createElement("p");
             name.innerHTML = `Name: ${sandwich.name}`;
@@ -38,9 +38,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             let menuItem = document.createElement("div");
             menuItem.classList.add("menu-item");
 
-            let img = document.createElement("img");
-            img.src = juice.imageURL;
-            menuItem.appendChild(img);
+            // let img = document.createElement("img");
+            // img.src = juice.imageURL;
+            // menuItem.appendChild(img);
 
             let name = document.createElement("p");
             name.innerHTML = `Name: ${juice.name}`;
