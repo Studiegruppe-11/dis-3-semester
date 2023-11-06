@@ -10,28 +10,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         let juiceList = document.getElementById("juiceList");
 
         // Opret separate kasser for hver sandwich
-        sandwich.forEach((sandwich) => {
-            let menuItem = document.createElement("div");
-            menuItem.classList.add("menu-item");
+        // sandwich.forEach((sandwich) => {
+        //     let menuItem = document.createElement("div");
+        //     menuItem.classList.add("menu-item");
 
-            let img = document.createElement("img");
-            img.src = sandwich.imageURL;
-            menuItem.appendChild(img);
+        //     let img = document.createElement("img");
+        //     img.src = sandwich.imageURL;
+        //     menuItem.appendChild(img);
 
-            let name = document.createElement("p");
-            name.innerHTML = `Name: ${sandwich.name}`;
-            menuItem.appendChild(name);
+        //     let name = document.createElement("p");
+        //     name.innerHTML = `Name: ${sandwich.name}`;
+        //     menuItem.appendChild(name);
 
-            // let description = document.createElement("p");
-            // description.innerHTML = `Description: ${sandwich.description}`;
-            // menuItem.appendChild(description);
+        //     let description = document.createElement("p");
+        //     description.innerHTML = `Description: ${sandwich.description}`;
+        //     menuItem.appendChild(description);
 
-            // let price = document.createElement("p");
-            // price.innerHTML = `Price: ${sandwich.price} kr`;
-            // menuItem.appendChild(price);
+        //     let price = document.createElement("p");
+        //     price.innerHTML = `Price: ${sandwich.price} kr`;
+        //     menuItem.appendChild(price);
 
-            sandwichList.appendChild(menuItem);
-        });
+        //     sandwichList.appendChild(menuItem);
+        // });
 
         // // Opret separate kasser for hver juice
         // juice.forEach((juice) => {
