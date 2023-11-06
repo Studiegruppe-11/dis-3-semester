@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         sandwich.forEach((sandwich) => {
             let li = document.createElement("li");
-            li.innerHTML = `${sandwich.name} ${sandwich.price} kr`;
+            li.innerHTML = `${sandwich.name} ${sandwich.description} ${sandwich.price} kr`;
             sandwichList.appendChild(li);
         }
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         juice.forEach((juice) => {
             let li = document.createElement("li");
-            li.innerHTML = `${juice.name} ${juice.price} kr`;
+            li.innerHTML = `${juice.name} ${juice.description} ${juice.price} kr`;
             juiceList.appendChild(li);
 
         }
