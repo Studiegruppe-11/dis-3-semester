@@ -56,80 +56,80 @@
 
 
     // hvis server kører dårligt 
-    router.get('/lowping', async (req, res) => {
-        const path = require('path');
-        const dotenv = require('dotenv');
-        dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+    // router.get('/lowping', async (req, res) => {
+    //     const path = require('path');
+    //     const dotenv = require('dotenv');
+    //     dotenv.config({ path: path.resolve(__dirname, '../../.env') });
       
-        const twilio = {
-          myphone: process.env.MY_PHONE,
-          twilioPhone: process.env.TWILIO_PHONE,
-          accountSid: process.env.TWILIO_SID,
-          authToken: process.env.TWILIO_TOKEN
-        };
+    //     const twilio = {
+    //       myphone: process.env.MY_PHONE,
+    //       twilioPhone: process.env.TWILIO_PHONE,
+    //       accountSid: process.env.TWILIO_SID,
+    //       authToken: process.env.TWILIO_TOKEN
+    //     };
       
-        const accountSid = twilio.accountSid;
-        const authToken = twilio.authToken;
-        const client = require('twilio')(accountSid, authToken);
+    //     const accountSid = twilio.accountSid;
+    //     const authToken = twilio.authToken;
+    //     const client = require('twilio')(accountSid, authToken);
       
-        client.messages
-          .create({
-            body: `RTT er over 1000 ms`,
-            from: twilio.twilioPhone,
-            to: twilio.myphone
+    //     client.messages
+    //       .create({
+    //         body: `RTT er over 1000 ms`,
+    //         from: twilio.twilioPhone,
+    //         to: twilio.myphone
 
-            /*
-            client.messages.create({
-            body: `RTT er over 1000 ms`,
-            messagingServiceSid: 'MG7b5a902f7b7ab7b68e45af8c708ab8d5',
-            to: twilio.myphone
-            */
+    //         /*
+    //         client.messages.create({
+    //         body: `RTT er over 1000 ms`,
+    //         messagingServiceSid: 'MG7b5a902f7b7ab7b68e45af8c708ab8d5',
+    //         to: twilio.myphone
+    //         */
             
             
-          })
-          .then(message => {
-            console.log(message.sid);
-            res.send('Message sent.'); // Send et svar tilbage til klienten
-          })
-          .catch(error => {
-            console.error('Error sending message:', error);
-            res.status(500).send('Error sending message.'); // Håndter fejl og send en fejlrespons til klienten
-          });
-      });
+    //       })
+    //       .then(message => {
+    //         console.log(message.sid);
+    //         res.send('Message sent.'); // Send et svar tilbage til klienten
+    //       })
+    //       .catch(error => {
+    //         console.error('Error sending message:', error);
+    //         res.status(500).send('Error sending message.'); // Håndter fejl og send en fejlrespons til klienten
+    //       });
+    //   });
 
 
 // hvis server kører godt
-      router.get('/goodping', async (req, res) => {
-        const path = require('path');
-        const dotenv = require('dotenv');
-        dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+      // router.get('/goodping', async (req, res) => {
+      //   const path = require('path');
+      //   const dotenv = require('dotenv');
+      //   dotenv.config({ path: path.resolve(__dirname, '../../.env') });
       
-        const twilio = {
-          myphone: process.env.MY_PHONE,
-          twilioPhone: process.env.TWILIO_PHONE,
-          accountSid: process.env.TWILIO_SID,
-          authToken: process.env.TWILIO_TOKEN
-        };
+      //   const twilio = {
+      //     myphone: process.env.MY_PHONE,
+      //     twilioPhone: process.env.TWILIO_PHONE,
+      //     accountSid: process.env.TWILIO_SID,
+      //     authToken: process.env.TWILIO_TOKEN
+      //   };
       
-        const accountSid = twilio.accountSid;
-        const authToken = twilio.authToken;
-        const client = require('twilio')(accountSid, authToken);
+      //   const accountSid = twilio.accountSid;
+      //   const authToken = twilio.authToken;
+      //   const client = require('twilio')(accountSid, authToken);
       
-        client.messages
-          .create({
-            body: `Serveren kører godt`,
-            from: twilio.twilioPhone,
-            to: twilio.myphone
-          })
-          .then(message => {
-            console.log(message.sid);
-            res.send('Message sent.'); // Send et svar tilbage til klienten
-          })
-          .catch(error => {
-            console.error('Error sending message:', error);
-            res.status(500).send('Error sending message.'); // Håndter fejl og send en fejlrespons til klienten
-          });
-      });
+      //   client.messages
+      //     .create({
+      //       body: `Serveren kører godt`,
+      //       from: twilio.twilioPhone,
+      //       to: twilio.myphone
+      //     })
+      //     .then(message => {
+      //       console.log(message.sid);
+      //       res.send('Message sent.'); // Send et svar tilbage til klienten
+      //     })
+      //     .catch(error => {
+      //       console.error('Error sending message:', error);
+      //       res.status(500).send('Error sending message.'); // Håndter fejl og send en fejlrespons til klienten
+      //     });
+      // });
       
 
 
