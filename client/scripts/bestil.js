@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.src = sandwich.imageURL;
             menuItem.appendChild(img);
 
-            // let name = document.createElement("p");
-            // name.innerHTML = `Name: ${sandwich.name}`;
-            // menuItem.appendChild(name);
+            let name = document.createElement("p");
+            name.innerHTML = `Name: ${sandwich.name}`;
+            menuItem.appendChild(name);
 
             // let description = document.createElement("p");
             // description.innerHTML = `Description: ${sandwich.description}`;
