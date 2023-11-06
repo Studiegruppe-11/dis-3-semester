@@ -8,15 +8,31 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         console.log(sandwich, juice);
 
+        let sandwichList = document.getElementById("sandwichList");
+        let juiceList = document.getElementById("juiceList");
 
-        
-          //document.getElementById("user").innerHTML = result.name;
-        
-    
-      } catch (error) {
-          console.log(error);
-          
+        sandwich.forEach((sandwich) => {
+            let li = document.createElement("li");
+            li.innerHTML = `${sandwich.name} ${sandwich.price} kr`;
+            sandwichList.appendChild(li);
         }
+
+        );
+
+        juice.forEach((juice) => {
+            let li = document.createElement("li");
+            li.innerHTML = `${juice.name} ${juice.price} kr`;
+            juiceList.appendChild(li);
+
+        }
+
+        );
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
 
 
       });
