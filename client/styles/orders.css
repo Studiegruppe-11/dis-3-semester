@@ -51,7 +51,24 @@ body {
     font-weight: bolder;
   }
   
-  /* Rest of your CSS styles here */
+  /* Styling for the menu card */
+  .menu-card {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .menu-category {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f7c1d9;
+    border-radius: 10px;
+  }
+  
+  .menu-category h2 {
+    font-size: 24px;
+  }
+
+  
   
     
     /* .container {
