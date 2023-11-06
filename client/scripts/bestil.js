@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             name.innerHTML = `Name: ${sandwich.name}`;
             menuItem.appendChild(name);
 
-            // let description = document.createElement("p");
-            // description.innerHTML = `Description: ${sandwich.description}`;
-            // menuItem.appendChild(description);
+            let description = document.createElement("p");
+            description.innerHTML = `Description: ${sandwich.description}`;
+            menuItem.appendChild(description);
 
             // let price = document.createElement("p");
             // price.innerHTML = `Price: ${sandwich.price} kr`;
