@@ -4,34 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/admin.css" />
+    <link rel="stylesheet" href="../styles/orders.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Bestil</title>
   </head>
   <body>
-    <ul>
-      <li><img src="../img/joeLogo.svg" alt="Logo" /></li>
-      <li><a href="/home" >Home</a></li>
-      <li><a href="/users/bestil" class="active" >Bestil</a></li>
-      <li><a href="/users/kurv">Kurv</a></li>
-      <li><a href="/admin">Admin</a></li>
-    </ul>
+    <ul class="menubar">
+        <li><img src="../img/joeLogo.svg" alt="Logo" /></li>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/users/bestil" class="active">Bestil</a></li>
+        <li><a href="/users/kurv">Kurv</a></li>
+        <li><a href="/admin">Admin</a></li>
+      </ul>
+  
+      <ul class="menubar">
+        <li><p id="user"></p></li>
+        <li class="vertical-line"></li>
+        <li><i style="font-size: 24px;" id="logout" class="fa fa-sign-out"> </i> </li>
+      </ul>
 
     <ul>
-      <li><p id="user"></p></li>
-      <li class="vertical-line"></li>
-      <li><i style="font: size 24px;" id="logout" class="fa fa-sign-out"> </i> </li>
-    </ul>
-
-    <ul>
-      <h2>Sandwich Menu</h2>
+      <h2>Sandwiches</h2>
       <ul id="sandwichList">
         <!-- Sandwich items will be added here by JavaScript -->
       </ul>
     </ul>
 
     <ul>
-      <h2>Juice Menu</h2>
+      <h2>Juices</h2>
       <ul id="juiceList">
         <!-- Juice items will be added here by JavaScript -->
       </ul>
