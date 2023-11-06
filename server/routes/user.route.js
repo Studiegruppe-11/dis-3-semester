@@ -144,13 +144,28 @@ router.get("/users/logout", async (req, res) => {
 
 
 
-//ORDERS
+//ORDERS skal måske over i anden route, skal lige se i forhold til session id når man bestiller. 
 router.get('/orders/sandwich', async (req, res) => {
   try {
       const pool = await connection.poolPromise;
 
       // Udfør SQL-forespørgslen her
       const [rows] = await pool.query('SELECT * FROM products where category = "Sandwich"');
+
+      res.send(rows);
+  } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
+  }
+});
+
+
+router.get('/orders/juice', async (req, res) => {
+  try {
+      const pool = await connection.poolPromise;
+
+      // Udfør SQL-forespørgslen her
+      const [rows] = await pool.query('SELECT * FROM products where category = "Juice"');
 
       res.send(rows);
   } catch (error) {
