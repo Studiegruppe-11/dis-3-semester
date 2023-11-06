@@ -132,20 +132,9 @@ app.post('/', function (req, res) {
 
 
 
-// twilio sms 
-
+// twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
 
 const { MessagingResponse } = require('twilio').twiml;
-
-
-// app.post('/sms', (req, res) => {
-//   const twiml = new MessagingResponse();
-
-//   twiml.message('vi har modtaget din besked');
-
-//   res.type('text/xml').send(twiml.toString());
-// });
-
 
 app.use(bodyParser.urlencoded({ extended: false }));
 

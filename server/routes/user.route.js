@@ -144,6 +144,36 @@ router.get("/users/logout", async (req, res) => {
 
 
 
+//ORDERS
+router.get('/orders/sandwich', async (req, res) => {
+  try {
+      const pool = await connection.poolPromise;
+
+      // Udfør SQL-forespørgslen her
+      const [rows] = await pool.query('SELECT * FROM products where category = "Sandwich"');
+
+      res.send(rows);
+  } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
