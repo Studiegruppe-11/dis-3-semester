@@ -66,49 +66,7 @@
 
 
 
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const response1 = await fetch("/orders/sandwich");
-        const response2 = await fetch("/orders/juice");
-        const [sandwichData, juiceData] = await Promise.all([response1.json(), response2.json()]);
 
-        const sandwichList = document.getElementById("sandwichList");
-        const juiceList = document.getElementById("juiceList");
+console.log("Bestil.js loaded");
 
-        const createMenuItem = (item) => {
-            const menuItem = document.createElement("div");
-            menuItem.classList.add("menu-item");
 
-            const img = document.createElement("img");
-            img.src = item.imageURL;
-            menuItem.appendChild(img);
-
-            const name = document.createElement("p");
-            name.innerHTML = `Name: ${item.name}`;
-            menuItem.appendChild(name);
-
-            const description = document.createElement("p");
-            description.innerHTML = `Description: ${item.description}`;
-            menuItem.appendChild(description);
-
-            const price = document.createElement("p");
-            price.innerHTML = `Price: ${item.price} kr`;
-            menuItem.appendChild(price);
-
-            return menuItem;
-        };
-
-        // Opret separate kasser for hver sandwich
-        sandwichData.forEach((sandwich) => {
-            sandwichList.appendChild(createMenuItem(sandwich));
-        });
-
-        // Opret separate kasser for hver juice
-        juiceData.forEach((juice) => {
-            juiceList.appendChild(createMenuItem(juice));
-        });
-
-    } catch (error) {
-        console.log(error);
-    }
-});
