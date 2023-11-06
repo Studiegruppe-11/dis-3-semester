@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-        Opret separate kasser for hver sandwich
+       // Opret separate kasser for hver sandwich
         sandwich.forEach((sandwich) => {
             let menuItem = document.createElement("div");
             menuItem.classList.add("menu-item");
