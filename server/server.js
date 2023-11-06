@@ -87,6 +87,11 @@ app.get("/admin/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/adminLogin.html"));
 });
 
+app.get("/users/bestil", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/bestil.html"));
+});
+
+
 
 // Admin filer
 // Nedenstående skal udkommenteres og så skal vi bruge den fra adminRoute.js (lige nu  er det omvendt), så kan vi også bruge isAdmin middleware funktionen. 
