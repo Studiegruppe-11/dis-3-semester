@@ -18,17 +18,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.src = sandwich.imageURL;
             menuItem.appendChild(img);
 
-            let name = document.createElement("p");
-            name.innerHTML = `Name: ${sandwich.name}`;
-            menuItem.appendChild(name);
+            // let name = document.createElement("p");
+            // name.innerHTML = `Name: ${sandwich.name}`;
+            // menuItem.appendChild(name);
 
-            let description = document.createElement("p");
-            description.innerHTML = `Description: ${sandwich.description}`;
-            menuItem.appendChild(description);
+            // let description = document.createElement("p");
+            // description.innerHTML = `Description: ${sandwich.description}`;
+            // menuItem.appendChild(description);
 
-            let price = document.createElement("p");
-            price.innerHTML = `Price: ${sandwich.price} kr`;
-            menuItem.appendChild(price);
+            // let price = document.createElement("p");
+            // price.innerHTML = `Price: ${sandwich.price} kr`;
+            // menuItem.appendChild(price);
 
             sandwichList.appendChild(menuItem);
         });
