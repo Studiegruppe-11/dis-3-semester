@@ -9,53 +9,58 @@ document.addEventListener('DOMContentLoaded', async () => {
         let sandwichList = document.getElementById("sandwichList");
         let juiceList = document.getElementById("juiceList");
 
-        // Opret separate kasser for hver sandwich
-        // sandwich.forEach((sandwich) => {
-        //     let menuItem = document.createElement("div");
-        //     menuItem.classList.add("menu-item");
 
-        //     let img = document.createElement("img");
-        //     img.src = sandwich.imageURL;
-        //     menuItem.appendChild(img);
+        
 
-        //     let name = document.createElement("p");
-        //     name.innerHTML = `Name: ${sandwich.name}`;
-        //     menuItem.appendChild(name);
 
-        //     let description = document.createElement("p");
-        //     description.innerHTML = `Description: ${sandwich.description}`;
-        //     menuItem.appendChild(description);
 
-        //     let price = document.createElement("p");
-        //     price.innerHTML = `Price: ${sandwich.price} kr`;
-        //     menuItem.appendChild(price);
+        Opret separate kasser for hver sandwich
+        sandwich.forEach((sandwich) => {
+            let menuItem = document.createElement("div");
+            menuItem.classList.add("menu-item");
 
-        //     sandwichList.appendChild(menuItem);
-        // });
+            let img = document.createElement("img");
+            img.src = sandwich.imageURL;
+            menuItem.appendChild(img);
 
-        // // Opret separate kasser for hver juice
-        // juice.forEach((juice) => {
-        //     let menuItem = document.createElement("div");
-        //     menuItem.classList.add("menu-item");
+            let name = document.createElement("p");
+            name.innerHTML = `Name: ${sandwich.name}`;
+            menuItem.appendChild(name);
 
-        //     let img = document.createElement("img");
-        //     img.src = juice.imageURL;
-        //     menuItem.appendChild(img);
+            let description = document.createElement("p");
+            description.innerHTML = `Description: ${sandwich.description}`;
+            menuItem.appendChild(description);
 
-        //     let name = document.createElement("p");
-        //     name.innerHTML = `Name: ${juice.name}`;
-        //     menuItem.appendChild(name);
+            let price = document.createElement("p");
+            price.innerHTML = `Price: ${sandwich.price} kr`;
+            menuItem.appendChild(price);
 
-        //     let description = document.createElement("p");
-        //     description.innerHTML = `Description: ${juice.description}`;
-        //     menuItem.appendChild(description);
+            sandwichList.appendChild(menuItem);
+        });
 
-        //     let price = document.createElement("p");
-        //     price.innerHTML = `Price: ${juice.price} kr`;
-        //     menuItem.appendChild(price);
+        // Opret separate kasser for hver juice
+        juice.forEach((juice) => {
+            let menuItem = document.createElement("div");
+            menuItem.classList.add("menu-item");
 
-        //     juiceList.appendChild(menuItem);
-        // });
+            let img = document.createElement("img");
+            img.src = juice.imageURL;
+            menuItem.appendChild(img);
+
+            let name = document.createElement("p");
+            name.innerHTML = `Name: ${juice.name}`;
+            menuItem.appendChild(name);
+
+            let description = document.createElement("p");
+            description.innerHTML = `Description: ${juice.description}`;
+            menuItem.appendChild(description);
+
+            let price = document.createElement("p");
+            price.innerHTML = `Price: ${juice.price} kr`;
+            menuItem.appendChild(price);
+
+            juiceList.appendChild(menuItem);
+        });
 
     } catch (error) {
 
