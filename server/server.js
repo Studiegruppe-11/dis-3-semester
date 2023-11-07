@@ -17,6 +17,8 @@ const { exec } = require('child_process');
 // grundlæggende rigtigt med rtt og ping skal lige kigges igennem. fx tror jeg ikke at rtt er ping*2. og det er meget meget lave ping og rtt tider vi får. 
 
 
+
+
 const ping = require('ping');
 const io = require('socket.io')(http);
 io.on('connection', (socket) => {
@@ -41,8 +43,6 @@ io.on('connection', (socket) => {
   setInterval(measurePing, 600000); //hver 10. min.
 });
 // SOCKET
-
-
 
 
 
