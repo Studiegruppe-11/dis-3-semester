@@ -230,3 +230,29 @@ JOIN (
     GROUP BY order_id
 ) totals ON o.order_id = totals.order_id
 SET o.total_price = totals.total_price;
+
+
+
+
+
+
+CREATE TABLE placedorders (
+    placedorders_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    date TIMESTAMP
+);
+
+
+
+ALTER TABLE placedorders
+ADD CONSTRAINT fk_customer_id
+FOREIGN KEY (customer_id)
+REFERENCES customers(customer_id);
+
+ALTER TABLE placedorders
+ADD CONSTRAINT fk_product_id
+FOREIGN KEY (product_id)
+REFERENCES products(product_id);
+
+
