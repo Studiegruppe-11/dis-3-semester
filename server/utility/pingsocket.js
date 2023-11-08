@@ -23,7 +23,7 @@ function setupPing(server) {
   
     // Mål ping og RTT ved forbindelse og derefter hvert minut.
     measurePing();
-    setInterval(measurePing, 5); //hver 10. min.
+    setInterval(measurePing, 60000); //hver 10. min.
   });
 }
 
