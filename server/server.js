@@ -8,7 +8,7 @@ const session = require("express-session");
 const http = require("http").Server(app);
 // const ping = require('ping');
 // const io = require('socket.io')(http);
-const pingSocket = require('./utility/pingsocket.js');
+const setupPing = require('./utility/pingsocket.js');
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
@@ -22,7 +22,7 @@ const { exec } = require('child_process');
 // SOCKET
 
 
-
+  
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -110,7 +110,8 @@ app.post('/', function (req, res) {
 
 
 
-pingSocket(http);
+// Ping socket
+setupPing(http)
 
 
 
