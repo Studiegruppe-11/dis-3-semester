@@ -5,6 +5,8 @@
 
 
     // Middleware til at tjekke om brugeren er logget ind som admin
+    // Bliver ikke kaldt lige nu, da der er en fejl med middleware mellem denne fil og server.js. 
+    // Finder ud af det
     function isAdmin(req, res, next) {
         if (req.session.isAdmin) {
             next();
