@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             menuItem.classList.add("menu-item");
 
             let img = document.createElement("img");
-            img.src = sandwich.imageURL;
+            img.src = sandwich.imageUrl;
             menuItem.appendChild(img);
-            console.log(sandwich.imageURL);
+            console.log(sandwich.imageUrl);
 
             let name = document.createElement("p");
             name.innerHTML = `Name: ${sandwich.name}`;
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             menuItem.classList.add("menu-item");
 
             let img = document.createElement("img");
-            img.src = juice.imageURL;
+            img.src = juice.imageUrl;
             menuItem.appendChild(img);
 
             let name = document.createElement("p");
