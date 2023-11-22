@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             let img = document.createElement("img");
             img.src = sandwich.imageURL;
             menuItem.appendChild(img);
+            console.log(sandwich.imageURL);
 
             let name = document.createElement("p");
             name.innerHTML = `Name: ${sandwich.name}`;
