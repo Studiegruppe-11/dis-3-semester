@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es6",                 // ECMAScript target version: ES6
+        "module": "commonjs",            // Module code generation: CommonJS
+        "strictNullChecks": true,        // Enable strict null checks
+        "strictFunctionTypes": true,     // Enable strict checking of function types
+        "forceConsistentCasingInFileNames": true  // Enforce consistent casing in file names
+    },
+    "exclude": [
+        "node_modules",            // Don't include anything in node_modules, so we don't try to type-check it (it slows things down)
+        "**/node_modules/*"    ]
+}
