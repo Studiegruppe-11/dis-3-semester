@@ -151,7 +151,3 @@ app.use((err, req, res, next) => {
   console.error('Global Error Handler:', err.message);
   res.status(500).send('Server Error');
 });
-
-
-
-
