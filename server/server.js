@@ -142,7 +142,7 @@ app.post('/sms', (req, res) => {
 
 
 // start server
-http.listen(3000, "164.90.228.42", () => {
+http.listen(3000, () => {
   console.log("Serveren er åben på port 3000");
 });
 
