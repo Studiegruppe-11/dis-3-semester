@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         let juiceList = document.getElementById("juiceList");
 
 
-        
-
+         // Funktion til at håndtere klik på knappen
+         function handleButtonClick(product) {
+          console.log(`Button clicked for ${product.name}`);
+          // Gør hvad du vil, når knappen klikkes
+      }
 
 
        // Opret separate kasser for hver sandwich
@@ -34,6 +37,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             let price = document.createElement("p");
             price.innerHTML = `Price: ${sandwich.price} kr`;
             menuItem.appendChild(price);
+
+            // Opret knap
+            let button = document.createElement("button");
+            button.innerHTML = "Tilføj til kurv";
+            button.addEventListener("click", () => handleButtonClick(sandwich));
+            menuItem.appendChild(button);
+
 
             sandwichList.appendChild(menuItem);
         });
@@ -58,6 +68,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             let price = document.createElement("p");
             price.innerHTML = `Price: ${juice.price} kr`;
             menuItem.appendChild(price);
+
+            // Opret knap
+            let button = document.createElement("button");
+            button.innerHTML = "Tilføj til kurv";
+            button.addEventListener("click", () => handleButtonClick(juice));
+            menuItem.appendChild(button);
 
             juiceList.appendChild(menuItem);
         });
