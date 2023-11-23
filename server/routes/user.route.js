@@ -234,6 +234,19 @@ router.get("/kurv/placedorders", async (req, res) => {
 });
 
 
+// Se om produkterne er gemt på endpoint
+router.get("/kurv/placedorders", async (req, res) => {
+  const { placedorders } = req.session;
+
+  if (placedorders && placedorders.length > 0) {
+    res.json({ placedorders });
+  } else {
+    res.status(404).json({ error: "Ingen produkter i kurven" });
+  }
+});
+
+
+
 
 // Gem id fra produkterne i kurven når der klikkes på gennemfør order i kurv.js/html
 router.post("/kurv/placedorders", async (req, res) => {
@@ -260,18 +273,6 @@ router.post("/kurv/placedorders", async (req, res) => {
     res.status(500).json({ error: "Fejl under håndtering af gennemfør bestilling" });
   }
 });
-
-// Se om produkterne er gemt på endpoint
-router.get("/kurv/placedorders", async (req, res) => {
-  const { placedorders } = req.session;
-
-  if (placedorders && placedorders.length > 0) {
-    res.json({ placedorders });
-  } else {
-    res.status(404).json({ error: "Ingen produkter i kurven" });
-  }
-});
-
 
 
 
