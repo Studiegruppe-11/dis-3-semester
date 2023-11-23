@@ -144,7 +144,11 @@ router.get("/users/logout", async (req, res) => {
 
 
 
-//ORDERS skal måske over i anden route, skal lige se i forhold til session id når man bestiller. 
+
+// BESTIL PRODUKTER OG SE KURV. ALTSÅ BESTIL.HTML/JS OG KURV.HTML/JS
+// SKAL NOK OVER I EN ANDEN ROUTE, DA DET ER EN ANDEN SIDE.
+
+// hent alle sandwich fra db
 router.get('/orders/sandwich', async (req, res) => {
   try {
       const pool = await connection.poolPromise;
@@ -159,7 +163,7 @@ router.get('/orders/sandwich', async (req, res) => {
   }
 });
 
-
+// hent alle juice fra db
 router.get('/orders/juice', async (req, res) => {
   try {
       const pool = await connection.poolPromise;
@@ -175,24 +179,48 @@ router.get('/orders/juice', async (req, res) => {
 });
 
 
-
-
-// gem id fra produktet i session, så det kan vises i kurv.html
+// Gem id fra produktet i session, så det kan vises i kurv.html, når der klikkes på tilføj til kurv i bestil.js
 router.post("/bestil/kurv", async (req, res) => {
   const { product_id } = req.body;
-  req.session.productId = product_id;
+
+  // Hvis der ikke er nogen kurv i sessionen, opret et tomt array
+  req.session.productIds = req.session.productIds || [];
+
+  // Tilføj det nye produkt_id til arrayet
+  req.session.productIds.push(product_id);
+
   res.json({ success: true });
 });
 
-// se om produktet er gemt på endpoint
+
+
+// Se om produkterne er gemt på endpoint
 router.get("/bestil/kurv", async (req, res) => {
-  const { productId } = req.session;
-  if (productId) {
-    res.json({ productId });
+  const { productIds } = req.session;
+
+  if (productIds && productIds.length > 0) {
+    res.json({ productIds });
   } else {
     res.status(404).json({ error: "Ingen produkter i kurven" });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;
