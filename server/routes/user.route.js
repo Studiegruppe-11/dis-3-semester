@@ -178,16 +178,13 @@ router.get('/orders/juice', async (req, res) => {
 
 
 // gem id fra produktet i session, så det kan vises i kurv.html
-
 router.post("/bestil/kurv", async (req, res) => {
-  const { productIdid } = req.body;
-  req.session.productId = productIdid;
+  const { product_id } = req.body;
+  req.session.productId = product_id;
   res.json({ success: true });
-}
-);
+});
 
-
-// se om produktet er gemt på endpoint 
+// se om produktet er gemt på endpoint
 router.get("/bestil/kurv", async (req, res) => {
   const { productId } = req.session;
   if (productId) {
@@ -196,8 +193,6 @@ router.get("/bestil/kurv", async (req, res) => {
     res.status(404).json({ error: "Ingen produkter i kurven" });
   }
 });
-
-
 
 
 module.exports = router;
