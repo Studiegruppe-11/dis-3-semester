@@ -220,6 +220,47 @@ router.post("/kurv/placedorders", async (req, res) => {
   res.json({ success: true });
 });
 
+
+
+// Se om de bestile varer er gemt på endpoint
+router.get("/kurv/placedorders", async (req, res) => {
+  const { placedorders } = req.session;
+
+  if (placedorders && placedorders.length > 0) {
+    res.json({ placedorders });
+  } else {
+    res.status(404).json({ error: "Ingen produkter er bestilt" });
+  }
+});
+
+
+
+// Gem id fra produkterne i kurven når der klikkes på gennemfør order i kurv.js/html
+router.post("/kurv/placedorders", async (req, res) => {
+  const { placedorder } = req.body;
+  const userId = req.session.userId; // Antager, at brugerens id er gemt i sessionen
+
+  try {
+    const pool = await connection.poolPromise;
+
+    // Udfør SQL-forespørgslen for at indsætte data i placedorders tabellen
+    const currentDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+    const status = "waiting";
+
+    const sql = `
+      INSERT INTO placedorders (customer_id, product_id, date, status)
+      VALUES (?, ?, ?, ?)
+    `;
+
+    await pool.query(sql, [userId, placedorder, currentDate, status]);
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Fejl under håndtering af gennemfør bestilling:', error);
+    res.status(500).json({ error: "Fejl under håndtering af gennemfør bestilling" });
+  }
+});
+
 // Se om produkterne er gemt på endpoint
 router.get("/kurv/placedorders", async (req, res) => {
   const { placedorders } = req.session;
@@ -230,6 +271,11 @@ router.get("/kurv/placedorders", async (req, res) => {
     res.status(404).json({ error: "Ingen produkter i kurven" });
   }
 });
+
+
+
+
+
 
 
 
