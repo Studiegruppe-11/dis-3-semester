@@ -46,7 +46,7 @@ router.post("/admin/login", async (req, res) => {
   });
 
 
-  
+  // vis navn
   router.get("/admins/show", async (req, res) => {
     const { userId, name } = req.session;
     if (userId && name) {
@@ -55,6 +55,14 @@ router.post("/admin/login", async (req, res) => {
       res.status(404).json({ error: "User not found" });
     }
 });
+
+// logud 
+router.get("/admin/logout", async (req, res) => {
+    req.session.destroy();
+    res.json({ loggedOut: true });
+  }
+  );
+ 
 
 
 

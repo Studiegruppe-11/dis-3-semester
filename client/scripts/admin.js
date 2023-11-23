@@ -20,6 +20,25 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 
+  document.getElementById("logout").addEventListener("click", async () => {
+
+    try {
+        const response = await fetch("/admin/logout");
+        const result = await response.json();
+        console.log(result);
+        if (result.loggedOut) {
+            window.location.href = "/admin/login";
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+);
+
+
+
+
 
 
 
