@@ -207,6 +207,30 @@ router.get("/bestil/kurv", async (req, res) => {
 
 
 
+// Gem id fra produkterne i kurven når der klikkes på gennemfør order i kurv.js/html
+router.post("/kurv/placedorders", async (req, res) => {
+  const { placedorder } = req.body;
+
+  // Hvis der ikke er nogen kurv i sessionen, opret et tomt array
+  req.session.placedorders = req.session.placedorders || [];
+
+  // Tilføj det nye produkt_id til arrayet
+  req.session.placedorders.push(placedorder);
+
+  res.json({ success: true });
+});
+
+// Se om produkterne er gemt på endpoint
+router.get("/kurv/placedorders", async (req, res) => {
+  const { placedorders } = req.session;
+
+  if (placedorders && placedorders.length > 0) {
+    res.json({ placedorders });
+  } else {
+    res.status(404).json({ error: "Ingen produkter i kurven" });
+  }
+});
+
 
 
 

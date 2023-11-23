@@ -15,11 +15,28 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
 
 
- // Funktion til at håndtere "Gennemfør bestilling"-klik
- function handleGennemforBestilling(productId) {
-    console.log(`Gennemfør bestilling for Product ID: ${productId}`);
-    // Implementer logik for at gennemføre bestillingen her
+ 
+// Funktion til at håndtere "Gennemfør bestilling"-klik
+async function handleGennemforBestilling(productId) {
+    try {
+        // send produktets id til serveren, som derefter gemmer i express session.
+        await fetch("/kurv/placedorders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                placedorder: productId,
+            }),
+        });
+
+        console.log(`Gennemfør bestilling for Product ID: ${productId}`);
+        // Implementer logik for at gennemføre bestillingen her
+    } catch (error) {
+        console.error('Fejl under håndtering af gennemfør bestilling:', error);
+    }
 }
+
 
 
 // vis kurv (lige nu kun id) og knap til at gennemføre bestilling. bestilling bliver nu gemt i db
