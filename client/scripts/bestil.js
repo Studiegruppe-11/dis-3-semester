@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
        // Funktion til at håndtere klik på knappen
        function handleButtonClick(product) {
-        console.log(`Button clicked for Product ID: ${product.id}, Name: ${product.name}`);
+        console.log(`Button clicked for Product ID: ${product.product_id}, Name: ${product.name}`);
     }
 
 
