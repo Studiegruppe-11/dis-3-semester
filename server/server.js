@@ -68,6 +68,10 @@ app.get("/users/bestil", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/bestil.html"));
 });
 
+app.get("/users/kurv", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/pages/kurv.html"));
+});
+
 
 
 // Admin filer
