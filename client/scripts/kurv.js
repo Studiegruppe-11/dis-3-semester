@@ -15,23 +15,40 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
 
 
+ // Funktion til at håndtere "Gennemfør bestilling"-klik
+ function handleGennemforBestilling(productId) {
+    console.log(`Gennemfør bestilling for Product ID: ${productId}`);
+    // Implementer logik for at gennemføre bestillingen her
+}
 
+
+// vis kurv (lige nu kun id) og knap til at gennemføre bestilling. bestilling bliver nu gemt i db
     window.addEventListener("DOMContentLoaded", async () => {
         try {
             // Hent data fra serveren
             const response = await fetch("/bestil/kurv");
             const result = await response.json();
-            
-            // Find det element, hvor du vil vise produkt-id'erne
+    
+            // Find det element, hvor du vil vise produkt-id'erne og knapperne
             const kurvElement = document.getElementById("kurv");
     
             // Tjek om der er produkt-id'er i svaret
             if (result.productIds && result.productIds.length > 0) {
-                // Opret en liste og tilføj hvert produkt-id som et listeelement
+                // Opret en liste og tilføj hvert produkt-id som et listeelement med en knap
                 const productList = document.createElement("ul");
                 result.productIds.forEach((productId) => {
                     const listItem = document.createElement("li");
                     listItem.textContent = `Product ID: ${productId}`;
+    
+                    // Opret en knap for hvert produkt-id
+                    const gennemforBestillingButton = document.createElement("button");
+                    gennemforBestillingButton.textContent = "Gennemfør bestilling";
+                    gennemforBestillingButton.addEventListener("click", () => handleGennemforBestilling(productId));
+    
+                    // Tilføj knappen til listeelementet
+                    listItem.appendChild(gennemforBestillingButton);
+    
+                    // Tilføj listeelementet til listen
                     productList.appendChild(listItem);
                 });
     
@@ -46,3 +63,4 @@ window.addEventListener("DOMContentLoaded", async () => {
         }
     });
     
+   
