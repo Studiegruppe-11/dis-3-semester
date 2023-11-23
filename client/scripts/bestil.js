@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         let juiceList = document.getElementById("juiceList");
 
 
-         // Funktion til at håndtere klik på knappen
-         function handleButtonClick(product) {
-          console.log(`Button clicked for ${product.name}`);
-          // Gør hvad du vil, når knappen klikkes
-      }
+       // Funktion til at håndtere klik på knappen
+       function handleButtonClick(product) {
+        console.log(`Button clicked for Product ID: ${product.id}, Name: ${product.name}`);
+    }
+
 
 
        // Opret separate kasser for hver sandwich
