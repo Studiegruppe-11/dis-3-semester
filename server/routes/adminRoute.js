@@ -7,46 +7,101 @@
     // Middleware til at tjekke om brugeren er logget ind som admin
     // Bliver ikke kaldt lige nu, da der er en fejl med middleware mellem denne fil og server.js. 
     // Finder ud af det
-    function isAdmin(req, res, next) {
-        if (req.session.isAdmin) {
-            next();
-        } else {
-            res.redirect('/admin/login');
-        }
+    // function isAdmin(req, res, next) {
+    //     if (req.session.isAdmin) {
+    //         next();
+    //     } else {
+    //         res.redirect('/admin/login');
+    //     }
+    // }
+
+    // // Admin Login Route
+    // router.post('/admin/login', async (req, res) => {
+    //     const { username, password } = req.body;
+    //     try {
+    //         const pool = await connection.poolPromise;
+    //         const [rows] = await pool.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password]);
+    //         if (rows.length > 0) {
+    //             req.session.isAdmin = true;
+    //             req.session.username = username;
+    //             res.cookie('username', username, { httpOnly: false }); // Bruges til at vise username i admin.html
+    //             res.json({ username: username });  // Send the username back in the response
+    //         } else {
+    //             res.status(401).json({ error: 'Invalid credentials' });
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //         res.status(500).json({ error: error.message });
+    //     }
+    // });
+
+    // // Admin Log ud
+    // router.get('/admin/logout', (req, res) => {
+    //     req.session.destroy(err => {  // Destroy the session
+    //         if (err) {
+    //             console.log(err);
+    //             res.status(500).json({ error: 'An error occurred while logging out' });
+    //         } else {
+    //             res.clearCookie('username');  // Clear the username cookie
+    //             res.redirect('/admin/login');  // Redirect to the login page
+    //         }
+    //     });
+    // });
+
+
+
+
+// Undersøg om login er korrekt.
+router.post("/admin/login", async (req, res) => {
+    const { username, password } = req.body;
+    const pool = await connection.poolPromise;
+    try {
+      // Udfør SQL-forespørgslen
+      const [rows] = await pool.query(
+        'SELECT * FROM admins WHERE username = ? AND password = ?',
+        [username, password]
+      );
+  
+      if (rows.length > 0) {
+        const user = rows[0];
+  
+        // Gem brugerens id og navn i express-session
+        req.session.userId = user.id;
+        req.session.name = user.username;
+  
+        // Send svar tilbage til klienten
+        res.json({ success: true });
+      } else {
+        res.json({ error: 'Forkert brugernavn eller adgangskode' });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Der opstod en fejl under login.' });
     }
+  });
 
-    // Admin Login Route
-    router.post('/admin/login', async (req, res) => {
-        const { username, password } = req.body;
-        try {
-            const pool = await connection.poolPromise;
-            const [rows] = await pool.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password]);
-            if (rows.length > 0) {
-                req.session.isAdmin = true;
-                req.session.username = username;
-                res.cookie('username', username, { httpOnly: false }); // Bruges til at vise username i admin.html
-                res.json({ username: username });  // Send the username back in the response
-            } else {
-                res.status(401).json({ error: 'Invalid credentials' });
-            }
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({ error: error.message });
-        }
-    });
 
-    // Admin Log ud
-    router.get('/admin/logout', (req, res) => {
-        req.session.destroy(err => {  // Destroy the session
-            if (err) {
-                console.log(err);
-                res.status(500).json({ error: 'An error occurred while logging out' });
-            } else {
-                res.clearCookie('username');  // Clear the username cookie
-                res.redirect('/admin/login');  // Redirect to the login page
-            }
-        });
-    });
+
+
+  
+  router.get("/admins/show", async (req, res) => {
+    const { userId, name } = req.session;
+    if (userId && name) {
+      res.json({ userId, name });
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+});
+
+
+
+
+
+
+
+
+
+
 
     // Nedenstående skal ikke være udkommenteret, men kan ikke få den til at virke. Lige nu kører der en "app.get" i server.js, som virker.
     // Problemet er at "isAdmin" funktionen gerne skulle køre som middleware herinde fra. Måske man bare kan bruge app eller router.get i stedet for app.get i server.js
