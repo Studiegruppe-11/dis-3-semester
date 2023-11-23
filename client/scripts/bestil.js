@@ -11,9 +11,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
        // Funktion til at håndtere klik på knappen
-       function handleButtonClick(product) {
+      function handleButtonClick(product) {
+        
+
+        // send produktets id til serveren, som derefter gemmer i express session. 
+        fetch("/bestil/kurv", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product_id: product.product_id,
+          }),
+        });
+
+        // se i console at det er det rigtige produkt der logges. 
         console.log(`Button clicked for Product ID: ${product.product_id}, Name: ${product.name}`);
-    }
+
+      }
 
 
 

@@ -177,6 +177,20 @@ router.get('/orders/juice', async (req, res) => {
 
 
 
+// gem id fra produktet i session, så det kan vises i kurv.html
+
+router.post("/bestil/kurv", async (req, res) => {
+  const { id } = req.body;
+  req.session.productId = id;
+  res.json({ success: true });
+}
+);
+
+
+
+
+
+
 
 
 
