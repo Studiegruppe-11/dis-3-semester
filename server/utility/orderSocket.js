@@ -29,7 +29,7 @@ async function getPlacedOrders() {
 const socketIO = require('socket.io');
 
 function setupOrderSocket(http) {
-const io = socketIO(http);
+  const io = socketIO(http).of('/order');
 
 
   io.on('connection', (socket) => {
