@@ -23,9 +23,34 @@ router.get('/getplacedorders', async (req, res) => {
         console.log(error);
         res.status(500).send(error.message);
     }
+
 });
 
   
+  
+
+
+
+// get total revenue
+router.get('/getplacedorders', async (req, res) => {
+    try {
+        const pool = await connection.poolPromise;
+
+        // Udfør SQL-forespørgslen her
+        const [rows] = await pool.query(`
+            SELECT products.price
+            FROM placedorders
+            INNER JOIN products ON placedorders.product_id = products.product_id
+        `);
+
+        res.send(rows);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+
+});
+
   
   
   
