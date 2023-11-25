@@ -310,29 +310,27 @@ router.get("/kurv/placedorders", async (req, res) => {
 
 
 router.post('/kurv/placedorders', async (req, res) => {
-
+  const { placedorder } = req.body;
   const customer_id = "gustav";
-  const product_id = 1; 
   const date = "2021-05-05";
   const status = "waiting";
-
 
   try {
     const pool = await connection.poolPromise;
 
-    // Udfør SQL-forespørgslen her
     const query = `
-    INSERT INTO placedorders (customer_id, product_id, date, status)
-    VALUES (?, ?, ?, ?)
-  `;
-    const values = [customer_id, product_id, date, status];
+      INSERT INTO placedorders (customer_id, product_id, date, status)
+      VALUES (?, ?, ?, ?)
+    `;
 
-    const [rows] = await pool.query(query, values);
+    const values = [customer_id, placedorder, date, status];
 
-    res.send(rows);
+    await pool.query(query, values);
+
+    res.json({ success: true });
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 });
 
