@@ -45,11 +45,13 @@ router.post("/admin/login", async (req, res) => {
 
 // logud 
 router.get("/admin/logout", async (req, res) => {
-    req.session.destroy();
-    res.json({ loggedOut: true });
-  }
-  );
- 
+  // Slet brugernavn og ID fra sessionen
+  delete req.session.adminUserId;
+  delete req.session.adminName;
+
+  res.json({ loggedOut: true });
+});
+
 
 
     module.exports = router;
