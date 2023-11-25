@@ -265,6 +265,8 @@ router.post("/kurv/placedorders", async (req, res) => {
       VALUES (?, ?, ?, ?)
     `;
 
+    console.log("SQL-forespørgsel:", sql); // Tilføj denne linje
+
     await pool.query(sql, [userId, placedorder, currentDate, status]);
 
     res.json({ success: true });
