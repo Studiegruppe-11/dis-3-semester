@@ -130,17 +130,7 @@ router.get("/users/logout", async (req, res) => {
  
 
 
-
-  // router.get("/admin/logout", async (req, res) => {
-  //   // Slet brugernavn og ID fra sessionen
-  //   delete req.session.adminUserId;
-  //   delete req.session.adminName;
   
-  //   res.json({ loggedOut: true });
-  // });
-  
-
-
   // vis logget ind bruger
 
 
