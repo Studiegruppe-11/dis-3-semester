@@ -120,12 +120,22 @@ router.post("/users/login", async (req, res) => {
 // Log ud
 
 router.get("/users/logout", async (req, res) => {
-     // Slet brugernavn og ID fra sessionen
-     delete req.session.userId;
-     delete req.session.name;
+    req.session.destroy();
+    res.json({ loggedOut: true });
   }
   );
  
+
+
+
+  // router.get("/admin/logout", async (req, res) => {
+  //   // Slet brugernavn og ID fra sessionen
+  //   delete req.session.adminUserId;
+  //   delete req.session.adminName;
+  
+  //   res.json({ loggedOut: true });
+  // });
+  
 
 
   // vis logget ind bruger
