@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("/admins/show");
     const result = await response.json();
 
-    if (result.adminUserId && result.AdminName) {
+    if (result.adminUserId && result.adminName) {
       // Viser navn hvis man er logget ind
       document.getElementById("usernameDisplay").innerHTML = result.adminName;
       // Skal ikke vise "opret bruger" hvis man er logget ind.
