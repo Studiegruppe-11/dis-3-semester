@@ -46,6 +46,8 @@ app.use("/", adminRoute);
 const userRoute = require("./routes/user.route");
 app.use("/", userRoute);
 
+const orderRoute = require("./routes/order.route");
+app.use("/", orderRoute);
 
 // Send client files from server
 app.get("/users/create", (req, res) => {
@@ -82,15 +84,7 @@ app.get("/admin", (req, res) => {
 });
 
 
-// se hvilken bruger der er gemt i session storage. 
-app.get('/test', (req, res) => {
-  if (req.session.userId && req.session.name) {
-    res.send(`Bruger ID: ${req.session.userId}, Navn: ${req.session.name}`);
-  } else {
-    res.send('Ingen data i sessionen.');
-  }
-});
- 
+
 
 // definer hvilket html side der skal åbnes når ip adressen åbnes. SKAL stå nederst under øvrige endpoints.
 app.get("/", (req, res) => {
@@ -120,6 +114,7 @@ setupPing(http)
 
 
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
+// SKAL LAVES OM TIL WHATSAPP.
 
 const { MessagingResponse } = require('twilio').twiml;
 
