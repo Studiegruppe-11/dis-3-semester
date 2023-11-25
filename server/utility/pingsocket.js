@@ -10,7 +10,7 @@ function setupPing(server) {
     // Funktion til at måle ping og RTT
     const measurePing = async () => {
       try {
-        const target = '164.90.228.42'; // Erstat med din servers IP
+        const target = '164.90.228.42';
         const res = await ping.promise.probe(target);
         const pingTime = res.time;
         socket.emit('pingUpdate', { ping: pingTime });
@@ -25,6 +25,6 @@ function setupPing(server) {
     measurePing();
     setInterval(measurePing, 60000); //hver 10. min.
   });
-}
+} 
 
 module.exports = setupPing;
