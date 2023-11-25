@@ -145,6 +145,23 @@ router.get("/users/logout", async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // BESTIL PRODUKTER OG SE KURV. ALTSÅ BESTIL.HTML/JS OG KURV.HTML/JS
 // SKAL NOK OVER I EN ANDEN ROUTE, DA DET ER EN ANDEN SIDE.
 
@@ -194,17 +211,6 @@ router.post("/bestil/kurv", async (req, res) => {
 
 
 
-// Se om produkterne er gemt på endpoint
-router.get("/bestil/kurv", async (req, res) => {
-  const { productIds } = req.session;
-
-  if (productIds && productIds.length > 0) {
-    res.json({ productIds });
-  } else {
-    res.status(404).json({ error: "Ingen produkter i kurven" });
-  }
-});
-
 
 
 // Gem id fra produkterne i kurven når der klikkes på gennemfør order i kurv.js/html
@@ -218,19 +224,6 @@ router.post("/kurv/placedorders", async (req, res) => {
   req.session.placedorders.push(placedorder);
 
   res.json({ success: true });
-});
-
-
-
-// Se om de bestile varer er gemt på endpoint
-router.get("/kurv/placedorders", async (req, res) => {
-  const { placedorders } = req.session;
-
-  if (placedorders && placedorders.length > 0) {
-    res.json({ placedorders });
-  } else {
-    res.status(404).json({ error: "Ingen produkter er bestilt" });
-  }
 });
 
 
@@ -249,12 +242,10 @@ router.post("/bestil/fjernfraKurv", (req, res) => {
 
 
 
-
-
-//gennem før order
+//gennemfør order
 router.post('/kurv/placerordrer', async (req, res) => {
   const { productIds, date } = req.body;
-  const customer_id = 3;
+  const customer_id = req.session.userId;
   const status = "waiting";
 
   try {
@@ -283,19 +274,29 @@ router.post('/kurv/placerordrer', async (req, res) => {
 
 
 
-
-
-
-
-
-
+// SKAL FJERNES KUN TIL TEST
 // test for at se alle placedorders
+// router.get('/getplacedorders', async (req, res) => {
+//   try {
+//       const pool = await connection.poolPromise;
+
+//       // Udfør SQL-forespørgslen her
+//       const [rows] = await pool.query('SELECT * FROM placedorders');
+
+//       res.send(rows);
+//   } catch (error) {
+//       console.log(error);
+//       res.status(500).send(error.message);
+//   }
+// });
+
+
 router.get('/getplacedorders', async (req, res) => {
   try {
       const pool = await connection.poolPromise;
 
       // Udfør SQL-forespørgslen her
-      const [rows] = await pool.query('SELECT * FROM placedorders');
+      const [rows] = await pool.query('SELECT * FROM placedorders where status = "waiting" and customer_id = ?', [req.session.userId]);
 
       res.send(rows);
   } catch (error) {
@@ -303,7 +304,6 @@ router.get('/getplacedorders', async (req, res) => {
       res.status(500).send(error.message);
   }
 });
-
 
 
 
