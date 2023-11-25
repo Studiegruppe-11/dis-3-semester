@@ -6,9 +6,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("/admins/show");
     const result = await response.json();
 
-    if (result.userId && result.name) {
+    if (result.adminUserId && result.AdminName) {
       // Viser navn hvis man er logget ind
-      document.getElementById("usernameDisplay").innerHTML = result.name;
+      document.getElementById("usernameDisplay").innerHTML = result.adminName;
       // Skal ikke vise "opret bruger" hvis man er logget ind.
     }
   } catch (error) {
@@ -73,3 +73,4 @@ if (data.rtt > 1000) {
   });
 
 // SOCKET PING SLUT 
+ 
