@@ -137,7 +137,34 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   
-  
+  // Fjern produkt-ID'er fra Express-session når der bestilles
+router.post("/bestil/fjernprodukter", async (req, res) => {
+  try {
+      const { productIds } = req.body;
+
+      if (productIds && productIds.length > 0) {
+          // Hvis der er produkt-ID'er, fjern dem fra sessionen
+          productIds.forEach(productId => {
+              const index = req.session.productIds.indexOf(productId);
+              if (index !== -1) {
+                  req.session.productIds.splice(index, 1);
+              }
+          });
+
+          res.json({ success: true });
+      } else {
+          res.status(400).json({ error: "Ingen produkt-ID'er blev angivet" });
+      }
+  } catch (error) {
+      console.error("Fejl under fjernelse af produkt-ID'er fra session:", error);
+      res.status(500).json({ error: "Fejl under fjernelse af produkt-ID'er fra session" });
+  }
+});
+
+
+
+
+
   
   
   // test for at se alle placedorders

@@ -80,42 +80,49 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
     
    
-
-
-
-
-
-
-
-// TEST
 // Funktion til at håndtere klik på test-knappen
 async function placedorder() {
-    try {
+  try {
       // Hent produkt-IDs fra Express-session
       const response = await fetch("/bestil/kurv");
       const result = await response.json();
       const productIds = result.productIds || [];
-  
+
       // send en test-anmodning til serveren
       await fetch("/kurv/placerordrer", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productIds: productIds,
-          date: new Date().toISOString().split('T')[0], // Dagens dato uden tid
-        }),
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              productIds: productIds,
+              date: new Date().toISOString().split('T')[0], // Dagens dato uden tid
+          }),
       });
-  
+
+      // Fjern produkt-ID'er fra Express-session
+      await fetch("/bestil/fjernprodukter", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              productIds: productIds,
+          }),
+      });
+
+      // Genindlæs siden
+      window.location.reload(true);
+
       console.log("Ordrer placeret med succes!");
       // Implementer eventuel logik for at håndtere testen her
-    } catch (error) {
+  } catch (error) {
       console.error('Fejl under håndtering af test:', error);
-    }
   }
-  
-  // Tilføj eventlistener til test-knappen
-  const testButton = document.getElementById("placeOrder"); // Brug det faktiske id, du har
-  testButton.addEventListener("click", placedorder);
+}
+
+// Tilføj eventlistener til test-knappen
+const orderButton = document.getElementById("placeOrder");
+orderButton.addEventListener("click", placedorder);
+
   
