@@ -11,7 +11,7 @@ const http = require("http").Server(app);
 
 
 // PING SOCKET SKAL ÅBNES IGEN. LIGE NU TEST TIL AT SE OM ANDEN SOCKET VIRKER
-//const setupPing = require('./utility/pingsocket.js');
+const setupPing = require('./utility/pingsocket.js');
 const setupOrderSocket = require('./utility/orderSocket.js');
 
 
@@ -119,7 +119,7 @@ app.post('/', function (req, res) {
 
 //SOCKET TIL PING SKAL ÅBNES IGEN. LIGE NU TEST TIL AT SE OM ANDEN SOCKET VIRKER
 // Ping socket
-//setupPing(http)
+setupPing(http)
 
 // Order socket
 setupOrderSocket(http);
