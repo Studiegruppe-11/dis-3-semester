@@ -13,8 +13,8 @@ router.get('/getplacedorders', async (req, res) => {
         const [rows] = await pool.query(`
             SELECT customers.first_name, products.name
             FROM placedorders
-            INNER JOIN customers ON placedorders.customer_id = customers.id
-            INNER JOIN products ON placedorders.product_id = products.id
+            INNER JOIN customers ON placedorders.customer_id = customers.customer_id
+            INNER JOIN products ON placedorders.product_id = products.product_id
             WHERE status = "waiting"
         `);
 
