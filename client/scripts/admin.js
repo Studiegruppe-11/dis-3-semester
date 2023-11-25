@@ -35,7 +35,7 @@ function updatePlacedOrders(placedOrders) {
 
   placedOrders.forEach((order) => {
     const orderItem = document.createElement('div');
-    orderItem.textContent = `Customer: ${order.first_name}, Product: ${order.name}`;
+    orderItem.textContent = `Kundens navn: ${order.first_name}, Produkt: ${order.name}`;
     placedOrdersElement.appendChild(orderItem);
   });
 }
