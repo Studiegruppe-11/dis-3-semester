@@ -23,22 +23,22 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 
-const socket = io();
-  socket.on('placedOrdersUpdate', (data) => {
-    updatePlacedOrders(data);
-  });
+// const socket = io();
+//   socket.on('placedOrdersUpdate', (data) => {
+//     updatePlacedOrders(data);
+//   });
 });
 
-function updatePlacedOrders(placedOrders) {
-  const placedOrdersElement = document.getElementById('placedOrders');
-  placedOrdersElement.innerHTML = '';
+// function updatePlacedOrders(placedOrders) {
+//   const placedOrdersElement = document.getElementById('placedOrders');
+//   placedOrdersElement.innerHTML = '';
 
-  placedOrders.forEach((order) => {
-    const orderItem = document.createElement('div');
-    orderItem.textContent = `Order ID: ${order.id}, Customer: ${order.customerName}`;
-    placedOrdersElement.appendChild(orderItem);
-  });
-}
+//   placedOrders.forEach((order) => {
+//     const orderItem = document.createElement('div');
+//     orderItem.textContent = `Order ID: ${order.id}, Customer: ${order.customerName}`;
+//     placedOrdersElement.appendChild(orderItem);
+//   });
+// }
 
 
 
