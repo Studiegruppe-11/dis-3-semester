@@ -111,6 +111,7 @@ async function placedorder() {
           }),
       });
 
+      alert("Din order er placeret og sendt til køkkenet!");
       // Genindlæs siden
       window.location.reload(true);
 
