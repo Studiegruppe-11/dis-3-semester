@@ -32,7 +32,7 @@ router.get('/getplacedorders', async (req, res) => {
 
 
 // get total revenue
-router.get('/getplacedorders', async (req, res) => {
+router.get('/totalRevenue', async (req, res) => {
     try {
         const pool = await connection.poolPromise;
 
