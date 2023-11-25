@@ -38,7 +38,7 @@ function setupOrderSocket(server) {
     const emitPlacedOrders = async () => {
       try {
         const placedOrders = await getPlacedOrders(); // Brug din funktion til at hente ventende ordrer
-        socket.emit('placedOrdersUpdate', placedOrders);
+        io.emit('placedOrdersUpdate', placedOrders);
       } catch (error) {
         console.error('Fejl under håndtering af opdatering af ventende ordrer:', error);
       }
