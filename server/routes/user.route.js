@@ -234,15 +234,16 @@ router.get("/kurv/placedorders", async (req, res) => {
 });
 
 
-// Se om produkterne er gemt på endpoint
-router.get("/kurv/placedorders", async (req, res) => {
-  const { placedorders } = req.session;
 
-  if (placedorders && placedorders.length > 0) {
-    res.json({ placedorders });
-  } else {
-    res.status(404).json({ error: "Ingen produkter i kurven" });
-  }
+
+// Server endpoint for at fjerne et produkt fra kurven
+router.post("/bestil/fjernfraKurv", (req, res) => {
+  const { productId } = req.body;
+
+  // Fjern produktet fra kurven i Express-session
+  req.session.productIds = req.session.productIds.filter(id => id !== productId);
+
+  res.json({ success: true });
 });
 
 
@@ -250,10 +251,7 @@ router.get("/kurv/placedorders", async (req, res) => {
 
 
 
-
-
-
-//TEST
+//gennem før order
 router.post('/kurv/placerordrer', async (req, res) => {
   const { productIds, date } = req.body;
   const customer_id = 3;
