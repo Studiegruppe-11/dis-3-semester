@@ -15,11 +15,11 @@ router.post("/admin/login", async (req, res) => {
       );
   
       if (rows.length > 0) {
-        const user = rows[0];
+        const adminUser = rows[0];
   
         // Gem brugerens id og navn i express-session
-        req.session.userId = user.id;
-        req.session.name = user.username;
+        req.session.adminUserId = adminUser.id;
+        req.session.adminName = adminUser.username;
   
         // Send svar tilbage til klienten
         res.json({ success: true });
@@ -35,9 +35,9 @@ router.post("/admin/login", async (req, res) => {
 
   // vis navn
   router.get("/admins/show", async (req, res) => {
-    const { userId, name } = req.session;
-    if (userId && name) {
-      res.json({ userId, name });
+    const { adminUserId, adminName } = req.session;
+    if (adminUserId && adminName) {
+      res.json({ adminUserId, adminName });
     } else {
       res.status(404).json({ error: "User not found" });
     }
