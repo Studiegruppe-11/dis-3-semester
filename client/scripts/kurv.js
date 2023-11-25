@@ -91,8 +91,10 @@ window.addEventListener("DOMContentLoaded", async () => {
 // Funktion til at håndtere klik på test-knappen
 async function handleTest() {
     try {
-      // Opret en ny datoobjekt og få dets strengrepræsentation (YYYY-MM-DD)
-      const currentDate = new Date().toISOString().split('T')[0];
+      // Hent produkt-IDs fra Express-session
+      const response = await fetch("/bestil/kurv");
+      const result = await response.json();
+      const productIds = result.productIds || [];
   
       // send en test-anmodning til serveren
       await fetch("/kurv/test", {
@@ -101,8 +103,8 @@ async function handleTest() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          placedorder: 1, // eller hvad der passer til din test
-          date: currentDate,
+          productIds: productIds,
+          date: new Date().toISOString().split('T')[0], // Dagens dato uden tid
         }),
       });
   

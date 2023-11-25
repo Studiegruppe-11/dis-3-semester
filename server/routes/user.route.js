@@ -310,25 +310,26 @@ router.get("/kurv/placedorders", async (req, res) => {
 
 
 
-
-
-//TEST 
+//TEST
 router.post('/kurv/test', async (req, res) => {
-  const { placedorder, date } = req.body;
-  const customer_id = req.session.userId;
+  const { productIds, date } = req.body;
+  const customer_id = 3;
   const status = "waiting";
 
   try {
     const pool = await connection.poolPromise;
 
-    const query = `
-      INSERT INTO placedorders (customer_id, product_id, date, status)
-      VALUES (?, ?, ?, ?)
-    `;
-
-    const values = [customer_id, placedorder, date, status];
-
-    await pool.query(query, values);
+    // Iterér gennem produkt-IDs og indsæt dem i databasen
+    for (const placedorder of productIds) {
+      const query = `
+        INSERT INTO placedorders (customer_id, product_id, date, status)
+        VALUES (?, ?, ?, ?)
+      `;
+  
+      const values = [customer_id, placedorder, date, status];
+  
+      await pool.query(query, values);
+    }
 
     res.json({ success: true, message: "Test udført med succes!" });
   } catch (error) {
@@ -336,10 +337,6 @@ router.post('/kurv/test', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-
-
-
 
 
 
