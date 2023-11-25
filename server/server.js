@@ -112,11 +112,11 @@ app.post('/', function (req, res) {
 
 
 // Ping socket
-//setupPing(http)
+setupPing(http)
 
 // Order socket
 // BEGGE SOCKETS KAN IKKE KØRE SAMTIDIGT. 
-setupOrderSocket(http);
+//setupOrderSocket(http);
 
 
 
