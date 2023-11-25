@@ -341,7 +341,7 @@ router.post('/kurv/placedorders', async (req, res) => {
 //TEST 
 router.post('/kurv/test', async (req, res) => {
   const { placedorder } = req.body;
-  const customer_id = 3;
+  const customer_id = req.session.userId;
   const date = "2021-05-05";
   const status = "waiting";
 
