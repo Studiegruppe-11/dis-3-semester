@@ -47,8 +47,6 @@ function setupOrderSocket(server) {
     // Udsend opdateringer ved forbindelse og derefter ved ændringer
     emitPlacedOrders();
 
-    // ... andre eventlyttere og funktioner ...
-
     socket.on('disconnect', () => {
       console.log('En klient er frakoblet via socket.');
     });
