@@ -28,8 +28,9 @@ async function getPlacedOrders() {
 
 const socketIO = require('socket.io');
 
-function setupOrderSocket(server) {
-  const io = socketIO(server);
+function setupOrderSocket(http) {
+const io = socketIO(http);
+
 
   io.on('connection', (socket) => {
     console.log('En klient er tilsluttet via socket.');

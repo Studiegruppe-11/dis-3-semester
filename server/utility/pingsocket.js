@@ -1,8 +1,10 @@
+
+//root/server/utility/pingsocket.js
 const ping = require('ping');
 const socketIO = require('socket.io');
 
-function setupPing(server) {
-  const io = socketIO(server);
+function setupPing(http) {
+  const io = socketIO(http);
 
   io.on('connection', (socket) => {
     console.log('En klient er tilsluttet via socket.');
