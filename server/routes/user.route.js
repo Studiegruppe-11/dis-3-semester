@@ -278,31 +278,61 @@ router.get("/kurv/placedorders", async (req, res) => {
 
 
 
-router.post("/kurv/placedorders", async (req, res) => {
-  // Ændrede værdier for test
-  const userId = "test_user_id";
-  const placedorder = "test_placedorder";
+// router.post("/kurv/placedorders", async (req, res) => {
+//   // Ændrede værdier for test
+//   const userId = "test_user_id";
+//   const placedorder = "test_placedorder";
+
+//   try {
+//     const pool = await connection.poolPromise;
+
+//     // Udfør SQL-forespørgslen for at indsætte data i placedorders tabellen
+//     const currentDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+//     const status = "waiting";
+
+//     const sql = `
+//       INSERT INTO placedorders (customer_id, product_id, date, status)
+//       VALUES (?, ?, ?, ?)
+//     `;
+
+//     console.log("SQL-forespørgsel:", sql); // Tilføj denne linje
+
+//     await pool.query(sql, [userId, placedorder, currentDate, status]);
+
+//     res.json({ success: true });
+//   } catch (error) {
+//     console.error('Fejl under håndtering af gennemfør bestilling:', error);
+//     res.status(500).json({ error: "Fejl under håndtering af gennemfør bestilling", errorMessage: error.message });
+//   }
+// });
+
+
+
+
+router.post('/kurv/placedorders', async (req, res) => {
+
+  const customer_id = "gustav";
+  const product_id = 1; 
+  const date = "2021-05-05";
+  const status = "waiting";
+
 
   try {
     const pool = await connection.poolPromise;
 
-    // Udfør SQL-forespørgslen for at indsætte data i placedorders tabellen
-    const currentDate = new Date().toISOString().slice(0, 19).replace("T", " ");
-    const status = "waiting";
+    // Udfør SQL-forespørgslen her
+    const query = `
+    INSERT INTO placedorders (customer_id, product_id, date, status)
+    VALUES (?, ?, ?, ?)
+  `;
+    const values = [customer_id, product_id, date, status];
 
-    const sql = `
-      INSERT INTO placedorders (customer_id, product_id, date, status)
-      VALUES (?, ?, ?, ?)
-    `;
+    const [rows] = await pool.query(query, values);
 
-    console.log("SQL-forespørgsel:", sql); // Tilføj denne linje
-
-    await pool.query(sql, [userId, placedorder, currentDate, status]);
-
-    res.json({ success: true });
+    res.send(rows);
   } catch (error) {
-    console.error('Fejl under håndtering af gennemfør bestilling:', error);
-    res.status(500).json({ error: "Fejl under håndtering af gennemfør bestilling", errorMessage: error.message });
+    console.log(error);
+    res.status(500).send(error.message);
   }
 });
 
@@ -315,6 +345,15 @@ router.post("/kurv/placedorders", async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+// test for at se alle placedorders
 router.get('/getplacedorders', async (req, res) => {
   try {
       const pool = await connection.poolPromise;
