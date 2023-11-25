@@ -87,11 +87,15 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 
+// TEST
 
 
 // Funktion til at håndtere klik på test-knappen
 async function handleTest() {
     try {
+      // Opret en ny datoobjekt og få dets strengrepræsentation (YYYY-MM-DD)
+      const currentDate = new Date().toISOString().split('T')[0];
+  
       // send en test-anmodning til serveren
       await fetch("/kurv/test", {
         method: "POST",
@@ -100,6 +104,7 @@ async function handleTest() {
         },
         body: JSON.stringify({
           placedorder: 1, // eller hvad der passer til din test
+          date: currentDate,
         }),
       });
   
@@ -113,7 +118,4 @@ async function handleTest() {
   // Tilføj eventlistener til test-knappen
   const testButton = document.getElementById("testButton"); // Brug det faktiske id, du har
   testButton.addEventListener("click", handleTest);
-
-  
-
   
