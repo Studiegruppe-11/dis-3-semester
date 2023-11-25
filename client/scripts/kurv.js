@@ -80,3 +80,40 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
     
    
+
+
+
+
+
+
+
+
+
+// Funktion til at håndtere klik på test-knappen
+async function handleTest() {
+    try {
+      // send en test-anmodning til serveren
+      await fetch("/kurv/test", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          placedorder: 1, // eller hvad der passer til din test
+        }),
+      });
+  
+      console.log("Test udført med succes!");
+      // Implementer eventuel logik for at håndtere testen her
+    } catch (error) {
+      console.error('Fejl under håndtering af test:', error);
+    }
+  }
+  
+  // Tilføj eventlistener til test-knappen
+  const testButton = document.getElementById("testButton"); // Brug det faktiske id, du har
+  testButton.addEventListener("click", handleTest);
+
+  
+
+  
