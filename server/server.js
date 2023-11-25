@@ -7,7 +7,7 @@ const app = express();
 const session = require("express-session");
 const http = require("http").Server(app);
 const setupPing = require('./utility/pingsocket.js');
-const setupOrderSocket = require('./utility/orderSocket.js');
+//const setupOrderSocket = require('./utility/orderSocket.js');
 
 
 // Til github webhook for automatisk pull 
@@ -109,12 +109,12 @@ app.post('/', function (req, res) {
 });
 
 
-
+//SOCKET
 // Ping socket
 setupPing(http)
 
 // Order socket
-setupOrderSocket(http);
+//setupOrderSocket(http);
 
 
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
