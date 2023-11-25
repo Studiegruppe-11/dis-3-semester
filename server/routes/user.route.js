@@ -120,7 +120,10 @@ router.post("/users/login", async (req, res) => {
 // Log ud
 
 router.get("/users/logout", async (req, res) => {
-    req.session.destroy();
+
+    // Slet brugernavn og ID fra sessionen
+    delete req.session.userId;
+    delete req.session.name;
     res.json({ loggedOut: true });
   }
   );
