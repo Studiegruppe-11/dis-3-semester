@@ -311,7 +311,7 @@ router.get("/kurv/placedorders", async (req, res) => {
 
 router.post('/kurv/placedorders', async (req, res) => {
   const { placedorder } = req.body;
-  const customer_id = "gustav";
+  const customer_id = 3;
   const date = "2021-05-05";
   const status = "waiting";
 
@@ -333,10 +333,6 @@ router.post('/kurv/placedorders', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-
-
-
 
 
 
