@@ -6,8 +6,8 @@ const path = require("path");
 const app = express();
 const session = require("express-session");
 const http = require("http").Server(app);
-const setupPing = require('./utility/pingsocket.js');
-//const setupOrderSocket = require('./utility/orderSocket.js');
+//const setupPing = require('./utility/pingsocket.js');
+const setupOrderSocket = require('./utility/orderSocket.js');
 
 
 // Til github webhook for automatisk pull 
@@ -114,10 +114,10 @@ app.post('/', function (req, res) {
 
 //SOCKET
 // Ping socket
-setupPing(http)
+//setupPing(http)
 
 // Order socket
-//setupOrderSocket(http);
+setupOrderSocket(http);
 
 
 
