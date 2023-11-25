@@ -270,10 +270,9 @@ router.post("/kurv/placedorders", async (req, res) => {
     res.json({ success: true });
   } catch (error) {
     console.error('Fejl under håndtering af gennemfør bestilling:', error);
-    res.status(500).json({ error: "Fejl under håndtering af gennemfør bestilling" });
+    res.status(500).json({ error: "Fejl under håndtering af gennemfør bestilling", errorMessage: error.message });
   }
 });
-
 
 
 
