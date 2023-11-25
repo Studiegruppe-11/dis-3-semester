@@ -141,35 +141,22 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   // test for at se alle placedorders
-//   router.get('/getplacedorders', async (req, res) => {
-//     try {
-//         const pool = await connection.poolPromise;
-  
-//         // Udfør SQL-forespørgslen her
-//         const [rows] = await pool.query('SELECT * FROM placedorders');
-  
-//         res.send(rows);
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).send(error.message);
-//     }
-//   });
-
-
-router.get('/getplacedorders', async (req, res) => {
+  router.get('/getplacedorders', async (req, res) => {
     try {
         const pool = await connection.poolPromise;
-
+  
         // Udfør SQL-forespørgslen her
-        const [rows] = await pool.query('SELECT * FROM placedorders WHERE status = "waiting" AND customer_id = ?', [req.session.userId]);
-
+        const [rows] = await pool.query('SELECT * FROM placedorders');
+  
         res.send(rows);
     } catch (error) {
         console.log(error);
         res.status(500).send(error.message);
     }
-});
-  
+  });
+
+
+
   
   
   

@@ -49,6 +49,15 @@ app.use("/", userRoute);
 const orderRoute = require("./routes/order.route");
 app.use("/", orderRoute);
 
+const adminOrderRoute = require("./routes/adminOrder.route");
+app.use("/", adminOrderRoute);
+
+
+
+
+
+
+
 // Send client files from server
 app.get("/users/create", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/create.html"));
