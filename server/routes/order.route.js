@@ -107,7 +107,7 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   
-  //gennem før order
+  //gennemfør order
   router.post('/kurv/placerordrer', async (req, res) => {
     const { productIds, date } = req.body;
     const customer_id = req.session.userId;
@@ -141,19 +141,34 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   // test for at se alle placedorders
-  router.get('/getplacedorders', async (req, res) => {
+//   router.get('/getplacedorders', async (req, res) => {
+//     try {
+//         const pool = await connection.poolPromise;
+  
+//         // Udfør SQL-forespørgslen her
+//         const [rows] = await pool.query('SELECT * FROM placedorders');
+  
+//         res.send(rows);
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send(error.message);
+//     }
+//   });
+
+
+router.get('/getplacedorders', async (req, res) => {
     try {
         const pool = await connection.poolPromise;
-  
+
         // Udfør SQL-forespørgslen her
-        const [rows] = await pool.query('SELECT * FROM placedorders');
-  
+        const [rows] = await pool.query('SELECT * FROM placedorders WHERE status = "waiting" AND customer_id = ?', [req.session.userId]);
+
         res.send(rows);
     } catch (error) {
         console.log(error);
         res.status(500).send(error.message);
     }
-  });
+});
   
   
   
