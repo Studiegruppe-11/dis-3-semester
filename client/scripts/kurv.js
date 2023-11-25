@@ -88,8 +88,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 // TEST
-
-
 // Funktion til at håndtere klik på test-knappen
 async function handleTest() {
     try {
