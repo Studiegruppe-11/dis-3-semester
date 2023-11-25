@@ -6,20 +6,11 @@ const path = require("path");
 const app = express();
 const session = require("express-session");
 const http = require("http").Server(app);
-// const ping = require('ping');
-// const io = require('socket.io')(http);
 const setupPing = require('./utility/pingsocket.js');
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
 
-// SOCKET TIL PING OG RTT
-
-// grundlæggende rigtigt med rtt og ping skal lige kigges igennem. fx tror jeg ikke at rtt er ping*2. og det er meget meget lave ping og rtt tider vi får. 
-
-
-
-// SOCKET
 
 
   
