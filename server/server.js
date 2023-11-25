@@ -109,12 +109,30 @@ app.post('/', function (req, res) {
 });
 
 
+
+
+
 //SOCKET
 // Ping socket
 setupPing(http)
 
 // Order socket
 //setupOrderSocket(http);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
