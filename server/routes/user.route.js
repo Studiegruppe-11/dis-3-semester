@@ -248,70 +248,13 @@ router.get("/kurv/placedorders", async (req, res) => {
 
 
 
-// Gem id fra produkterne i kurven når der klikkes på gennemfør order i kurv.js/html
-// router.post("/kurv/placedorders", async (req, res) => {
-//   const { placedorder } = req.body;
-//   const userId = req.session.userId; // Antager, at brugerens id er gemt i sessionen
-
-//   try {
-//     const pool = await connection.poolPromise;
-
-//     // Udfør SQL-forespørgslen for at indsætte data i placedorders tabellen
-//     const currentDate = new Date().toISOString().slice(0, 19).replace("T", " ");
-//     const status = "waiting";
-
-//     const sql = `
-//       INSERT INTO placedorders (customer_id, product_id, date, status)
-//       VALUES (?, ?, ?, ?)
-//     `;
-
-//     console.log("SQL-forespørgsel:", sql); // Tilføj denne linje
-
-//     await pool.query(sql, [userId, placedorder, currentDate, status]);
-
-//     res.json({ success: true });
-//   } catch (error) {
-//     console.error('Fejl under håndtering af gennemfør bestilling:', error);
-//     res.status(500).json({ error: "Fejl under håndtering af gennemfør bestilling", errorMessage: error.message });
-//   }
-// });
-
-
-
-// router.post("/kurv/placedorders", async (req, res) => {
-//   // Ændrede værdier for test
-//   const userId = "test_user_id";
-//   const placedorder = "test_placedorder";
-
-//   try {
-//     const pool = await connection.poolPromise;
-
-//     // Udfør SQL-forespørgslen for at indsætte data i placedorders tabellen
-//     const currentDate = new Date().toISOString().slice(0, 19).replace("T", " ");
-//     const status = "waiting";
-
-//     const sql = `
-//       INSERT INTO placedorders (customer_id, product_id, date, status)
-//       VALUES (?, ?, ?, ?)
-//     `;
-
-//     console.log("SQL-forespørgsel:", sql); // Tilføj denne linje
-
-//     await pool.query(sql, [userId, placedorder, currentDate, status]);
-
-//     res.json({ success: true });
-//   } catch (error) {
-//     console.error('Fejl under håndtering af gennemfør bestilling:', error);
-//     res.status(500).json({ error: "Fejl under håndtering af gennemfør bestilling", errorMessage: error.message });
-//   }
-// });
 
 
 
 
 
 //TEST
-router.post('/kurv/test', async (req, res) => {
+router.post('/kurv/placerordrer', async (req, res) => {
   const { productIds, date } = req.body;
   const customer_id = 3;
   const status = "waiting";

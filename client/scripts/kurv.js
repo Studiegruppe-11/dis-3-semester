@@ -18,24 +18,9 @@ window.addEventListener("DOMContentLoaded", async () => {
  
 
 // Funktion til at håndtere "Gennemfør bestilling"-klik
-async function handleGennemforBestilling(productId) {
-    try {
-        // send produktets id til serveren, som derefter gemmer i express session.
-        await fetch("/kurv/placedorders", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                placedorder: productId,
-            }),
-        });
+async function fjernFraKurv(productId) {
 
-        console.log(`Gennemfør bestilling for Product ID: ${productId}`);
-        // Implementer logik for at gennemføre bestillingen her
-    } catch (error) {
-        console.error('Fejl under håndtering af gennemfør bestilling:', error);
-    }
+
 }
 
 // vis kurv (lige nu kun id) og knap til at gennemføre bestilling. bestilling bliver nu gemt i db
@@ -58,8 +43,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
                 // Opret en knap for hvert produkt-id
                 const gennemforBestillingButton = document.createElement("button");
-                gennemforBestillingButton.textContent = "Gennemfør bestilling";
-                gennemforBestillingButton.addEventListener("click", () => handleGennemforBestilling(productId));
+                gennemforBestillingButton.textContent = "Fjern fra kurv";
+                gennemforBestillingButton.addEventListener("click", () => fjernFraKurv(productId));
 
                 // Tilføj knappen til listeelementet
                 listItem.appendChild(gennemforBestillingButton);
@@ -89,7 +74,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 // TEST
 // Funktion til at håndtere klik på test-knappen
-async function handleTest() {
+async function placedorder() {
     try {
       // Hent produkt-IDs fra Express-session
       const response = await fetch("/bestil/kurv");
@@ -97,7 +82,7 @@ async function handleTest() {
       const productIds = result.productIds || [];
   
       // send en test-anmodning til serveren
-      await fetch("/kurv/test", {
+      await fetch("/kurv/placerordrer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,7 +93,7 @@ async function handleTest() {
         }),
       });
   
-      console.log("Test udført med succes!");
+      console.log("Ordrer placeret med succes!");
       // Implementer eventuel logik for at håndtere testen her
     } catch (error) {
       console.error('Fejl under håndtering af test:', error);
@@ -116,6 +101,6 @@ async function handleTest() {
   }
   
   // Tilføj eventlistener til test-knappen
-  const testButton = document.getElementById("testButton"); // Brug det faktiske id, du har
-  testButton.addEventListener("click", handleTest);
+  const testButton = document.getElementById("placeOrder"); // Brug det faktiske id, du har
+  testButton.addEventListener("click", placedorder);
   
