@@ -122,7 +122,7 @@ app.post('/', function (req, res) {
 setupPing(http)
 
 // Order socket
-setupOrderSocket(http);
+//setupOrderSocket(http);
 
 
 
