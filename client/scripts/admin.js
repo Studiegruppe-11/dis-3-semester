@@ -19,7 +19,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 
-
   document.getElementById("logout").addEventListener("click", async () => {
 
     try {
@@ -40,29 +39,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// SOCKET
-
+// SOCKET PING START
 // socket til at vise rtt og ping i real time på admin siden.
-
-
-
-
-
 // Opret en WebSocket-forbindelse til serveren
 const socket = io();
 
@@ -71,93 +49,17 @@ const socket = io();
 socket.on('rttUpdate', (data) => {
     // Opdater HTML-elementet med RTT-oplysninger
     document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
-  
-    // Hvis data.rtt er over en vis grænse, send en SMS via Twilio
-   
-// Send SMS via Twilio
 
 if (data.rtt > 1000) {
   document.getElementById('rttInfo').style.color = 'red';
-
-
-
-
-  
-  // fetch('/lowping') // Foretag en GET-anmodning til /lowping
-  // .then(response => {
-  //   if (response.ok) {
-  //     return response.text();
-  //   } else {
-  //     throw new Error('An error occurred while making the request.');
-  //   }
-  // })
-  // .then(data => {
-  //   console.log(data); // Log besked fra serveren (f.eks., 'Message sent.')
-  // })
-  // .catch(error => {
-  //   console.error('Error:', error);
-  // });
-
-
-
-
-
 
 } else {
   // Hvis RTT er under grænsen, sæt farven til grøn eller orange som tidligere
   if (data.rtt < 1000) {
     document.getElementById('rttInfo').style.color = 'green';
-
-
-
-    
-
-  
-  // fetch('/goodping') // Foretag en GET-anmodning til /lowping
-  // .then(response => {
-  //   if (response.ok) {
-  //     return response.text();
-  //   } else {
-  //     throw new Error('An error occurred while making the request.');
-  //   }
-  // })
-  // .then(data => {
-  //   console.log(data); // Log besked fra serveren (f.eks., 'Message sent.')
-  // })
-  // .catch(error => {
-  //   console.error('Error:', error);
-  // });
-
-
-
-
-
-
-
-
-
-
 } 
 }
-
-
   });
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-  
   socket.on('pingUpdate', (data) => {
     // Opdater HTML-elementet med ping-oplysninger
     document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
@@ -170,37 +72,4 @@ if (data.rtt > 1000) {
   
   });
 
-// SOCKET   
-
-
-// test twilio
-
-// window.onload = () => {
-
-
-
-//   fetch('/testtwilio') // Foretag en GET-anmodning til /lowping
-//   .then(response => {
-//     if (response.ok) {
-//       return response.text();
-//     } else {
-//       throw new Error('An error occurred while making the request.');
-//     }
-//   })
-//   .then(data => {
-//     console.log(data); // Log besked fra serveren (f.eks., 'Message sent.')
-//   })
-//   .catch(error => {
-//     console.error('Error:', error);
-//   });
-  
-
-// };
-
-
-
-
-
-
- 
- 
+// SOCKET PING SLUT 
