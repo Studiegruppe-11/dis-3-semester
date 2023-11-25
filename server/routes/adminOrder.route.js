@@ -38,12 +38,13 @@ router.get('/totalRevenue', async (req, res) => {
 
         // Udfør SQL-forespørgslen her
         const [rows] = await pool.query(`
-            SELECT products.price
+            SELECT SUM(products.price) AS total_price
             FROM placedorders
             INNER JOIN products ON placedorders.product_id = products.product_id
         `);
 
-        res.send(rows);
+        const totalPrice = rows[0].total_price;
+        res.send({ total_price: totalPrice });
     } catch (error) {
         console.log(error);
         res.status(500).send(error.message);
