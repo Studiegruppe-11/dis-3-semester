@@ -1,6 +1,5 @@
 // root/server/utility/orderSocket.js
 
-
 const connection = require('../db/database1.js');
 
 async function getPlacedOrders() {
@@ -23,14 +22,10 @@ async function getPlacedOrders() {
   }
 }
 
-
- 
-
 const socketIO = require('socket.io');
 
 function setupOrderSocket(http) {
   const io = socketIO(http).of('/order');
-
 
   io.on('connection', (socket) => {
     console.log('En klient er tilsluttet via socket.');
@@ -48,6 +43,16 @@ function setupOrderSocket(http) {
 
     // Udsend opdateringer ved forbindelse og derefter ved ændringer
     emitPlacedOrders();
+
+    // Håndter 'getPlacedOrders' hændelsen fra klienten
+    socket.on('getPlacedOrders', async (callback) => {
+      try {
+        const placedOrders = await getPlacedOrders();
+        callback(placedOrders);
+      } catch (error) {
+        console.error('Fejl under hentning af ventende ordrer:', error);
+      }
+    });
 
     socket.on('disconnect', () => {
       console.log('En klient er frakoblet via socket.');

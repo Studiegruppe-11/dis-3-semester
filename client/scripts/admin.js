@@ -50,23 +50,55 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     // SOCKET TIL AT VISE ALLE VENTENDE ORDRER I REAL TIME PÅ ADMIN SIDEN
 
-    const socket1 = io('/order');
-    socket1.on('placedOrdersUpdate', (data) => {
-      updatePlacedOrders(data);
-      console.log('Placed orders updated:', data);
-    });
+//     const socket1 = io('/order');
+//     socket1.on('placedOrdersUpdate', (data) => {
+//       updatePlacedOrders(data);
+//       console.log('Placed orders updated:', data);
+//     });
 
 
-function updatePlacedOrders(placedOrders) {
-  const placedOrdersElement = document.getElementById('placedOrders');
-  placedOrdersElement.innerHTML = '';
+// function updatePlacedOrders(placedOrders) {
+//   const placedOrdersElement = document.getElementById('placedOrders');
+//   placedOrdersElement.innerHTML = '';
 
-  placedOrders.forEach((order) => {
-    const orderItem = document.createElement('div');
-    orderItem.textContent = `Kundens navn: ${order.first_name}, Produkt: ${order.name}`;
-    placedOrdersElement.appendChild(orderItem);
+//   placedOrders.forEach((order) => {
+//     const orderItem = document.createElement('div');
+//     orderItem.textContent = `Kundens navn: ${order.first_name}, Produkt: ${order.name}`;
+//     placedOrdersElement.appendChild(orderItem);
+//   });
+// }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const socket = io('/order'); // Connect to the '/order' namespace
+
+  // Listen for updates on placed orders
+  socket.on('placedOrdersUpdate', function (placedOrders) {
+    updatePlacedOrdersList(placedOrders);
   });
-}
+
+  // Function to update the placed orders list in the HTML
+  function updatePlacedOrdersList(placedOrders) {
+    const placedOrdersList = document.getElementById('placedOrdersList');
+
+    // Clear existing content
+    placedOrdersList.innerHTML = '';
+
+    // Add new orders to the list
+    placedOrders.forEach(order => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${order.first_name} ordered ${order.name}`;
+      placedOrdersList.appendChild(listItem);
+    });
+  }
+
+  // Initial request for placed orders when the page loads
+  socket.emit('getPlacedOrders', function (placedOrders) {
+    updatePlacedOrdersList(placedOrders);
+  });
+});
+
+
 
 
 
