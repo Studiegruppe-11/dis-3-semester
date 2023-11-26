@@ -69,14 +69,15 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 });
 
- 
-
-
 document.addEventListener('DOMContentLoaded', function () {
   const socket = io('/order'); // Connect to the '/order' namespace
 
   // Listen for updates on placed orders
   socket.on('placedOrdersUpdate', function (placedOrders) {
+    // Sort placedOrders based on the lowest product_id first
+    placedOrders.sort((a, b) => a.product_id - b.product_id);
+
+    // Update the placed orders list in the HTML
     updatePlacedOrdersList(placedOrders);
   });
 
@@ -97,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Initial request for placed orders when the page loads
   socket.emit('getPlacedOrders', function (placedOrders) {
+    // Sort placedOrders based on the lowest product_id first
+    placedOrders.sort((a, b) => a.product_id - b.product_id);
+
+    // Update the placed orders list in the HTML
     updatePlacedOrdersList(placedOrders);
   });
 });
