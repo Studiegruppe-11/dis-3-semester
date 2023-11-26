@@ -31,8 +31,8 @@ router.get('/getplacedorders', async (req, res) => {
 
 
 
-// get total revenue
-router.get('/totalRevenue', async (req, res) => {
+// hent total omtæning for i dag
+router.get('/totalRevenuetoday', async (req, res) => {
     try {
         const pool = await connection.poolPromise;
 
@@ -53,6 +53,28 @@ router.get('/totalRevenue', async (req, res) => {
 
 });
 
+
+
+// hent total omtæning
+router.get('/totalRevenue', async (req, res) => {
+    try {
+        const pool = await connection.poolPromise;
+
+        // Udfør SQL-forespørgslen her
+        const [rows] = await pool.query(`
+            SELECT SUM(products.price) AS total_price
+            FROM placedorders
+            INNER JOIN products ON placedorders.product_id = products.product_id
+        `);
+
+        const totalPrice = rows[0].total_price;
+        res.send({ total_price: totalPrice });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+
+});
   
   
   
