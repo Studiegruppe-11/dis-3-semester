@@ -87,7 +87,6 @@ router.get('/finishedorders', async (req, res) => {
             SELECT COUNT(*) AS finished_orders
             FROM placedorders
             WHERE status = "waiting"
-            and where date = CURDATE()
         `);
 
         const finishedOrders = rows[0].finished_orders;
