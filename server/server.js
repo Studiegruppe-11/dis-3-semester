@@ -116,7 +116,7 @@ setupPing(http)
 
 // Order socket
 
-setupOrderSocket(http);
+//setupOrderSocket(http);
 
 
 
