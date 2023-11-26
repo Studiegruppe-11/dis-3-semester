@@ -44,8 +44,6 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
 
-console.log("DOM fully loaded and parsed");
-
 });
 
  
@@ -55,6 +53,7 @@ console.log("DOM fully loaded and parsed");
     const socket1 = io('/order');
     socket1.on('placedOrdersUpdate', (data) => {
       updatePlacedOrders(data);
+      console.log('Placed orders updated:', data);
     });
 
 
