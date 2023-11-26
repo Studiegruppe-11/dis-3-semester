@@ -14,9 +14,9 @@ window.addEventListener("DOMContentLoaded", async () => {
       // Skal ikke vise "opret bruger" hvis man er logget ind.
     }
     else {
-      console.log("No admin logged in");
     }
   } catch (error) {
+      console.log(error);
       // Håndter fejlhåndtering her
     }
 
