@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 // vis alle færdige ordrer på admin siden
   try {
-    const response = await fetch("/finishedOrders");
+    const response = await fetch("/finishedorders");
     const result = await response.json();
     if (result.finishedOrders) {
       document.getElementById("finishedOrders").innerHTML = result.finishedOrders;
