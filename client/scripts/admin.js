@@ -17,7 +17,6 @@ window.addEventListener("DOMContentLoaded", async () => {
       console.log("No admin logged in");
     }
   } catch (error) {
-      console.log(error);
       // Håndter fejlhåndtering her
     }
 
