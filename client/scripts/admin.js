@@ -89,9 +89,9 @@ document.addEventListener('DOMContentLoaded', function () {
     placedOrdersList.innerHTML = '';
 
     // Add new orders to the list
-    placedOrders.forEach(order => {
+    placedOrders.forEach((order, index) => {
       const listItem = document.createElement('li');
-      listItem.textContent = ` Produkt: ${order.name}  Kundens navn:${order.first_name} `;
+      listItem.textContent = `${index + 1}. Produkt: ${order.name}  Kundens navn: ${order.first_name}`;
       placedOrdersList.appendChild(listItem);
     });
   }
@@ -105,8 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePlacedOrdersList(placedOrders);
   });
 });
-
-
 
 
 
