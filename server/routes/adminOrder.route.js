@@ -98,7 +98,7 @@ router.get('/finishedorders', async (req, res) => {
 });
 
 
-router.post ('/updatestatus', async (req, res) => {
+router.post('/updatestatus', async (req, res) => {
     try {
         const pool = await connection.poolPromise;
 
@@ -106,8 +106,8 @@ router.post ('/updatestatus', async (req, res) => {
         const [rows] = await pool.query(`
             UPDATE placedorders
             SET status = "finished"
-            WHERE placedorder_id = ?
-        `, [req.body.placedorder_id]);
+            WHERE product_id = ?
+        `, [req.body.product_id]); 
 
         res.send({ status: "success" });
     } catch (error) {
