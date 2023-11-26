@@ -38,7 +38,8 @@ function setupOrderSocket(http) {
     // Lyt efter opdateringer i ventende ordrer
     const emitPlacedOrders = async () => {
       try {
-        const placedOrders = await getPlacedOrders(); // Brug din funktion til at hente ventende ordrer
+        const placedOrders = await getPlacedOrders();
+        console.log('Placed orders updated:', placedOrders);
         io.emit('placedOrdersUpdate', placedOrders);
       } catch (error) {
         console.error('Fejl under håndtering af opdatering af ventende ordrer:', error);
