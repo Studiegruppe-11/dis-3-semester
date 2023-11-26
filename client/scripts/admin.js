@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Listen for updates on placed orders
   socket.on('placedOrdersUpdate', function (placedOrders) {
-    // Sort placedOrders based on the lowest placedorder_id first
-    placedOrders.sort((a, b) => a.placedorder_id - b.placedorder_id);
+    // Sort placedOrders based on the lowest placeorders_id first
+    placedOrders.sort((a, b) => a.placeorders_id - b.placeorders_id);
 
     // Update the placed orders list in the HTML
     updatePlacedOrdersList(placedOrders);
@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const finishButton = document.createElement('button');
       finishButton.textContent = 'Færdig';
       finishButton.addEventListener('click', function () {
-        // Send a POST request to '/finished' with the placedorder_id
-        finishOrder(order.placedorder_id);
+        // Send a POST request to '/finished' with the placeorders_id
+        finishOrder(order.placeorders_id);
       });
 
       listItem.appendChild(finishButton);
@@ -108,24 +108,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Initial request for placed orders when the page loads
   socket.emit('getPlacedOrders', function (placedOrders) {
-    // Sort placedOrders based on the lowest placedorder_id first
-    placedOrders.sort((a, b) => a.placedorder_id - b.placedorder_id);
+    // Sort placedOrders based on the lowest placeorders_id first
+    placedOrders.sort((a, b) => a.placeorders_id - b.placeorders_id);
 
     // Update the placed orders list in the HTML
     updatePlacedOrdersList(placedOrders);
   });
 
-
-
-  // Function to send a POST request to '/finished' with placedorder_id using fetch
-  function finishOrder(placedorder_id) {
-    console.log('Finishing order with placedorder_id:', placedorder_id); 
+  // Function to send a POST request to '/finished' with placeorders_id using fetch
+  function finishOrder(placeorders_id) {
+    console.log('Finishing order with placeorders_id:', placeorders_id); 
     fetch('/updatestatus', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ placedorder_id }),
+      body: JSON.stringify({ placeorders_id }),
     })
       .then(response => response.json())
       .then(data => {
@@ -136,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 });
+
 
 
 
