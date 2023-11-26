@@ -98,6 +98,23 @@ router.get('/finishedorders', async (req, res) => {
 });
 
 
+router.post ('/updatestatus', async (req, res) => {
+    try {
+        const pool = await connection.poolPromise;
+
+        // Udfør SQL-forespørgslen her
+        const [rows] = await pool.query(`
+            UPDATE placedorders
+            SET status = "finished"
+            WHERE placedorder_id = ?
+        `, [req.body.placedorder_id]);
+
+        res.send({ status: "success" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+});
 
 
 
