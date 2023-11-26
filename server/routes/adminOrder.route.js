@@ -107,7 +107,8 @@ router.post('/updatestatus', async (req, res) => {
             UPDATE placedorders
             SET status = "finished"
             WHERE placedorders_id = ?
-        `, [req.body.placedorders_id]); 
+        `, [80]);
+        //[req.body.placedorders_id]); 
 
         res.send({ status: "success" });
     } catch (error) {
