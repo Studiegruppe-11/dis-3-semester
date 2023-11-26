@@ -115,8 +115,11 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePlacedOrdersList(placedOrders);
   });
 
+
+
   // Function to send a POST request to '/finished' with placedorder_id using fetch
   function finishOrder(placedorder_id) {
+    console.log('Finishing order with placedorder_id:', placedorder_id); 
     fetch('/updatestatus', {
       method: 'POST',
       headers: {
@@ -127,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(data => {
         console.log('Order finished:', data);
-        console.log(placedorder_id)
       })
       .catch(error => {
         console.error('Error finishing order:', error);
