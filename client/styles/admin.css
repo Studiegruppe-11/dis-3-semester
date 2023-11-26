@@ -102,6 +102,7 @@ body {
 #user {
   float: left; /* Placer user helt til venstre */
   margin-top: 15px; /* Juster topmarginen efter dine præferencer */
+  color: yellow;
 }
 
 
@@ -111,8 +112,3 @@ body {
   margin-bottom: 0; /* Fjerner bundmarginen */
 }
 
-
-#placedOrders {
-  margin-top: 1rem; /* Tilføj margin til toppen af overskriften */
-  color: blue;
-}
