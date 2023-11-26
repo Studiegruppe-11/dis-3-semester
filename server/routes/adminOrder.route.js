@@ -78,7 +78,7 @@ router.get('/totalRevenue', async (req, res) => {
   
   
 // hent antal færdige ordrer i dag
-router.get('/getfinishedorders', async (req, res) => {
+router.get('/finishedorders', async (req, res) => {
     try {
         const pool = await connection.poolPromise;
 
