@@ -56,9 +56,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     if (result.finishedOrders) {
       document.getElementById("finishedOrders").innerHTML = result.finishedOrders;
     }
-    else {
-      document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
-    }
   } catch (error) {
     console.log(error);
   }
