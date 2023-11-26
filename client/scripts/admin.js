@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add new orders to the list
     placedOrders.forEach(order => {
       const listItem = document.createElement('li');
-      listItem.textContent = `${order.first_name} ordered ${order.name}`;
+      listItem.textContent = `${order.first_name} har bestilt ${order.name}`;
       placedOrdersList.appendChild(listItem);
     });
   }
