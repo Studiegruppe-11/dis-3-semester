@@ -86,7 +86,7 @@ router.get('/finishedorders', async (req, res) => {
         const [rows] = await pool.query(`
             SELECT COUNT(*) AS finished_orders
             FROM placedorders
-            WHERE status = "waiting"
+            WHERE status = "waiting" AND date = CURDATE()
         `);
 
         const finishedOrders = rows[0].finished_orders;
