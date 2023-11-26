@@ -52,7 +52,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     const socket1 = io('/order');
     socket1.on('placedOrdersUpdate', (data) => {
       updatePlacedOrders(data);
-      location.reload();  // Dette genindlæser siden
     });
 
 });
