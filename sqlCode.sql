@@ -256,3 +256,6 @@ FOREIGN KEY (product_id)
 REFERENCES products(product_id);
 
 
+UPDATE products
+SET imageUrl = 'https://joepay-api.joejuice.com/productAssets/9?type=tile_row&resolution=1'
+WHERE product_id = 15;
