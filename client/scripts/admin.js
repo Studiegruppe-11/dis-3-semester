@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to send a POST request to '/finished' with placeorders_id using fetch
   function finishOrder(placeorders_id) {
-    console.log('Finishing order with placeorders_id:', placeorders_id, order.name, order.first_name);
+    console.log('Finishing order with placeorders_id:', placeorders_id);
   
     // fetch('/updatestatus', {
     //   method: 'POST',
