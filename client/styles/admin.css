@@ -110,3 +110,9 @@ body {
   font-weight: bold; /* Gør overskriften fed */
   margin-bottom: 0; /* Fjerner bundmarginen */
 }
+
+
+#placedOrders {
+  margin-top: 1rem; /* Tilføj margin til toppen af overskriften */
+  color: blue;
+}
