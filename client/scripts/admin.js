@@ -69,16 +69,13 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 });
 
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
   const socket = io('/order'); // Connect to the '/order' namespace
 
   // Listen for updates on placed orders
   socket.on('placedOrdersUpdate', function (placedOrders) {
-    // Sort placedOrders based on the lowest product_id first
-    placedOrders.sort((a, b) => a.product_id - b.product_id);
+    // Sort placedOrders based on the lowest placedorder_id first
+    placedOrders.sort((a, b) => a.placedorder_id - b.placedorder_id);
 
     // Update the placed orders list in the HTML
     updatePlacedOrdersList(placedOrders);
@@ -100,33 +97,32 @@ document.addEventListener('DOMContentLoaded', function () {
       const finishButton = document.createElement('button');
       finishButton.textContent = 'Færdig';
       finishButton.addEventListener('click', function () {
-        // Send a POST request to '/finished' with the product_id
-        finishOrder(order.product_id);
+        // Send a POST request to '/finished' with the placedorder_id
+        finishOrder(order.placedorder_id);
       });
 
       listItem.appendChild(finishButton);
       placedOrdersList.appendChild(listItem);
     });
-    
   }
 
   // Initial request for placed orders when the page loads
   socket.emit('getPlacedOrders', function (placedOrders) {
-    // Sort placedOrders based on the lowest product_id first
-    placedOrders.sort((a, b) => a.product_id - b.product_id);
+    // Sort placedOrders based on the lowest placedorder_id first
+    placedOrders.sort((a, b) => a.placedorder_id - b.placedorder_id);
 
     // Update the placed orders list in the HTML
     updatePlacedOrdersList(placedOrders);
   });
 
-  // Function to send a POST request to '/finished' with product_id using fetch
-  function finishOrder(product_id) {
+  // Function to send a POST request to '/finished' with placedorder_id using fetch
+  function finishOrder(placedorder_id) {
     fetch('/updatestatus', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ product_id }),
+      body: JSON.stringify({ placedorder_id }),
     })
       .then(response => response.json())
       .then(data => {
@@ -138,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 });
+
 
 
 
