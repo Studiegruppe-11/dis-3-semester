@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   
   // vis total omsætning i dag
   try {
-    const response = await fetch("/admin/totalRevenuetoday");
+    const response = await fetch("/totalRevenuetoday");
     const result = await response.json();
     if (result.total_price) {
       document.getElementById("totalRevenuetoday").innerHTML = result.total_price;
@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   // vis total omsætning
   try {
-    const response = await fetch("/admin/totalRevenue");
+    const response = await fetch("/totalRevenue");
     const result = await response.json();
     if (result.total_price) {
       document.getElementById("totalRevenue").innerHTML = result.total_price;
