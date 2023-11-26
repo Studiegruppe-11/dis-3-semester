@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
       finishButton.textContent = 'Færdig';
       finishButton.addEventListener('click', function () {
         // Send a POST request to '/finished' with the placeorders_id
-        finishOrder(order.placeorders_id);
+        finishOrder(order.placedorders_id); // Opdateret her
       });
 
       listItem.appendChild(finishButton);
@@ -135,10 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error finishing order:', error);
       });
   }
-
-  
 });
-
 
 
 
