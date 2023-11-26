@@ -62,11 +62,10 @@ try {
   console.log(error);
 }
 
-
-
-
-
 });
+
+
+// root/client/scripts/admin.js
 
 document.addEventListener('DOMContentLoaded', function () {
   const socket = io('/order'); // Connect to the '/order' namespace
@@ -118,23 +117,23 @@ document.addEventListener('DOMContentLoaded', function () {
   function finishOrder(placeorders_id) {
     console.log('Finishing order with placeorders_id:', placeorders_id);
   
-    // fetch('/updatestatus', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ placeorders_id }),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log('Order finished:', data);
+    fetch('/updatestatus', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ placeorders_id }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Order finished:', data);
   
-    //     // Genindlæs siden
-    //     window.location.reload();
-    //   })
-    //   .catch(error => {
-    //     console.error('Error finishing order:', error);
-    //   });
+        // Genindlæs siden
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error('Error finishing order:', error);
+      });
   }
 
   
