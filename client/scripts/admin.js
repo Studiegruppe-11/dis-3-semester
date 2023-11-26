@@ -2,6 +2,8 @@
 
 
 window.addEventListener("DOMContentLoaded", async () => {
+
+  //  vis navn på admin logget ind
   try {
     const response = await fetch("/admins/show");
     const result = await response.json();
@@ -17,12 +19,37 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
 
 
+    // test på at vise total omsætning i dag og i alt. skal laves til socket i stedet. 
+  
+  // vis total omsætning i dag
+  try {
+    const response = await fetch("/admin/totalRevenuetoday");
+    const result = await response.json();
+    if (result.total_price) {
+      document.getElementById("totalRevenuetoday").innerHTML = result.total_price;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  // vis total omsætning
+  try {
+    const response = await fetch("/admin/totalRevenue");
+    const result = await response.json();
+    if (result.total_price) {
+      document.getElementById("totalRevenue").innerHTML = result.total_price;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 
 
-    // SOCKET TIL AT VISE ALLE VENTENDE ORDRER I REAL TIME PÅ ADMIN SIDEN
+
+
+});
 
  
-});
+    // SOCKET TIL AT VISE ALLE VENTENDE ORDRER I REAL TIME PÅ ADMIN SIDEN
 
  
 const socket1 = io('/order');
