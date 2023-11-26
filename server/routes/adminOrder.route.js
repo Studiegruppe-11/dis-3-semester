@@ -77,7 +77,27 @@ router.get('/totalRevenue', async (req, res) => {
 });
   
   
-  
+// hent antal færdige ordrer i dag
+router.get('/getfinishedorders', async (req, res) => {
+    try {
+        const pool = await connection.poolPromise;
+
+        // Udfør SQL-forespørgslen her
+        const [rows] = await pool.query(`
+            SELECT COUNT(*) AS finished_orders
+            FROM placedorders
+            WHERE status = "waiting"
+            and where date = CURDATE()
+        `);
+
+        const finishedOrders = rows[0].finished_orders;
+        res.send({ finished_orders: finishedOrders });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+});
+
   
   
   module.exports = router;
