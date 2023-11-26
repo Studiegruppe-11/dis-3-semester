@@ -44,7 +44,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
 
-
+console.log("DOM fully loaded and parsed");
 
 });
 
