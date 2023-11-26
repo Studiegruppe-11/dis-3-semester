@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("/totalRevenuetoday");
     const result = await response.json();
     if (result.total_price) {
-      document.getElementById("totalRevenuetoday").innerHTML = result.total_price + "Kr.";
+      document.getElementById("totalRevenuetoday").innerHTML = result.total_price + " Kr.";
     }
   } catch (error) {
     console.log(error);
@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("/totalRevenue");
     const result = await response.json();
     if (result.total_price) {
-      document.getElementById("totalRevenue").innerHTML = result.total_price + "Kr.";
+      document.getElementById("totalRevenue").innerHTML = result.total_price + " Kr.";
     }
   } catch (error) {
     console.log(error);
