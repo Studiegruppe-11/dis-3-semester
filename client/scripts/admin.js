@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         console.log('Order finished:', data);
         // genindlæser siden når ordren er færdig. kunne også bruge socket men det er ikke nødvendigt.
-        window.location.reload();
+       // window.location.reload();
       })
       .catch(error => {
         console.error('Error finishing order:', error);
