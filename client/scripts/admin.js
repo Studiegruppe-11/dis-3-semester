@@ -28,6 +28,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     if (result.total_price) {
       document.getElementById("totalRevenuetoday").innerHTML = result.total_price + " Kr.";
     }
+    else {
+      document.getElementById("totalRevenuetoday").innerHTML = "0 Kr.";
+    }
   } catch (error) {
     console.log(error);
   }
@@ -39,6 +42,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     if (result.total_price) {
       document.getElementById("totalRevenue").innerHTML = result.total_price + " Kr.";
     }
+    else {
+      document.getElementById("totalRevenue").innerHTML = "0 Kr.";
+    }
   } catch (error) {
     console.log(error);
   }
@@ -49,6 +55,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     const result = await response.json();
     if (result.finishedOrders) {
       document.getElementById("finishedOrders").innerHTML = result.finishedOrders;
+    }
+    else {
+      document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
     }
   } catch (error) {
     console.log(error);
