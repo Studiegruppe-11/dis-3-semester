@@ -116,7 +116,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to send a POST request to '/finished' with placeorders_id using fetch
   function finishOrder(placeorders_id) {
-    console.log('Finishing order with placeorders_id:', placeorders_id); 
+    console.log('Finishing order with placeorders_id:', placeorders_id);
+  
     fetch('/updatestatus', {
       method: 'POST',
       headers: {
@@ -127,13 +128,16 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(data => {
         console.log('Order finished:', data);
-        // genindlæser siden når ordren er færdig. kunne også bruge socket men det er ikke nødvendigt.
-       // window.location.reload();
+  
+        // Genindlæs siden
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error finishing order:', error);
       });
   }
+
+  
 });
 
 
