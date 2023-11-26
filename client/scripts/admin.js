@@ -50,15 +50,17 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
 // vis alle færdige ordrer på admin siden
-  try {
-    const response = await fetch("/finishedorders");
-    const result = await response.json();
-    if (result.finishedOrders) {
-      document.getElementById("finishedOrders").innerHTML = result.finishedOrders;
-    }
-  } catch (error) {
-    console.log(error);
+try {
+  const response = await fetch("/finishedorders");
+  const result = await response.json();
+  if (result.finished_orders) {  // Skiftet fra finishedOrders til finished_orders
+    document.getElementById("finishedOrders").innerHTML = result.finished_orders;
+  } else {
+    document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
   }
+} catch (error) {
+  console.log(error);
+}
 
 
 
