@@ -49,10 +49,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     // SOCKET TIL AT VISE ALLE VENTENDE ORDRER I REAL TIME PÅ ADMIN SIDEN
 
  
-    const socket1 = io('/order');
-    socket1.on('placedOrdersUpdate', (data) => {
-      updatePlacedOrders(data);
-    });
+    // const socket1 = io('/order');
+    // socket1.on('placedOrdersUpdate', (data) => {
+    //   updatePlacedOrders(data);
+    // });
 
 });
 
