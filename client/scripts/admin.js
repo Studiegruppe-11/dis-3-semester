@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(data => {
         console.log('Order finished:', data);
-        // You may want to update the UI or take additional actions after finishing the order
+        console.log(placedorder_id)
       })
       .catch(error => {
         console.error('Error finishing order:', error);
