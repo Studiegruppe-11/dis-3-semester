@@ -139,11 +139,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
-
   document.getElementById("logout").addEventListener("click", async () => {
 
     try {
