@@ -8,7 +8,7 @@ async function getPlacedOrders() {
 
     // Udfør SQL-forespørgslen for at hente ventende ordrer
     const [rows] = await pool.query(`
-    SELECT customers.first_name, products.name
+    SELECT placedorders_id, customers.first_name, products.name
     FROM placedorders
     INNER JOIN customers ON placedorders.customer_id = customers.customer_id
     INNER JOIN products ON placedorders.product_id = products.product_id
