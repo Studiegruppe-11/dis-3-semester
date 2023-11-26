@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     console.log(error);
   }
 
-// vis alle færdige ordrer på admin siden
+// vis alle færdige ordrer på admin siden. Skal også laves til socket i stedet.
 try {
   const response = await fetch("/finishedorders");
   const result = await response.json();
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         console.log('Order finished:', data);
   
-        // Genindlæs siden
+        // Genindlæs siden. Hvis alt bliver lavet til socket så skal den ikke genindlæse siden, da dette vil ske automatisk.
         window.location.reload();
       })
       .catch(error => {
@@ -136,6 +136,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 });
+
+
+
+
 
 
 
