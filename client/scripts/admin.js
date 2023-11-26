@@ -69,6 +69,9 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 });
 
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const socket = io('/order'); // Connect to the '/order' namespace
 
@@ -92,6 +95,16 @@ document.addEventListener('DOMContentLoaded', function () {
     placedOrders.forEach((order, index) => {
       const listItem = document.createElement('li');
       listItem.textContent = `${index + 1}. Produkt: ${order.name}  Kundens navn: ${order.first_name}`;
+      
+      // Add a button for finishing the order
+      const finishButton = document.createElement('button');
+      finishButton.textContent = 'Færdig';
+      finishButton.addEventListener('click', function () {
+        // Send a POST request to '/finished' with the product_id
+        finishOrder(order.product_id);
+      });
+
+      listItem.appendChild(finishButton);
       placedOrdersList.appendChild(listItem);
     });
   }
@@ -104,6 +117,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update the placed orders list in the HTML
     updatePlacedOrdersList(placedOrders);
   });
+
+  // Function to send a POST request to '/finished' with product_id using fetch
+  function finishOrder(product_id) {
+    fetch('/finished', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ product_id }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Order finished:', data);
+        // You may want to update the UI or take additional actions after finishing the order
+      })
+      .catch(error => {
+        console.error('Error finishing order:', error);
+      });
+  }
 });
 
 
