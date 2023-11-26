@@ -106,8 +106,8 @@ router.post('/updatestatus', async (req, res) => {
         const [rows] = await pool.query(`
             UPDATE placedorders
             SET status = "finished"
-            WHERE placeorders_id = ?
-        `, [req.body.placeorders_id]); 
+            WHERE placedorders_id = ?
+        `, [req.body.placedorders_id]); 
 
         res.send({ status: "success" });
     } catch (error) {
