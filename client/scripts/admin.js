@@ -71,26 +71,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
  
 
-    // SOCKET TIL AT VISE ALLE VENTENDE ORDRER I REAL TIME PÅ ADMIN SIDEN
-
-//     const socket1 = io('/order');
-//     socket1.on('placedOrdersUpdate', (data) => {
-//       updatePlacedOrders(data);
-//       console.log('Placed orders updated:', data);
-//     });
-
-
-// function updatePlacedOrders(placedOrders) {
-//   const placedOrdersElement = document.getElementById('placedOrders');
-//   placedOrdersElement.innerHTML = '';
-
-//   placedOrders.forEach((order) => {
-//     const orderItem = document.createElement('div');
-//     orderItem.textContent = `Kundens navn: ${order.first_name}, Produkt: ${order.name}`;
-//     placedOrdersElement.appendChild(orderItem);
-//   });
-// }
-
 
 document.addEventListener('DOMContentLoaded', function () {
   const socket = io('/order'); // Connect to the '/order' namespace
@@ -110,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add new orders to the list
     placedOrders.forEach(order => {
       const listItem = document.createElement('li');
-      listItem.textContent = `${order.first_name} har bestilt ${order.name}`;
+      listItem.textContent = ` Produkt: ${order.name}  Kundens navn:${order.first_name} `;
       placedOrdersList.appendChild(listItem);
     });
   }

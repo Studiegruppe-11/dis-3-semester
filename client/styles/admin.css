@@ -102,13 +102,4 @@ body {
 #user {
   float: left; /* Placer user helt til venstre */
   margin-top: 15px; /* Juster topmarginen efter dine præferencer */
-  color: yellow;
 }
-
-
-.headline {
-  font-size: 1.5rem; /* Ændrer størrelsen på overskriften */
-  font-weight: bold; /* Gør overskriften fed */
-  margin-bottom: 0; /* Fjerner bundmarginen */
-}
-
