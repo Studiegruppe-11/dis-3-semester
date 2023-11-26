@@ -43,6 +43,20 @@ window.addEventListener("DOMContentLoaded", async () => {
     console.log(error);
   }
 
+// vis alle færdige ordrer på admin siden
+  try {
+    const response = await fetch("/finishedOrders");
+    const result = await response.json();
+    if (result.finishedOrders) {
+      document.getElementById("finishedOrders").innerHTML = result.finishedOrders;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+
+
+
 
 });
 
