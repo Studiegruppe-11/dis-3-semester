@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
       listItem.appendChild(finishButton);
       placedOrdersList.appendChild(listItem);
     });
+    
   }
 
   // Initial request for placed orders when the page loads
@@ -120,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to send a POST request to '/finished' with product_id using fetch
   function finishOrder(product_id) {
-    fetch('/finished', {
+    fetch('/updatestatus', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
