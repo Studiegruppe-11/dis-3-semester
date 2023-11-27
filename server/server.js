@@ -126,40 +126,27 @@ setupOrderSocket(http);
 
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
 // SKAL LAVES OM TIL WHATSAPP.
-// const { MessagingResponse } = require('twilio').twiml;
-// const bodyParser = require('body-parser');
 
-// app.use(bodyParser.urlencoded({ extended: false }));
+const { MessagingResponse } = require('twilio').twiml;
 
-// app.post('/sms', async (req, res) => {
-//   const twiml = new MessagingResponse();
+app.use(bodyParser.urlencoded({ extended: false }));
 
-//   if (req.body.Body == 'serverstatus') {
-//     twiml.message('Serveren er online.');
-//   } else if (req.body.Body == 'dagens omsætning') {
+app.post('/sms', (req, res) => {
+  const twiml = new MessagingResponse();
 
-//     try {
-//       // Hent data fra /totalrevenue-endepunktet ved hjælp af fetch
-//       const response = await fetch('https://joejuicexam.me/totalrevenue');
-      
-//       if (response.ok) {
-//         const data = await response.json();
-//         const totalRevenue = data.total_price;
-//         twiml.message(`Dagens omsætning er: ${totalRevenue}`);
-//       } else {
-//         console.error('Fejl ved hentning af total omsætning:', response.status);
-//         twiml.message('Der opstod en fejl ved hentning af omsætning.');
-//       }
-//     } catch (error) {
-//       console.error('Fejl ved hentning af total omsætning:', error);
-//       twiml.message('Der opstod en fejl ved hentning af omsætning.');
-//     }
-//   } else {
-//     twiml.message('Ukendt kommando. Skriv i stedet "serverstatus" eller "dagens omsætning"');
-//   }
+  if (req.body.Body == 'serverstatus') {
+    twiml.message(' Serveren er online.');
+  } else if (req.body.Body == 'dagens omsætning') {
+    twiml.message(' Snart vil du kunne modtage dagens omsætning.');
+    // fetch /totalrevenue
+  } else {
+    twiml.message(
+      'Prøv at skriv noget andet.'
+    );
+  }
 
-//   res.type('text/xml').send(twiml.toString());
-// });
+  res.type('text/xml').send(twiml.toString());
+});
 
 
 
