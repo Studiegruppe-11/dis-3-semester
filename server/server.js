@@ -126,40 +126,40 @@ setupOrderSocket(http);
 
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
 // SKAL LAVES OM TIL WHATSAPP.
-const { MessagingResponse } = require('twilio').twiml;
-const bodyParser = require('body-parser');
+// const { MessagingResponse } = require('twilio').twiml;
+// const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post('/sms', async (req, res) => {
-  const twiml = new MessagingResponse();
+// app.post('/sms', async (req, res) => {
+//   const twiml = new MessagingResponse();
 
-  if (req.body.Body == 'serverstatus') {
-    twiml.message('Serveren er online.');
-  } else if (req.body.Body == 'dagens omsætning') {
+//   if (req.body.Body == 'serverstatus') {
+//     twiml.message('Serveren er online.');
+//   } else if (req.body.Body == 'dagens omsætning') {
 
-    try {
-      // Hent data fra /totalrevenue-endepunktet ved hjælp af fetch
-      const response = await fetch('https://joejuicexam.me/totalrevenue');
+//     try {
+//       // Hent data fra /totalrevenue-endepunktet ved hjælp af fetch
+//       const response = await fetch('https://joejuicexam.me/totalrevenue');
       
-      if (response.ok) {
-        const data = await response.json();
-        const totalRevenue = data.total_price;
-        twiml.message(`Dagens omsætning er: ${totalRevenue}`);
-      } else {
-        console.error('Fejl ved hentning af total omsætning:', response.status);
-        twiml.message('Der opstod en fejl ved hentning af omsætning.');
-      }
-    } catch (error) {
-      console.error('Fejl ved hentning af total omsætning:', error);
-      twiml.message('Der opstod en fejl ved hentning af omsætning.');
-    }
-  } else {
-    twiml.message('Ukendt kommando. Skriv "serverstatus" for at se om serveren er online. Skriv "dagens omsætning" for at se dagens omsætning');
-  }
+//       if (response.ok) {
+//         const data = await response.json();
+//         const totalRevenue = data.total_price;
+//         twiml.message(`Dagens omsætning er: ${totalRevenue}`);
+//       } else {
+//         console.error('Fejl ved hentning af total omsætning:', response.status);
+//         twiml.message('Der opstod en fejl ved hentning af omsætning.');
+//       }
+//     } catch (error) {
+//       console.error('Fejl ved hentning af total omsætning:', error);
+//       twiml.message('Der opstod en fejl ved hentning af omsætning.');
+//     }
+//   } else {
+//     twiml.message('Ukendt kommando. Skriv i stedet "serverstatus" eller "dagens omsætning"');
+//   }
 
-  res.type('text/xml').send(twiml.toString());
-});
+//   res.type('text/xml').send(twiml.toString());
+// });
 
 
 
