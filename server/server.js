@@ -138,6 +138,7 @@ app.post('/sms', (req, res) => {
     twiml.message(' Serveren er online.');
   } else if (req.body.Body == 'dagens omsætning') {
     twiml.message(' Snart vil du kunne modtage dagens omsætning.');
+    // fetch /totalrevenue
   } else {
     twiml.message(
       'Prøv at skriv noget andet.'
