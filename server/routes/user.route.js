@@ -71,7 +71,6 @@ try {
 
   // If the insert was successful and we have an inserted user's id
   if (rows.insertId) {
-    console.log('User inserted with id: ', rows.insertId);
     // Call your sendWelcomeEmail function here
     // Assuming sendWelcomeEmail is an async function and takes the user's email and name as parameters
     await sendWelcomeEmail(email, firstname + ' ' + lastname);
