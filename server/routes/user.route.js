@@ -74,13 +74,7 @@ try {
     console.log('User inserted with id: ', rows.insertId);
     // Call your sendWelcomeEmail function here
     // Assuming sendWelcomeEmail is an async function and takes the user's email and name as parameters
-    try {
-      await sendWelcomeEmail(email, firstname + ' ' + lastname);
-      res.status(201).json({ message: 'User created and email sent' });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Error sending welcome email' });
-    }
+    await sendWelcomeEmail(email, firstname + ' ' + lastname);
   }
   
   // Send a response back to the client
