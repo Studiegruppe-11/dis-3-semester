@@ -3,11 +3,11 @@ const dotenv = require('dotenv');
 const path = require('path');
 const nodemailer = require('nodemailer');
 
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
 const gUser = process.env.GMAIL_USER;
 const gPswd = process.env.GMAIL_PASS;
 
-
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 console.log("Email User:", gUser);
 console.log("Email Password:", gPswd ? "Password is set" : "Password is NOT set");
