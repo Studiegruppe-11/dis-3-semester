@@ -55,8 +55,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Image upload størrelse
 app.use(fileUpload({
   createParentPath: true,
-  limits: { fileSize: 50 * 1024 * 1024 }, // Set limit here (e.g., 50MB)
+  limits: { fileSize: 100 * 1024 * 1024 }, // Adjust size as per requirement, e.g., 100MB
 }));
+
 
 
 // ############
