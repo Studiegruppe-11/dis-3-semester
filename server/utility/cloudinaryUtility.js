@@ -1,4 +1,4 @@
-// root/server/utility/cloudinaryUtil.js
+// root/server/utility/cloudinaryUtility.js
 const cloudinary = require('cloudinary').v2;
 
 async function uploadImage(imagePath) {

@@ -1,7 +1,7 @@
 // root/server/routes/imageRoute.js
 const express = require('express');
 const router = express.Router();
-const { uploadImage } = require('../utility/cloudinaryUtil'); // Utility module for Cloudinary
+const { uploadImage } = require('../utility/cloudinaryUtility'); // Utility module for Cloudinary
 
 router.post('/upload', async (req, res) => {
   try {
