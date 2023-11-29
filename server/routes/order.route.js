@@ -36,17 +36,26 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   // Gem id fra produktet i session, så det kan vises i kurv.html, når der klikkes på tilføj til kurv i bestil.js
-  router.post("/bestil/kurv", async (req, res) => {
-    const { product_id } = req.body;
-  
-    // Hvis der ikke er nogen kurv i sessionen, opret et tomt array
-    req.session.productIds = req.session.productIds || [];
-  
-    // Tilføj det nye produkt_id til arrayet
-    req.session.productIds.push(product_id);
-  
-    res.json({ success: true });
-  });
+  router.get("/bestil/kurv", async (req, res) => {
+    const { productIds } = req.session;
+
+    if (!productIds || productIds.length === 0) {
+        return res.status(404).json({ error: "Ingen produkter i kurven" });
+    }
+
+    try {
+        const pool = await poolPromise;
+
+        // Opret SQL-forespørgsel baseret på produkt-id'er fra sessionen
+        const sql = `SELECT * FROM products WHERE productId IN (${productIds.join(",")})`;
+        const [rows] = await pool.query(sql);
+
+        res.json({ products: rows });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+});
   
   
   
