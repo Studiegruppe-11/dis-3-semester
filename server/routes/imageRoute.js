@@ -1,20 +1,24 @@
+// root/server/routes/imageRoute.js
 const express = require('express');
 const router = express.Router();
-const cloudinary = require('cloudinary').v2;
+const { uploadImage } = require('../utility/cloudinaryUtil'); // Utility module for Cloudinary
 
-// Route to handle image upload
 router.post('/upload', async (req, res) => {
   try {
-    // Assuming a file upload form with the input field named 'image'
-    if(req.files && req.files.image){
-      const result = await cloudinary.uploader.upload(req.files.image.tempFilePath);
-      return res.status(200).json({ message: 'Image uploaded successfully', url: result.url });
+    let uploadPromises = [];
+    // Check if multiple files are uploaded
+    if (req.files.image.length) {
+      uploadPromises = req.files.image.map(file => uploadImage(file.tempFilePath));
     } else {
-      return res.status(400).json({ message: 'No image file provided' });
+      // Single file upload
+      uploadPromises = [uploadImage(req.files.image.tempFilePath)];
     }
+
+    const results = await Promise.all(uploadPromises);
+    res.status(200).json({ message: 'Images uploaded successfully', urls: results });
   } catch (error) {
-    console.error('Error uploading image:', error);
-    res.status(500).send('Error uploading image');
+    console.error('Error uploading images:', error);
+    res.status(500).send('Error uploading images');
   }
 });
 

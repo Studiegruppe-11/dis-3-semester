@@ -8,6 +8,8 @@ const session = require("express-session");
 const http = require("http").Server(app);
 const setupPing = require('./utility/pingsocket.js');
 const setupOrderSocket = require('./utility/orderSocket.js');
+
+// Til cloudinary
 const cloudinary = require('cloudinary').v2;
 const fileUpload = require('express-fileupload'); // For handling file uploads
 
@@ -21,6 +23,8 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY, 
   api_secret: process.env.CLOUDINARY_API_SECRET 
 });
+
+console.log(cloudinary.config()); 
 
   
 // Middlewares
@@ -37,6 +41,22 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+// ############
+
+// Til cloudinary 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload({ createParentPath: true }));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Image upload route
+const imageRoute = require('./routes/image.route');
+app.use('/images', imageRoute);
+
+// ############
 
 
 // Routes
