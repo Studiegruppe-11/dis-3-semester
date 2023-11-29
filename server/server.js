@@ -72,7 +72,7 @@ const adminOrderRoute = require("./routes/adminOrder.route");
 app.use("/", adminOrderRoute);
 
 const imageRoute = require('./routes/imageRoute.js');
-app.use('/', imageRoute);
+app.use('/images', imageRoute);
 
 
 
@@ -104,7 +104,7 @@ app.get("/users/kurv", (req, res) => {
 });
 
 app.get("/admin/upload", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/pages/imageUpload.html"));
+  res.sendFile(path.join(__dirname, "../client/pages/imageUpload.html"));
 });
 
 

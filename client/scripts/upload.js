@@ -9,7 +9,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         formData.append('image', files[i]);
     }
 
-    fetch('/images/upload', {
+    fetch('/images/upload/images', {
         method: 'POST',
         body: formData
     })
