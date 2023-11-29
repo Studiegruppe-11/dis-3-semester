@@ -53,7 +53,7 @@ app.use(fileUpload({ createParentPath: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Image upload route
-const imageRoute = require('./routes/image.route');
+const imageRoute = require('./routes/imageRoute.js');
 app.use('/images', imageRoute);
 
 // ############
