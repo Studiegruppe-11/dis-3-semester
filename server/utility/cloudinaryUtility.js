@@ -1,3 +1,6 @@
+// root/server/utility/cloudinaryUtility.js
+const cloudinary = require('cloudinary').v2;
+
 async function uploadImage(imagePath) {
   try {
     const result = await cloudinary.uploader.upload(imagePath);
@@ -7,3 +10,6 @@ async function uploadImage(imagePath) {
     throw error;  // Rethrowing the error to be caught in the calling function
   }
 }
+
+
+module.exports = { uploadImage };
