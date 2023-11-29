@@ -1,4 +1,4 @@
-// root/server/utility/mailUtility.js
+// root/server/utility/mailUtility-old.js
 const dotenv = require('dotenv');
 const path = require('path');
 const nodemailer = require('nodemailer');

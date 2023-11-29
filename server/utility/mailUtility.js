@@ -1,6 +1,7 @@
-const nodemailer = require('nodemailer');
+// root/server/utility/mailUtility.js
 const dotenv = require('dotenv');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
