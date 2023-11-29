@@ -60,7 +60,7 @@ body {
     margin: 20px;
     padding: 20px;
     border-radius: 10px;
-    width: 100%w;
+    width: 100%;
   }
   
   .menu-category h2 {
@@ -145,8 +145,8 @@ body {
   }
 
   .kurvknap{
-        background-color: #c72323;
-        color: white;
+        background-color: #d2d2d2;
+        color: rgb(0, 0, 0);
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
