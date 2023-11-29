@@ -64,11 +64,12 @@ router.get('/orders/sandwich', async (req, res) => {
 
   // hent alle juice fra db
   router.get('/bestil/kurvtest', async (req, res) => {
+    const { productIds } = req.session;
     try {
         const pool = await connection.poolPromise;
   
         // Udfør SQL-forespørgslen her
-        const [rows] = await pool.query('SELECT * FROM products where product_id = "1"');
+        const [rows] = await pool.query('SELECT * FROM products where product_id = ?', [productIds]);
   
         res.send(rows);
     } catch (error) {
