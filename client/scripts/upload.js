@@ -19,7 +19,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('Error in client-side upload script:', error);
         document.getElementById('uploadStatus').textContent = 'Upload failed';
     });
 });
