@@ -17,7 +17,7 @@ router.post('/upload/images', async (req, res) => {
     const results = await Promise.all(uploadPromises);
     res.status(200).json({ message: 'Images uploaded successfully', urls: results });
   } catch (error) {
-    console.error('Error uploading images:', error);
+    console.error('Error uploading images:', error, error.msg, error.stack);
     res.status(500).send('Error uploading images');
   }
 });

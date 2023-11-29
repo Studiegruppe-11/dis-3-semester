@@ -6,7 +6,7 @@ async function uploadImage(imagePath) {
     const result = await cloudinary.uploader.upload(imagePath);
     return result.url;
   } catch (error) {
-    console.error('Error in cloudinaryUtility - uploadImage:', error);
+    console.error('Error in cloudinaryUtility - uploadImage:', error, error.msg, error.stack);
     throw error;  // Rethrowing the error to be caught in the calling function
   }
 }

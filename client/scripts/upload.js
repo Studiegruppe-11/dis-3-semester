@@ -24,8 +24,8 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
     })
     .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error;
+        console.error('Error:', error, error.msg, error.stack);
+        document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error, error.msg, error.stack;
     });
     
 });
