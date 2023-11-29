@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
       listItem.appendChild(finishButton);
       placedOrdersList.appendChild(listItem);
     });
-  }
+  } 
 
   // Initial request for placed orders when the page loads
   socket.emit('getPlacedOrders', function (placedOrders) {
