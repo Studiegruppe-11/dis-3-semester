@@ -189,6 +189,6 @@ http.listen(3000, "164.90.228.42", () => {
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
-  console.error('Global Error Handler:', err.message);
+  console.error('Global Error Handler:', err.message, err.stack);
   res.status(500).send('Server Error');
 });
