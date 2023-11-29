@@ -47,8 +47,7 @@ router.get('/orders/sandwich', async (req, res) => {
   
     res.json({ success: true });
   });
-  
-  
+    
   
   // Se om produkterne er gemt på endpoint
   router.get("/bestil/kurv", async (req, res) => {
