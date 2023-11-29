@@ -3,6 +3,8 @@
 
 window.addEventListener("DOMContentLoaded", async () => {
 
+  console.log("test")
+
   //  vis navn på admin logget ind
   try {
     const response = await fetch("/admins/show");
