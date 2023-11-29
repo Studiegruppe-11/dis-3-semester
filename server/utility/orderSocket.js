@@ -29,7 +29,7 @@ function setupOrderSocket(http) {
 
   io.on('connection', (socket) => {
     console.log('En klient er tilsluttet via socket.');
-
+    
     // Lyt efter opdateringer i ventende ordrer
     const emitPlacedOrders = async () => {
       try {
