@@ -6,6 +6,11 @@ body {
     flex-direction: column;
     background-color: #ffffff;
   }
+
+  #forside{
+    position: absolute;
+    background-image: url("https://cms.kronenvanlose.dk/media/1ppauotz/img_6547-hdr.jpg?width=2560");
+  }
   
   ul {
     list-style-type: none;
