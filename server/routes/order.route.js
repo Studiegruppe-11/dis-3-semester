@@ -62,22 +62,21 @@ router.get('/orders/sandwich', async (req, res) => {
 
 
 
-  // hent alle juice fra db
-  router.get('/bestil/kurvtest', async (req, res) => {
-    const { productIds } = req.session;
-    try {
-        const pool = await connection.poolPromise;
-  
-        // Udfør SQL-forespørgslen her
-        const [rows] = await pool.query('SELECT * FROM products where product_id = ?', [productIds]);
-  
-        res.send(rows);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send(error.message);
-    }
-  });
 
+router.get('/bestil/kurvtest', async (req, res) => {
+  const { productIds } = req.session;
+  try {
+      const pool = await connection.poolPromise;
+
+      // Opdateret SQL-forespørgslen med IN-klausul
+      const [rows] = await pool.query('SELECT * FROM products WHERE product_id IN (?)', [productIds]);
+
+      res.send(rows);
+  } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
+  }
+});
 
 
 
