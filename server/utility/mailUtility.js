@@ -1,16 +1,23 @@
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
+// Gmail brugerens mail + applikationskode (normalt password kan ikke bruges)
+const gUser = process.env.GMAIL_USER;
+const gPswd = process.env.GMAIL_PASS;
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "skoleprojektdis@gmail.com",
-    pass: "gagj xqup tjcu xqdw",
+    user: gUser,
+    pass: gPswd,
   },
 });
 
 async function sendMail(recipients, subject, text, html) {
   const mailOptions = {
-    from: "Your Service <skoleprojektdis@gmail.com>",
+    from: "Your Service <gUser>",
     to: recipients,
     subject: subject,
     text: text,

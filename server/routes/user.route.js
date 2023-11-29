@@ -69,14 +69,14 @@ try {
   // If the insert was successful and we have an inserted user's id
   if (rows.insertId) {
     // Call the sendMail function from mailUtility
-    await sendMail(email, "Welcome to Our Service", `Hi ${firstname}, welcome to our service!`, `<b>Hi ${firstname}</b>,<br>Welcome to our service! We're glad to have you.`);
-    res.status(201).json({ message: 'User created and email sent' });
+    await sendMail(email, "Velkommen til Joe", `Hi ${firstname}, welcome to our service!`, `<b>Hi ${firstname}</b>,<br>Welcome to our service! We're glad to have you.`);
+    res.status(201).json({ message: 'Bruger oprettet og velkomstmail afsendt' });
   } else {
-    res.status(400).json({ error: 'User registration failed' });
+    res.status(400).json({ error: 'Bruger registrering fejlede' });
   }
 } catch ( error ) {
-  console.error("Error during user registration or email sending:", error);
-  res.status(500).json({ error: 'Error during user registration or sending email' });
+  console.error("Fejl under bruger registrering eller velkomstmail afsendelse:", error);
+  res.status(500).json({ error: 'Fejl under bruger registrering eller velkomstmail afsendelse' });
 }
 });
 
