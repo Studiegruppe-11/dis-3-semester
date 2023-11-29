@@ -55,4 +55,3 @@ router.get("/admin/logout", async (req, res) => {
 
 
     module.exports = router;
-

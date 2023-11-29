@@ -14,6 +14,9 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+console.log(process.env.GMAIL_USER);
+console.log(process.env.GMAIL_PASS);
+
 async function sendWelcomeEmail(recipientEmail, recipientName) {
   const mailOptions = {
     from: '"Your Service Name" <your-email@gmail.com>',
@@ -29,6 +32,7 @@ async function sendWelcomeEmail(recipientEmail, recipientName) {
     console.log(`Welcome email sent to ${recipientEmail}`);
   } catch (error) {
     console.error("Error sending welcome email", error);
+    throw error; // Rethrow the error to handle it in the caller function
   }
 }
 
