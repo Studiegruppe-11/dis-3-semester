@@ -14,6 +14,7 @@ router.post('/upload/images', async (req, res) => {
       // Check if multiple files are uploaded
       if (Array.isArray(req.files.image)) {
         uploadPromises = req.files.image.map(file => uploadImage(file.tempFilePath));
+        
       } else {
         // Single file upload
         uploadPromises = [uploadImage(req.files.image.tempFilePath)];
