@@ -14,14 +14,13 @@ body {
 #forsidefoto {
   height: 100vh;
   width: 100%;
-  background-image: url("https://cms.kronenvanlose.dk/media/1ppauotz/img_6547-hdr.jpg?width=2560");
   background-position: center;
   text-align: center;
   padding-top: 200px;
   color: white;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(EauDp1hUcAAE-bK.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+    url(https://cms.kronenvanlose.dk/media/1ppauotz/img_6547-hdr.jpg?width=2560);
 }
-
 
 #bestilknap {
   background-color: #f7c1d9;
