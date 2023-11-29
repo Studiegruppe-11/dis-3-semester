@@ -31,14 +31,7 @@ router.post('/users/create', async (req, res) => {
     password,
     firstname,
     lastname,
-    country,
-    age,
-    email,
-    gender,
-    street_name,
-    street_number,
-    postal_code,
-    city
+    email
   } = req.body;
 //   try {
 //     const pool = await connection.poolPromise;
@@ -61,10 +54,10 @@ router.post('/users/create', async (req, res) => {
 try {
   const pool = await connection.poolPromise;
   const query = `
-    INSERT INTO customers (username, password, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO customers (username, password, first_name, last_name, email)
+    VALUES (?, ?, ?, ?, ?)
   `;
-  const values = [username, password, firstname, lastname, country, age, email, gender, street_name, street_number, postal_code, city];
+  const values = [username, password, firstname, lastname, email];
   
   // Insert the user into the database
   const [rows] = await pool.query(query, values);
