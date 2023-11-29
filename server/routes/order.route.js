@@ -63,21 +63,29 @@ router.get('/orders/sandwich', async (req, res) => {
 
 
 
-router.get('/bestil/kurvtest', async (req, res) => {
+// Se om produkterne er gemt på endpoint
+router.get("/bestil/kurv", async (req, res) => {
   const { productIds } = req.session;
-  try {
-      const pool = await connection.poolPromise;
 
-      // Opdateret SQL-forespørgslen med IN-klausul
-      const [rows] = await pool.query('SELECT * FROM products WHERE product_id IN (?)', [productIds]);
+  if (productIds && productIds.length > 0) {
+      try {
+          const pool = await connection.poolPromise;
 
-      res.send(rows);
-  } catch (error) {
-      console.log(error);
-      res.status(500).send(error.message);
+          // Opret en IN-streng med komma-separerede værdier, f.eks. '1,2,3'
+          const inString = productIds.join(',');
+
+          // Hent produkterne fra databasen baseret på productIds
+          const [rows] = await pool.query(`SELECT * FROM products WHERE product_id IN (${inString})`);
+
+          res.json({ products: rows });
+      } catch (error) {
+          console.error('Fejl under hentning af produkter fra database:', error);
+          res.status(500).json({ error: 'Serverfejl' });
+      }
+  } else {
+      res.status(404).json({ error: "Ingen produkter i kurven" });
   }
 });
-
 
 
 
