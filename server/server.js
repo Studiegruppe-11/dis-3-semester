@@ -53,8 +53,7 @@ app.use(fileUpload({ createParentPath: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Image upload route
-const imageRoute = require('./routes/imageRoute.js');
-app.use('/images', imageRoute);
+
 
 // ############
 
@@ -72,7 +71,8 @@ app.use("/", orderRoute);
 const adminOrderRoute = require("./routes/adminOrder.route");
 app.use("/", adminOrderRoute);
 
-
+const imageRoute = require('./routes/imageRoute.js');
+app.use('/', imageRoute);
 
 
 
@@ -103,6 +103,9 @@ app.get("/users/kurv", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/kurv.html"));
 });
 
+app.get("/admin/upload", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/pages/imageUpload.html"));
+});
 
 
 // Admin filer

@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { uploadImage } = require('../utility/cloudinaryUtility.js'); // Utility module for Cloudinary
 
-router.post('/upload', async (req, res) => {
+router.post('/upload/images', async (req, res) => {
   try {
     let uploadPromises = [];
     // Check if multiple files are uploaded
