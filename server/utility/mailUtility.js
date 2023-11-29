@@ -1,45 +1,29 @@
-// root/server/utility/mailUtility.js
-const dotenv = require('dotenv');
-const path = require('path');
 const nodemailer = require('nodemailer');
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
-
-const gUser = process.env.GMAIL_USER;
-const gPswd = process.env.GMAIL_PASS;
-
-
-console.log("Email User:", gUser);
-console.log("Email Password:", gPswd ? "Password is set" : "Password is NOT set");
-
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: "Gmail",
   auth: {
-    user: gUser,
-    pass: gPswd
-  }
+    user: "skoleprojektdis@gmail.com",
+    pass: "gagj xqup tjcu xqdw",
+  },
 });
 
-console.log(process.env.GMAIL_USER);
-console.log(gPswd);
-
-async function sendWelcomeEmail(recipientEmail, recipientName) {
+async function sendMail(recipients, subject, text, html) {
   const mailOptions = {
-    from: '"Your Service Name" <your-email@gmail.com>',
-    to: recipientEmail,
-    subject: "Welcome to Our Service!",
-    text: `Hi ${recipientName}, welcome to our service! We're glad to have you.`,
-    // You can also use HTML content
-    html: `<b>Hi ${recipientName}</b>,<br>Welcome to our service! We're glad to have you.`
+    from: "Your Service <skoleprojektdis@gmail.com>",
+    to: recipients,
+    subject: subject,
+    text: text,
+    html: html
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log(`Welcome email sent to ${recipientEmail}`);
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Message sent: %s", info.messageId);
   } catch (error) {
-    console.error("Error sending welcome email", error);
-    throw error; // Rethrow the error to handle it in the caller function
+    console.error("Error in sending email:", error);
+    throw error; // Rethrow the error for further handling
   }
 }
 
-module.exports = { sendWelcomeEmail };
+module.exports = { sendMail };

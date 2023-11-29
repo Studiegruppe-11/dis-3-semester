@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             let button = document.createElement("button");
             button.innerHTML = "Tilføj til kurv";
             button.addEventListener("click", () => handleButtonClick(sandwich));
+            button.classList.add("kurvknap");
             menuItem.appendChild(button);
 
 

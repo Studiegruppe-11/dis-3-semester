@@ -60,7 +60,7 @@ body {
     margin: 20px;
     padding: 20px;
     border-radius: 10px;
-    width: 100%;
+    width: 100%w;
   }
   
   .menu-category h2 {
@@ -140,3 +140,19 @@ body {
     margin-top: 15px; /* Juster topmarginen efter dine præferencer */
   }
   
+  p{
+    margin: 5px;
+  }
+
+  .kurvknap{
+        background-color: #c72323;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      
+  }
