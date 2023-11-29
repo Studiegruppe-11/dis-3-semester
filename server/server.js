@@ -8,19 +8,19 @@ const session = require("express-session");
 const http = require("http").Server(app);
 const setupPing = require('./utility/pingsocket.js');
 const setupOrderSocket = require('./utility/orderSocket.js');
-const cloudinary = require('cloudinary').v2;
-const fileUpload = require('express-fileupload'); // For handling file uploads
+// const cloudinary = require('cloudinary').v2;
+// const fileUpload = require('express-fileupload'); // For handling file uploads
 
 
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
 
-cloudinary.config({ 
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-  api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: process.env.CLOUDINARY_API_SECRET 
-});
+// cloudinary.config({ 
+//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+//   api_key: process.env.CLOUDINARY_API_KEY, 
+//   api_secret: process.env.CLOUDINARY_API_SECRET 
+// });
 
   
 // Middlewares
