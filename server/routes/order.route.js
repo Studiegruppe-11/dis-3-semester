@@ -60,6 +60,25 @@ router.get('/orders/sandwich', async (req, res) => {
     }
   });
   
+
+
+  router.get('/bestil/kurvtest', async (req, res) => {
+    const { productIds } = req.session;
+    if (productIds && productIds.length > 0) 
+    try {
+        const pool = await connection.poolPromise;
+  
+        // Udfør SQL-forespørgslen her
+        const [rows] = await pool.query('SELECT * FROM products where product_id = $productIds');
+  
+        res.send(rows);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+  });
+
+  
   
   
   // Gem id fra produkterne i kurven når der klikkes på gennemfør order i kurv.js/html
