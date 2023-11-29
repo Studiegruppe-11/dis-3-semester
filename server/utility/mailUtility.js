@@ -4,8 +4,11 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 // Gmail brugerens mail + applikationskode (normalt password kan ikke bruges)
-const gUser = process.env.GMAIL_USER;
-const gPswd = process.env.GMAIL_PASS;
+const gUser = 'skoleprojektdis@gmail.com';
+const gPswd = 'gagj xqup tjcu xqdw';
+
+// const gUser = process.env.GMAIL_USER;
+// const gPswd = process.env.GMAIL_PASS;
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
