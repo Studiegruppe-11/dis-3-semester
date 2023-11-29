@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.src = sandwich.imageUrl;
             menuItem.appendChild(img);
 
-            let name = document.createElement("p");
+            let name = document.createElement("h3");
             name.innerHTML = `${sandwich.name}`;
             menuItem.appendChild(name);
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.src = juice.imageUrl;
             menuItem.appendChild(img);
 
-            let name = document.createElement("H1");
+            let name = document.createElement("H3");
             name.innerHTML = `${juice.name}`;
             menuItem.appendChild(name);
 
