@@ -15,6 +15,9 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+console.log("Email User:", gUser);
+console.log("email Password:", gPswd ? "Password is set" : "Password is NOT set");
+
 async function sendMail(recipients, subject, text, html) {
   const mailOptions = {
     from: "Your Service <gUser>",
