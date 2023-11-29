@@ -27,7 +27,6 @@ router.get('/users/customers', async (req, res) => {
 });
 
 
-
 // Opret bruger i DB
 router.post('/users/create', async (req, res) => {
   const {
@@ -69,7 +68,7 @@ try {
   // If the insert was successful and we have an inserted user's id
   if (rows.insertId) {
     // Call the sendMail function from mailUtility
-    await sendMail(email, "Velkommen til Joe", `Hi ${firstname}, welcome to our service!`, `<b>Hi ${firstname}</b>,<br>Welcome to our service! We're glad to have you.`);
+    await sendMail(email, "Velkommen til Joe", `Hi ${firstname}, Velkommen til Joe's app!`, `<b>Hi ${firstname}</b>,<br>Welcome to our service! We're glad to have you.`);
     res.status(201).json({ message: 'Bruger oprettet og velkomstmail afsendt' });
   } else {
     res.status(400).json({ error: 'Bruger registrering fejlede' });
