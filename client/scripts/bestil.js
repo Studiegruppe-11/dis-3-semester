@@ -43,15 +43,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             menuItem.appendChild(img);
 
             let name = document.createElement("p");
-            name.innerHTML = `Name: ${sandwich.name}`;
+            name.innerHTML = `${sandwich.name}`;
             menuItem.appendChild(name);
 
             let description = document.createElement("p");
-            description.innerHTML = `Description: ${sandwich.description}`;
+            description.innerHTML = `${sandwich.description}`;
             menuItem.appendChild(description);
 
             let price = document.createElement("p");
-            price.innerHTML = `Price: ${sandwich.price} kr`;
+            price.innerHTML = `${sandwich.price} kr`;
             menuItem.appendChild(price);
 
             // Opret knap
@@ -73,16 +73,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.src = juice.imageUrl;
             menuItem.appendChild(img);
 
-            let name = document.createElement("p");
-            name.innerHTML = `Name: ${juice.name}`;
+            let name = document.createElement("H1");
+            name.innerHTML = `${juice.name}`;
             menuItem.appendChild(name);
 
             let description = document.createElement("p");
-            description.innerHTML = `Description: ${juice.description}`;
+            description.innerHTML = `${juice.description}`;
             menuItem.appendChild(description);
 
             let price = document.createElement("p");
-            price.innerHTML = `Price: ${juice.price} kr`;
+            price.innerHTML = `${juice.price} kr`;
             menuItem.appendChild(price);
 
             // Opret knap
