@@ -31,3 +31,19 @@ document.getElementById("logout").addEventListener("click", async () => {
 }
 
 );
+
+document.getElementById("bestilknap").addEventListener("click", async () => {
+
+  try {
+      const response = await fetch("/users/bestil");
+      const result = await response.json();
+      console.log(result);
+      if (result.loggedOut) {
+          window.location.href = "/users/bestil";
+      }
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+);
