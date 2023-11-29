@@ -3,19 +3,25 @@ const dotenv = require('dotenv');
 const path = require('path');
 const nodemailer = require('nodemailer');
 
-
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
+const gUser = process.env.GMAIL_USER;
+const gPswd = process.env.GMAIL_PASS;
+
+
+console.log("Email User:", gUser);
+console.log("Email Password:", gPswd ? "Password is set" : "Password is NOT set");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS
+    user: gUser,
+    pass: gPswd
   }
 });
 
 console.log(process.env.GMAIL_USER);
-console.log(process.env.GMAIL_PASS);
+console.log(gPswd);
 
 async function sendWelcomeEmail(recipientEmail, recipientName) {
   const mailOptions = {
