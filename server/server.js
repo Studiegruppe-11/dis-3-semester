@@ -52,7 +52,11 @@ app.use(fileUpload({ createParentPath: true }));
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Image upload route
+// Image upload størrelse
+app.use(fileUpload({
+  createParentPath: true,
+  limits: { fileSize: 50 * 1024 * 1024 }, // Set limit here (e.g., 50MB)
+}));
 
 
 // ############

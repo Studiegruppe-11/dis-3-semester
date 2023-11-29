@@ -13,13 +13,19 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
     .then(data => {
         const uploadedUrls = data.urls.join('<br>');
         document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
     })
     .catch(error => {
-        console.error('Error in client-side upload script:', error);
-        document.getElementById('uploadStatus').textContent = 'Upload failed';
+        console.error('Error:', error);
+        document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error;
     });
+    
 });
