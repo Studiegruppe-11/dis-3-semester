@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-
+ 
  
 
 // Hvis der klikkes på fjern fra kurv så udføres denne funktion der sender anmodning til endpoint der sletter fra express-session. 
