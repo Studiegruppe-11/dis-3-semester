@@ -14,7 +14,8 @@ body {
     #forsidefoto{
         height: 100vh;
         width: 100%;
-        background-image: url("https://cms.farumbytorv.dk/media/tvvn0sdl/farum_bytorv_joe-the_juice_facade.jpeg?width=2560");
+        background-image: url("https://cms.kronenvanlose.dk/media/1ppauotz/img_6547-hdr.jpg?width=2560");
+        background-position: center;
     }
     ul {
       list-style-type: none;
