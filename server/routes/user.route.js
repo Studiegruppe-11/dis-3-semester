@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
+const { sendMail } = require('../utility/mailUtility');
+
 
 // Importer function til at sende mail
 const { sendWelcomeEmail } = require('../utility/mailUtility.js');
@@ -23,6 +25,8 @@ router.get('/users/customers', async (req, res) => {
         res.status(500).send(error.message);
     }
 });
+
+
 
 // Opret bruger i DB
 router.post('/users/create', async (req, res) => {
@@ -64,17 +68,15 @@ try {
 
   // If the insert was successful and we have an inserted user's id
   if (rows.insertId) {
-    // Call your sendWelcomeEmail function here
-    // Assuming sendWelcomeEmail is an async function and takes the user's email and name as parameters
-    await sendWelcomeEmail(email, firstname + ' ' + lastname);
+    // Call the sendMail function from mailUtility
+    await sendMail(email, "Welcome to Our Service", `Hi ${firstname}, welcome to our service!`, `<b>Hi ${firstname}</b>,<br>Welcome to our service! We're glad to have you.`);
+    res.status(201).json({ message: 'User created and email sent' });
+  } else {
+    res.status(400).json({ error: 'User registration failed' });
   }
-  
-  // Send a response back to the client
-  res.status(201).json({ message: 'User created and email sent' });
-} catch (error) {
-  // If sending the email throws an error, you would catch it here as well
-  console.log(error);
-  res.status(500).send(error.message);
+} catch ( error ) {
+  console.error("Error during user registration or email sending:", error);
+  res.status(500).json({ error: 'Error during user registration or sending email' });
 }
 });
 
