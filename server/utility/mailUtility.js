@@ -1,10 +1,10 @@
 // root/server/utility/mailUtility.js
 const dotenv = require('dotenv');
-const path = require('path');
+// const path = require('path');
 const nodemailer = require('nodemailer');
 
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+// dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 // Gmail brugerens mail + applikationskode (normalt password kan ikke bruges)
 const gUser = 'skoleprojektdis@gmail.com';
