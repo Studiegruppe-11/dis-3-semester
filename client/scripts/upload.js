@@ -27,7 +27,6 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     })
     .catch(error => {
         console.error('Error:', error, error.msg, error.stack);
-        console.log(response.json)
         document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error, error.msg, error.stack;
     });
     
