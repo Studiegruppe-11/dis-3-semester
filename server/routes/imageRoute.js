@@ -25,6 +25,7 @@ router.post('/upload/images', async (req, res) => {
     } catch (error) {
       console.error('Error uploading images:', error.message, error.stack);
       res.status(500).send('Error uploading images');
+      console.log(req.files.image.tempFilePath)
     }
   });
 
