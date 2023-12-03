@@ -1,83 +1,90 @@
 // root/client/scripts/admin.js
 
-document.addEventListener('DOMContentLoaded', function () {
-  // Generel admin-socket (inkl. total omsætning)
-  const adminSocket = io();
 
-  adminSocket.on('totalRevenueUpdate', function (data) {
-    // Opdater HTML-elementet med total omsætning i dag
-    document.getElementById('totalRevenuetoday').textContent = `${data.total_price} Kr.`;
-  });
+window.addEventListener("DOMContentLoaded", async () => {
 
-  adminSocket.on('totalRevenueUpdate', function (data) {
-    // Opdater HTML-elementet med total omsætning
-    document.getElementById('totalRevenue').textContent = `${data.total_price} Kr.`;
-  });
+  //  vis navn på admin logget ind
+  try {
+    const response = await fetch("/admins/show");
+    const result = await response.json();
 
-  adminSocket.on('finishedOrdersUpdate', function (data) {
-    // Opdater HTML-elementet med færdige ordrer
-    document.getElementById('finishedOrders').textContent = data.finished_orders || "Ingen færdige ordrer i dag";
-  });
-
-  // Lyt efter opdateringer fra serveren
-  adminSocket.on('rttUpdate', function (data) {
-    // Opdater HTML-elementet med RTT-oplysninger
-    document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
-
-    if (data.rtt > 1000) {
-      document.getElementById('rttInfo').style.color = 'red';
-    } else {
-      document.getElementById('rttInfo').style.color = 'green';
+    if (result.adminUserId && result.adminName) {
+      // Viser navn hvis man er logget ind
+      document.getElementById("usernameDisplay").innerHTML = result.adminName;
+      // Skal ikke vise "opret bruger" hvis man er logget ind.
     }
-  });
-
-  adminSocket.on('pingUpdate', function (data) {
-    // Opdater HTML-elementet med ping-oplysninger
-    document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
-
-    if (data.ping < 500) {
-      document.getElementById('pingInfo').style.color = 'green';
-    } else {
-      document.getElementById('pingInfo').style.color = 'orange';
+    else {
     }
-  });
-
-  // Lyt efter admin-loginopdateringer
-  adminSocket.on('adminLoginUpdate', async function () {
-    //  vis navn på admin logget ind
-    try {
-      const response = await fetch("/admins/show");
-      const result = await response.json();
-
-      if (result.adminUserId && result.adminName) {
-        // Viser navn hvis man er logget ind
-        document.getElementById("usernameDisplay").innerHTML = result.adminName;
-        // Skal ikke vise "opret bruger" hvis man er logget ind.
-      }
-    } catch (error) {
+  } catch (error) {
       console.log(error);
       // Håndter fejlhåndtering her
     }
-  });
 
-  // Funktion til at håndtere admin-logout
-  document.getElementById("logout").addEventListener("click", async () => {
-    try {
-      const response = await fetch("/admin/logout");
-      const result = await response.json();
-      console.log(result);
-      if (result.loggedOut) {
-        window.location.href = "/admin/login";
-      }
-    } catch (error) {
-      console.log(error);
+
+    // test på at vise total omsætning i dag og i alt. skal laves til socket i stedet. 
+  
+  // vis total omsætning i dag
+  try {
+    const response = await fetch("/totalRevenuetoday");
+    const result = await response.json();
+    if (result.total_price) {
+      document.getElementById("totalRevenuetoday").innerHTML = result.total_price + " Kr.";
     }
-  });
+    else {
+      document.getElementById("totalRevenuetoday").innerHTML = "0 Kr.";
+    }
+  } catch (error) {
+    console.log(error);
+  }
 
-  // Ordre-relateret socket
-  const orderSocket = io('/order');
+  // vis total omsætning
+  try {
+    const response = await fetch("/totalRevenue");
+    const result = await response.json();
+    if (result.total_price) {
+      document.getElementById("totalRevenue").innerHTML = result.total_price + " Kr.";
+    }
+    else {
+      document.getElementById("totalRevenue").innerHTML = "0 Kr.";
+    }
+  } catch (error) {
+    console.log(error);
+  }
 
-  orderSocket.on('placedOrdersUpdate', function (placedOrders) {
+// vis alle færdige ordrer på admin siden. Skal også laves til socket i stedet.
+try {
+  const response = await fetch("/finishedorders");
+  const result = await response.json();
+  if (result.finished_orders) {  // Skiftet fra finishedOrders til finished_orders
+    document.getElementById("finishedOrders").innerHTML = result.finished_orders;
+  } else {
+    document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
+  }
+} catch (error) {
+  console.log(error);
+}
+
+});
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+// root/client/scripts/admin.js
+
+document.addEventListener('DOMContentLoaded', function () {
+  const socket = io('/order'); // Connect to the '/order' namespace
+
+  // Listen for updates on placed orders
+  socket.on('placedOrdersUpdate', function (placedOrders) {
     // Sort placedOrders based on the lowest placeorders_id first
     placedOrders.sort((a, b) => a.placeorders_id - b.placeorders_id);
 
@@ -85,35 +92,44 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePlacedOrdersList(placedOrders);
   });
 
+  // Function to update the placed orders list in the HTML
   function updatePlacedOrdersList(placedOrders) {
     const placedOrdersList = document.getElementById('placedOrdersList');
+
+    // Clear existing content
     placedOrdersList.innerHTML = '';
 
+    // Add new orders to the list
     placedOrders.forEach((order, index) => {
       const listItem = document.createElement('li');
       listItem.textContent = `${index + 1}. Produkt: ${order.name}  Kundens navn: ${order.first_name}`;
-
+      
+      // Add a button for finishing the order
       const finishButton = document.createElement('button');
       finishButton.textContent = 'Færdig';
       finishButton.addEventListener('click', function () {
-        finishOrder(order.placedorders_id);
+        // Send a POST request to '/finished' with the placeorders_id
+        finishOrder(order.placedorders_id); // Opdateret her
       });
 
       listItem.appendChild(finishButton);
       placedOrdersList.appendChild(listItem);
     });
-  }
+  } 
 
   // Initial request for placed orders when the page loads
-  orderSocket.emit('getPlacedOrders', function (placedOrders) {
+  socket.emit('getPlacedOrders', function (placedOrders) {
+    // Sort placedOrders based on the lowest placeorders_id first
     placedOrders.sort((a, b) => a.placeorders_id - b.placeorders_id);
+
+    // Update the placed orders list in the HTML
     updatePlacedOrdersList(placedOrders);
   });
 
   // Function to send a POST request to '/finished' with placeorders_id using fetch
   function finishOrder(placeorders_id) {
     console.log('Finishing order with placeorders_id:', placeorders_id);
-
+  
     fetch('/updatestatus', {
       method: 'POST',
       headers: {
@@ -124,6 +140,8 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(data => {
         console.log('Order finished:', data);
+  
+        // Genindlæs siden. Hvis alt bliver lavet til socket så skal den ikke genindlæse siden, da dette vil ske automatisk.
         window.location.reload();
       })
       .catch(error => {
@@ -131,3 +149,62 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 });
+
+
+
+
+  document.getElementById("logout").addEventListener("click", async () => {
+
+    try {
+        const response = await fetch("/admin/logout");
+        const result = await response.json();
+        console.log(result);
+        if (result.loggedOut) {
+            window.location.href = "/admin/login";
+        }
+    } catch (error) {
+        console.log(error);
+    } 
+}
+
+);
+
+
+
+
+
+// SOCKET PING START
+// socket til at vise rtt og ping i real time på admin siden.
+// Opret en WebSocket-forbindelse til serveren
+const socket = io();
+
+// Lyt efter opdateringer fra serveren
+
+socket.on('rttUpdate', (data) => {
+    // Opdater HTML-elementet med RTT-oplysninger
+    document.getElementById('rttInfo').textContent = `RTT: ${data.rtt} ms`;
+
+if (data.rtt > 1000) {
+  document.getElementById('rttInfo').style.color = 'red';
+
+} else {
+  // Hvis RTT er under grænsen, sæt farven til grøn eller orange som tidligere
+  if (data.rtt < 1000) {
+    document.getElementById('rttInfo').style.color = 'green';
+} 
+}
+  });
+  socket.on('pingUpdate', (data) => {
+    // Opdater HTML-elementet med ping-oplysninger
+    document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
+  
+  if(data.ping < 500) {
+      document.getElementById('pingInfo').style.color = 'green';
+  } else if (data.ping > 500) {
+      document.getElementById('pingInfo').style.color = 'orange';
+  }
+  
+  });
+
+// SOCKET PING SLUT 
+ 
