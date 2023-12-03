@@ -24,7 +24,8 @@ ul {
 
 li {
     display: flex;
-    justify-content: column;    
+    justify-content: center;
+    flex-direction: column;
 }
 
 li a {
