@@ -35,18 +35,18 @@ router.get('/orders/sandwich', async (req, res) => {
   });
   
   
-  // // Gem id fra produktet i session, så det kan vises i kurv.html, når der klikkes på tilføj til kurv i bestil.js
-  // router.post("/bestil/kurv", async (req, res) => {
-  //   const { product_id } = req.body;
+  // Gem id fra produktet i session, så det kan vises i kurv.html, når der klikkes på tilføj til kurv i bestil.js
+  router.post("/bestil/kurv", async (req, res) => {
+    const { product_id } = req.body;
   
-  //   // Hvis der ikke er nogen kurv i sessionen, opret et tomt array
-  //   req.session.productIds = req.session.productIds || [];
+    // Hvis der ikke er nogen kurv i sessionen, opret et tomt array
+    req.session.productIds = req.session.productIds || [];
   
-  //   // Tilføj det nye produkt_id til arrayet
-  //   req.session.productIds.push(product_id);
+    // Tilføj det nye produkt_id til arrayet
+    req.session.productIds.push(product_id);
   
-  //   res.json({ success: true });
-  // });
+    res.json({ success: true });
+  });
     
   
   // // Se om produkterne er gemt på endpoint
