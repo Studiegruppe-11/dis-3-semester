@@ -147,7 +147,7 @@ app.post('/', function (req, res) {
 // BEGGE SOCKETS KAN IKKE KØRE SAMTIDIGT. 
 
 // Ping socket
-setupPing(http)
+// setupPing(http)
 
 // Order socket
 setupOrderSocket(http);
