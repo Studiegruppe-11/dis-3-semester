@@ -2,6 +2,26 @@
 
 const connection = require('../db/database1.js');
 
+// Simulér en funktion, der henter nye ordrer fra databasen
+async function getNewOrders() {
+  try {
+    const pool = await connection.poolPromise;
+
+    const [newRows] = await pool.query(`
+      SELECT placedorders_id, customers.first_name, products.name
+      FROM placedorders
+      INNER JOIN customers ON placedorders.customer_id = customers.customer_id
+      INNER JOIN products ON placedorders.product_id = products.product_id
+      WHERE placedorders.status = "waiting" AND placedorders.created_at > NOW() - INTERVAL 5 SECOND
+    `);
+
+    return newRows;
+  } catch (error) {
+    console.error('Fejl under hentning af nye ordrer:', error);
+    throw error;
+  }
+}
+
 async function getPlacedOrders(socket) {
   try {
     const pool = await connection.poolPromise;
