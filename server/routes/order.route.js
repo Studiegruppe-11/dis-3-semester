@@ -49,21 +49,11 @@ router.get('/orders/sandwich', async (req, res) => {
   });
     
   
-  // // Se om produkterne er gemt på endpoint
-  // router.get("/bestil/kurv", async (req, res) => {
-  //   const { productIds } = req.session;
-  
-  //   if (productIds && productIds.length > 0) {
-  //     res.json({ productIds });
-  //   } else {
-  //     res.status(404).json({ error: "Ingen produkter i kurven" });
-  //   }
-  // });
 
 
 
-
-router.get('/bestil/kurvtest', async (req, res) => {
+// hent produkter som er lagt i kurven
+router.get('/bestil/kurv', async (req, res) => {
   const { productIds } = req.session;
   try {
       const pool = await connection.poolPromise;
