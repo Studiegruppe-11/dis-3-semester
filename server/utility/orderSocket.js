@@ -2,9 +2,17 @@
 
 const connection = require('../db/database1.js');
 
-async function getPlacedOrders() {
+async function getPlacedOrders(socket) {
   try {
     const pool = await connection.poolPromise;
+
+    // Simpel timeout til illustration - du skal bruge en trigger i produktion
+    setInterval(async () => {
+      const newOrders = await getNewOrders(); // Funktion til at hente nye ordrer
+      if (newOrders.length > 0) {
+        socket.emit('placedOrdersUpdate', newOrders);
+      }
+    }, 5000); // Opdater hvert 5. sekund - juster efter behov
 
     // Udfør SQL-forespørgslen for at hente ventende ordrer
     const [rows] = await pool.query(`
@@ -33,7 +41,7 @@ function setupOrderSocket(http) {
     // Lyt efter opdateringer i ventende ordrer
     const emitPlacedOrders = async () => {
       try {
-        const placedOrders = await getPlacedOrders();
+        const placedOrders = await getPlacedOrders(socket);
         console.log('Placed orders updated:', placedOrders);
         io.emit('placedOrdersUpdate', placedOrders);
       } catch (error) {
@@ -47,7 +55,7 @@ function setupOrderSocket(http) {
     // Håndter 'getPlacedOrders' hændelsen fra klienten
     socket.on('getPlacedOrders', async (callback) => {
       try {
-        const placedOrders = await getPlacedOrders();
+        const placedOrders = await getPlacedOrders(socket);
         callback(placedOrders);
       } catch (error) {
         console.error('Fejl under hentning af ventende ordrer:', error);
