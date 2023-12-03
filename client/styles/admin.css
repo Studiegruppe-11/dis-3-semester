@@ -83,20 +83,14 @@ body {
 }
 
 
-
-
-
-#placedorderlist {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #f7c1d9;
-  border-radius: 8px;
-  width: 100%;
+.headline {
+    font-size: 1.5rem;  /* Specify font size */
+    font-weight: bold;  /* Make font bold */
+    margin-bottom: 1rem;  /* Add some space below the headline */
 }
+
+
+
 
 
 /* bruges til home*/
