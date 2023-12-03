@@ -1,5 +1,3 @@
-// root/server/utility/orderSocket.js
-
 const connection = require('../db/database1.js');
 
 async function getPlacedOrders() {
@@ -13,7 +11,7 @@ async function getPlacedOrders() {
     INNER JOIN customers ON placedorders.customer_id = customers.customer_id
     INNER JOIN products ON placedorders.product_id = products.product_id
     WHERE placedorders.status = "waiting"
-        `);
+    `);
 
     return rows;
   } catch (error) {
@@ -44,6 +42,9 @@ function setupOrderSocket(http) {
     // Udsend opdateringer ved forbindelse og derefter ved ændringer
     emitPlacedOrders();
 
+    // Opdater data hvert 10. sekund
+    const intervalId = setInterval(emitPlacedOrders, 10000);
+
     // Håndter 'getPlacedOrders' hændelsen fra klienten
     socket.on('getPlacedOrders', async (callback) => {
       try {
@@ -55,6 +56,7 @@ function setupOrderSocket(http) {
     });
 
     socket.on('disconnect', () => {
+      clearInterval(intervalId); // Ryd op i intervallet ved afbrydelse
       console.log('En klient er frakoblet via socket.');
     });
   });
