@@ -101,14 +101,13 @@ if (result && result.length > 0) {
         <span class="productName">${product.name}</span>
         <br>
         <span class="productPrice">${product.price} kr.</span>
-        <button class="removeButton">Fjern fra kurv</button>
      </div>`;
 
         // Opret en knap for hvert produkt
-        const removeButton = listItem.querySelector('.removeButton');
-        removeButton.addEventListener("click", () => fjernFraKurv(product.product_id));
+        const gennemforBestillingButton = document.createElement("button");
+        gennemforBestillingButton.textContent = "Fjern fra kurv";
+        gennemforBestillingButton.addEventListener("click", () => fjernFraKurv(product.product_id));
 
-        
         // Tilføj knappen til listeelementet
         listItem.appendChild(gennemforBestillingButton);
 
