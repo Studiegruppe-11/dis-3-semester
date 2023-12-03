@@ -1,6 +1,7 @@
 // root/client/scripts/admin.js
 
-document.addEventListener('DOMContentLoaded', async () => {
+
+window.addEventListener("DOMContentLoaded", async () => {
 
   //  vis navn på admin logget ind
   try {
@@ -17,10 +18,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
       console.log(error);
       // Håndter fejlhåndtering her
-  }
+    }
 
-  // test på at vise total omsætning i dag og i alt. skal laves til socket i stedet.
 
+    // test på at vise total omsætning i dag og i alt. skal laves til socket i stedet. 
+  
   // vis total omsætning i dag
   try {
     const response = await fetch("/totalRevenuetoday");
@@ -49,20 +51,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log(error);
   }
 
-  // vis alle færdige ordrer på admin siden. Skal også laves til socket i stedet.
-  try {
-    const response = await fetch("/finishedorders");
-    const result = await response.json();
-    if (result.finished_orders) {
-      document.getElementById("finishedOrders").innerHTML = result.finished_orders;
-    } else {
-      document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
-    }
-  } catch (error) {
-    console.log(error);
+// vis alle færdige ordrer på admin siden. Skal også laves til socket i stedet.
+try {
+  const response = await fetch("/finishedorders");
+  const result = await response.json();
+  if (result.finished_orders) {  // Skiftet fra finishedOrders til finished_orders
+    document.getElementById("finishedOrders").innerHTML = result.finished_orders;
+  } else {
+    document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
   }
+} catch (error) {
+  console.log(error);
+}
 
-  // Funktion til at opdatere listen over placerede ordrer i HTML
+});
+
+
+// root/client/scripts/admin.js
+
+document.addEventListener('DOMContentLoaded', function () {
+  const socket = io('/order'); // Connect to the '/order' namespace
+
+  // Listen for updates on placed orders
+  socket.on('placedOrdersUpdate', function (placedOrders) {
+    // Sort placedOrders based on the lowest placeorders_id first
+    placedOrders.sort((a, b) => a.placeorders_id - b.placeorders_id);
+
+    // Update the placed orders list in the HTML
+    updatePlacedOrdersList(placedOrders);
+  });
+
+  // Function to update the placed orders list in the HTML
   function updatePlacedOrdersList(placedOrders) {
     const placedOrdersList = document.getElementById('placedOrdersList');
 
@@ -119,6 +138,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
   }
 });
+
+
 
 
 
