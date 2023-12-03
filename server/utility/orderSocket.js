@@ -1,20 +1,27 @@
 // root/server/utility/orderSocket.js
-// root/server/utility/orderSocket.js
 
 const connection = require('../db/database1.js');
 
-async function getPlacedOrders() {
+async function getPlacedOrders(socket) {
   try {
     const pool = await connection.poolPromise;
 
+    // Simpel timeout til illustration - du skal bruge en trigger i produktion
+    setInterval(async () => {
+      const newOrders = await getNewOrders(); // Funktion til at hente nye ordrer
+      if (newOrders.length > 0) {
+        socket.emit('placedOrdersUpdate', newOrders);
+      }
+    }, 5000); // Opdater hvert 5. sekund - juster efter behov
+
     // Udfør SQL-forespørgslen for at hente ventende ordrer
     const [rows] = await pool.query(`
-    SELECT placedorders_id, customers.first_name, products.name
-    FROM placedorders
-    INNER JOIN customers ON placedorders.customer_id = customers.customer_id
-    INNER JOIN products ON placedorders.product_id = products.product_id
-    WHERE placedorders.status = "waiting"
-        `);
+      SELECT placedorders_id, customers.first_name, products.name
+      FROM placedorders
+      INNER JOIN customers ON placedorders.customer_id = customers.customer_id
+      INNER JOIN products ON placedorders.product_id = products.product_id
+      WHERE placedorders.status = "waiting"
+    `);
 
     return rows;
   } catch (error) {
@@ -30,11 +37,11 @@ function setupOrderSocket(http) {
 
   io.on('connection', (socket) => {
     console.log('En klient er tilsluttet via socket.');
-    
+
     // Lyt efter opdateringer i ventende ordrer
     const emitPlacedOrders = async () => {
       try {
-        const placedOrders = await getPlacedOrders();
+        const placedOrders = await getPlacedOrders(socket);
         console.log('Placed orders updated:', placedOrders);
         io.emit('placedOrdersUpdate', placedOrders);
       } catch (error) {
@@ -48,7 +55,7 @@ function setupOrderSocket(http) {
     // Håndter 'getPlacedOrders' hændelsen fra klienten
     socket.on('getPlacedOrders', async (callback) => {
       try {
-        const placedOrders = await getPlacedOrders();
+        const placedOrders = await getPlacedOrders(socket);
         callback(placedOrders);
       } catch (error) {
         console.error('Fejl under hentning af ventende ordrer:', error);
@@ -62,4 +69,3 @@ function setupOrderSocket(http) {
 }
 
 module.exports = setupOrderSocket;
-
