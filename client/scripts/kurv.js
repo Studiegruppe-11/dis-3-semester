@@ -96,7 +96,7 @@ if (result && result.length > 0) {
         const listItem = document.createElement("li");
         
         // Opdater teksten for at inkludere navn, pris og billede
-        listItem.innerHTML = `<div>
+        listItem.innerHTML = `<div class="basket">
         <img class="productPicture" src="${product.imageUrl}" alt="${product.name}">
         <span class="productName">${product.name}</span>
         <br>
