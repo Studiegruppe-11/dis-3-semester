@@ -1,74 +1,5 @@
 // root/client/scripts/admin.js
 
-
-window.addEventListener("DOMContentLoaded", async () => {
-
-  //  vis navn på admin logget ind
-  try {
-    const response = await fetch("/admins/show");
-    const result = await response.json();
-
-    if (result.adminUserId && result.adminName) {
-      // Viser navn hvis man er logget ind
-      document.getElementById("usernameDisplay").innerHTML = result.adminName;
-      // Skal ikke vise "opret bruger" hvis man er logget ind.
-    }
-    else {
-    }
-  } catch (error) {
-      console.log(error);
-      // Håndter fejlhåndtering her
-    }
-
-
-    // test på at vise total omsætning i dag og i alt. skal laves til socket i stedet. 
-  
-  // vis total omsætning i dag
-  try {
-    const response = await fetch("/totalRevenuetoday");
-    const result = await response.json();
-    if (result.total_price) {
-      document.getElementById("totalRevenuetoday").innerHTML = result.total_price + " Kr.";
-    }
-    else {
-      document.getElementById("totalRevenuetoday").innerHTML = "0 Kr.";
-    }
-  } catch (error) {
-    console.log(error);
-  }
-
-  // vis total omsætning
-  try {
-    const response = await fetch("/totalRevenue");
-    const result = await response.json();
-    if (result.total_price) {
-      document.getElementById("totalRevenue").innerHTML = result.total_price + " Kr.";
-    }
-    else {
-      document.getElementById("totalRevenue").innerHTML = "0 Kr.";
-    }
-  } catch (error) {
-    console.log(error);
-  }
-
-// vis alle færdige ordrer på admin siden. Skal også laves til socket i stedet.
-try {
-  const response = await fetch("/finishedorders");
-  const result = await response.json();
-  if (result.finished_orders) {  // Skiftet fra finishedOrders til finished_orders
-    document.getElementById("finishedOrders").innerHTML = result.finished_orders;
-  } else {
-    document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
-  }
-} catch (error) {
-  console.log(error);
-}
-
-});
-
-
-// root/client/scripts/admin.js
-
 document.addEventListener('DOMContentLoaded', function () {
   const socket = io('/order'); // Connect to the '/order' namespace
 
@@ -138,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 });
-
 
 
 
