@@ -81,8 +81,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 
-        
-        // Hent data fra serveren
+// Hent data fra serveren
 const response = await fetch("/bestil/kurvtest");
 const result = await response.json();
 
@@ -95,12 +94,17 @@ if (result && result.length > 0) {
     const productList = document.createElement("ul");
     result.forEach((product) => {
         const listItem = document.createElement("li");
-        listItem.textContent = `Product: ${product.name}, Price: ${product.price}`;
+        
+        // Opdater teksten for at inkludere navn, pris og billede
+        listItem.innerHTML = `<div>
+                                 <img src="${product.imageUrl}" alt="${product.name}" style="width:50px;height:50px;">
+                                 <span>Product: ${product.name}, Price: ${product.price}</span>
+                              </div>`;
 
         // Opret en knap for hvert produkt
         const gennemforBestillingButton = document.createElement("button");
         gennemforBestillingButton.textContent = "Fjern fra kurv";
-        gennemforBestillingButton.addEventListener("click", () => fjernFraKurv(product.productId));
+        gennemforBestillingButton.addEventListener("click", () => fjernFraKurv(product.product_id));
 
         // Tilføj knappen til listeelementet
         listItem.appendChild(gennemforBestillingButton);
@@ -115,7 +119,6 @@ if (result && result.length > 0) {
     // Hvis der ikke er nogen produkter, vis en besked
     kurvElement.textContent = "Ingen produkter i kurven";
 }
-
 
 
 

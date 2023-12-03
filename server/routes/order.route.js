@@ -69,7 +69,7 @@ router.get('/bestil/kurvtest', async (req, res) => {
       const pool = await connection.poolPromise;
 
       // Opdateret SQL-forespørgslen med IN-klausul
-      const [rows] = await pool.query('SELECT name, price FROM products WHERE product_id IN (?)', [productIds]);
+      const [rows] = await pool.query('SELECT name, price, imageUrl, product_id FROM products WHERE product_id IN (?)', [productIds]);
 
       res.send(rows);
   } catch (error) {
