@@ -179,22 +179,10 @@ router.post("/bestil/fjernprodukter", async (req, res) => {
       console.error("Fejl under fjernelse af produkt-ID'er fra session:", error);
       res.status(500).json({ error: "Fejl under fjernelse af produkt-ID'er fra session" });
   }
-});
+}); 
 
 
 
-
-// Modtag opdateringsanmodningen fra klienten og udsend en socket-opdatering
-router.post('/bestil/sendOrderUpdate', async (req, res) => {
-  try {
-    // Udsend en opdatering til alle admin-klienter via socket.io
-    orderSocket.emitPlacedOrders();
-    res.status(200).json({ message: 'Opdatering sendt til admin.' });
-  } catch (error) {
-    console.error('Fejl under håndtering af sendOrderUpdate:', error);
-    res.status(500).json({ error: 'Fejl under behandling af opdateringsanmodning.' });
-  }
-});
 
 
 
