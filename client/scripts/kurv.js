@@ -97,7 +97,7 @@ if (result && result.length > 0) {
         
         // Opdater teksten for at inkludere navn, pris og billede
         listItem.innerHTML = `<div>
-        <img src="${product.imageUrl}" alt="${product.name}" style="width:50px;height:50px;">
+        <img class="productPicture" src="${product.imageUrl}" alt="${product.name}" style="width:50px;height:50px;">
         <span class="productName">${product.name}</span>
         <br>
         <span class="productPrice">${product.price} kr.</span>
