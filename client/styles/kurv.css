@@ -1,111 +1,75 @@
+
 body {
     font-family: Arial, sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: #ffffff;
-    }
-  
-    #forside{
-      position: absolute;
-      background-image: url("https://cms.kronenvanlose.dk/media/1ppauotz/img_6547-hdr.jpg?width=2560");
-    }
-    
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background-color: #f7c1d9;
-      font-size: 1rem;
-      border-radius: 6px;
-    }
-    
-    li {
-      float: left;
-    }
-    
-    li a {
-      display: block;
-      color: rgb(41, 41, 41);
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-    li img {
-      display: block;
-      width: 65px;
-    }
-    
-    .active {
-      background-color: #f09bc1;
-      font-weight: bolder;
-    }
-  
-    #a
-    
-    li a:hover {
-      background-color: #f088b7;
-      font-weight: bolder;
-    }
-    
-    /* .container {
-    margin: auto;
-    } */
-    
-    .center {
-      gap: 1%;
-      padding: 1%;
-      justify-content: space-around; /* Center the dashboard items with some space around */
-      display: flex;
-      flex-direction: row;
-      grid-gap: 20px;
-  }
-  
-  .dashboardItem {
-      background-color: #f7c1d9;  /* Make background pink */
-      border-radius: 8px;  /* Round corners */
-      padding: 1rem;  /* Add some padding */
-      width: 45%;  /* Specify a width */
-      height: 200px;  /* Specify a height that suits small tables */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;  /* Align content to the start of the div */
-      width: 100%;
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  /* bruges til home*/
-  
-  #logout {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f7c1d9;
+    font-size: 1rem;
+    border-radius: 6px;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: rgb(41, 41, 41);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+li img {
+    display: block;
+    width: 65px;
+}
+
+.active {
+    background-color: #f09bc1;
+    font-weight: bolder;
+}
+
+li a:hover {
+    background-color: #f088b7;
+    font-weight: bolder;
+}
+
+.vertical-line {
+    border-left: 1px solid grey;
+    height: 50px;
+    margin: 0 10px;
+}
+
+#user {
+    float: left;
+    margin-top: 15px;
+}
+
+/* Additional styles based on your HTML and JavaScript */
+#kurv {
+    margin: 20px;
+}
+
+button {
+    padding: 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
     cursor: pointer;
-  }
-  
-  #logout:hover {
-    background-color: blue; /* Ændrer baggrundsfarven til blå ved hover */
-  }
-  
-  
-  .vertical-line {
-    border-left: 1px solid grey; /* Tilføj en sort lodret streg til venstre */
-    height: 50px; /* Juster højden efter dine præferencer */
-    margin: 0 10px; /* Tilføj margin til stregen for at skabe afstand */
-  }
-  
-  #user {
-    float: left; /* Placer user helt til venstre */
-    margin-top: 15px; /* Juster topmarginen efter dine præferencer */
-  }
-  
+}
