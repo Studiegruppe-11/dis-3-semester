@@ -85,7 +85,7 @@ button {
 }
 
 
-.productPicture {
+img.productPicture {
     width: 100%;
     height: auto;
 }
