@@ -99,9 +99,10 @@ if (result && result.length > 0) {
         listItem.innerHTML = `<div>
         <img src="${product.imageUrl}" alt="${product.name}" style="width:50px;height:50px;">
         <span class="productName">${product.name}</span>
+        <br>
         <span class="productPrice">${product.price} kr.</span>
      </div>`;
-     
+
         // Opret en knap for hvert produkt
         const gennemforBestillingButton = document.createElement("button");
         gennemforBestillingButton.textContent = "Fjern fra kurv";
