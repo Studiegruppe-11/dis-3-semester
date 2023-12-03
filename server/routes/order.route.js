@@ -53,7 +53,7 @@ router.get('/orders/sandwich', async (req, res) => {
 
 
 // hent produkter som er lagt i kurven
-router.get('/bestil/kurv', async (req, res) => {
+router.get('/bestil/kurvtest', async (req, res) => {
   const { productIds } = req.session;
   try {
       const pool = await connection.poolPromise;

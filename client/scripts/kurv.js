@@ -43,7 +43,7 @@ async function fjernFraKurv(productId) {
 window.addEventListener("DOMContentLoaded", async () => {
   try {
     // Hent data fra serveren
-const response = await fetch("/bestil/kurv");
+const response = await fetch("/bestil/kurvtest");
 const result = await response.json();
 
 // Find det element, hvor du vil vise produkterne og knapperne
@@ -82,7 +82,7 @@ if (result && result.length > 0) {
 });
   
  
-// Funktion til at håndtere klik på knappen til at gennemføre bestilling
+// Funktion til at håndtere klik på test-knappen
 async function placedorder() {
 try {
     // Hent produkt-IDs fra Express-session
