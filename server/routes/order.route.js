@@ -54,7 +54,7 @@ router.get('/orders/sandwich', async (req, res) => {
     const { productIds } = req.session;
   
     if (productIds && productIds.length > 0) {
-      res.json({ productIds });
+      res.json({ productIds }); 
     } else {
       res.status(404).json({ error: "Ingen produkter i kurven" });
     }
@@ -62,22 +62,26 @@ router.get('/orders/sandwich', async (req, res) => {
 
 
 
-
-router.get('/bestil/kurvtest', async (req, res) => {
-  const { productIds } = req.session;
-  try {
+  router.get('/bestil/kurvtest', async (req, res) => {
+    const { productIds } = req.session;
+    try {
+      if (!productIds || productIds.length === 0) {
+        // Hvis productIds mangler eller er tom, returner en passende fejlmeddelelse
+        return res.status(400).send('Ingen produkter i kurven');
+      }
+  
       const pool = await connection.poolPromise;
-
+  
       // Opdateret SQL-forespørgslen med IN-klausul
       const [rows] = await pool.query('SELECT name, price, imageUrl, product_id FROM products WHERE product_id IN (?)', [productIds]);
-
+  
       res.send(rows);
-  } catch (error) {
+    } catch (error) {
       console.log(error);
       res.status(500).send(error.message);
-  }
-});
-
+    }
+  });
+  
 
 
 

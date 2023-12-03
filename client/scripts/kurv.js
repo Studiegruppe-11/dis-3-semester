@@ -92,7 +92,7 @@ const kurvElement = document.getElementById("kurv");
 if (result && result.length > 0) {
     // Opret en liste og tilføj hvert produkt som et listeelement med en knap
     const productList = document.createElement("ul");
-    result.forEach((product) => {
+    result.forEach((product) => { 
         const listItem = document.createElement("li");
         
         // Opdater teksten for at inkludere navn, pris og billede
