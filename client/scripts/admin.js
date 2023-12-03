@@ -1,4 +1,3 @@
-
 // root/client/scripts/admin.js
 
 
@@ -66,8 +65,6 @@ try {
 }
 
 });
-
-
 
 
 
