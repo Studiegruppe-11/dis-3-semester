@@ -96,10 +96,12 @@ if (result && result.length > 0) {
         const listItem = document.createElement("li");
         
         // Opdater teksten for at inkludere navn, pris og billede
-        listItem.innerHTML = `<div>
-                                 <img src="${product.imageUrl}" alt="${product.name}" style="width:50px;height:50px;">
-                                 <span>Product: ${product.name}, Price: ${product.price}</span>
-                              </div>`;
+              listItem.innerHTML = `<div class="basket">
+              <img class="productPicture" src="${product.imageUrl}" alt="${product.name}">
+              <span class="productName">${product.name}</span>
+              <br>
+              <span class="productPrice">${product.price} kr.</span>
+              </div>`;
 
         // Opret en knap for hvert produkt
         const gennemforBestillingButton = document.createElement("button");
