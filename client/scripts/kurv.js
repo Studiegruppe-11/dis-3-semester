@@ -1,3 +1,4 @@
+//root/client/scripts/kurv.js
 window.addEventListener("DOMContentLoaded", async () => {
     try {
       const response = await fetch("/users/show");
@@ -79,6 +80,27 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
 });
     
+
+
+
+
+//opdatering funktion, så admin.js opdatere. 
+async function sendOrderUpdate() {
+  try {
+    // Send en anmodning til serveren for at opdatere admin-siden
+    await fetch("/bestil/sendOrderUpdate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    });
+  } catch (error) {
+    console.error('Fejl under sendOrderUpdate:', error);
+  }
+}
+
+
    
 // Funktion til at håndtere klik på test-knappen
 async function placedorder() {
@@ -87,6 +109,8 @@ async function placedorder() {
       const response = await fetch("/bestil/kurv");
       const result = await response.json();
       const productIds = result.productIds || [];
+
+      await sendOrderUpdate();
 
       // send en test-anmodning til serveren
       await fetch("/kurv/placerordrer", {
@@ -118,7 +142,7 @@ async function placedorder() {
       console.log("Ordrer placeret med succes!");
       // Implementer eventuel logik for at håndtere testen her
   } catch (error) {
-      console.error('Fejl under håndtering af test:', error);
+      console.error('Fejl under håndtering:', error);
   }
 }
 

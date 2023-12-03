@@ -41,6 +41,9 @@ function setupOrderSocket(http) {
       }
     };
 
+ // Lyt efter 'sendOrderUpdate' hændelsen fra klienten
+ socket.on('sendOrderUpdate', emitPlacedOrders);
+
     // Udsend opdateringer ved forbindelse og derefter ved ændringer
     emitPlacedOrders();
 
