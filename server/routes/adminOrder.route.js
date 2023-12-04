@@ -42,7 +42,7 @@ router.get('/totalRevenuetoday', async (req, res) => {
             FROM placedorders
             INNER JOIN products ON placedorders.product_id = products.product_id
             where date = CURDATE()
-            and where status = "finished"
+            and status = "finished"
         `);
 
         const totalPrice = rows[0].total_price;
