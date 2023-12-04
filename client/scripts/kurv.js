@@ -139,7 +139,7 @@ if (result && result.length > 0) {
 
 
    
-// Funktion til at håndtere klik på test-knappen
+// Funktion til at håndtere klik
 async function placedorder() {
   try {
       // Hent produkt-IDs fra Express-session

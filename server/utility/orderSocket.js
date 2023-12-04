@@ -31,7 +31,7 @@ function setupOrderSocket(http) {
     console.log('En klient er tilsluttet via socket.');
     
     // Lyt efter opdateringer i ventende ordrer
-    const emitPlacedOrders = async () => {
+    const emitPlacedOrders = async () => { 
       try {
         const placedOrders = await getPlacedOrders();
         console.log('Placed orders updated:', placedOrders);
