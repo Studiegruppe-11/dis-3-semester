@@ -41,7 +41,7 @@ function setupOrderSocket(http) {
       }
     };
 
-    // Udsend opdateringer ved forbindelse og derefter ved ændringer
+    // Udsend opdateringer ved forbindelse
     emitPlacedOrders();
 
      // Opdater data hvert 10. sekund
