@@ -27,9 +27,7 @@ body {
   }
   
   li {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    display: block;
   }
   
   li a {
@@ -111,9 +109,8 @@ body {
 
 
 #ordrer {
-display: flex;
-flex-direction: column;
+display: block;
 justify-content: center;
-align-items: center;
-flex-wrap: wrap;
+
+height: auto;
 }
