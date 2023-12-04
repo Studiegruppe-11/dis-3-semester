@@ -105,10 +105,12 @@ img.productPicture {
     background-color: #f7c1d9;
 }
 
-
+button#placeOrder{
+    width: 20%;
+    justify-self: center;
+}
 
 button#placeOrder:hover {
-    width: 10%;
     background-color: green;    
 
 }
