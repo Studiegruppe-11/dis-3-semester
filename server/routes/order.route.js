@@ -129,7 +129,7 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   
-  
+  const orderSocket = require('../utility/orderSocket.js');
   
   //gennemfør order
   router.post('/kurv/placerordrer', async (req, res) => {
@@ -153,6 +153,7 @@ router.get('/orders/sandwich', async (req, res) => {
       }
   
       res.json({ success: true, message: "Test udført med succes!" });
+      orderSocket.setupOrderSocket(http);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: error.message });
@@ -185,7 +186,7 @@ router.post("/bestil/fjernprodukter", async (req, res) => {
   }
 }); 
 
-
+ 
 
 
 
