@@ -73,16 +73,24 @@ try {
 // Undersøg om login er korrekt.
 router.post("/users/login", async (req, res) => {
   const { username, password } = req.body;
+  console.log("Login attempt for username:", username); // Log the username attempting to login
+
   const pool = await connection.poolPromise;
   try {
     // Retrieve user by username
     const [rows] = await pool.query('SELECT * FROM customers WHERE username = ?', [username]);
 
+    console.log("Number of users fetched:", rows.length); // Log the number of users fetched
+
     if (rows.length > 0) {
       const user = rows[0];
 
+      console.log("Fetched user data for:", user.username); // Log the username of the fetched user
+
       // Compare hashed password
       const match = await bcrypt.compare(password, user.password);
+      console.log("Password match result:", match); // Log the result of the password comparison
+
       if (match) {
         // Passwords match, set session details
         req.session.userId = user.customer_id;
@@ -99,10 +107,11 @@ router.post("/users/login", async (req, res) => {
       res.json({ error: 'Forkert brugernavn eller adgangskode' });
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error during login process:", error); // Log any error during the login process
     res.status(500).json({ error: 'Der opstod en fejl under login.' });
   }
 });
+
 
 
 
