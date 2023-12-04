@@ -153,9 +153,6 @@ app.post('/', function (req, res) {
 setupOrderSocket(http);
 
 
-module.exports = { app, http }; // Export the http server
-
-
 
 
 
