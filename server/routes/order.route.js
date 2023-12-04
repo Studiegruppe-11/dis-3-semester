@@ -131,7 +131,7 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   // hent ordersocket funktionen. 
-  const orderSocket = require('../utility/orderSocket.js');
+  const setupOrderSocket  = require('../utility/orderSocket.js');
   
   //gennemfør order
   router.post('/kurv/placerordrer', async (req, res) => {
@@ -153,11 +153,12 @@ router.get('/orders/sandwich', async (req, res) => {
     
         await pool.query(query, values);
       }
-  
-      res.json({ success: true, message: "Test udført med succes!" });
+      
+      // Efter at have gennemført ordren, opret forbindelse til socket og send opdatering
+      setupOrderSocket(http);  // 'httpServer' skal være det korrekte objektnavn i din app
 
-      //kald funktionen der sender opdatering til socket
-      orderSocket.setupOrderSocket(http);
+      res.json({ success: true, message: "Udført med succes!" });
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: error.message });
