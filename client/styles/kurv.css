@@ -107,7 +107,7 @@ img.productPicture {
 
 button#placeOrder{
     width: 20%;
-    justify-self: center;
+    float: right;
 }
 
 button#placeOrder:hover {
