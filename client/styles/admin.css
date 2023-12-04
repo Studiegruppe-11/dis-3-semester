@@ -107,3 +107,12 @@ body {
   float: left; /* Placer user helt til venstre */
   margin-top: 15px; /* Juster topmarginen efter dine præferencer */
 }
+
+
+#ordrer {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+}
