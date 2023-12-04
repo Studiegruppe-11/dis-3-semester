@@ -5,6 +5,10 @@ const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
 const { sendMail } = require('../utility/mailUtility');
 
+// hashing imports
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 // Importer function til at sende mail
 const { sendWelcomeEmail } = require('../utility/mailUtility.js');
@@ -36,31 +40,17 @@ router.post('/users/create', async (req, res) => {
     lastname,
     email
   } = req.body;
-//   try {
-//     const pool = await connection.poolPromise;
 
-//     // Udfør SQL-forespørgslen her
-//     const query = `
-//       INSERT INTO customers (username, password, first_name, last_name, country, age, email, gender, street_name, street_number, postal_code, city)
-//       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-//     `;
-//     const values = [username, password, firstname, lastname, country, age, email, gender, street_name, street_number, postal_code, city];
-
-//     const [rows] = await pool.query(query, values);
-
-//     res.send(rows);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send(error.message);
-//   }
-// });
 try {
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+
   const pool = await connection.poolPromise;
   const query = `
     INSERT INTO customers (username, password, first_name, last_name, email)
     VALUES (?, ?, ?, ?, ?)
   `;
-  const values = [username, password, firstname, lastname, email];
+  const values = [username, hashedPassword, firstname, lastname, email];
   
   // Insert the user into the database
   const [rows] = await pool.query(query, values);
@@ -82,32 +72,37 @@ try {
  
 // Undersøg om login er korrekt.
 router.post("/users/login", async (req, res) => {
-    const { username, password } = req.body;
-    const pool = await connection.poolPromise;
-    try {
-      // Udfør SQL-forespørgslen
-      const [rows] = await pool.query(
-        'SELECT * FROM customers WHERE username = ? AND password = ?',
-        [username, password]
-      );
-  
-      if (rows.length > 0) {
-        const user = rows[0];
-  
-        // Gem brugerens id og navn i express-session
+  const { username, password } = req.body;
+  const pool = await connection.poolPromise;
+  try {
+    // Retrieve user by username
+    const [rows] = await pool.query('SELECT * FROM customers WHERE username = ?', [username]);
+
+    if (rows.length > 0) {
+      const user = rows[0];
+
+      // Compare hashed password
+      const match = await bcrypt.compare(password, user.password);
+      if (match) {
+        // Passwords match, set session details
         req.session.userId = user.customer_id;
         req.session.name = user.first_name;
-  
-        // Send svar tilbage til klienten
+
+        // Send success response
         res.json({ success: true });
       } else {
+        // Passwords don't match
         res.json({ error: 'Forkert brugernavn eller adgangskode' });
       }
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Der opstod en fejl under login.' });
+    } else {
+      // User not found
+      res.json({ error: 'Forkert brugernavn eller adgangskode' });
     }
-  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Der opstod en fejl under login.' });
+  }
+});
 
 
 

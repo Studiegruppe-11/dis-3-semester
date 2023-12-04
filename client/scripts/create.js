@@ -1,4 +1,5 @@
 //root/client/pages/create.html
+
 document.getElementById("create").addEventListener("click", function () {
     if (
       document.getElementById("username").value !== "" &&
