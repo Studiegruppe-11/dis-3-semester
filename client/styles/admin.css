@@ -20,10 +20,10 @@ body {
     gap: 0.5rem;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     background-color: #f7c1d9;
     font-size: 1rem;
     border-radius: 6px;
+    height: auto;
   }
   
   li {
@@ -73,7 +73,6 @@ body {
     border-radius: 8px;  /* Round corners */
     padding: 1rem;  /* Add some padding */
     width: 45%;  /* Specify a width */
-    height: 200px;  /* Specify a height that suits small tables */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;  /* Align content to the start of the div */
@@ -113,4 +112,8 @@ display: block;
 justify-content: center;
 
 height: auto;
+}
+
+#orderDash {
+  height: auto;
 }
