@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
-//const { http } = require('../server.js'); // Adjust the path as per your directory structure
+const { http } = require('../server.js'); // Adjust the path as per your directory structure
 
 
 
