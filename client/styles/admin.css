@@ -80,6 +80,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;  /* Align content to the start of the div */
     width: 100%;
+    justify-content: center;
 }
 
 
