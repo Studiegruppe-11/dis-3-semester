@@ -104,3 +104,9 @@ img.productPicture {
     border-radius: 8px;
     background-color: #f7c1d9;
 }
+
+
+#placeOrder:hover {
+    background-color: green;
+    font-weight: bolder;
+}
