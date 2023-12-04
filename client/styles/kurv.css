@@ -114,6 +114,7 @@ button#placeOrder::after {
     transition-duration: 0.6ms;
     transform-origin: top left;
     width: 0;
+    color: green;
 }
 
 button#placeOrder:hover::after {
