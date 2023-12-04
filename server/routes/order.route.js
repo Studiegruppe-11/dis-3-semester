@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
+const { http } = require('../server'); // Adjust the path as per your directory structure
+
 
 
 // hent alle sandwich fra db
