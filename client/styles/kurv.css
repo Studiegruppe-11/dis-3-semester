@@ -105,12 +105,8 @@ img.productPicture {
     background-color: #f7c1d9;
 }
 
-button#placeOrder{
-    width: 20%;
-    float: right;
-}
 
 button#placeOrder:hover {
-    background-color: green;    
-
+    background:green;
+    box-shadow: 0 0 5px green, 0 0 25px green, 0 0 50px green, 0 0 200px green;
 }
