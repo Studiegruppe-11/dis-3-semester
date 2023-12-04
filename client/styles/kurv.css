@@ -105,7 +105,9 @@ img.productPicture {
     background-color: #f7c1d9;
 }
 
-
+body{
+    background-color: black;
+}
 
 button#placeOrder{
     border: none;
