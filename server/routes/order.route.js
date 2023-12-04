@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
-const { http } = require('../server.js'); // Adjust the path as per your directory structure
+//const { http } = require('../server.js'); // Adjust the path as per your directory structure
 
 
 
@@ -131,7 +131,7 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   // hent ordersocket funktionen. 
-  const orderSocket = require('../utility/orderSocket.js');
+  //const orderSocket = require('../utility/orderSocket.js');
   
   //gennemfør order
   router.post('/kurv/placerordrer', async (req, res) => {
@@ -155,7 +155,7 @@ router.get('/orders/sandwich', async (req, res) => {
       }
       
       // Efter at have gennemført ordren, opret forbindelse til socket og send opdatering
-      orderSocket.setupOrderSocket(http); 
+      //orderSocket.setupOrderSocket(http); 
 
       res.json({ success: true, message: "Udført med succes!" });
 

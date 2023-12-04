@@ -182,7 +182,7 @@ app.post('/sms', (req, res) => {
 
 
 
-module.exports = { http }; // Export the http server
+//module.exports = { http }; // Export the http server
 
 
 // start server
