@@ -109,9 +109,10 @@ img.productPicture {
 
 button#placeOrder{
     border: none;
+    background-color: white;
 }
 
 button#placeOrder:hover {
-    background: #ff96ad;
-    box-shadow: 0 0 5px #ff96ad, 0 0 25px #ff96ad, 0 0 50px #ff96ad, 0 0 200px #ff96ad;
+    background: #f7c1d9;
+    box-shadow: 0 0 5px #f7c1d9, 0 0 25px #f7c1d9, 0 0 50px #f7c1d9, 0 0 200px #f7c1d9;
 }
