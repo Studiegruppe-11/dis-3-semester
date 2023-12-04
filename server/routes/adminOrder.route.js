@@ -42,6 +42,7 @@ router.get('/totalRevenuetoday', async (req, res) => {
             FROM placedorders
             INNER JOIN products ON placedorders.product_id = products.product_id
             where date = CURDATE()
+            and where status = "finished"
         `);
 
         const totalPrice = rows[0].total_price;
@@ -65,6 +66,7 @@ router.get('/totalRevenue', async (req, res) => {
             SELECT SUM(products.price) AS total_price
             FROM placedorders
             INNER JOIN products ON placedorders.product_id = products.product_id
+            where status = "finished"
         `);
 
         const totalPrice = rows[0].total_price;
