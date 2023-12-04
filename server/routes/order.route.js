@@ -128,7 +128,7 @@ router.get('/orders/sandwich', async (req, res) => {
   
   
   
-  
+  // hent ordersocket funktionen. 
   const orderSocket = require('../utility/orderSocket.js');
   
   //gennemfør order
@@ -153,6 +153,7 @@ router.get('/orders/sandwich', async (req, res) => {
       }
   
       res.json({ success: true, message: "Test udført med succes!" });
+      //kald funktionen der sender opdatering til socket
       orderSocket.setupOrderSocket(http);
     } catch (error) {
       console.error(error);
