@@ -126,8 +126,9 @@ h2 {
     color: #ff4d9d;
     font-weight: 600;
     margin-bottom: 10px;
+    margin-top: 10px;
     text-align: center;
-    margin-bottom: 10px;
+    column-gap: 4px;
 }
 
 img {
