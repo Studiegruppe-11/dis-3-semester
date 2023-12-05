@@ -28,7 +28,7 @@ router.post('/upload/images', upload.array('image', 8), async (req, res) => {
             fs.unlinkSync(tmpFilePath);
             console.log(result);
             console.log(result.url);
-            return result.url; // Make sure this is the URL you want to return
+            return result; // Make sure this is the URL you want to return
         });
 
         const results = await Promise.all(uploadPromises); // Store the URLs in 'results'
