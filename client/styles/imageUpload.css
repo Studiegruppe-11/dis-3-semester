@@ -23,8 +23,8 @@ body {
   }
 
   input[type="file"] {
-    display: block; /* or 'inline-block' */
-    width: auto; /* Adjust as needed */
+    display: block; 
+    width: auto; 
   }
 
   .preview-images {
@@ -53,14 +53,14 @@ body {
 
   .button-container {
   display: flex;
-  justify-content: space-between; /* Adjust as needed */
-  width: 100%; /* Ensure full width of the container */
-  gap: 10px; /* Optionally add some gap between the elements */
+  justify-content: space-between; 
+  width: 100%; 
+  gap: 10px; 
   }
-  
+
   .cdn-images-container {
-    width: 80%; /* Adjust the width as needed */
-    margin: 20px auto; /* Center the container */
+    width: 80%; 
+    margin: 20px auto; 
     padding: 20px;
     background: white;
     border-radius: 10px;
@@ -74,12 +74,12 @@ body {
   .cdn-images {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Space between images */
+    gap: 10px; 
     justify-content: center;
   }
   
   .cdn-images img {
-    width: 100px; /* Adjust the size as needed */
+    width: 100px; 
     height: 100px;
     object-fit: cover;
     border-radius: 5px;

@@ -66,9 +66,6 @@ const imageRoute = require('./routes/imageRoute.js');
 app.use('/images', imageRoute);
 
 
-
-
-
 // Send client files from server
 app.get("/users/create", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/create.html"));

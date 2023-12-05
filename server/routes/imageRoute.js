@@ -1,9 +1,12 @@
 const express = require('express');
 const multer = require('multer');
 const router = express.Router();
-const { uploadImage } = require('../utility/multipleImgUploadUtility.js');
 const fs = require('fs');
 const path = require('path');
+
+const { uploadImage } = require('../utility/multipleImgUploadUtility.js');
+const { fetchImagesFromCloudinary } = require('../utility/cloudinaryUtility');
+
 
 // Set up multer for memory storage
 const storage = multer.memoryStorage();
@@ -31,5 +34,17 @@ router.post('/upload/images', upload.array('image', 5), async (req, res) => {
         res.status(500).send('Error uploading images');
     }
 });
+
+// Route to fetch images from Cloudinary
+router.get('/fetch', async (req, res) => {
+    try {
+      const images = await fetchImagesFromCloudinary('your_folder_name'); // Replace with your folder name
+      res.json(images);
+    } catch (error) {
+      console.error('Error in route - fetching images:', error);
+      res.status(500).send('Error fetching images');
+    }
+  });
+
 
 module.exports = router;

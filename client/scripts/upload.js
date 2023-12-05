@@ -33,3 +33,27 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error;
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetchImagesFromCDN();
+  });
+  
+  function fetchImagesFromCDN() {
+    fetch('/images/fetch')
+      .then(response => response.json())
+      .then(urls => {
+        const container = document.getElementById('cdnImages');
+        urls.forEach(url => {
+          const img = document.createElement('img');
+          img.src = url;
+          img.style.width = '100px'; // adjust as needed
+          img.style.height = '100px'; // adjust as needed
+          img.style.objectFit = 'cover';
+          img.style.marginRight = '10px';
+          img.style.borderRadius = '5px';
+          container.appendChild(img);
+        });
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }
