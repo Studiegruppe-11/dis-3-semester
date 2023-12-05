@@ -22,14 +22,17 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     })
     .then(data => {
         console.log(data);
-        if (data.url) {
+        if (data.url) { // Single image upload
             document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URL: <br>${data.url}`;
+        } else if (data.urls && data.urls.length > 0) { // Multiple image uploads
+            const uploadedUrls = data.urls.join('<br>');
+            document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
         } else {
             document.getElementById('uploadStatus').textContent = 'Upload successful but no URL returned.';
         }
     })
     .catch(error => {
-        console.error('Error:', error, error.msg, error.stack);
-        document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error, error.msg, error.stack;
+        console.error('Error:', error);
+        document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error;
     });
 });
