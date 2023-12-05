@@ -11,6 +11,10 @@ body {
     position: absolute;
     background-image: url("https://cms.kronenvanlose.dk/media/1ppauotz/img_6547-hdr.jpg?width=2560");
   }
+
+  .menu-container {
+    
+  }
   
   ul {
     list-style-type: none;
