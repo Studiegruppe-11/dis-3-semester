@@ -130,8 +130,7 @@ router.get('/orders/sandwich', async (req, res) => {
     res.json({ success: true });
   });
   
-  
-  const setupOrderSocket = require('../utility/orderSocket.js');
+  const orderSocket = require('../utility/orderSocket.js');
 
   //gennemfør order
   router.post('/kurv/placerordrer', async (req, res) => {
@@ -153,8 +152,9 @@ router.get('/orders/sandwich', async (req, res) => {
     
         await pool.query(query, values);
       }
-      
-    setupOrderSocket(http);
+
+
+      orderSocket.setupOrderSocket(http);
 
       res.json({ success: true, message: "Udført med succes!" });
 
