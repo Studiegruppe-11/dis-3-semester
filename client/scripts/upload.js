@@ -58,3 +58,36 @@ function fetchImagesFromCDN() {
 document.addEventListener('DOMContentLoaded', function() {
     fetchImagesFromCDN();
 });
+
+function previewImages() {
+    var preview = document.getElementById('preview');
+    var fileChosen = document.getElementById('file-chosen');
+    preview.innerHTML = '';
+    if (this.files) {
+        fileChosen.textContent = `${this.files.length} file(s) chosen`;
+        [].forEach.call(this.files, readAndPreview);
+    } else {
+        fileChosen.textContent = 'No files chosen';
+    }
+
+    function readAndPreview(file) {
+        // Make sure `file.name` matches our extensions criteria
+        if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+            return alert(file.name + " is not an image");
+        } 
+
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function() {
+            var image = new Image();
+            image.height = 100;
+            image.title = file.name;
+            image.src = this.result;
+            preview.appendChild(image);
+        });
+
+        reader.readAsDataURL(file);
+    }
+}
+
+document.getElementById('fileInput').addEventListener('change', previewImages);
