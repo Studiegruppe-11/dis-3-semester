@@ -7,7 +7,7 @@ const app = express();
 const session = require("express-session");
 const http = require("http").Server(app);
 const setupPing = require('./utility/pingsocket.js');
-const setupOrderSocket = require('./utility/orderSocket.js');
+//const setupOrderSocket = require('./utility/orderSocket.js');
 
 // Til cloudinary
 const cloudinary = require('cloudinary').v2;
@@ -163,9 +163,6 @@ app.post('/sms', (req, res) => {
   res.type('text/xml').send(twiml.toString());
 });
 
-
-
-//module.exports = { http }; // Export the http server
 
 
 // start server
