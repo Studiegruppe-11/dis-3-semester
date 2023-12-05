@@ -24,7 +24,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
             document.getElementById('uploadStatus').innerHTML = `Upload successful! <br>${links}`;
         
             // Add a slight delay before fetching images
-            setTimeout(fetchImagesFromCDN, 1000); // Delay of 1 second
+            setTimeout(fetchImagesFromCDN, 2000); // Increase delay to 2 seconds
         } else {
             document.getElementById('uploadStatus').textContent = 'Upload successful but no URLs returned.';
         }
