@@ -7,29 +7,34 @@ const path = require('path');
 
 // Set up multer for memory storage
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage }).fields([{ name: 'image', maxCount: 5 }]);
+const upload = multer({ storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5 // 5MB
+    } });
 
-// Use upload.array for multiple files
-router.post('/upload/images', upload.array('image', 5), async (req, res) => {
-  console.log(req.files);
+router.post('/upload/images', upload.single('image'), async (req, res) => {
     try {
-        if (!req.files || req.files.length === 0) {
-            return res.status(400).send('No files uploaded.');
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
         }
 
-        const uploadPromises = req.files.map(async file => {
-            const tmpFilePath = path.join(__dirname, '../../uploads/', file.originalname);
-            fs.writeFileSync(tmpFilePath, file.buffer);
-            const result = await uploadImage(tmpFilePath);
-            fs.unlinkSync(tmpFilePath);
-            return result.url;
-        });
+        const imageBuffer = req.file.buffer;
+        const filename = req.file.originalname;
+        const tmpFilePath = path.join(__dirname, '../../uploads/', filename);
 
-        const results = await Promise.all(uploadPromises);
-        res.status(200).json({ message: 'Images uploaded successfully', urls: results });
+        // Write the buffer to a temporary file
+        fs.writeFileSync(tmpFilePath, imageBuffer);
+
+        // Upload to Cloudinary
+        const result = await uploadImage(tmpFilePath);
+
+        // Delete the temporary file
+        fs.unlinkSync(tmpFilePath);
+
+        res.status(200).json({ message: 'Image uploaded successfully', url: result });
     } catch (error) {
-        console.error('Error uploading images:', error);
-        res.status(500).send('Error uploading images');
+        console.error('Error uploading image:', error);
+        res.status(500).send('Error uploading image');
     }
 });
 
