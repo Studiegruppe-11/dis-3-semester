@@ -1,6 +1,5 @@
-const { response } = require("express");
-
 // root/client/scripts/upload.js
+
 document.getElementById('uploadForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
