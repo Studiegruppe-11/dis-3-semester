@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { uploadImage } = require('../utility/multipleImgUploadUtility.js');
-const { fetchImagesFromCloudinary } = require('../utility/cloudinaryUtility');
+const { fetchImagesFromCloudinary } = require('../utility/cdnUploadUtility.js');
 
 
 // Set up multer for memory storage
