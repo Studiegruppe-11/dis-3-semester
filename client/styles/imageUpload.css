@@ -26,7 +26,7 @@ body {
     display: block; /* or 'inline-block' */
     width: auto; /* Adjust as needed */
   }
-  
+
   .preview-images {
     display: flex;
     flex-wrap: wrap;
@@ -51,4 +51,8 @@ body {
     background-color: #0056b3;
   }
 
-  
+  .button-container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  width: 100%; /* Ensure full width of the container */
+  gap: 10px; /* Optionally add some gap between the elements */
