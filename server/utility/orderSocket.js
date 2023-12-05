@@ -1,6 +1,9 @@
 // root/server/utility/orderSocket.js
 
 const connection = require('../db/database1.js');
+const socketIO = require('socket.io');
+
+let io; // Definer io uden for setupOrderSocket
 
 async function getPlacedOrders() {
   try {
@@ -13,7 +16,7 @@ async function getPlacedOrders() {
     INNER JOIN customers ON placedorders.customer_id = customers.customer_id
     INNER JOIN products ON placedorders.product_id = products.product_id
     WHERE placedorders.status = "waiting"
-        `);
+    `);
 
     return rows;
   } catch (error) {
@@ -22,16 +25,14 @@ async function getPlacedOrders() {
   }
 }
 
-const socketIO = require('socket.io');
-
 function setupOrderSocket(http) {
-  const io = socketIO(http).of('/order');
+  io = socketIO(http).of('/order'); // Tildel io her
 
   io.on('connection', (socket) => {
     console.log('En klient er tilsluttet via socket.');
-    
+
     // Lyt efter opdateringer i ventende ordrer
-    const emitPlacedOrders = async () => { 
+    const emitPlacedOrders = async () => {
       try {
         const placedOrders = await getPlacedOrders();
         console.log('Placed orders updated:', placedOrders);
@@ -61,4 +62,16 @@ function setupOrderSocket(http) {
   });
 }
 
-module.exports = setupOrderSocket;
+// Eksportér begge funktioner
+module.exports = {
+  setupOrderSocket,
+  emitPlacedOrders: async function () {
+    try {
+      const placedOrders = await getPlacedOrders();
+      console.log('Placed orders updated:', placedOrders);
+      io.of('/order').emit('placedOrdersUpdate', placedOrders);
+    } catch (error) {
+      console.error('Fejl under håndtering af opdatering af ventende ordrer:', error);
+    }
+  }
+};

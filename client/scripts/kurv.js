@@ -137,6 +137,7 @@ if (result && result.length > 0) {
 
 
 
+const orderSocket = require('../../server/utility/orderSocket.js');
 
    
 // Funktion til at håndtere klik
@@ -169,6 +170,10 @@ async function placedorder() {
               productIds: productIds,
           }),
       });
+
+
+        // Opdater socketen med de seneste ventende ordrer
+         orderSocket.emitPlacedOrders();
 
       alert("Din order er placeret og sendt til køkkenet!");
       // Genindlæs siden
