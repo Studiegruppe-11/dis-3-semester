@@ -154,6 +154,7 @@ router.get('/orders/sandwich', async (req, res) => {
         await pool.query(query, values);
       }
       
+     console.log(setupOrderSocket(http));
     setupOrderSocket(http);
 
       res.json({ success: true, message: "Udført med succes!" });
