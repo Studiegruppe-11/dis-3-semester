@@ -3,7 +3,7 @@ const cloudinary = require('cloudinary').v2;
 
 async function uploadImage(imagePath) {
   try {
-    const result = await cloudinary.uploader.upload(imagePath, { folder: folderName }); // Specify the folder here
+    const result = await cloudinary.uploader.upload(imagePath);
     return result.url;
   } catch (error) {
     console.error('Error in cloudinaryUtility - uploadImage:', error, error.msg, error.stack);

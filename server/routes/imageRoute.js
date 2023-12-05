@@ -21,12 +21,10 @@ router.post('/upload/images', upload.array('image', 5), async (req, res) => {
             return res.status(400).send('No files uploaded.');
         }
 
-        const folderName = 'joebilleder'; // Specify the folder name here
-
         const uploadPromises = req.files.map(async file => {
             const tmpFilePath = path.join(__dirname, '../../uploads/', file.originalname);
             fs.writeFileSync(tmpFilePath, file.buffer);
-            const result = await uploadImage(tmpFilePath, folderName); // Pass the folder name here
+            const result = await uploadImage(tmpFilePath);
             fs.unlinkSync(tmpFilePath);
             return result.url;
         });
