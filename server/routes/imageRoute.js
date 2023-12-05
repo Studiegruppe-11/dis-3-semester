@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const router = express.Router();
-const { uploadImage } = require('../utility/cloudinaryUtility.js');
+const { uploadImage } = require('../utility/multipleImgUploadUtility.js');
 const fs = require('fs');
 const path = require('path');
 
