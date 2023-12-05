@@ -4,7 +4,7 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
-const { http } = require("../server.js"); // importer http fra server.js for at kunne bruge det i setupOrderSocket
+//const { http } = require("../server.js"); // importer http fra server.js for at kunne bruge det i setupOrderSocket
 
 
 
@@ -130,7 +130,8 @@ router.get('/orders/sandwich', async (req, res) => {
     res.json({ success: true });
   });
   
-  const orderSocket = require('../utility/orderSocket.js');
+
+
 
   //gennemfør order
   router.post('/kurv/placerordrer', async (req, res) => {
@@ -152,9 +153,6 @@ router.get('/orders/sandwich', async (req, res) => {
     
         await pool.query(query, values);
       }
-
-
-      orderSocket.setupOrderSocket(http);
 
       res.json({ success: true, message: "Udført med succes!" });
 

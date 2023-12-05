@@ -44,6 +44,8 @@ function setupOrderSocket(http) {
     // Udsend opdateringer ved forbindelse og derefter hver gang en bruger bestiller.
     // setupOrderSocket importeres i order.route.js og bliver kaldt hver gang der bestilles.
     emitPlacedOrders();
+    
+    setInterval(emitPlacedOrders, 10000);
 
     // Håndter 'getPlacedOrders' hændelsen fra klienten
     socket.on('getPlacedOrders', async (callback) => {
