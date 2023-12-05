@@ -62,7 +62,7 @@ app.use("/", orderRoute);
 const adminOrderRoute = require("./routes/adminOrder.route");
 app.use("/", adminOrderRoute);
 
-const imageRoute = require('./routes/imageRoute.js');
+const imageRoute = require('./routes/imageRoute');
 app.use('/images', imageRoute);
 
 
