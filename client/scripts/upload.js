@@ -7,7 +7,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     const files = e.target.image.files;
 
     for(let i = 0; i < files.length; i++) {
-        formData.append('image', files[i]);
+        formData.append('image', files[i]); // 'image' should match the field name expected by multer
     }
 
     fetch('/images/upload/images', {
@@ -21,14 +21,11 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         return response.json();
     })
     .then(data => {
-        console.log(data);
-        if (data.url) { // Single image upload
-            document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URL: <br>${data.url}`;
-        } else if (data.urls && data.urls.length > 0) { // Multiple image uploads
+        if (data.urls && data.urls.length > 0) { 
             const uploadedUrls = data.urls.join('<br>');
             document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
         } else {
-            document.getElementById('uploadStatus').textContent = 'Upload successful but no URL returned.';
+            document.getElementById('uploadStatus').textContent = 'Upload successful but no URLs returned.';
         }
     })
     .catch(error => {
