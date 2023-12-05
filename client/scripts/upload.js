@@ -20,7 +20,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     })
     .then(data => {
         if (data.urls && data.urls.length > 0) {
-            const links = data.urls.map(url => `<a href="${url}" target="_blank">${url}</a>`).join('<br>');
+            const links = data.urls.map(url => `<a href="${url}" target="_blank" style="color: #ff4d9d;">${url}</a>`).join('<br>');
             document.getElementById('uploadStatus').innerHTML = `Upload successful! <br>${links}`;
         
             // Add a slight delay before fetching images
@@ -29,6 +29,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
             document.getElementById('uploadStatus').textContent = 'Upload successful but no URLs returned.';
         }
     })
+    
     .catch(error => {
         console.error('Error:', error);
         document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error;
