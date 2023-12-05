@@ -1,5 +1,3 @@
-// root/client/scripts/upload.js
-
 document.getElementById('uploadForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -24,6 +22,9 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         if (data.urls && data.urls.length > 0) { 
             const uploadedUrls = data.urls.join('<br>');
             document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
+
+            // Refresh the images from CDN after successful upload
+            fetchImagesFromCDN();
         } else {
             document.getElementById('uploadStatus').textContent = 'Upload successful but no URLs returned.';
         }
@@ -34,16 +35,12 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     });
 });
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    fetchImagesFromCDN();
-  });
-  
-  function fetchImagesFromCDN() {
+function fetchImagesFromCDN() {
     fetch('/images/fetch')
       .then(response => response.json())
       .then(urls => {
         const container = document.getElementById('cdnImages');
+        container.innerHTML = ''; // Clear existing images before appending new ones
         urls.forEach(url => {
           const img = document.createElement('img');
           img.src = url;
@@ -56,4 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       })
       .catch(error => console.error('Error fetching images:', error));
-  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetchImagesFromCDN();
+});
