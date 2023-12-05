@@ -7,7 +7,10 @@ const path = require('path');
 
 // Set up multer for memory storage
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5 // 5MB
+    } });
 
 router.post('/upload/images', upload.single('image'), async (req, res) => {
     try {

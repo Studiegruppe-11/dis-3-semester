@@ -44,20 +44,6 @@ app.use(
 
 // ############
 
-// Til cloudinary 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileUpload({ createParentPath: true }));
-
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Image upload størrelse
-app.use(fileUpload({
-  createParentPath: true,
-  limits: { fileSize: 100 * 1024 * 1024 }, // Adjust size as per requirement, e.g., 100MB
-}));
-
 
 
 // ############
