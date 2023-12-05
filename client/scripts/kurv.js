@@ -173,7 +173,7 @@ async function placedorder() {
 
 
         // Opdater socketen med de seneste ventende ordrer
-         orderSocket.emitPlacedOrders();
+         //orderSocket.emitPlacedOrders();
 
       alert("Din order er placeret og sendt til køkkenet!");
       // Genindlæs siden
