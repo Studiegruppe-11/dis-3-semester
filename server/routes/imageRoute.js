@@ -40,7 +40,7 @@ router.post('/upload/images', upload.array('image', 5), async (req, res) => {
 // Route to fetch images from Cloudinary
 router.get('/fetch', async (req, res) => {
     try {
-      const images = await fetchImagesFromCloudinary('your_folder_name'); // Replace with your folder name
+      const images = await fetchImagesFromCloudinary('joebilleder'); // Replace with your folder name
       res.json(images);
     } catch (error) {
       console.error('Error in route - fetching images:', error);
