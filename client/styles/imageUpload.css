@@ -118,3 +118,11 @@ h2 {
 .file-upload-button:hover {
     background-color: #ff4d9d;
 }
+
+#uploadStatus {
+    font-size: 14px;
+    color: #ff4d9d;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
