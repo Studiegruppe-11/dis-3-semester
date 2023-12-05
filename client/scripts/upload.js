@@ -22,13 +22,14 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     })
     .then(data => {
         console.log(data);
-        console.log(data.urls);
-        const uploadedUrls = data.urls.join('<br>');
-        document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
+        if (data.url) {
+            document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URL: <br>${data.url}`;
+        } else {
+            document.getElementById('uploadStatus').textContent = 'Upload successful but no URL returned.';
+        }
     })
     .catch(error => {
         console.error('Error:', error, error.msg, error.stack);
         document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error, error.msg, error.stack;
     });
-    
 });
