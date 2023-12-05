@@ -56,3 +56,31 @@ body {
   justify-content: space-between; /* Adjust as needed */
   width: 100%; /* Ensure full width of the container */
   gap: 10px; /* Optionally add some gap between the elements */
+  }
+  
+  .cdn-images-container {
+    width: 80%; /* Adjust the width as needed */
+    margin: 20px auto; /* Center the container */
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cdn-images-container h2 {
+    text-align: center;
+  }
+  
+  .cdn-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between images */
+    justify-content: center;
+  }
+  
+  .cdn-images img {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+  }

@@ -7,6 +7,7 @@
    
 </head>
 <body>
+
   <div class="container">
     <form id="uploadForm" class="upload-form" enctype="multipart/form-data">
       <input type="file" name="image" multiple onchange="previewImages()">
@@ -18,6 +19,14 @@
     </form>
     <div id="uploadStatus"></div>
   </div>
+
+  <div class="cdn-images-container">
+    <h2>Current images on CDN</h2>
+    <div id="cdnImages" class="cdn-images">
+      <!-- Images will be dynamically loaded here -->
+    </div>
+  </div>
+
   <script src="/scripts/upload.js"></script>
   <script>
     function previewImages() {
