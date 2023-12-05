@@ -40,7 +40,7 @@ body {
     border-radius: 5px;
   }
   .button {
-    background-color: #007bff;
+    background-color: #f7c1d9;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -48,7 +48,7 @@ body {
     cursor: pointer;
   }
   .button:hover {
-    background-color: #0056b3;
+    background-color: #ff4d9d;
   }
 
   .button-container {
