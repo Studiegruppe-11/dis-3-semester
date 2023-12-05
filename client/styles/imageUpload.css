@@ -7,6 +7,14 @@ body {
     height: 100vh;
     margin: 0;
   }
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f7c1d9;
+    font-weight: 600;
+}
+
   .container {
     background: white;
     padding: 20px;
