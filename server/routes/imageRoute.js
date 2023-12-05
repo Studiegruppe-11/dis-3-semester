@@ -20,7 +20,7 @@ router.post('/upload/images', upload.single('image'), async (req, res) => {
 
         const imageBuffer = req.file.buffer;
         const filename = req.file.originalname;
-        const tmpFilePath = path.join(__dirname, '../uploads/', filename);
+        const tmpFilePath = path.join(__dirname, '../../uploads/', filename);
 
         // Write the buffer to a temporary file
         fs.writeFileSync(tmpFilePath, imageBuffer);
