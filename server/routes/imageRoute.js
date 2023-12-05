@@ -10,27 +10,27 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }).fields([{ name: 'image', maxCount: 5 }]);
 
 // Use upload.array for multiple files
-router.post('/upload/images', upload, async (req, res) => {
-  try {
-      if (!req.files || req.files.length === 0) {
-          return res.status(400).send('No files uploaded.');
-      }
+router.post('/upload/images', upload.array('image', 5), async (req, res) => {
+  console.log(req.files);
+    try {
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).send('No files uploaded.');
+        }
 
-      // Process each file
-      const uploadPromises = req.files.map(async file => {
-          const tmpFilePath = path.join(__dirname, '../../uploads/', file.originalname);
-          fs.writeFileSync(tmpFilePath, file.buffer);
-          const result = await uploadImage(tmpFilePath);
-          fs.unlinkSync(tmpFilePath);
-          return result;
-      });
+        const uploadPromises = req.files.map(async file => {
+            const tmpFilePath = path.join(__dirname, '../../uploads/', file.originalname);
+            fs.writeFileSync(tmpFilePath, file.buffer);
+            const result = await uploadImage(tmpFilePath);
+            fs.unlinkSync(tmpFilePath);
+            return result.url;
+        });
 
-      const results = await Promise.all(uploadPromises);
-      res.status(200).json({ message: 'Images uploaded successfully', urls: results });
-  } catch (error) {
-      console.error('Error uploading images:', error);
-      res.status(500).send('Error uploading images');
-  }
+        const results = await Promise.all(uploadPromises);
+        res.status(200).json({ message: 'Images uploaded successfully', urls: results });
+    } catch (error) {
+        console.error('Error uploading images:', error);
+        res.status(500).send('Error uploading images');
+    }
 });
 
 module.exports = router;
