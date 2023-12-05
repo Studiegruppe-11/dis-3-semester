@@ -10,7 +10,7 @@ const { uploadImage } = require('../utility/multipleImgUploadUtility.js');
 const { fetchImagesFromCloudinary } = require('../utility/cdnUploadUtility.js');
 
 
-// Set up multer for memory storage
+// Set up multer for memory storage and file size limits
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage, limits: { fileSize: 1024 * 1024 * 5 } }); // 5MB limit
 
