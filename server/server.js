@@ -7,7 +7,7 @@ const app = express();
 const session = require("express-session");
 const http = require("http").Server(app);
 const setupPing = require('./utility/pingsocket.js');
-//const setupOrderSocket = require('./utility/orderSocket.js');
+const setupOrderSocket = require('./utility/orderSocket.js');
 
 // Til cloudinary
 const cloudinary = require('cloudinary').v2;
@@ -133,7 +133,7 @@ app.post('/', function (req, res) {
 // setupPing(http)
 
 // Order socket. Opdatere hver gang en ny ordre bliver oprettet eller hvert 30. sekund.
-//setupOrderSocket(http);
+setupOrderSocket(http);
 
 
 
