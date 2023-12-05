@@ -20,9 +20,9 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     })
     .then(data => {
         if (data.urls && data.urls.length > 0) {
-            const uploadedUrls = data.urls.join('<br>');
-            document.getElementById('uploadStatus').innerHTML = `Upload successful! <br>${uploadedUrls}`;
-    
+            const links = data.urls.map(url => `<a href="${url}" target="_blank">${url}</a>`).join('<br>');
+            document.getElementById('uploadStatus').innerHTML = `Upload successful! <br>${links}`;
+        
             // Add a slight delay before fetching images
             setTimeout(fetchImagesFromCDN, 1000); // Delay of 1 second
         } else {
