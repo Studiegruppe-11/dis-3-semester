@@ -26,7 +26,7 @@ router.post('/upload/images', upload.array('image', 8), async (req, res) => {
             fs.writeFileSync(tmpFilePath, file.buffer);
             const result = await uploadImage(tmpFilePath);
             fs.unlinkSync(tmpFilePath);
-            return result.url;
+            return result.url; // or result.url
         });
 
         const results = await Promise.all(uploadPromises);
