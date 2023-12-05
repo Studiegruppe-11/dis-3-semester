@@ -26,11 +26,11 @@ router.post('/upload/images', upload.array('image', 8), async (req, res) => {
             fs.writeFileSync(tmpFilePath, file.buffer);
             const result = await uploadImage(tmpFilePath);
             fs.unlinkSync(tmpFilePath);
-            return result.url; // or result.url
+            return result.url; // Make sure this is the URL you want to return
         });
 
-        const results = await Promise.all(uploadPromises);
-        res.status(200).json({ message: 'Images uploaded successfully', urls: urls });
+        const results = await Promise.all(uploadPromises); // Store the URLs in 'results'
+        res.status(200).json({ message: 'Images uploaded successfully', urls: results }); // Use 'results' here
     } catch (error) {
         console.error('Error uploading images:', error);
         res.status(500).send('Error uploading images');
