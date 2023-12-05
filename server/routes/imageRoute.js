@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { uploadImage } = require('../utility/multipleImgUploadUtility.js');
-const { fetchImagesFromCloudinary } = require('../utility/cdnUploadUtility.js');
+const { fetchImagesFromCloudinary } = require('../utility/cdnDownloadUtility.js');
 
 
 // Set up multer for memory storage and file size limits
@@ -21,10 +21,12 @@ router.post('/upload/images', upload.array('image', 5), async (req, res) => {
             return res.status(400).send('No files uploaded.');
         }
 
+        const folderName = 'joebilleder'; // Specify the folder name here
+
         const uploadPromises = req.files.map(async file => {
             const tmpFilePath = path.join(__dirname, '../../uploads/', file.originalname);
             fs.writeFileSync(tmpFilePath, file.buffer);
-            const result = await uploadImage(tmpFilePath);
+            const result = await uploadImage(tmpFilePath, folderName); // Pass the folder name here
             fs.unlinkSync(tmpFilePath);
             return result.url;
         });
