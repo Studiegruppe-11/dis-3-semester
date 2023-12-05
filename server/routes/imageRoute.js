@@ -31,6 +31,7 @@ router.post('/upload/images', upload.array('image', 8), async (req, res) => {
         });
 
         const results = await Promise.all(uploadPromises); // Store the URLs in 'results'
+        console.log(results);
         res.status(200).json({ message: 'Images uploaded successfully', urls: results }); // Use 'results' here
     } catch (error) {
         console.error('Error uploading images:', error);
