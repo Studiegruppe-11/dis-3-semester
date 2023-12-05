@@ -21,6 +21,8 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         return response.json();
     })
     .then(data => {
+        console.log(data);
+        console.log(data.urls);
         const uploadedUrls = data.urls.join('<br>');
         document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
     })
