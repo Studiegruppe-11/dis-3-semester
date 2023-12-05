@@ -44,3 +44,12 @@ body {
   .button:hover {
     background-color: #0056b3;
   }
+
+  .back-button {
+    background-color: #6c757d; /* Different color for the back button */
+    margin-top: 10px;
+  }
+  
+  .back-button:hover {
+    background-color: #5a6268;
+  }
