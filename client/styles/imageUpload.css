@@ -21,6 +21,12 @@ body {
   .upload-form input[type="file"] {
     margin-bottom: 10px;
   }
+
+  input[type="file"] {
+    display: block; /* or 'inline-block' */
+    width: auto; /* Adjust as needed */
+  }
+  
   .preview-images {
     display: flex;
     flex-wrap: wrap;
@@ -45,11 +51,4 @@ body {
     background-color: #0056b3;
   }
 
-  .back-button {
-    background-color: #6c757d; /* Different color for the back button */
-    margin-top: 10px;
-  }
   
-  .back-button:hover {
-    background-color: #5a6268;
-  }

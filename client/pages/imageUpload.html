@@ -9,7 +9,8 @@
 <body>
   <div class="container">
     <form id="uploadForm" class="upload-form" enctype="multipart/form-data">
-      <!-- ... existing form elements ... -->
+      <input type="file" name="image" multiple onchange="previewImages()">
+      <div class="preview-images" id="preview"></div>
       <button type="submit" class="button">Upload Image</button>
     </form>
     <button onclick="location.href='/admin'" class="button back-button">Back to Admin</button>
