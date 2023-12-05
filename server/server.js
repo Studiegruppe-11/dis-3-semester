@@ -133,7 +133,7 @@ app.post('/', function (req, res) {
 // setupPing(http)
 
 // Order socket. Opdatere hver gang en ny ordre bliver oprettet eller hvert 30. sekund.
-setupOrderSocket(http);
+//setupOrderSocket(http);
 
 
 

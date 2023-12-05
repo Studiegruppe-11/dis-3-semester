@@ -135,9 +135,6 @@ if (result && result.length > 0) {
 
 
 
-
-
-
 // Funktion til at håndtere klik
 async function placedorder() {
   try {
