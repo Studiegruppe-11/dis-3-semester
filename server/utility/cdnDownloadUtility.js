@@ -1,4 +1,4 @@
-// root/server/utility/cloudinaryUtility.js
+// root/server/utility/cdnDownloadUtility.js
 
 const cloudinary = require('cloudinary').v2;
 
