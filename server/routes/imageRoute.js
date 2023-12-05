@@ -1,32 +1,38 @@
-// root/server/routes/imageRoute.js
 const express = require('express');
+const multer = require('multer');
 const router = express.Router();
-const { uploadImage } = require('../utility/cloudinaryUtility.js'); // Utility module for Cloudinary
+const { uploadImage } = require('../utility/cloudinaryUtility.js');
+const fs = require('fs');
+const path = require('path');
 
-router.post('/upload/images', async (req, res) => {
+// Set up multer for memory storage
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+router.post('/upload/images', upload.single('image'), async (req, res) => {
     try {
-      // Check if file data is present
-      if (!req.files || !req.files.image) {
-        return res.status(400).send('No files were uploaded.');
-      }
-  
-      let uploadPromises = [];
-      // Check if multiple files are uploaded
-      if (Array.isArray(req.files.image)) {
-        uploadPromises = req.files.image.map(file => uploadImage(file.tempFilePath));
-        
-      } else {
-        // Single file upload
-        uploadPromises = [uploadImage(req.files.image.tempFilePath)];
-      }
-  
-      const results = await Promise.all(uploadPromises);
-      res.status(200).json({ message: 'Images uploaded successfully', urls: results });
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+
+        const imageBuffer = req.file.buffer;
+        const filename = req.file.originalname;
+        const tmpFilePath = path.join(__dirname, '../uploads/', filename);
+
+        // Write the buffer to a temporary file
+        fs.writeFileSync(tmpFilePath, imageBuffer);
+
+        // Upload to Cloudinary
+        const result = await uploadImage(tmpFilePath);
+
+        // Delete the temporary file
+        fs.unlinkSync(tmpFilePath);
+
+        res.status(200).json({ message: 'Image uploaded successfully', url: result });
     } catch (error) {
-      console.error('Error uploading images:', error.message, error.stack);
-      res.status(500).send('Error uploading images');
-      console.log(req.files.image.tempFilePath)
+        console.error('Error uploading image:', error);
+        res.status(500).send('Error uploading image');
     }
-  });
+});
 
 module.exports = router;
