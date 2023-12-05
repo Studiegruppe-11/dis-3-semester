@@ -2,11 +2,12 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f7c1d9;
     display: flex;
+    flex-direction: column; /* Change to column to stack divs vertically */
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 5%;
-  }
+    margin: 0;
+}
 
 h2 {
     text-align: center;
@@ -15,12 +16,15 @@ h2 {
     font-weight: 600;
 }
 
-  .container {
+.container {
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+    margin-bottom: 20px; /* Add bottom margin to create space */
+    z-index: 1; /* Ensure this div is above others */
+}
+
   .upload-form {
     display: flex;
     flex-direction: column;
@@ -67,13 +71,14 @@ h2 {
   }
 
   .cdn-images-container {
-    width: 80%; 
-    margin: 20px auto; 
+    width: 80%;
+    margin: 0 auto 20px; /* Adjust margin for spacing and centering */
     padding: 20px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+    z-index: 0; /* Lower z-index than .container */
+}
   
   .cdn-images-container h2 {
     text-align: center;
