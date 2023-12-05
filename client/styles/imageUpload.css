@@ -37,6 +37,7 @@ h2 {
   input[type="file"] {
     display: block; 
     width: auto; 
+    align-items: center;
   }
 
   .preview-images {
