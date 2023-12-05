@@ -19,12 +19,12 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         return response.json();
     })
     .then(data => {
-        if (data.urls && data.urls.length > 0) { 
+        if (data.urls && data.urls.length > 0) {
             const uploadedUrls = data.urls.join('<br>');
             document.getElementById('uploadStatus').innerHTML = `Upload successful! Image URLs: <br>${uploadedUrls}`;
-
-            // Refresh the images from CDN after successful upload
-            fetchImagesFromCDN();
+    
+            // Add a slight delay before fetching images
+            setTimeout(fetchImagesFromCDN, 1000); // Delay of 1 second
         } else {
             document.getElementById('uploadStatus').textContent = 'Upload successful but no URLs returned.';
         }
