@@ -37,35 +37,35 @@ app.use(express.static(path.join(__dirname, "../client")));
 // app.use(favicon(path.join(__dirname, '../client/images', 'favicon.ico')));
 
 
-// const RedisStore = require('connect-redis')(session);
-// // Konfigurer Redis som sessionopbevaring
-// const redisOptions = {
-//   host: '164.90.228.42',
-//   port: 6379, // standard Redis-port
-//   // yderligere konfiguration efter behov
-// };
+const RedisStore = require('connect-redis')(session);
+// Konfigurer Redis som sessionopbevaring
+const redisOptions = {
+  host: '164.90.228.42',
+  port: 6379, // standard Redis-port
+  // yderligere konfiguration efter behov
+};
 
-// app.use(session({
-//   store: new RedisStore(redisOptions),
-//   secret: 'your-secret-key',
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
-//     secure: false, // Sæt til true, hvis du bruger HTTPS
-//     httpOnly: true,
-//     maxAge: 1000 * 60 * 60 * 24, // Sessionens levetid i millisekunder (her 1 dag)
-//   },
-// }));
+app.use(session({
+  store: new RedisStore(redisOptions),
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Sæt til true, hvis du bruger HTTPS
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24, // Sessionens levetid i millisekunder (her 1 dag)
+  },
+}));
 
 
-// til session storage
-app.use(
-  session({
-    secret: "my-secret-key",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+// // til session storage
+// app.use(
+//   session({
+//     secret: "my-secret-key",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
 
 
 
