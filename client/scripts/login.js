@@ -17,7 +17,7 @@ document.getElementById("login").addEventListener("click", async function () {
             password
         })
     });
-
+ 
     const result = await response.json();
     // hvis brugeren er logget ind, så sendes brugeren til index.html
     if (result.success) {
