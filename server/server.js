@@ -73,39 +73,39 @@ app.use(express.static(path.join(__dirname, "../client")));
 // }));
 
 
-const { createClient } = require('redis');
+// const { createClient } = require('redis');
 
-const redisClient = createClient({
-    // If Redis is on the same host and default port
-    host: '164.90.228.42',
-    port: 6379
-});
+// const redisClient = createClient({
+//     // If Redis is on the same host and default port
+//     host: '164.90.228.42',
+//     port: 6379
+// });
 
-redisClient.on('connect', () => {
-    console.log('Connected to Redis server successfully');
-});
+// redisClient.on('connect', () => {
+//     console.log('Connected to Redis server successfully');
+// });
 
-redisClient.on('error', (err) => {
-    console.error('Redis error: ', err);
-});
+// redisClient.on('error', (err) => {
+//     console.error('Redis error: ', err);
+// });
 
-// Connect to Redis server
-(async () => {
-    await redisClient.connect();
-})();
+// // Connect to Redis server
+// (async () => {
+//     await redisClient.connect();
+// })();
 
 
-app.use(session({
-  store: new RedisStore({ client: redisClient }),
-  secret: 'your-secret-key', // Replace with a real secret key
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      secure: true, // Set to true if using https
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 24 hours
-  }
-}));
+// app.use(session({
+//   store: new RedisStore({ client: redisClient }),
+//   secret: 'your-secret-key', // Replace with a real secret key
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//       secure: true, // Set to true if using https
+//       httpOnly: true,
+//       maxAge: 1000 * 60 * 60 * 24 // 24 hours
+//   }
+// }));
 
 
 
@@ -123,6 +123,49 @@ app.use(session({
 //     saveUninitialized: false,
 //   })
 // );
+
+
+
+
+const redis = require('redis');
+const connectRedis = require('connect-redis');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// enable this if you run behind a proxy (e.g. nginx)
+app.set('trust proxy', 1);
+const RedisStore = connectRedis(session)
+//Configure redis client
+const redisClient = redis.createClient({
+    host: '164.90.228.42',
+    port: 6379
+})
+redisClient.on('error', function (err) {
+    console.log('Could not establish a connection with redis. ' + err);
+});
+redisClient.on('connect', function (err) {
+    console.log('Connected to redis successfully');
+});
+//Configure session middleware
+app.use(session({
+    store: new RedisStore({ client: redisClient }),
+    secret: 'secret$%^134',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true, // if true only transmit cookie over https
+        httpOnly: true, // if true prevent client side JS from reading the cookie 
+        maxAge: 1000 * 60 * 10 // session max age in miliseconds
+    }
+}))
+
+
+
+
+
+
+
+
+
 
 
 
