@@ -29,6 +29,12 @@ document.getElementById("login").addEventListener("click", async function () {
     }
 });
 
+// Login med "enter" knappen
+document.getElementById("password").addEventListener("keyup", function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById("login").click();
+    }
+});
 
- 
 
