@@ -43,32 +43,79 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 ///////// Redis session storage //////////
 
-const redis = require('redis');
-const RedisStore = require("connect-redis").default
+// const redis = require('redis');
+// const RedisStore = require("connect-redis").default
 
-// Create Redis Client
-const redisClient = redis.createClient({
+// // Create Redis Client
+// const redisClient = redis.createClient({
+//     url: 'redis://0.0.0.0' // Ensure this is the correct Redis URI
+// });
+
+// redisClient.on('error', (err) => console.log('Redis Client Error', err));
+// redisClient.connect();
+
+// //Configure session middleware to use Redis
+// app.use(session({
+//     store: new RedisStore({ client: redisClient }),
+//     secret: 'your-secret-key', // Replace this with your own secret
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         secure: true, // Set to true if using https
+//         httpOnly: true,
+//         maxAge: 1000 * 60 * 60 * 24 // 24 hours
+//     }
+// }));
+
+const initSession = async () => {
+  // Create Redis Client
+  const redisClient = redis.createClient({
     url: 'redis://0.0.0.0' // Ensure this is the correct Redis URI
-});
+  });
 
-redisClient.on('error', (err) => console.log('Redis Client Error', err));
-redisClient.connect();
+  redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
-//Configure session middleware to use Redis
-app.use(session({
-    store: new RedisStore({ client: redisClient }),
-    secret: 'your-secret-key', // Replace this with your own secret
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: true, // Set to true if using https
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 // 24 hours
-    }
-}));
+  // Wrap Redis client connection in a promise
+  const connectRedis = () => {
+    return new Promise((resolve, reject) => {
+      redisClient.on('connect', () => {
+        console.log('Connected to Redis');
+        resolve();
+      });
 
+      redisClient.on('error', (err) => {
+        console.log('Error connecting to Redis', err);
+        reject(err);
+      });
+    });
+  };
 
+  try {
+    // Wait for Redis connection before configuring session middleware
+    await connectRedis();
 
+    // Configure session middleware to use Redis
+    app.use(
+      session({
+        store: new RedisStore({ client: redisClient }),
+        secret: 'your-secret-key', // Replace this with your own secret
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+          secure: true, // Set to true if using https
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24 // 24 hours
+        }
+      })
+    );
+
+    // Add any additional middleware or routes here
+
+  } catch (error) {
+    console.error('Error initializing session:', error);
+  }
+
+};
 
 // Remember to close the client when you're done
 // client.quit();
