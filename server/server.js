@@ -108,9 +108,9 @@ app.use(express.static(path.join(__dirname, "../client")));
 // }));
 
 
-
-
-const RedisStore = require("connect-redis")(session); // connect-redis wrapper for express-session
+console.log("Before RedisStore import:", session);
+const RedisStore = require("connect-redis")(session);
+console.log("After RedisStore import:", RedisStore);
 app.use(
   session({
     store: new RedisStore({
