@@ -146,7 +146,7 @@ setupOrderSocket(http);
 
 
 
-
+//TWILIO START
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
 
 const { MessagingResponse } = require('twilio').twiml;
@@ -207,9 +207,12 @@ const fetchAndSendMessage = async () => {
   }
 };
 
-
 // Set up an interval to run the function every minute
 setInterval(fetchAndSendMessage, 60000);
+
+//TWILIO SLUT
+
+
 
 
 
