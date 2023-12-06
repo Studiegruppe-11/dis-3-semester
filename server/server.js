@@ -42,39 +42,39 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 
 
-// const RedisStore = require('connect-redis')(session);
+const RedisStore = require('connect-redis')(session);
 
-// const redisOptions = {
-//   host: '164.90.228.42',
-//   port: 6379,
-//   // yderligere konfiguration efter behov
-// };
+const redisOptions = {
+  host: '164.90.228.42',
+  port: 6379,
+  // yderligere konfiguration efter behov
+};
 
-// app.use(session({
-//   store: new RedisStore(redisOptions),
-//   secret: 'your-secret-key',
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
-//     secure: false,
-//     httpOnly: true,
-//     maxAge: 1000 * 60 * 60 * 24,
-//   },
-// }));
-
-
+app.use(session({
+  store: new RedisStore(redisOptions),
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24,
+  },
+}));
 
 
 
 
-// til session storage
-app.use(
-  session({
-    secret: "my-secret-key",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+
+
+// // til session storage
+// app.use(
+//   session({
+//     secret: "my-secret-key",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
 
 
 
