@@ -200,45 +200,48 @@ app.post('/sms', (req, res) => {
 
   res.type('text/xml').send(twiml.toString());
 });
-const accountSid = process.env.TWILIO_SID;
-const authToken = process.env.TWILIO_TOKEN;
-const myPhone = process.env.MY_PHONE;
-const twilioPhone = process.env.TWILIO_PHONE;
-const client = require('twilio')(accountSid, authToken);
-const fetch = require('node-fetch'); // Import the node-fetch library
 
-// Function to fetch total revenue and send message
-const fetchAndSendMessage = async () => {
-  try {
-    const response = await fetch("/totalRevenuetoday");
-    const result = await response.json();
+
+
+// const accountSid = process.env.TWILIO_SID;
+// const authToken = process.env.TWILIO_TOKEN;
+// const myPhone = process.env.MY_PHONE;
+// const twilioPhone = process.env.TWILIO_PHONE;
+// const client = require('twilio')(accountSid, authToken);
+// const fetch = require('node-fetch'); // Import the node-fetch library
+
+// // Function to fetch total revenue and send message
+// const fetchAndSendMessage = async () => {
+//   try {
+//     const response = await fetch("/totalRevenuetoday");
+//     const result = await response.json();
     
-    let totalRevenue = "0 Kr.";
+//     let totalRevenue = "0 Kr.";
     
-    if (result.total_price !== undefined) {
-      totalRevenue = result.total_price + " Kr.";
-    }
+//     if (result.total_price !== undefined) {
+//       totalRevenue = result.total_price + " Kr.";
+//     }
 
-    // Check if it's 18:00
-    const now = new Date();
-    if (now.getHours() === 10 && now.getMinutes() === 15) {
-      // Send message using Twilio
-      client.messages
-        .create({
-          body: `Total Revenue: ${totalRevenue}`,
-          from: twilioPhone,
-          to: myPhone
-        })
-        .then(message => console.log(message.sid))
-        .done();
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-};
+//     // Check if it's 18:00
+//     const now = new Date();
+//     if (now.getHours() === 10 && now.getMinutes() === 15) {
+//       // Send message using Twilio
+//       client.messages
+//         .create({
+//           body: `Total Revenue: ${totalRevenue}`,
+//           from: twilioPhone,
+//           to: myPhone
+//         })
+//         .then(message => console.log(message.sid))
+//         .done();
+//     }
+//   } catch (error) {
+//     console.error("An error occurred:", error);
+//   }
+// };
 
-// Set up an interval to run the function every minute
-setInterval(fetchAndSendMessage, 60000);
+// // Set up an interval to run the function every minute
+// setInterval(fetchAndSendMessage, 60000);
 
 //TWILIO SLUT
 
