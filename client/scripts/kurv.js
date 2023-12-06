@@ -45,45 +45,6 @@ async function fjernFraKurv(productId) {
 // vis kurv (lige nu kun id) og knap til at gennemføre bestilling. bestilling bliver nu gemt i db
 window.addEventListener("DOMContentLoaded", async () => {
     try {
-        // // Hent data fra serveren
-        // const response = await fetch("/bestil/kurv");
-        // const result = await response.json();
-
-        // // Find det element, hvor du vil vise produkt-id'erne og knapperne
-        // const kurvElement = document.getElementById("kurv");
-
-        // // Tjek om der er produkt-id'er i svaret
-        // if (result.productIds && result.productIds.length > 0) {
-        //     // Opret en liste og tilføj hvert produkt-id som et listeelement med en knap
-        //     const productList = document.createElement("ul");
-        //     result.productIds.forEach((productId) => {
-        //         const listItem = document.createElement("li");
-        //         listItem.textContent = `Product ID: ${productId}`;
-
-        //         // Opret en knap for hvert produkt-id
-        //         const gennemforBestillingButton = document.createElement("button");
-        //         gennemforBestillingButton.textContent = "Fjern fra kurv";
-        //         gennemforBestillingButton.addEventListener("click", () => fjernFraKurv(productId));
-
-        //         // Tilføj knappen til listeelementet
-        //         listItem.appendChild(gennemforBestillingButton);
-
-        //         // Tilføj listeelementet til listen
-        //         productList.appendChild(listItem);
-        //     });
-
-        //     // Tilføj listen til DOM'en
-        //     kurvElement.appendChild(productList);
-        // } else {
-        //     // Hvis der ikke er nogen produkt-id'er, vis en besked
-        //     kurvElement.textContent = "Ingen produkter i kurven";
-        // }
-
-
-
-
-
-
 // Hent data fra serveren
 const response = await fetch("/bestil/kurvtest");
 const result = await response.json();
