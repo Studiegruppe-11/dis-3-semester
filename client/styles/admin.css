@@ -53,6 +53,12 @@ body {
     font-weight: bolder;
   }
 
+  .nav-link{
+    background-color: #f09bc1;
+    font-weight: bolder;
+  }
+
+
   
   #logout {
     cursor: pointer;
