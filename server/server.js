@@ -89,23 +89,23 @@ app.use(express.static(path.join(__dirname, "../client")));
 //     console.error('Redis error: ', err);
 // });
 
-// // Connect to Redis server
-// (async () => {
-//     await redisClient.connect();
-// })();
+// Connect to Redis server
+(async () => {
+    await redisClient.connect();
+})();
 
 
-// app.use(session({
-//   store: new RedisStore({ client: redisClient }),
-//   secret: 'your-secret-key', // Replace with a real secret key
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
-//       secure: true, // Set to true if using https
-//       httpOnly: true,
-//       maxAge: 1000 * 60 * 60 * 24 // 24 hours
-//   }
-// }));
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: 'your-secret-key', // Replace with a real secret key
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      secure: true, // Set to true if using https
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 // 24 hours
+  }
+}));
 
 
 
