@@ -9,6 +9,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("user").innerHTML = result.name;
         // Skal ikke vise "opret bruger" hvis man er logget ind.
       }
+      else{
+        window.location.href = "/users/login";
+      }
     } catch (error) {
         console.log(error);
         // Håndter fejlhåndtering her
