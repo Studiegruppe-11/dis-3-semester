@@ -15,7 +15,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
     else {
       window.location.href = "/admin/login";
-      alert("Du er ikke logget ind. Du bliver sendt til login siden.");
     }
   } catch (error) {
       console.log(error);
