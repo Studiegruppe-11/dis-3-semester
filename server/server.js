@@ -117,6 +117,8 @@ const initSession = async () => {
 
 };
 
+
+
 // Remember to close the client when you're done
 // client.quit();
 
@@ -338,7 +340,7 @@ http.listen(3000, "164.90.228.42", () => {
 //   console.log(`Server is running on http://localhost:${port}`);
 // });
 
-
+initSession();
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
