@@ -95,7 +95,17 @@ redisClient.on('error', (err) => {
 })();
 
 
-
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: 'your-secret-key', // Replace with a real secret key
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      secure: false, // Set to true if using https
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 // 24 hours
+  }
+}));
 
 
 
