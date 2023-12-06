@@ -30,7 +30,7 @@ document.getElementById("login").addEventListener("click", async function () {
 });
 
 document.getElementById("password").addEventListener("keyup", function(event) {
-    if (event.key === Enter) {
+    if (event.key === 'Enter') {
         event.preventDefault();
         document.getElementById("login").click();
     }
