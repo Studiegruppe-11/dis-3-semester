@@ -14,6 +14,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       // Skal ikke vise "opret bruger" hvis man er logget ind.
     }
     else {
+      window.location.href = "/admin/login";
     }
   } catch (error) {
       console.log(error);
