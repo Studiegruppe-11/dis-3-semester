@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, "../client")));
 ///////// Redis session storage //////////
 
 const redis = require('redis');
-const RedisStore = require('connect-redis')(session);
+const RedisStore = require("connect-redis").default
 
 // Create Redis Client
 const redisClient = redis.createClient({
