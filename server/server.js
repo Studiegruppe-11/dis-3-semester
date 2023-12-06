@@ -50,6 +50,16 @@ const redisOptions = {
   // yderligere konfiguration efter behov
 };
 
+// Listen for the 'connect' event
+redisClient.on('connect', () => {
+    console.log('Connected to Redis server successfully');
+});
+
+// Listen for the 'error' event
+redisClient.on('error', (err) => {
+    console.error('Redis error: ', err);
+});
+
 app.use(session({
   store: new RedisStore(redisOptions),
   secret: 'your-secret-key',
