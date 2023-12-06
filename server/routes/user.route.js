@@ -93,11 +93,13 @@ router.post("/users/login", async (req, res) => {
 
       if (match) {
         // Passwords match, set session details
-        req.session.userId = user.customer_id;
-        req.session.name = user.first_name;
+        req.session.regenerate(() => {
+          req.session.userId = user.customer_id;
+          req.session.name = user.first_name;
 
-        // Send success response
-        res.json({ success: true });
+          // Send success response
+          res.json({ success: true });
+        });
       } else {
         // Passwords don't match
         res.json({ error: 'Forkert brugernavn eller adgangskode' });
@@ -111,7 +113,6 @@ router.post("/users/login", async (req, res) => {
     res.status(500).json({ error: 'Der opstod en fejl under login.' });
   }
 });
-
 
 
 
