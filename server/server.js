@@ -77,7 +77,7 @@ const { createClient } = require('redis');
 
 const redisClient = createClient({
     // If Redis is on the same host and default port
-    host: 'localhost',
+    host: '164.90.228.42',
     port: 6379
 });
 
