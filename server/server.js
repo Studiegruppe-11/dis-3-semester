@@ -76,7 +76,6 @@ app.use(express.static(path.join(__dirname, "../client")));
 const { createClient } = require('redis');
 
 const redisClient = createClient({
-    // If Redis is on the same host and default port
     host: '164.90.228.42',
     port: 6379
 });
@@ -91,21 +90,35 @@ redisClient.on('error', (err) => {
 
 // Connect to Redis server
 (async () => {
-    await redisClient.connect();
+    try {
+        console.log('Attempting to connect to Redis...');
+        await redisClient.connect();
+        console.log('Connection to Redis established.');
+    } catch (err) {
+        console.error('Error connecting to Redis:', err);
+    }
 })();
 
-
 app.use(session({
-  store: new RedisStore({ client: redisClient }),
-  secret: 'your-secret-key', // Replace with a real secret key
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      secure: true, // Set to true if using https
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 24 hours
-  }
+    store: new RedisStore({ client: redisClient }),
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false, // Set to true if using https
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 // 24 hours
+    }
 }));
+
+// Additional logging for session middleware
+app.use((req, res, next) => {
+    console.log('Session middleware');
+    console.log('Session ID:', req.sessionID);
+    console.log('Session:', req.session);
+    next();
+});
+
 
 
 
