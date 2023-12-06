@@ -12,7 +12,6 @@ const saltRounds = 10;
 
 // Importer function til at sende mail
 const { sendWelcomeEmail } = require('../utility/mailUtility.js');
-console.log('sendWelcomeEmail: ', sendWelcomeEmail);
 
 
 // Endpoint for getting all customers
