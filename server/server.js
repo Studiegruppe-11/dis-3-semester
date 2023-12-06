@@ -13,7 +13,7 @@ const setupOrderSocket = require('./utility/orderSocket.js');
 const cloudinary = require('cloudinary').v2;
 const fileUpload = require('express-fileupload'); // For handling file uploads
 
-// Favicon
+// Favicon 
 // var favicon = require('serve-favicon');
 
 // Til github webhook for automatisk pull 
@@ -25,7 +25,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
-console.log(cloudinary.config()); 
+// console.log(cloudinary.config()); 
 
   
 // Middlewares
