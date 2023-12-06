@@ -84,12 +84,10 @@ app.use(
 );
 
 
-app.use((req, res, next) => {
-  console.log('Session ID:', req.sessionID);
-  next();
-});
-
-
+// app.use((req, res, next) => {
+//   console.log('Session ID:', req.sessionID);
+//   next();
+// });
 
 
 
