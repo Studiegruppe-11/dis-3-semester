@@ -1,3 +1,26 @@
+window.addEventListener("DOMContentLoaded", async () => {
+
+    //  vis navn på admin logget ind
+    try {
+      const response = await fetch("/admins/show");
+      const result = await response.json();
+  
+      if (result.adminUserId && result.adminName) {
+        // Viser navn hvis man er logget ind
+        document.getElementById("usernameDisplay").innerHTML = result.adminName;
+        // Skal ikke vise "opret bruger" hvis man er logget ind.
+      }
+      else {
+        window.location.href = "/admin/login";
+      }
+    } catch (error) {
+        console.log(error);
+        // Håndter fejlhåndtering her
+      }
+    });  
+
+
+
 document.getElementById('uploadForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
