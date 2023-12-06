@@ -14,7 +14,7 @@ const cloudinary = require('cloudinary').v2;
 const fileUpload = require('express-fileupload'); // For handling file uploads
 
 // Favicon
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
 // Favicon
-app.use(favicon(path.join(__dirname, '../client/images', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, '../client/images', 'favicon.ico')));
 
 
 // til session storage
