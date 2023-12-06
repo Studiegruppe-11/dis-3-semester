@@ -67,6 +67,19 @@ app.use(session({
     }
 }));
 
+
+// Middleware til at vente på sessioninitialisering
+const waitForSession = (req, res, next) => {
+  // Vent på at sessionen er initialiseret
+  req.session.regenerate(() => {
+      next();
+  });
+};
+// Anvend middleware globalt
+app.use(waitForSession);
+
+
+
 // Remember to close the client when you're done
 // client.quit();
 
