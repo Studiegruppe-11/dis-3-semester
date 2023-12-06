@@ -36,12 +36,11 @@ app.use(express.static(path.join(__dirname, "../client")));
 // Favicon
 // app.use(favicon(path.join(__dirname, '../client/images', 'favicon.ico')));
 
-
 const RedisStore = require('connect-redis')(session);
-// Konfigurer Redis som sessionopbevaring
+
 const redisOptions = {
   host: '164.90.228.42',
-  port: 6379, // standard Redis-port
+  port: 6379,
   // yderligere konfiguration efter behov
 };
 
@@ -51,12 +50,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // Sæt til true, hvis du bruger HTTPS
+    secure: false,
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24, // Sessionens levetid i millisekunder (her 1 dag)
+    maxAge: 1000 * 60 * 60 * 24,
   },
 }));
-
 
 // // til session storage
 // app.use(
