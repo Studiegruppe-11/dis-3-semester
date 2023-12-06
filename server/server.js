@@ -90,22 +90,22 @@ app.use(express.static(path.join(__dirname, "../client")));
 // });
 
 // Connect to Redis server
-(async () => {
-    await redisClient.connect();
-})();
+// (async () => {
+//     await redisClient.connect();
+// })();
 
 
-app.use(session({
-  store: new RedisStore({ client: redisClient }),
-  secret: 'your-secret-key', // Replace with a real secret key
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      secure: true, // Set to true if using https
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 24 hours
-  }
-}));
+// app.use(session({
+//   store: new RedisStore({ client: redisClient }),
+//   secret: 'your-secret-key', // Replace with a real secret key
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//       secure: true, // Set to true if using https
+//       httpOnly: true,
+//       maxAge: 1000 * 60 * 60 * 24 // 24 hours
+//   }
+// }));
 
 
 
@@ -136,7 +136,7 @@ app.set('trust proxy', 1);
 const RedisStore = connectRedis(session)
 //Configure redis client
 const redisClient = redis.createClient({
-    host: 'localhost',
+    host: '164.90.228.42',
     port: 6379
 })
 redisClient.on('error', function (err) {
@@ -157,7 +157,6 @@ app.use(session({
         maxAge: 1000 * 60 * 10 // session max age in miliseconds
     }
 }))
-
 
 
 
