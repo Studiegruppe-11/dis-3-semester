@@ -191,7 +191,7 @@ const fetchAndSendMessage = async () => {
 
     // Check if it's 18:00
     const now = new Date();
-    if (now.getHours() === 11 && now.getMinutes() === 0) {
+    if (now.getHours() === 10 && now.getMinutes() === 15) {
       // Send message using Twilio
       client.messages
         .create({
