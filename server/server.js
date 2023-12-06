@@ -265,7 +265,11 @@ http.listen(3000, "164.90.228.42", () => {
 });
 
 
-
+// // Start server on localhost
+// const port = 3000;
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
 
 
 
