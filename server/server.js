@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, "../client")));
 const redis = require('redis');
 
 const client = redis.createClient({
-    url: 'redis://164.90.228.42' // Ensure this is a correct Redis URI
+    url: '0.0.0.0' // Ensure this is a correct Redis URI
 });
 
 client.on('connect', () => {
