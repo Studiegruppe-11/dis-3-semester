@@ -200,13 +200,12 @@ app.post('/sms', (req, res) => {
 
   res.type('text/xml').send(twiml.toString());
 });
-
-
 const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_TOKEN;
 const myPhone = process.env.MY_PHONE;
 const twilioPhone = process.env.TWILIO_PHONE;
 const client = require('twilio')(accountSid, authToken);
+const fetch = require('node-fetch'); // Import the node-fetch library
 
 // Function to fetch total revenue and send message
 const fetchAndSendMessage = async () => {
