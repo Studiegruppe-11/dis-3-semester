@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   
       if (result.adminUserId && result.adminName) {
         // Viser navn hvis man er logget ind
-        document.getElementById("usernameDisplay").innerHTML = "Logget ind som:", result.adminName;
+        document.getElementById("usernameDisplay").innerHTML = "Logget ind som: " + result.adminName;
         // Skal ikke vise "opret bruger" hvis man er logget ind.
       }
       else {
