@@ -213,6 +213,7 @@ app.post('/sms', (req, res) => {
 });
 
 
+//NEDENSTÅENDE SKAL LIGE FIXES
 
 // const accountSid = process.env.TWILIO_SID;
 // const authToken = process.env.TWILIO_TOKEN;
