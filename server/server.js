@@ -73,7 +73,26 @@ app.use(express.static(path.join(__dirname, "../client")));
 // }));
 
 
+const { createClient } = require('redis');
 
+const redisClient = createClient({
+    // If Redis is on the same host and default port
+    host: 'localhost',
+    port: 6379
+});
+
+redisClient.on('connect', () => {
+    console.log('Connected to Redis server successfully');
+});
+
+redisClient.on('error', (err) => {
+    console.error('Redis error: ', err);
+});
+
+// Connect to Redis server
+(async () => {
+    await redisClient.connect();
+})();
 
 
 
@@ -82,13 +101,13 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 
 // til session storage
-app.use(
-  session({
-    secret: "my-secret-key",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+// app.use(
+//   session({
+//     secret: "my-secret-key",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
 
 
 
