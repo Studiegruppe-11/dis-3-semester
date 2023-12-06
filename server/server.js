@@ -107,17 +107,22 @@ app.use(express.static(path.join(__dirname, "../client")));
 //   }
 // }));
 
+const expressSession = require("express-session");
+console.log("Before connect-redis import:", session);
+const RedisStore = require("connect-redis")(expressSession);
+console.log("After connect-redis import:", RedisStore);
+const redis = require("redis");
 
-console.log("Before RedisStore import:", session);
-const RedisStore = require("connect-redis")(session);
-console.log("After RedisStore import:", RedisStore);
+const redisClient = redis.createClient({
+  host: "164.90.228.42",
+  port: 6379,
+});
+
+const store = new RedisStore({ client: redisClient });
+
 app.use(
-  session({
-    store: new RedisStore({
-      host: "164.90.228.42", // Du skal erstatte dette med din Redis-serveradresse
-      port: 6379, // Du skal erstatte dette med din Redis-serverport
-      ttl: 86400, // Time-to-live i sekunder, her 24 timer
-    }),
+  expressSession({
+    store: store,
     secret: "my-secret-key",
     resave: false,
     saveUninitialized: false,
