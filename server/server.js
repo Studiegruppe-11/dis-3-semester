@@ -44,23 +44,28 @@ app.use(express.static(path.join(__dirname, "../client")));
 ///////// Redis session storage //////////
 
 const redis = require('redis');
+const RedisStore = require('connect-redis')(session);
 
-const client = redis.createClient({
-    url: 'redis://0.0.0.0' // Ensure this is a correct Redis URI
+// Create Redis Client
+const redisClient = redis.createClient({
+    url: 'redis://0.0.0.0' // Ensure this is the correct Redis URI
 });
 
-client.on('connect', () => {
-    console.log('Connected to Redis server successfully');
-});
+redisClient.on('error', (err) => console.log('Redis Client Error', err));
+redisClient.connect();
 
-(async () => {
-    try {
-        await client.connect();
-        // Additional code here if needed
-    } catch (err) {
-        console.error('Error connecting to Redis:', err);
+// Configure session middleware to use Redis
+app.use(session({
+    store: new RedisStore({ client: redisClient }),
+    secret: 'your-secret-key', // Replace this with your own secret
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true, // Set to true if using https
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 // 24 hours
     }
-})();
+}));
 
 // Remember to close the client when you're done
 // client.quit();
