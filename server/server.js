@@ -41,10 +41,32 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 
 
+///////// Redis session storage //////////
+
+const redis = require('redis');
+
+const client = redis.createClient({
+    url: 'redis://164.90.228.42' // Ensure this is a correct Redis URI
+});
+
+client.on('connect', () => {
+    console.log('Connected to Redis server successfully');
+});
+
+(async () => {
+    try {
+        await client.connect();
+        // Additional code here if needed
+    } catch (err) {
+        console.error('Error connecting to Redis:', err);
+    }
+})();
+
+// Remember to close the client when you're done
+// client.quit();
 
 
-
-
+// client.quit()
 
 
 
