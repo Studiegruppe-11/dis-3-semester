@@ -259,10 +259,15 @@ app.post('/sms', (req, res) => {
 
 
 
-// start server
+// start server på digitalocean
 http.listen(3000, "164.90.228.42", () => {
   console.log("Serveren er åben på port 3000");
 });
+
+
+
+
+
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
