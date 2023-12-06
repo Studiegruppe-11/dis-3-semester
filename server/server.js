@@ -13,7 +13,8 @@ const setupOrderSocket = require('./utility/orderSocket.js');
 const cloudinary = require('cloudinary').v2;
 const fileUpload = require('express-fileupload'); // For handling file uploads
 
-
+// Favicon
+// var favicon = require('serve-favicon');
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
@@ -31,6 +32,9 @@ console.log(cloudinary.config());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
+
+// Favicon
+// app.use(favicon(path.join(__dirname, '../client/images', 'favicon.ico')));
 
 
 const RedisStore = require('connect-redis')(session);
