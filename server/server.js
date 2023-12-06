@@ -73,39 +73,59 @@ app.use(express.static(path.join(__dirname, "../client")));
 // }));
 
 
-const { createClient } = require('redis');
+// const { createClient } = require('redis');
 
-const redisClient = createClient({
-    // If Redis is on the same host and default port
-    host: '164.90.228.42',
-    port: 6379
-});
+// const redisClient = createClient({
+//     // If Redis is on the same host and default port
+//     host: '164.90.228.42',
+//     port: 6379
+// });
 
-redisClient.on('connect', () => {
-    console.log('Connected to Redis server successfully');
-});
+// redisClient.on('connect', () => {
+//     console.log('Connected to Redis server successfully');
+// });
 
-redisClient.on('error', (err) => {
-    console.error('Redis error: ', err);
-});
+// redisClient.on('error', (err) => {
+//     console.error('Redis error: ', err);
+// });
 
-// Connect to Redis server
-(async () => {
-    await redisClient.connect();
-})();
+// // Connect to Redis server
+// (async () => {
+//     await redisClient.connect();
+// })();
 
 
-app.use(session({
-  store: new RedisStore({ client: redisClient }),
-  secret: 'your-secret-key', // Replace with a real secret key
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      secure: true, // Set to true if using https
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 24 hours
-  }
-}));
+// app.use(session({
+//   store: new RedisStore({ client: redisClient }),
+//   secret: 'your-secret-key', // Replace with a real secret key
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//       secure: true, // Set to true if using https
+//       httpOnly: true,
+//       maxAge: 1000 * 60 * 60 * 24 // 24 hours
+//   }
+// }));
+
+
+
+
+const RedisStore = require("connect-redis")(session); // connect-redis wrapper for express-session
+app.use(
+  session({
+    store: new RedisStore({
+      host: "your-redis-server-host", // Du skal erstatte dette med din Redis-serveradresse
+      port: 6379, // Du skal erstatte dette med din Redis-serverport
+      ttl: 86400, // Time-to-live i sekunder, her 24 timer
+    }),
+    secret: "my-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+
+
 
 
 
