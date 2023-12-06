@@ -148,7 +148,6 @@ setupOrderSocket(http);
 
 
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
-// SKAL LAVES OM TIL WHATSAPP.
 
 const { MessagingResponse } = require('twilio').twiml;
 
