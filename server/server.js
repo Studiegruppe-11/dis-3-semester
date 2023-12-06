@@ -114,7 +114,7 @@ const RedisStore = require("connect-redis")(session); // connect-redis wrapper f
 app.use(
   session({
     store: new RedisStore({
-      host: "your-redis-server-host", // Du skal erstatte dette med din Redis-serveradresse
+      host: "164.90.228.42", // Du skal erstatte dette med din Redis-serveradresse
       port: 6379, // Du skal erstatte dette med din Redis-serverport
       ttl: 86400, // Time-to-live i sekunder, her 24 timer
     }),
