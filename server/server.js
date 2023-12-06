@@ -55,28 +55,31 @@ redisClient.on('error', (err) => console.log('Redis Client Error', err));
 redisClient.connect();
 
 // Configure session middleware to use Redis
+// app.use(session({
+//     store: new RedisStore({ client: redisClient }),
+//     secret: 'your-secret-key', // Replace this with your own secret
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         secure: true, // Set to true if using https
+//         httpOnly: true,
+//         maxAge: 1000 * 60 * 60 * 24 // 24 hours
+//     }
+// }));
+
+
+// Configure session middleware to use Redis
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
-    secret: 'your-secret-key', // Replace this with your own secret
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: true, // Set to true if using https
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 // 24 hours
-    }
+  store: new RedisStore({ client: redisClient }),
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      secure: true,
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 // 24 hours
+  }
 }));
-
-
-// Middleware til at vente på sessioninitialisering
-const waitForSession = (req, res, next) => {
-  // Vent på at sessionen er initialiseret
-  req.session.regenerate(() => {
-      next();
-  });
-};
-// Anvend middleware globalt
-app.use(waitForSession);
 
 
 
