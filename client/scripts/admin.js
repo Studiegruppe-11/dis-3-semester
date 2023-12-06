@@ -14,8 +14,8 @@ window.addEventListener("DOMContentLoaded", async () => {
       // Skal ikke vise "opret bruger" hvis man er logget ind.
     }
     else {
-      alert("Du er ikke logget ind. Du bliver sendt til login siden.");
       window.location.href = "/admin/login";
+      alert("Du er ikke logget ind. Du bliver sendt til login siden.");
     }
   } catch (error) {
       console.log(error);
