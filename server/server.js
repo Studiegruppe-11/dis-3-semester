@@ -101,8 +101,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-      secure: true, // Set to true if using https
-      httpOnly: false,
+      secure: false, // Set to true if using https
+      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 // 24 hours
   }
 }));
