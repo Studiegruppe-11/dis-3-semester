@@ -18,7 +18,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-console.log("Email User:", gUser);
 
 async function sendMail(recipients, subject, text, html) {
   const mailOptions = {
