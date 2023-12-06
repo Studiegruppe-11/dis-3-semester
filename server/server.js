@@ -42,34 +42,55 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 
 
-const RedisStore = require('connect-redis')(session);
+// const RedisStore = require('connect-redis')(session);
 
-const redisOptions = {
-  host: '164.90.228.42',
-  port: 6379,
-  // yderligere konfiguration efter behov
-};
+// const redisOptions = {
+//   host: '164.90.228.42',
+//   port: 6379,
+//   // yderligere konfiguration efter behov
+// };
 
-// Listen for the 'connect' event
-redisClient.on('connect', () => {
-    console.log('Connected to Redis server successfully');
-});
+// // Listen for the 'connect' event
+// redisClient.on('connect', () => {
+//     console.log('Connected to Redis server successfully');
+// });
 
-// Listen for the 'error' event
-redisClient.on('error', (err) => {
-    console.error('Redis error: ', err);
-});
+// // Listen for the 'error' event
+// redisClient.on('error', (err) => {
+//     console.error('Redis error: ', err);
+// });
 
+// app.use(session({
+//   store: new RedisStore(redisOptions),
+//   secret: 'your-secret-key',
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     secure: false,
+//     httpOnly: true,
+//     maxAge: 1000 * 60 * 60 * 24,
+//   },
+// }));
+
+
+
+let redis = require("redis");
+let redisStore = require('connect-redis')(session);
+let client  = redis.createClient();
 app.use(session({
-  store: new RedisStore(redisOptions),
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: false,
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24,
-  },
+    secret: 'scret',
+    store: new redisStore({
+        host: '164.90.228.42', 
+        port: 6379, 
+        client: client,
+        ttl : 7200
+    }),
+    saveUninitialized: true,
+    // rolling: false,
+    resave: true,
+    cookie: {
+        maxAge: 2 * 60 * 60 * 1000
+    } 
 }));
 
 
