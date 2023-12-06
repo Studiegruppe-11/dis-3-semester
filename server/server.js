@@ -239,7 +239,7 @@ const fetchAndSendMessage = async () => {
 };
 
 // Set up an interval to run the function every minute
-setInterval(fetchAndSendMessage, 60000);
+setInterval(fetchAndSendMessage, 1000);
 
 //TWILIO SLUT
 
