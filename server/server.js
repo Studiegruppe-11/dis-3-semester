@@ -39,6 +39,11 @@ app.use(express.static(path.join(__dirname, "../client")));
 // Favicon
 // app.use(favicon(path.join(__dirname, '../client/images', 'favicon.ico')));
 
+
+
+
+
+
 // const RedisStore = require('connect-redis')(session);
 
 // const redisOptions = {
@@ -72,6 +77,12 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+
+
+
+
+
 
 
 
