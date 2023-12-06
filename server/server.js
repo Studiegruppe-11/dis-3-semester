@@ -136,7 +136,7 @@ app.set('trust proxy', 1);
 const RedisStore = connectRedis(session)
 //Configure redis client
 const redisClient = redis.createClient({
-    host: '164.90.228.42',
+    host: 'localhost',
     port: 6379
 })
 redisClient.on('error', function (err) {
