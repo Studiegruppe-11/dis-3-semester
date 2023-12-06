@@ -67,79 +67,21 @@ app.use(express.static(path.join(__dirname, "../client")));
 //     }
 // }));
 
-const initSession = async () => {
-  // Create Redis Client
-  const redisClient = redis.createClient({
-    url: 'redis://0.0.0.0' // Ensure this is the correct Redis URI
-  });
 
-  redisClient.on('error', (err) => console.log('Redis Client Error', err));
-
-  // Wrap Redis client connection in a promise
-  const connectRedis = () => {
-    return new Promise((resolve, reject) => {
-      redisClient.on('connect', () => {
-        console.log('Connected to Redis');
-        resolve();
-      });
-
-      redisClient.on('error', (err) => {
-        console.log('Error connecting to Redis', err);
-        reject(err);
-      });
-    });
-  };
-
-  try {
-    // Wait for Redis connection before configuring session middleware
-    await connectRedis();
-
-    // Configure session middleware to use Redis
-    app.use(
-      session({
-        store: new RedisStore({ client: redisClient }),
-        secret: 'your-secret-key', // Replace this with your own secret
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-          secure: true, // Set to true if using https
-          httpOnly: true,
-          maxAge: 1000 * 60 * 60 * 24 // 24 hours
-        }
-      })
-    );
-
-    // Add any additional middleware or routes here
-
-  } catch (error) {
-    console.error('Error initializing session:', error);
-  }
-
-};
-
-
-
-// Remember to close the client when you're done
-// client.quit();
-
-
-// client.quit()
+////// redis slut /////////
 
 
 
 
 
-
-
-
-//til session storage
-// app.use(
-//   session({
-//     secret: "my-secret-key",
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// );
+// til session storage
+app.use(
+  session({
+    secret: "my-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 
 app.use((req, res, next) => {
@@ -340,7 +282,7 @@ http.listen(3000, "164.90.228.42", () => {
 //   console.log(`Server is running on http://localhost:${port}`);
 // });
 
-initSession();
+
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
