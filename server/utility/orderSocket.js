@@ -48,7 +48,7 @@ function setupOrderSocket(http) {
     emitPlacedOrders();
 
     // Udsend opdateringer hvert 10. sekund
-    //setInterval(emitPlacedOrders, 10000);
+    setInterval(emitPlacedOrders, 10000);
 
     // Håndter 'getPlacedOrders' hændelsen fra klienten
     socket.on('getPlacedOrders', async (callback) => {
