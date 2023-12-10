@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", async () => {
+  // hent navn og ID fra sessionen og vis det på siden. hentes fra routes. 
     try {
       const response = await fetch("/users/show");
       const result = await response.json();

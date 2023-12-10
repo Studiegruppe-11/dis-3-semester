@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 console.log("Bestil.js loaded");
 
 
-
+// vis brugerens navn når han er logget ind. 
 window.addEventListener("DOMContentLoaded", async () => {
     try {
       const response = await fetch("/users/show");
@@ -121,6 +121,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         // Skal ikke vise "opret bruger" hvis man er logget ind.
       }
       else{
+        // hvis ikke logget ind skal man sendes til login siden. man kan ikke tilgå siden uden at være logget ind. 
         window.location.href = "/users/login";
       }
     } catch (error) {

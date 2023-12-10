@@ -20,10 +20,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       console.log(error);
       // Håndter fejlhåndtering her
     }
- 
-
-    // test på at vise total omsætning i dag og i alt. skal laves til socket i stedet. 
-  
+   
   // vis total omsætning i dag
   try {
     const response = await fetch("/totalRevenuetoday");
@@ -52,11 +49,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     console.log(error);
   }
 
-// vis alle færdige ordrer på admin siden. Skal også laves til socket i stedet.
+// vis alle færdige ordrer på admin siden.
 try {
   const response = await fetch("/finishedorders");
   const result = await response.json();
-  if (result.finished_orders) {  // Skiftet fra finishedOrders til finished_orders
+  if (result.finished_orders) {  
     document.getElementById("finishedOrders").innerHTML = result.finished_orders;
   } else {
     document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
@@ -69,17 +66,7 @@ try {
 
 
 
-
-
-
-
-
-
- 
-
-
-
-// root/client/scripts/admin.js
+//socket med opdatering af nye order. hænger sammen med ordersocket.js
 
 document.addEventListener('DOMContentLoaded', function () {
   const socket = io('/order'); // Connect to the '/order' namespace
@@ -152,8 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
+// log ud knap
   document.getElementById("logout").addEventListener("click", async () => {
 
     try {
@@ -172,7 +158,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+// PING SOCKET KØRER IKKE LIGE NU DA DEN ER UDKOMMENTERET I SERVER.JS. SE HVAD JEG HAR SKREVET DER. BEGGE SOCKETS KAN IKKE KØRE SAMTIDIGT
+// LAD OS SE PÅ DETTE I DAGENENE OP TIL AFLEVERING.
 
 // SOCKET PING START
 // socket til at vise rtt og ping i real time på admin siden.
