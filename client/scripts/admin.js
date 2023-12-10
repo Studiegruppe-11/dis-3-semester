@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       console.log(error);
       // Håndter fejlhåndtering her
     }
-
+ 
 
     // test på at vise total omsætning i dag og i alt. skal laves til socket i stedet. 
   

@@ -84,13 +84,6 @@ app.use(
 );
 
 
-// app.use((req, res, next) => {
-//   console.log('Session ID:', req.sessionID);
-//   next();
-// });
-
-
-
 
 
 module.exports = {
@@ -184,19 +177,20 @@ app.post('/', function (req, res) {
 });
 
 
-// BEGGE SOCKETS KAN IKKE KØRE SAMTIDIGT. 
+// BEGGE SOCKETS KAN IKKE KØRE SAMTIDIGT. VENT MED AT SKRIV OM PINGSOCKET INDTIL VI FINDER UD AF OM DE KAN KØRE SAMMEN. 
+// ELLERS DROPPER VI BARE PINGSOCKET. 
 
 // Ping socket
 // setupPing(http)
 
-// Order socket. Opdatere hver gang en ny ordre bliver oprettet eller hvert 30. sekund.
+// Order socket. Opdatere ordrestatus i admin.html. S
 setupOrderSocket(http);
-
 
 
 
 //TWILIO START
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
+// twilio sms, hvor man skriver til et endpoint på serveren, som så sender en sms tilbage. endpoint defineret på twilio.com
 
 const { MessagingResponse } = require('twilio').twiml;
 
@@ -221,6 +215,7 @@ app.post('/sms', (req, res) => {
 
 
 //NEDENSTÅENDE SKAL LIGE FIXES
+// twilio som skal automatisk sende sms ud hver dag kl 18.00 med dagens omsætning. virker ikke helt men burde kunne laves hurtigt. 
 
 // const accountSid = process.env.TWILIO_SID;
 // const authToken = process.env.TWILIO_TOKEN;
@@ -243,7 +238,7 @@ app.post('/sms', (req, res) => {
 
 //     // Check if it's 18:00
 //     const now = new Date();
-//     if (now.getHours() === 10 && now.getMinutes() === 15) {
+//     if (now.getHours() === 18 && now.getMinutes() === 00) {
 //       // Send message using Twilio
 //       client.messages
 //         .create({
@@ -268,13 +263,13 @@ app.post('/sms', (req, res) => {
 
 
 
-// start server på digitalocean
+// start server på digitalocean, som vi bruger lige nu. 
 http.listen(3000, "164.90.228.42", () => {
   console.log("Serveren er åben på port 3000");
 });
 
 
-// // Start server on localhost
+// // Start server on localhost, som vi skal bruge når vi aflevere, så Mikkel kan starte på sin PC lokalt. 
 // const port = 3000;
 // app.listen(port, () => {
 //   console.log(`Server is running on http://localhost:${port}`);

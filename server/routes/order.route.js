@@ -65,7 +65,7 @@ router.get('/orders/sandwich', async (req, res) => {
   });
 
 
-
+  // henter alle produkter som en bruger har lagt i kurven, ved SQL til DB med productIds fra session i SQL IN-klausul
   router.get('/bestil/kurvtest', async (req, res) => {
     const { productIds } = req.session;
     try {
@@ -89,7 +89,6 @@ router.get('/orders/sandwich', async (req, res) => {
 
 
 
-    
   
   // Gem id fra produkterne i kurven når der klikkes på gennemfør order i kurv.js/html
   router.post("/kurv/placedorders", async (req, res) => {
@@ -134,6 +133,7 @@ router.get('/orders/sandwich', async (req, res) => {
 
 
   //gennemfør order
+  // indsæt bruger ID, produkt ID, dato og status i placedorders tabellen i DB. 
   router.post('/kurv/placerordrer', async (req, res) => {
     const { productIds, date } = req.body;
     const customer_id = req.session.userId;

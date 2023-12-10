@@ -122,15 +122,10 @@ router.get("/users/logout", async (req, res) => {
     res.json({ loggedOut: true });
   }
   );
- 
 
 
   
-  // vis logget ind bruger
-
-
-  // vis bruger
-
+  // vis logget ind bruger ved at hente brugerens ID og navn fra sessionen
   router.get("/users/show", async (req, res) => {
     const { userId, name } = req.session;
     if (userId && name) {
@@ -143,5 +138,5 @@ router.get("/users/logout", async (req, res) => {
 
 
 
-
+// eksporter så den kaldes i server.js
 module.exports = router;

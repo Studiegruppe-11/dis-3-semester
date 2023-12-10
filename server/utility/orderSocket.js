@@ -7,6 +7,9 @@ async function getPlacedOrders() {
     const pool = await connection.poolPromise;
 
     // Udfør SQL-forespørgslen for at hente ventende ordrer
+    // inner join for at hente navn på kunde
+    // inner join for at hente navn på produkt
+    // hvor status er "waiting", som den sættes når ordrer bestilles. 
     const [rows] = await pool.query(`
     SELECT placedorders_id, customers.first_name, products.name
     FROM placedorders
@@ -21,7 +24,7 @@ async function getPlacedOrders() {
     throw error;
   }
 }
-
+ 
 const socketIO = require('socket.io');
 
 function setupOrderSocket(http) {
