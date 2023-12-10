@@ -4,30 +4,6 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
 
-// hent alle 
-// router.get('/getplacedorders', async (req, res) => {
-//     try {
-//         const pool = await connection.poolPromise;
-
-//         // Udfør SQL-forespørgslen her
-//         const [rows] = await pool.query(`
-//             SELECT customers.first_name, products.name
-//             FROM placedorders
-//             INNER JOIN customers ON placedorders.customer_id = customers.customer_id
-//             INNER JOIN products ON placedorders.product_id = products.product_id
-//             WHERE status = "waiting"
-//         `);
-
-//         res.send(rows);
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).send(error.message);
-//     }
-
-// });
-
-  
-  
 
 
 
@@ -56,7 +32,7 @@ router.get('/totalRevenuetoday', async (req, res) => {
 
 
 
-// hent total omtæning
+// hent total omsætning i alt
 router.get('/totalRevenue', async (req, res) => {
     try {
         const pool = await connection.poolPromise;
@@ -99,7 +75,7 @@ router.get('/finishedorders', async (req, res) => {
     }
 });
 
-
+// når der klikkes på 
 router.post('/updatestatus', async (req, res) => {
     try {
       const pool = await connection.poolPromise;
