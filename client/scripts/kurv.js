@@ -16,10 +16,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         console.log(error);
         // Håndter fejlhåndtering her
       }
-    });
-
- 
- 
+});
 
 // Hvis der klikkes på fjern fra kurv så udføres denne funktion der sender anmodning til endpoint der sletter fra express-session. 
 async function fjernFraKurv(productId) {
@@ -40,7 +37,7 @@ async function fjernFraKurv(productId) {
     } catch (error) {
       console.error('Fejl under fjernFraKurv:', error);
     }
-  }
+}
 
 // vis kurv (lige nu kun id) og knap til at gennemføre bestilling. bestilling bliver nu gemt i db
 window.addEventListener("DOMContentLoaded", async () => {
@@ -84,20 +81,11 @@ if (result && result.length > 0) {
 } else {
     // Hvis der ikke er nogen produkter, vis en besked
     kurvElement.textContent = "Ingen produkter i kurven";
-}
-
-
-
-
-
-        
+}       
     } catch (error) {
         console.error("Fejl under indlæsning af kurvdata:", error);
     }
 });
-
-
-
 
 // Funktion til at håndtere klik
 async function placedorder() {

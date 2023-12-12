@@ -14,7 +14,6 @@ document.getElementById("create").addEventListener("click", function () {
       let password = document.getElementById("password").value;
       let email = document.getElementById("email").value;
       
-  
       // Send variablerne til serveren
       fetch("/users/create", {
         method: "POST",
@@ -28,7 +27,7 @@ document.getElementById("create").addEventListener("click", function () {
           lastname: lastname,
           email: email
         }),
-      })
+      }) // Sender brugeren til login siden eller giver en fejl
         .then((response) => {
           if (response.ok) {
             console.log(response.status);
