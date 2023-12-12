@@ -2,7 +2,6 @@
 
 document.getElementById("create").addEventListener("click", function () {
     if (
-      // alle felter skal være udfyldt
       document.getElementById("username").value !== "" &&
       document.getElementById("password").value !== "" &&
       document.getElementById("firstname").value !== "" &&
