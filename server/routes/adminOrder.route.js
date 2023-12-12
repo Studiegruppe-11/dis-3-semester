@@ -75,7 +75,7 @@ router.get('/finishedorders', async (req, res) => {
     }
 });
 
-// når der klikkes på at ordren er færdig, så opdateres status til finished. 
+// når der klikkes på 
 router.post('/updatestatus', async (req, res) => {
     try {
       const pool = await connection.poolPromise;
