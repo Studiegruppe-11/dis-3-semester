@@ -6,6 +6,7 @@ const path = require("path");
 const session = require("express-session");
 const app = express();
 const http = require("http").Server(app);
+// setupPing bruges ikke?
 const setupPing = require('./utility/pingsocket.js');
 const setupOrderSocket = require('./utility/orderSocket.js');
 
@@ -14,6 +15,7 @@ const cloudinary = require('cloudinary').v2;
 const fileUpload = require('express-fileupload'); // For handling file uploads
 
 // Favicon 
+// Fixes efter makro
 // var favicon = require('serve-favicon');
 
 // Til github webhook for automatisk pull 
@@ -39,6 +41,8 @@ app.use(express.static(path.join(__dirname, "../client")));
 // Favicon
 // app.use(favicon(path.join(__dirname, '../client/images', 'favicon.ico')));
 
+
+// Vi kunne ikke få Redis til at virke, så vi bruger bare express-session, selvom det er dårligt til skalering med load balancers.
 
 
 ///////// Redis session storage //////////
@@ -146,7 +150,7 @@ app.get("/admin/upload", (req, res) => {
 });
 
 
-// Admin filer
+// Admin filer (skal tjekke om dette bruges, da vi bare har lavet redirect hvis en admin bruger ikke er logget ind.)
 // Nedenstående skal udkommenteres og så skal vi bruge den fra adminRoute.js (lige nu  er det omvendt), så kan vi også bruge isAdmin middleware funktionen. 
 // Alternativt kan vi måske bare have den herinde med det andet middleware, ville bare være fedt at have alt admin login i adminRoute.js
 app.get("/admin", (req, res) => {
@@ -192,6 +196,7 @@ setupOrderSocket(http);
 // twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
 // twilio sms, hvor man skriver til et endpoint på serveren, som så sender en sms tilbage. endpoint defineret på twilio.com
 
+// Ryk nedenstående til en anden fil, så det ikke er i server.js. Evt. utilities.
 const { MessagingResponse } = require('twilio').twiml;
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -259,10 +264,6 @@ app.post('/sms', (req, res) => {
 
 //TWILIO SLUT
 
-
-
-
-
 // start server på digitalocean, som vi bruger lige nu. 
 http.listen(3000, "164.90.228.42", () => {
   console.log("Serveren er åben på port 3000");
@@ -270,11 +271,12 @@ http.listen(3000, "164.90.228.42", () => {
 
 
 // // Start server on localhost, som vi skal bruge når vi aflevere, så Mikkel kan starte på sin PC lokalt. 
+// Vi skal tjekke om dette virker
+
 // const port = 3000;
 // app.listen(port, () => {
 //   console.log(`Server is running on http://localhost:${port}`);
 // });
-
 
 
 // Global error handling middleware

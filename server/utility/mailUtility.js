@@ -4,12 +4,14 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 
 // Gmail brugerens mail + applikationskode (normalt password kan ikke bruges)
+// Ligger også i .env filen på serveren
 // const gUser = 'skoleprojektdis@gmail.com';
 // const gPswd = 'gagj xqup tjcu xqdw';
 
 const gUser = process.env.GMAIL_USER;
 const gPswd = process.env.GMAIL_PASS;
 
+// Opret transporter, som er en forbindelse til Gmail serveren
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
@@ -18,7 +20,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-
+// Funktion til at sende mails, tager modtager, emne, tekst og html som parametre
 async function sendMail(recipients, subject, text, html) {
   const mailOptions = {
     from: "Your Service <gUser>",
@@ -28,12 +30,13 @@ async function sendMail(recipients, subject, text, html) {
     html: html
   };
 
+  // Send mailen og log resultatet
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log("Message sent: %s", info.messageId);
   } catch (error) {
     console.error("Error in sending email:", error);
-    throw error; // Rethrow the error for further handling
+    throw error;
   }
 }
 

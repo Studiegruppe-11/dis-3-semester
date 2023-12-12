@@ -9,16 +9,15 @@ const path = require('path');
 const { uploadImage } = require('../utility/multipleImgUploadUtility.js');
 const { fetchImagesFromCloudinary } = require('../utility/cdnFetchUtility.js');
 
-
-// Set up multer for memory storage and file size limits
+// Konfigurer multer til hukommelseslagring og filstørrelsesgrænser
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage, limits: { fileSize: 1024 * 1024 * 5 } }); // 5MB limit
+const upload = multer({ storage: storage, limits: { fileSize: 1024 * 1024 * 5 } }); // 5MB grænse
 
-// Route to handle multiple image uploads
+// Rute til håndtering af upload af flere billeder
 router.post('/upload/images', upload.array('image', 8), async (req, res) => {
     try {
         if (!req.files || req.files.length === 0) {
-            return res.status(400).send('No files uploaded.');
+            return res.status(400).send('Ingen filer uploadet.');
         }
 
         const uploadPromises = req.files.map(async file => {
@@ -28,30 +27,27 @@ router.post('/upload/images', upload.array('image', 8), async (req, res) => {
             fs.unlinkSync(tmpFilePath);
             console.log(result);
             console.log(result.url);
-            return result; // Make sure this is the URL you want to return
+            return result; // Sørg for, at dette er den URL, du ønsker at returnere
         });
 
-        const results = await Promise.all(uploadPromises); // Store the URLs in 'results'
+        const results = await Promise.all(uploadPromises); // Gem URL'erne i 'results'
         console.log(results);
-        res.status(200).json({ message: 'Images uploaded successfully', urls: results }); // Use 'results' here
+        res.status(200).json({ message: 'Billeder uploadet med succes', urls: results }); // Brug 'results' her
     } catch (error) {
-        console.error('Error uploading images:', error);
-        res.status(500).send('Error uploading images');
+        console.error('Fejl ved upload af billeder:', error);
+        res.status(500).send('Fejl ved upload af billeder');
     }
 });
 
-// Route to fetch images from Cloudinary
+// Rute til at hente billeder fra Cloudinary
 router.get('/fetch', async (req, res) => {
     try {
-      const images = await fetchImagesFromCloudinary('joebilleder'); // Replace with your folder name
+      const images = await fetchImagesFromCloudinary('joebilleder'); // Erstat med dit mappenavn
       res.json(images);
     } catch (error) {
-      console.error('Error in route - fetching images:', error);
-      res.status(500).send('Error fetching images');
+      console.error('Fejl i rute - henter billeder:', error);
+      res.status(500).send('Fejl ved hentning af billeder');
     }
   });
-
-  
-
 
 module.exports = router;

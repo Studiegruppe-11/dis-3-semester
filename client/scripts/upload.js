@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     });  
 
 
-
+// vis navn på admin logget ind
 document.getElementById('uploadForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -46,7 +46,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
             const links = data.urls.map(url => `<a href="${url}" target="_blank" style="color: #f7c1d9; margin-top: 10px; margin-bottom: 10px;">${url}</a>`).join('<br>');
             document.getElementById('uploadStatus').innerHTML = `Upload successful! Her er dine links: <br>${links}`;
         
-            // Add a slight delay before fetching images
+            // Tilføjer delay, så billederne vises efter er uploaded. Uden delay prøver den at vise billederne før de er uploaded.
             setTimeout(fetchImagesFromCDN, 2000); // Increase delay to 2 seconds
         } else {
             document.getElementById('uploadStatus').textContent = 'Upload successful but no URLs returned.';
@@ -59,6 +59,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     });
 });
 
+// Fetcher billeder fra CDN og viser dem i browseren
 function fetchImagesFromCDN() {
     fetch('/images/fetch')
       .then(response => response.json())
@@ -66,10 +67,10 @@ function fetchImagesFromCDN() {
         const container = document.getElementById('cdnImages');
         container.innerHTML = ''; // Clear existing images before appending new ones
         urls.forEach(url => {
-          const img = document.createElement('img');
+          const img = document.createElement('img'); // Definerer img element og styler det
           img.src = url;
-          img.style.width = '100px'; // adjust as needed
-          img.style.height = '100px'; // adjust as needed
+          img.style.width = '100px'; 
+          img.style.height = '100px';
           img.style.objectFit = 'cover';
           img.style.marginRight = '10px';
           img.style.borderRadius = '5px';
