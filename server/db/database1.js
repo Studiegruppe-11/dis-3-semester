@@ -1,5 +1,4 @@
 // root/server/db/database1.js
-// dette er den der bruges
 
 // Ansvarlig for at oprette og eksportere en forbindelsespool til din MySQL-database ved hjælp af mysql2/promise biblioteket. Den bruger miljøvariabler til at konfigurere forbindelsen, som er defineret i .env filen i roden af dit projekt.
 // require statements: Importerer nødvendige moduler. path og dotenv bruges til at håndtere miljøvariabler, og mysql2/promise bruges til at oprette en forbindelse til MySQL-databasen.
