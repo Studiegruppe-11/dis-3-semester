@@ -3,16 +3,12 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
+const bcrypt = require('bcrypt');
+
 const { sendMail } = require('../utility/mailUtility');
 
-// hashing imports
-const bcrypt = require('bcrypt');
+// Salt rounds
 const saltRounds = 10;
-
-
-// Importer function til at sende mail
-const { sendWelcomeEmail } = require('../utility/mailUtility.js');
-
 
 // Endpoint for getting all customers
 router.get('/users/customers', async (req, res) => {
@@ -29,7 +25,6 @@ router.get('/users/customers', async (req, res) => {
     }
 });
 
-
 // Opret bruger i DB
 router.post('/users/create', async (req, res) => {
   const {
@@ -41,7 +36,7 @@ router.post('/users/create', async (req, res) => {
   } = req.body;
 
 try {
-      // Hash the password
+      // Hasher passwordet
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   const pool = await connection.poolPromise;
@@ -51,10 +46,10 @@ try {
   `;
   const values = [username, hashedPassword, firstname, lastname, email];
   
-  // Insert the user into the database
+  // Udfør SQL-forespørgslen her
   const [rows] = await pool.query(query, values);
 
-  // If the insert was successful and we have an inserted user's id
+// Hvis der er et insertId, er brugeren oprettet 
   if (rows.insertId) {
     // Call the sendMail function from mailUtility
     await sendMail(email, "Velkommen til Joe", `Hej ${firstname}, Velkommen til Joe's app!`, `<b>Hi ${firstname}</b>,<br>Vi er glade for at have dig med ombord..`);
@@ -72,23 +67,23 @@ try {
 // Undersøg om login er korrekt.
 router.post("/users/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log("Login attempt for username:", username); // Log the username attempting to login
+  console.log("Login attempt for username:", username); // Logge brugernavn, der forsøger at logge ind
 
   const pool = await connection.poolPromise;
   try {
-    // Retrieve user by username
+    // Hent brugeren fra databasen baseret på brugernavnet
     const [rows] = await pool.query('SELECT * FROM customers WHERE username = ?', [username]);
 
-    console.log("Number of users fetched:", rows.length); // Log the number of users fetched
+    console.log("Number of users fetched:", rows.length); // Logger antallet af brugere, der er hentet
 
     if (rows.length > 0) {
       const user = rows[0];
 
-      console.log("Fetched user data for:", user.username); // Log the username of the fetched user
+      console.log("Fetched user data for:", user.username); // Logger brugernavnet for den hentede bruger
 
       // Compare hashed password
       const match = await bcrypt.compare(password, user.password);
-      console.log("Password match result:", match); // Log the result of the password comparison
+      console.log("Password match result:", match); // Logger resultatet af sammenligningen af adgangskoder
 
       if (match) {
         // Passwords match, set session details

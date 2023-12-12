@@ -1,5 +1,7 @@
 // root/server/utility/orderSocket.js
+const socketIO = require('socket.io');
 
+// Bruger database connection pool fra root/server/db/database1.js
 const connection = require('../db/database1.js');
 
 async function getPlacedOrders() {
@@ -25,7 +27,6 @@ async function getPlacedOrders() {
   }
 }
  
-const socketIO = require('socket.io');
 
 function setupOrderSocket(http) {
   const io = socketIO(http).of('/order');
