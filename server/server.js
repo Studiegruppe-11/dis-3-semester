@@ -31,7 +31,6 @@ cloudinary.config({
 
 const redis = require('redis');
 const connectRedis = require('connect-redis');
-
 const RedisStore = connectRedis(session);
 
 // Configure redis client
