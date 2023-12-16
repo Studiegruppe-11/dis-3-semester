@@ -67,36 +67,41 @@ try {
 // Undersøg om login er korrekt.
 router.post("/users/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log("Login attempt for username:", username);
+  console.log("Login attempt for username:", username); // Logge brugernavn, der forsøger at logge ind
 
+  const pool = await connection.poolPromise;
   try {
-    const pool = await connection.poolPromise;
+    // Hent brugeren fra databasen baseret på brugernavnet
     const [rows] = await pool.query('SELECT * FROM customers WHERE username = ?', [username]);
 
-    console.log("Number of users fetched:", rows.length);
+    console.log("Number of users fetched:", rows.length); // Logger antallet af brugere, der er hentet
 
     if (rows.length > 0) {
       const user = rows[0];
-      console.log("Fetched user data for:", user.username);
 
+      console.log("Fetched user data for:", user.username); // Logger brugernavnet for den hentede bruger
+
+      // Compare hashed password
       const match = await bcrypt.compare(password, user.password);
-      console.log("Password match result:", match);
+      console.log("Password match result:", match); // Logger resultatet af sammenligningen af adgangskoder
 
       if (match) {
+        // Passwords match, set session details
         req.session.userId = user.customer_id;
         req.session.name = user.first_name;
-        console.log("User logged in successfully:", user.username);
+
+        // Send success response
         res.json({ success: true });
       } else {
-        console.log("Password mismatch for user:", username);
+        // Passwords don't match
         res.json({ error: 'Forkert brugernavn eller adgangskode' });
       }
     } else {
-      console.log("No user found with username:", username);
+      // User not found
       res.json({ error: 'Forkert brugernavn eller adgangskode' });
     }
   } catch (error) {
-    console.error("Error during login process for username:", username, error);
+    console.log("Error during login process:", error); // Log any error during the login process
     res.status(500).json({ error: 'Der opstod en fejl under login.' });
   }
 });
