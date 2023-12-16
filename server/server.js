@@ -53,6 +53,10 @@ app.use(express.static(path.join(__dirname, "../client")));
 const RedisStore = require("connect-redis").default(session);
 const { createClient } = require('redis');
 
+console.log(process.env.REDIS_PASS);
+console.log(process.env.REDIS_HOST);
+console.log(process.env.REDIS_PORT);
+
 const redisClient = createClient({
   password: process.env.REDIS_PASS, // Replace with your Redis Cloud password
   socket: {
@@ -60,6 +64,7 @@ const redisClient = createClient({
       port: process.env.REDIS_PORT
   }
 });
+
 
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
