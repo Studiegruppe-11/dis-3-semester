@@ -50,7 +50,7 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 ///////// Redis session storage //////////
 
-const RedisStore = require("connect-redis")(session);
+const RedisStore = require("connect-redis").default(session);
 const { createClient } = require('redis');
 
 const redisClient = createClient({
@@ -294,13 +294,13 @@ app.post('/sms', (req, res) => {
 
 
 // til session storage
-app.use(
-  session({
-    secret: "my-secret-key",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+// app.use(
+//   session({
+//     secret: "my-secret-key",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
 
 
 
