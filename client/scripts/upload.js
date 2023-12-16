@@ -80,12 +80,10 @@ function fetchImagesFromCDN() {
       .catch(error => console.error('Error fetching images:', error));
 }
 
-// Fetcher billeder fra CDN og viser dem i browseren når siden er loaded
 document.addEventListener('DOMContentLoaded', function() {
     fetchImagesFromCDN();
 });
 
-// Preview af billeder før upload
 function previewImages() {
     var preview = document.getElementById('preview');
     var fileChosen = document.getElementById('file-chosen');
@@ -98,14 +96,13 @@ function previewImages() {
     }
 
     function readAndPreview(file) {
-        // Sikrer at filen er et billede
+        // Make sure `file.name` matches our extensions criteria
         if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
             return alert(file.name + " is not an image");
         } 
 
         var reader = new FileReader();
 
-        // Tilføjer billede til preview når det er loaded
         reader.addEventListener("load", function() {
             var image = new Image();
             image.height = 100;

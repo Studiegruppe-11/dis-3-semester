@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
 
+
+
        // Opret separate kasser for hver sandwich
         sandwich.forEach((sandwich) => {
             let menuItem = document.createElement("div");
@@ -101,7 +103,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+
+
+
 console.log("Bestil.js loaded");
+
+
 
 window.addEventListener("DOMContentLoaded", async () => {
     try {
