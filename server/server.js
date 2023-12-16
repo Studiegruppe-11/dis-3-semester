@@ -27,8 +27,46 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
-// console.log(cloudinary.config()); 
+//########## REDIS NYT FORSØG ###########
 
+const session = require('express-session');
+const redis = require('redis');
+const connectRedis = require('connect-redis');
+
+const RedisStore = connectRedis(session);
+
+// Configure redis client
+const redisClient = redis.createClient({
+  host: 'localhost',
+  port: 6379,
+});
+
+const store = new RedisStore({ client: redisClient });
+
+redisClient.on('error', (err) => {
+  console.log('Could not establish a connection with redis. ' + err);
+});
+
+
+redisClient.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+// Configure session middleware
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: 'secret$%^134',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      secure: false, // if true only transmit cookie over https
+      httpOnly: false, // if true prevent client side JS from reading the cookie 
+      maxAge: 1000 * 60 * 10 // session max age in miliseconds
+  }
+}))
+
+
+////// redis slut /////////
   
 // Middlewares
 app.use(cors());
@@ -97,39 +135,6 @@ app.use(express.static(path.join(__dirname, "../client")));
 //         maxAge: 1000 * 60 * 60 * 24 // 24 hours
 //     }
 // }));
-
-//########## REDIS NYT FORSØG ###########
-
-const redis = require('redis');
-const connectRedis = require('connect-redis').default;
-
-const RedisStore = connectRedis(session)
-
-// Configure redis client
-const redisClient = redis.createClient({
-  host: 'localhost',
-  port: 6379,
-});
-
-redisClient.on('error', (err) => console.log('Redis Client Error', err));
-
-
-redisClient.on('connect', () => {
-  console.log('Connected to Redis');
-});
-
-// Configure session middleware
-app.use(session({
-  store: new RedisStore({ client: redisClient }),
-  secret: 'secret$%^134',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      secure: false, // if true only transmit cookie over https
-      httpOnly: false, // if true prevent client side JS from reading the cookie 
-      maxAge: 1000 * 60 * 10 // session max age in miliseconds
-  }
-}))
 
 
 ////// redis slut /////////
