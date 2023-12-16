@@ -75,30 +75,61 @@ app.use(express.static(path.join(__dirname, "../client")));
 // ###### NY REDIS SESSION STORAGE ########
 
 
-const redis = require('redis');
-const RedisStore = require("connect-redis").default(session);
+// const redis = require('redis');
+// const RedisStore = require("connect-redis").default(session);
 
-// Create Redis Client
+// // Create Redis Client
+// const redisClient = redis.createClient({
+//   url: 'redis://127.0.0.1:6379' // Local Redis URL
+// });
+
+// redisClient.on('error', (err) => console.log('Redis Client Error', err));
+
+// //Configure session middleware to use Redis
+// app.use(session({
+//     store: new RedisStore({ client: redisClient }),
+//     secret: process.env.SESSION_SECRET || 'your-secret-key', // Use an environment variable for the secret
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         secure: process.env.NODE_ENV === 'production', // Use environment variable to set secure flag
+//         httpOnly: true,
+//         maxAge: 1000 * 60 * 60 * 24 // 24 hours
+//     }
+// }));
+
+//########## REDIS NYT FORSØG ###########
+
+const redis = require('redis');
+const connectRedis = require('connect-redis');
+
+const RedisStore = connectRedis(session)
+
+// Configure redis client
 const redisClient = redis.createClient({
-  url: 'redis://127.0.0.1:6379' // Local Redis URL
+  host: 'localhost',
+  port: 6379,
 });
 
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
-//Configure session middleware to use Redis
+
+redisClient.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+// Configure session middleware
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
-    secret: process.env.SESSION_SECRET || 'your-secret-key', // Use an environment variable for the secret
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: process.env.NODE_ENV === 'production', // Use environment variable to set secure flag
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 // 24 hours
-    }
-}));
-
-
+  store: new RedisStore({ client: redisClient }),
+  secret: 'secret$%^134',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      secure: false, // if true only transmit cookie over https
+      httpOnly: false, // if true prevent client side JS from reading the cookie 
+      maxAge: 1000 * 60 * 10 // session max age in miliseconds
+  }
+}))
 
 
 ////// redis slut /////////
