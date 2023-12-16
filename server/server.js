@@ -183,8 +183,6 @@ app.use('/images', imageRoute);
 
 // Send client files from server
 
-app.use(express.static(__dirname + '/client'));
-
 app.get("/users/create", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/create.html"));
 });
