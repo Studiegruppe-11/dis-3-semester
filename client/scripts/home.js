@@ -16,6 +16,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         // Håndter fejlhåndtering her
       }
     });
+
+
     
 document.getElementById("logout").addEventListener("click", async () => {
 
