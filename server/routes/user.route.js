@@ -91,7 +91,7 @@ router.post("/users/login", async (req, res) => {
         req.session.name = user.first_name;
 
         // Send success response
-        res.json({ success: true });
+        res.send({ success: true });
       } else {
         // Passwords don't match
         res.json({ error: 'Forkert brugernavn eller adgangskode' });
