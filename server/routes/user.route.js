@@ -122,7 +122,7 @@ router.get("/users/logout", async (req, res) => {
       res.clearCookie('connect.sid'); // 'connect.sid' is the default session cookie name
 
       // Redirect to login page or send a success response
-      res.redirect('/login');
+      res.redirect('/');
   });
 
 
