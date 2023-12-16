@@ -111,9 +111,11 @@ router.post("/users/login", async (req, res) => {
 
 router.get("/users/logout", async (req, res) => {
 
-    // Slet brugernavn og ID fra sessionen
-    delete req.session.userId;
-    delete req.session.name;
+  req.session.destroy(function(err) {
+    if (err) {
+        console.error("Error destroying session:", err);
+    }
+});
     res.json({ loggedOut: true });
   }
   );
