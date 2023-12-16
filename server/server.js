@@ -41,7 +41,7 @@ const redisClient = redis.createClient({
 const store = new RedisStore({ client: redisClient });
 
 redisClient.on('error', (err) => {
-  console.log('Redis error: ', err);
+  console.log('Could not establish a connection with redis. ' + err);
 });
 
 redisClient.on('connect', () => {
