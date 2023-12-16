@@ -10,6 +10,10 @@ const http = require("http").Server(app);
 const setupPing = require('./utility/pingsocket.js');
 const setupOrderSocket = require('./utility/orderSocket.js');
 
+// REDIS
+const RedisStore = require('connect-redis')(session);
+const { createClient } = require('redis');
+
 // Til cloudinary
 const cloudinary = require('cloudinary').v2;
 const fileUpload = require('express-fileupload'); // For handling file uploads
@@ -46,6 +50,21 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 
 ///////// Redis session storage //////////
+
+const redisClient = createClient({
+  password: '*******', // Replace with your password
+  socket: {
+      host: 'redis-11219.c293.eu-central-1-1.ec2.cloud.redislabs.com',
+      port: 11219
+  }
+});
+
+redisClient.connect().catch(console.error);
+
+
+
+
+
 
 // const redis = require('redis');
 // const RedisStore = require("connect-redis").default
