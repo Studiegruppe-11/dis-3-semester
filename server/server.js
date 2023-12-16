@@ -68,7 +68,7 @@ redisClient.connect();
 app.use(session({
     store: new RedisStore({ 
       client: redisClient,
-      ttl: 60 }), // I sekunder: 60 sekunder
+      ttl: 60 }), // I sekunder: 60 sekunder, virker ikke
       // ttl: 60 *60 * 24 }), // I sekunder: 24 timer
     secret: 'tester', // Eventuelt ændre denne
     resave: false,
@@ -76,7 +76,8 @@ app.use(session({
     cookie: {
         secure: false, // Denne burde kunne være true, men det virker ikke. Måske fordi den forbinder direkte til localhost og altså ikke kontakte en ekstern server/db?
         httpOnly: false,
-        maxAge: 1000 * 60 * 60 * 24 // I millisekunder: 24 timer
+        maxAge: 1000 * 60 // cookies: I millisekunder: 60 sekunder
+        // maxAge: 1000 * 60 * 60 * 24 // cookies: I millisekunder: 24 timer
     }
 }));
 
