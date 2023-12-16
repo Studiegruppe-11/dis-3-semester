@@ -29,7 +29,6 @@ cloudinary.config({
 
 //########## REDIS NYT FORSØG ###########
 
-const session = require('express-session');
 const redis = require('redis');
 const connectRedis = require('connect-redis');
 
