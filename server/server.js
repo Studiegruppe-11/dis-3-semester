@@ -66,15 +66,17 @@ redisClient.connect();
 
 //Configure session middleware to use Redis
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
+    store: new RedisStore({ 
+      client: redisClient,
+      ttl: 60 }), // I sekunder: 24 timer
+      // ttl: 60 *60 * 24 }), // I sekunder: 24 timer
     secret: 'tester', // Replace this with your own secret
     resave: false,
     saveUninitialized: false,
     cookie: {
         secure: false, // Set to true if using https
         httpOnly: false,
-        maxAge: 24 // 24 sekunder
-        // maxAge: 1000 * 60 * 60 * 24 // 24 hours
+        maxAge: 1000 * 60 * 60 * 24 // I millisekunder: 24 timer
     }
 }));
 
