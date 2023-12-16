@@ -111,12 +111,19 @@ router.post("/users/login", async (req, res) => {
 
 router.get("/users/logout", async (req, res) => {
 
-  req.session.destroy(err => {
-    if (err) {
-        return console.log(err);
-    }
-    res.redirect("/")
-});
+    // Destroy the session
+    req.session.destroy(function(err) {
+      if(err) {
+          console.error("Error destroying session:", err);
+          return res.status(500).send("Could not log out.");
+      }
+
+      // Optionally, you can also clear the client-side cookie
+      res.clearCookie('connect.sid'); // 'connect.sid' is the default session cookie name
+
+      // Redirect to login page or send a success response
+      res.redirect('/login');
+  });
 
 
   // Slet brugernavn og ID fra sessionen
