@@ -72,6 +72,35 @@ app.use(express.static(path.join(__dirname, "../client")));
 // }));
 
 
+// ###### NY REDIS SESSION STORAGE ########
+
+
+const redis = require('redis');
+const RedisStore = require("connect-redis")(session);
+
+// Create Redis Client
+const redisClient = redis.createClient({
+  url: 'redis://127.0.0.1:6379' // Local Redis URL
+});
+
+redisClient.on('error', (err) => console.log('Redis Client Error', err));
+
+//Configure session middleware to use Redis
+app.use(session({
+    store: new RedisStore({ client: redisClient }),
+    secret: process.env.SESSION_SECRET || 'your-secret-key', // Use an environment variable for the secret
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production', // Use environment variable to set secure flag
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 // 24 hours
+    }
+}));
+
+
+
+
 ////// redis slut /////////
 
 
