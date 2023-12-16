@@ -50,17 +50,31 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 ///////// Redis session storage //////////
 
-import { createClient } from 'redis';
+const RedisStore = require("connect-redis")(session);
+const { createClient } = require('redis');
 
-const client = createClient();
+const redisClient = createClient({
+  password: process.env.REDIS_PASS, // Replace with your Redis Cloud password
+  socket: {
+      host: process.env.REDIS_HOST, 
+      port: process.env.REDIS_PORT
+  }
+});
 
-client.on('error', err => console.log('Redis Client Error', err));
+redisClient.on('error', err => console.log('Redis Client Error', err));
+await redisClient.connect();
 
-await client.connect();
-
-
-
-
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: "my-secret-key", // Replace with your secret key
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      secure: false, // Set to true if using https
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 // 24 hours
+  }
+}));
 
 // const redis = require('redis');
 // const RedisStore = require("connect-redis").default
@@ -93,22 +107,7 @@ await client.connect();
 
 
 
-// til session storage
-app.use(
-  session({
-    secret: "my-secret-key",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
-
-
-
-module.exports = {
-  app,
-  http,
-};
 
 
 // ############
@@ -278,6 +277,25 @@ app.post('/sms', (req, res) => {
 // setInterval(fetchAndSendMessage, 60000);
 
 //TWILIO SLUT
+
+
+
+// til session storage
+app.use(
+  session({
+    secret: "my-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+
+
+
+module.exports = {
+  app,
+  http,
+};
 
 // start server på digitalocean, som vi bruger lige nu. 
 http.listen(3000, "164.90.228.42", () => {
