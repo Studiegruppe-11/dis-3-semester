@@ -60,6 +60,8 @@ const RedisStore = require("connect-redis").default
 const redisClient = redis.createClient();
 
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
+redisClient.on('connect', (err) => console.log('Connected to redis successfully'));
+
 redisClient.connect();
 
 //Configure session middleware to use Redis
