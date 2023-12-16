@@ -50,10 +50,6 @@ app.use(express.static(path.join(__dirname, "../client")));
 
 ///////// Redis session storage //////////
 
-console.log(process.env.REDIS_PASS);
-console.log(process.env.REDIS_HOST);
-console.log(process.env.REDIS_PORT);
-
 const RedisStore = require("connect-redis").default(session);
 const { createClient } = require('redis');
 
