@@ -62,8 +62,21 @@ const redisClient = createClient({
 });
 
 redisClient.on('error', err => console.log('Redis Client Error', err));
-await redisClient.connect();
 
+// Async function to connect to Redis
+async function connectToRedis() {
+  try {
+      await redisClient.connect();
+      console.log('Connected to Redis');
+  } catch (err) {
+      console.error('Could not connect to Redis:', err);
+  }
+}
+
+// Call the function to connect to Redis
+connectToRedis();
+
+// Configure session middleware to use Redis
 app.use(session({
   store: new RedisStore({ client: redisClient }),
   secret: "my-secret-key", // Replace with your secret key
