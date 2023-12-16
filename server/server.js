@@ -38,15 +38,16 @@ const redisClient = redis.createClient({
   port: 6379,
 });
 
-const store = new RedisStore({ client: redisClient });
 
 redisClient.on('error', (err) => {
-  console.log('Could not establish a connection with redis. ' + err);
+  console.log('Redis error: ', err);
 });
 
 redisClient.on('connect', () => {
   console.log('Connected to Redis');
 });
+
+const store = new RedisStore({ client: redisClient });
 
 // Configure session middleware
 app.use(session({
