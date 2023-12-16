@@ -30,8 +30,7 @@ cloudinary.config({
 //########## REDIS NYT FORSØG ###########
 
 const redis = require('redis');
-const connectRedis = require('connect-redis');
-const RedisStore = connectRedis(session);
+const RedisStore = require("connect-redis").default;
 
 // Configure redis client
 const redisClient = redis.createClient({
@@ -45,14 +44,13 @@ redisClient.on('error', (err) => {
   console.log('Could not establish a connection with redis. ' + err);
 });
 
-
 redisClient.on('connect', () => {
   console.log('Connected to Redis');
 });
 
 // Configure session middleware
 app.use(session({
-  store: new RedisStore({ client: redisClient }),
+  store: store,
   secret: 'secret$%^134',
   resave: false,
   saveUninitialized: false,
@@ -61,7 +59,7 @@ app.use(session({
       httpOnly: false, // if true prevent client side JS from reading the cookie 
       maxAge: 1000 * 60 * 10 // session max age in miliseconds
   }
-}))
+}));
 
 
 ////// redis slut /////////
