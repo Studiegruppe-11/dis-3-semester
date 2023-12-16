@@ -65,7 +65,7 @@ redisClient.connect();
 //Configure session middleware to use Redis
 app.use(session({
     store: new RedisStore({ client: redisClient }),
-    secret: tester, // Replace this with your own secret
+    secret: 'tester', // Replace this with your own secret
     resave: false,
     saveUninitialized: false,
     cookie: {
