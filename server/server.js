@@ -51,15 +51,40 @@ app.use(express.static(path.join(__dirname, "../client")));
 ///////// Redis session storage //////////
 
 
-import { createClient } from 'redis';
+// Redis session storage (local host)
 
-const client = await createClient()
-  .on('error', err => console.log('Redis Client Error', err))
-  .connect();
+const redis = require('redis');
+const RedisStore = require("connect-redis")(session)
 
-await client.set('key', 'value');
-const value = await client.get('key');
-await client.disconnect();
+// Create Redis Client
+const redisClient = redis.createClient({
+    url: process.env.REDIS_URL,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD
+});
+
+redisClient.on('error', (err) => console.log('Redis Client Error', err));
+redisClient.connect();
+
+//Configure session middleware to use Redis
+app.use(session({
+    store: new RedisStore({ client: redisClient }),
+    secret: process.env.REDIS_SECRET, // Replace this with your own secret
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true, // Set to true if using https
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 // 24 hours
+    }
+}));
+
+
+// Redis session storage (digital ocean)
+
+
+
+
 
 // const redis = require('redis');
 // const RedisStore = require("connect-redis").default
