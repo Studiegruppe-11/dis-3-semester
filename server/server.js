@@ -101,7 +101,7 @@ app.use(express.static(path.join(__dirname, "../client")));
 //########## REDIS NYT FORSØG ###########
 
 const redis = require('redis');
-const connectRedis = require('connect-redis');
+const connectRedis = require('connect-redis').default;
 
 const RedisStore = connectRedis(session)
 
