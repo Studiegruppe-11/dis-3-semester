@@ -51,45 +51,15 @@ app.use(express.static(path.join(__dirname, "../client")));
 ///////// Redis session storage //////////
 
 
-const RedisStore = require("connect-redis")(session);
-const { createClient } = require('redis');
+import { createClient } from 'redis';
 
-const redisClient = createClient({
-  password: process.env.REDIS_PASS, // Replace with your Redis Cloud password
-  socket: {
-      host: process.env.REDIS_HOST, 
-      port: process.env.REDIS_PORT
-  }
-});
+const client = await createClient()
+  .on('error', err => console.log('Redis Client Error', err))
+  .connect();
 
-
-redisClient.on('error', err => console.log('Redis Client Error', err));
-
-// Async function to connect to Redis
-async function connectToRedis() {
-  try {
-      await redisClient.connect();
-      console.log('Connected to Redis');
-  } catch (err) {
-      console.error('Could not connect to Redis:', err);
-  }
-}
-
-// Call the function to connect to Redis
-connectToRedis();
-
-// Configure session middleware to use Redis
-app.use(session({
-  store: new RedisStore({ client: redisClient }),
-  secret: "my-secret-key", // Replace with your secret key
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      secure: false, // Set to true if using https
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 24 hours
-  }
-}));
+await client.set('key', 'value');
+const value = await client.get('key');
+await client.disconnect();
 
 // const redis = require('redis');
 // const RedisStore = require("connect-redis").default
