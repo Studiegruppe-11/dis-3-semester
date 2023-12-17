@@ -191,6 +191,8 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/pages/login.html"));
 });
 
+
+
 // Til automatisk pull fra github
 app.post('/', function (req, res) {
   exec('sh ../deploy.sh', (err, stdout, stderr) => {

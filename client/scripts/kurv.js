@@ -1,4 +1,7 @@
 // root/client/scripts/kurv.js
+
+
+// Hvorfor ligger dette her??
 window.addEventListener("DOMContentLoaded", async () => {
     try {
       const response = await fetch("/users/show");
