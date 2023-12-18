@@ -152,23 +152,16 @@ app.post('/smstext', (req, res) => {
   if (req.body.Body == 'serverstatus') {
     twiml.message('Serveren er online.');
   } else if (req.body.Body == 'dagens omsætning') {
-    // Fetch the /totalrevenue endpoint here
-    fetch('/totalrevenue')
-      .then(response => response.json())
-      .then(data => {
-        twiml.message(`Dagens omsætning er ${data.total_price}.`);
-      })
-      .catch(error => {
-        console.error(error);
-        twiml.message('Der opstod en fejl ved hentning af omsætning.');
-      });
+   
+    twiml.message('Dagens omsætning er: 1000 kr.');
+
+    
   } else {
     twiml.message('Prøv at skriv noget andet.');
   }
 
   res.type('text/xml').send(twiml.toString());
 });
-
 
 //TWILIO SLUT
 
