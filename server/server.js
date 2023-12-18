@@ -152,7 +152,7 @@ app.post('/sms', (req, res) => {
   if (req.body.Body == 'serverstatus') {
     twiml.message(' Serveren er online.');
   } else if (req.body.Body == 'dagens omsætning') {
-    twiml.message(' Snart vil du kunne modtage dagens omsætning.');
+    twiml.message('Snart vil du kunne modtage dagens omsætning.');
     // fetch /totalrevenue
   } else {
     twiml.message(
@@ -162,6 +162,7 @@ app.post('/sms', (req, res) => {
 
   res.type('text/xml').send(twiml.toString());
 });
+
 
 //TWILIO SLUT
 
