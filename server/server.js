@@ -146,7 +146,7 @@ const { MessagingResponse } = require('twilio').twiml;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post('/sms', (req, res) => {
+app.post('/smstext', (req, res) => {
   const twiml = new MessagingResponse();
 
   if (req.body.Body == 'serverstatus') {
