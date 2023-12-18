@@ -1,7 +1,4 @@
 // root/client/scripts/kurv.js
-
-
-// Hvorfor ligger dette her??
 window.addEventListener("DOMContentLoaded", async () => {
     try {
       const response = await fetch("/users/show");
@@ -20,10 +17,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         // Håndter fejlhåndtering her
       }
     });
-
- 
- 
-
 // Hvis der klikkes på fjern fra kurv så udføres denne funktion der sender anmodning til endpoint der sletter fra express-session. 
 async function fjernFraKurv(productId) {
     try {
@@ -87,21 +80,11 @@ if (result && result.length > 0) {
 } else {
     // Hvis der ikke er nogen produkter, vis en besked
     kurvElement.textContent = "Ingen produkter i kurven";
-}
-
-
-
-
-
-        
+}        
     } catch (error) {
         console.error("Fejl under indlæsning af kurvdata:", error);
     }
 });
-
-
-
-
 // Funktion til at håndtere klik
 async function placedorder() {
   try {
