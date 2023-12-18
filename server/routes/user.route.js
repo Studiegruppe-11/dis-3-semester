@@ -52,8 +52,8 @@ try {
 // Hvis der er et insertId, er brugeren oprettet 
   if (rows.insertId) {
     // Call the sendMail function from mailUtility
-    await sendMail(email, "Velkommen til Joe", `Hej ${firstname}, Velkommen til Joe's app!`, `<b>Hi ${firstname}</b>,<br>Vi er glade for at have dig med ombord..`);
-    res.status(201).json({ message: 'Bruger oprettet og velkomstmail afsendt' });
+    await sendMail(email, "Velkommen til Joe", `Hej ${firstname}, velkommen til Joe. Vi er glade for at have dig med om bord.`, `<b>Hej ${firstname}</b>,<br>Velkommen til Joe. Vi er glade for at have dig med om bord. <a href='https://joejuicexam.me'>Tryk her for at gå til forsiden</a>.`);
+        res.status(201).json({ message: 'Bruger oprettet og velkomstmail afsendt' });
   } else {
     res.status(400).json({ error: 'Bruger registrering fejlede' });
   }
