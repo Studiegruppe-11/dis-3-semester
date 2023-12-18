@@ -1,5 +1,4 @@
 // root/client/scripts/login.js
-
 document.getElementById("login").addEventListener("click", async function () {
     // henter username og password fra input felterne og gemmer dem i variablerne username og password.
     let username = document.getElementById("username").value;
