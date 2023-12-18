@@ -169,7 +169,6 @@ app.post('/smstext', (req, res) => {
     }
 
   }
-
     
   } else {
     twiml.message('Prøv at skriv noget andet.');
