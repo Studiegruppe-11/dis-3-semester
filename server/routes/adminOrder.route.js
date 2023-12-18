@@ -1,11 +1,7 @@
-
-
+// root/server/routes/adminOrder.route.js
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database1.js'); // Opdater stien efter behov
-
-
-
 
 // hent total omtæning for i dag
 router.get('/totalRevenuetoday', async (req, res) => {
@@ -20,17 +16,13 @@ router.get('/totalRevenuetoday', async (req, res) => {
             where date = CURDATE()
             and status = "finished"
         `);
-
         const totalPrice = rows[0].total_price;
         res.send({ total_price: totalPrice });
     } catch (error) {
         console.log(error);
         res.status(500).send(error.message);
     }
-
 });
-
-
 
 // hent total omsætning i alt
 router.get('/totalRevenue', async (req, res) => {
@@ -44,16 +36,13 @@ router.get('/totalRevenue', async (req, res) => {
             INNER JOIN products ON placedorders.product_id = products.product_id
             where status = "finished"
         `);
-
         const totalPrice = rows[0].total_price;
         res.send({ total_price: totalPrice });
     } catch (error) {
         console.log(error);
         res.status(500).send(error.message);
     }
-
 });
-  
   
 // hent antal færdige ordrer i dag
 router.get('/finishedorders', async (req, res) => {
@@ -75,7 +64,7 @@ router.get('/finishedorders', async (req, res) => {
     }
 });
 
-// når der klikkes på 
+// Når der trykkes på "Færdig" knappen, så opdateres status i databasen til "finished"
 router.post('/updatestatus', async (req, res) => {
     try {
       const pool = await connection.poolPromise;
@@ -93,11 +82,5 @@ router.post('/updatestatus', async (req, res) => {
       res.status(500).send(error.message);
     }
   });
-  
-
-
-
-
-  
   
   module.exports = router;
