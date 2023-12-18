@@ -1,4 +1,6 @@
 // root/client/scripts/admin.js
+const socket = io();
+
 window.addEventListener("DOMContentLoaded", async () => {
   //  vis navn på admin logget ind
   try {
@@ -146,7 +148,6 @@ document.getElementById("logout").addEventListener("click", async () => {
 // SOCKET PING START
 // Socket til at vise RTT og ping i realtid på admin-siden.
 // Opret en WebSocket-forbindelse til serveren
-const socket = io();
 
 // Lyt efter opdateringer fra serveren
 
@@ -176,6 +177,3 @@ if (data.rtt > 1000) {
   }
   
   });
-
-// SOCKET PING SLUT 
- 
