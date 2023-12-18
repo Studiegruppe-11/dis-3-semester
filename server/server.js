@@ -150,14 +150,20 @@ app.post('/smstext', (req, res) => {
   const twiml = new MessagingResponse();
 
   if (req.body.Body == 'serverstatus') {
-    twiml.message(' Serveren er online.');
+    twiml.message('Serveren er online.');
   } else if (req.body.Body == 'dagens omsætning') {
-    twiml.message('Snart vil du kunne modtage dagens omsætning.');
-    // fetch /totalrevenue
+    // Fetch the /totalrevenue endpoint here
+    fetch('/totalrevenue')
+      .then(response => response.json())
+      .then(data => {
+        twiml.message(`Dagens omsætning er ${data.total_price}.`);
+      })
+      .catch(error => {
+        console.error(error);
+        twiml.message('Der opstod en fejl ved hentning af omsætning.');
+      });
   } else {
-    twiml.message(
-      'Prøv at skriv noget andet.'
-    );
+    twiml.message('Prøv at skriv noget andet.');
   }
 
   res.type('text/xml').send(twiml.toString());
