@@ -1,8 +1,5 @@
 // root/client/scripts/admin.js
-
-
 window.addEventListener("DOMContentLoaded", async () => {
-
   //  vis navn på admin logget ind
   try {
     const response = await fetch("/admins/show");
@@ -18,12 +15,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
   } catch (error) {
       console.log(error);
-      // Håndter fejlhåndtering her
     }
- 
-
-    // test på at vise total omsætning i dag og i alt. skal laves til socket i stedet. 
-  
   // vis total omsætning i dag
   try {
     const response = await fetch("/totalRevenuetoday");
@@ -52,11 +44,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     console.log(error);
   }
 
-// vis alle færdige ordrer på admin siden. Skal også laves til socket i stedet.
+// Henter og viser hvor mange ordrer der er færdiggjort i dag
 try {
   const response = await fetch("/finishedorders");
   const result = await response.json();
-  if (result.finished_orders) {  // Skiftet fra finishedOrders til finished_orders
+  if (result.finished_orders) {
     document.getElementById("finishedOrders").innerHTML = result.finished_orders;
   } else {
     document.getElementById("finishedOrders").innerHTML = "Ingen færdige ordrer i dag";
@@ -67,49 +59,35 @@ try {
 
 });
 
-
-
-
-
-
-
-
-
- 
-
-
-
-// root/client/scripts/admin.js
-
 document.addEventListener('DOMContentLoaded', function () {
-  const socket = io('/order'); // Connect to the '/order' namespace
+  const socket = io('/order');
 
-  // Listen for updates on placed orders
+  // Lyt efter opdateringer på afgivne ordrer
   socket.on('placedOrdersUpdate', function (placedOrders) {
-    // Sort placedOrders based on the lowest placeorders_id first
+    // Sortér placedOrders baseret på den laveste placeorders_id først
     placedOrders.sort((a, b) => a.placeorders_id - b.placeorders_id);
 
-    // Update the placed orders list in the HTML
+    // Opdater listen over afgivne ordrer i HTML
     updatePlacedOrdersList(placedOrders);
   });
 
-  // Function to update the placed orders list in the HTML
+  // Funktion til at opdatere listen over afgivne ordrer i HTML
   function updatePlacedOrdersList(placedOrders) {
     const placedOrdersList = document.getElementById('placedOrdersList');
 
-    // Clear existing content
+    // Fjern eksisterende indhold
     placedOrdersList.innerHTML = '';
 
-    // Add new orders to the list
+    // Tilføj nye ordrer til listen
     placedOrders.forEach((order, index) => {
       const listItem = document.createElement('li');
       listItem.textContent = `${index + 1}. Produkt: ${order.name}  Kundens navn: ${order.first_name}`;
       
-      // Add a button for finishing the order
+      // Tilføj en knap til at færdiggøre ordren
       const finishButton = document.createElement('button');
       finishButton.textContent = 'Færdig';
       finishButton.addEventListener('click', function () {
-        // Send a POST request to '/finished' with the placeorders_id
+        // Send en POST-anmodning til '/finished' med placeorders_id
         finishOrder(order.placedorders_id); // Opdateret her
       });
 
@@ -118,18 +96,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   } 
 
-  // Initial request for placed orders when the page loads
+  // Første anmodning om afgivne ordrer, når siden indlæses
   socket.emit('getPlacedOrders', function (placedOrders) {
-    // Sort placedOrders based on the lowest placeorders_id first
+    // Sortér placedOrders baseret på den laveste placeorders_id først
     placedOrders.sort((a, b) => a.placeorders_id - b.placeorders_id);
 
-    // Update the placed orders list in the HTML
+    // Opdater listen over afgivne ordrer i HTML
     updatePlacedOrdersList(placedOrders);
   });
 
-  // Function to send a POST request to '/finished' with placeorders_id using fetch
+  // Funktion til at sende en POST-anmodning til '/finished' med placeorders_id ved hjælp af fetch
   function finishOrder(placeorders_id) {
-    console.log('Finishing order with placeorders_id:', placeorders_id);
+    console.log('Afslutter ordre med placeorders_id:', placeorders_id);
   
     fetch('/updatestatus', {
       method: 'POST',
@@ -140,21 +118,18 @@ document.addEventListener('DOMContentLoaded', function () {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Order finished:', data);
+        console.log('Ordre afsluttet:', data);
   
-        // Genindlæs siden. Hvis alt bliver lavet til socket så skal den ikke genindlæse siden, da dette vil ske automatisk.
+        // Genindlæs siden. Hvis alt bliver lavet til socket, så skal den ikke genindlæse siden, da dette vil ske automatisk.
         window.location.reload();
       })
       .catch(error => {
-        console.error('Error finishing order:', error);
+        console.error('Fejl ved afslutning af ordre:', error);
       });
   }
 });
 
-
-
-
-  document.getElementById("logout").addEventListener("click", async () => {
+document.getElementById("logout").addEventListener("click", async () => {
 
     try {
         const response = await fetch("/admin/logout");
@@ -166,16 +141,10 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (error) {
         console.log(error);
     } 
-}
-
-);
-
-
-
-
+});
 
 // SOCKET PING START
-// socket til at vise rtt og ping i real time på admin siden.
+// Socket til at vise RTT og ping i realtid på admin-siden.
 // Opret en WebSocket-forbindelse til serveren
 const socket = io();
 
@@ -199,7 +168,8 @@ if (data.rtt > 1000) {
     // Opdater HTML-elementet med ping-oplysninger
     document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
   
-  if(data.ping < 500) {
+  if
+(data.ping < 500) {
       document.getElementById('pingInfo').style.color = 'green';
   } else if (data.ping > 500) {
       document.getElementById('pingInfo').style.color = 'orange';
