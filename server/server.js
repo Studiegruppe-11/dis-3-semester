@@ -152,8 +152,23 @@ app.post('/smstext', (req, res) => {
   if (req.body.Body == 'serverstatus') {
     twiml.message('Serveren er online.');
   } else if (req.body.Body == 'dagens omsætning') {
-   
-    twiml.message('Dagens omsætning er: 1000 kr.');
+
+ async () => {
+    try {
+      const response = await fetch("/totalRevenue");
+      const result = await response.json();
+      
+      if (result.total_price) {
+        twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
+      }
+      else {
+        twiml.message('Dagens omsætning er: 0 kr.');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
     
   } else {
