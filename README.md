@@ -1,7 +1,7 @@
 # Joe Juice Project
 
 ## Introduction
-This school project is a web application modeled after Joe & The Juice. It's built using Node.js and Express and hosted on a DigitalOcean droplet. The application features user authentication, juice ordering, order management, and image uploads.
+This school project is a web application modeled after Joe & The Juice. It's built using Node.js and Express and hosted on a DigitalOcean droplet. The application features user authentication, juice ordering, order management, and image uploads. Commit count is high due testing/implementation directly on the server.
 
 ## Key Features
 - **User Authentication:** Secure login and registration system.
