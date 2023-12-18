@@ -5,6 +5,8 @@ This school project is a web application modeled after Joe & The Juice. It's bui
 
 ## Key Features
 - **User Authentication:** Secure login and registration system.
+- **Integrated Database:** MySQL database hosted on the server.
+- **In Cache Memory SM:** Client sessions are stored with Redis.
 - **Juice Ordering:** Users can browse and order juices.
 - **Order Management:** Admins can manage juice orders.
 - **Image Upload:** Admins can upload images for juices.
