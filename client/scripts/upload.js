@@ -1,26 +1,25 @@
 window.addEventListener("DOMContentLoaded", async () => {
-
-    //  vis navn på admin logget ind
+    // Tjekker login-status og viser brugerens navn
     try {
       const response = await fetch("/admins/show");
       const result = await response.json();
   
       if (result.adminUserId && result.adminName) {
-        // Viser navn hvis man er logget ind
+        // Opdaterer brugergrænsefladen med admin-brugerens navn
         document.getElementById("usernameDisplay").innerHTML = "Logget ind som: " + result.adminName;
-        // Skal ikke vise "opret bruger" hvis man er logget ind.
       }
       else {
+        // Omdirigerer til login-siden, hvis brugeren ikke er logget ind
         window.location.href = "/admin/login";
       }
     } catch (error) {
         console.log(error);
-        // Håndter fejlhåndtering her
+        // Håndterer eventuelle fejl i forbindelse med brugeroplysninger
       }
     });  
 
 
-// vis navn på admin logget ind
+// Håndtering af billedupload
 document.getElementById('uploadForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -28,9 +27,10 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     const files = e.target.image.files;
 
     for(let i = 0; i < files.length; i++) {
-        formData.append('image', files[i]); // 'image' should match the field name expected by multer
+        formData.append('image', files[i]);
     }
 
+    // Sender billedfiler til serveren og håndterer respons
     fetch('/images/upload/images', {
         method: 'POST',
         body: formData
@@ -43,31 +43,32 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     })
     .then(data => {
         if (data.urls && data.urls.length > 0) {
+            // Viser links til de uploadede billeder
             const links = data.urls.map(url => `<a href="${url}" target="_blank" style="color: #f7c1d9; margin-top: 10px; margin-bottom: 10px;">${url}</a>`).join('<br>');
             document.getElementById('uploadStatus').innerHTML = `Upload successful! Her er dine links: <br>${links}`;
         
-            // Tilføjer delay, så billederne vises efter er uploaded. Uden delay prøver den at vise billederne før de er uploaded.
-            setTimeout(fetchImagesFromCDN, 2000); // Increase delay to 2 seconds
+            // Forsinker visning af billeder for at sikre fuld upload
+            setTimeout(fetchImagesFromCDN, 2000);
         } else {
             document.getElementById('uploadStatus').textContent = 'Upload successful but no URLs returned.';
         }
     })
-    
     .catch(error => {
         console.error('Error:', error);
         document.getElementById('uploadStatus').textContent = 'Upload failed: ' + error;
     });
 });
 
-// Fetcher billeder fra CDN og viser dem i browseren
+// Indlæser og viser billeder fra CDN
 function fetchImagesFromCDN() {
     fetch('/images/fetch')
       .then(response => response.json())
       .then(urls => {
         const container = document.getElementById('cdnImages');
-        container.innerHTML = ''; // Clear existing images before appending new ones
+        container.innerHTML = ''; // Renser containeren før nye billeder tilføjes
         urls.forEach(url => {
-          const img = document.createElement('img'); // Definerer img element og styler det
+          // Opretter og tilføjer hvert billede til containeren
+          const img = document.createElement('img');
           img.src = url;
           img.style.width = '100px'; 
           img.style.height = '100px';
@@ -81,9 +82,11 @@ function fetchImagesFromCDN() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Indlæser billeder fra CDN ved sidenindlæsning
     fetchImagesFromCDN();
 });
 
+// Forhåndsvisning af valgte billedfiler
 function previewImages() {
     var preview = document.getElementById('preview');
     var fileChosen = document.getElementById('file-chosen');
@@ -95,8 +98,8 @@ function previewImages() {
         fileChosen.textContent = 'No files chosen';
     }
 
+    // Læser og forhåndsviser hver fil
     function readAndPreview(file) {
-        // Make sure `file.name` matches our extensions criteria
         if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
             return alert(file.name + " is not an image");
         } 

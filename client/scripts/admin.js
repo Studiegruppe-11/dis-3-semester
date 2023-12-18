@@ -145,10 +145,6 @@ document.getElementById("logout").addEventListener("click", async () => {
     } 
 });
 
-// SOCKET PING START
-// Socket til at vise RTT og ping i realtid på admin-siden.
-// Opret en WebSocket-forbindelse til serveren
-
 // Lyt efter opdateringer fra serveren
 
 socket.on('rttUpdate', (data) => {
@@ -168,9 +164,7 @@ if (data.rtt > 1000) {
   socket.on('pingUpdate', (data) => {
     // Opdater HTML-elementet med ping-oplysninger
     document.getElementById('pingInfo').textContent = `Ping: ${data.ping} ms`;
-  
-  if
-(data.ping < 500) {
+  if  (data.ping < 500) {
       document.getElementById('pingInfo').style.color = 'green';
   } else if (data.ping > 500) {
       document.getElementById('pingInfo').style.color = 'orange';

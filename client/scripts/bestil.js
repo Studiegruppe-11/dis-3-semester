@@ -11,27 +11,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
           // Funktion til at håndtere klik på knappen
-    async function handleButtonClick(product) {
-      try {
-        // send produktets id til serveren, som derefter gemmer i express session.
-        await fetch("/bestil/kurv", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            product_id: product.product_id,
-          }),
-        });
+        async function handleButtonClick(product) {
+          try {
+            // send produktets id til serveren, som derefter gemmer i express session.
+            await fetch("/bestil/kurv", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                product_id: product.product_id,
+              }),
+            });
 
-        // se i console at det er det rigtige produkt der logges.
-        console.log(`Button clicked for Product ID: ${product.product_id}, Name: ${product.name}`);
-      } catch (error) {
-        console.error('Error handling button click:', error);
-      }
-    }
-
-
+            // se i console at det er det rigtige produkt der logges.
+            console.log(`Button clicked for Product ID: ${product.product_id}, Name: ${product.name}`);
+          } catch (error) {
+            console.error('Error handling button click:', error);
+          }
+        }
 
        // Opret separate kasser for hver sandwich
         sandwich.forEach((sandwich) => {
@@ -60,7 +58,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             button.addEventListener("click", () => handleButtonClick(sandwich));
             button.classList.add("kurvknap");
             menuItem.appendChild(button);
-
 
             sandwichList.appendChild(menuItem);
         });
@@ -97,17 +94,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
     } catch (error) {
-
         console.log(error);
-
     }
 });
-
-
-
-
-console.log("Bestil.js loaded");
-
 
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -128,6 +117,3 @@ window.addEventListener("DOMContentLoaded", async () => {
         // Håndter fejlhåndtering her
       }
     });
-
-
-
