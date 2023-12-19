@@ -94,7 +94,7 @@ async function placedorder() {
       const productIds = result.productIds || [];
 
       // send en test-anmodning til serveren
-      await fetch("/kurv/placerordrer", {
+      await fetch("/kurv/placerordrer", {  
           method: "POST",
           headers: {
               "Content-Type": "application/json",
