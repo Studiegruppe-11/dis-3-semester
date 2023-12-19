@@ -115,10 +115,9 @@ router.get("/users/logout", async (req, res) => {
     if (err) {
         console.error("Error destroying session:", err);
     }
-});
+  });
     res.json({ loggedOut: true });
-  }
-  );
+});
 
 
   

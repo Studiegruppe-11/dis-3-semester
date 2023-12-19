@@ -45,11 +45,12 @@ router.post("/admin/login", async (req, res) => {
 
 // logud 
 router.get("/admin/logout", async (req, res) => {
-  // Slet brugernavn og ID fra sessionen
-  delete req.session.adminUserId;
-  delete req.session.adminName;
-
-  res.json({ loggedOut: true });
+  req.session.destroy(function(err) {
+    if (err) {
+        console.error("Error destroying session:", err);
+    }
+  });
+    res.json({ loggedOut: true });
 });
 
 
