@@ -101,7 +101,7 @@ router.post("/users/login", async (req, res) => {
       res.json({ error: 'Forkert brugernavn eller adgangskode' });
     }
   } catch (error) {
-    console.log("Error during login process:", error); // Log any error during the login process
+    console.log("Error during login process:", error);
     res.status(500).json({ error: 'Der opstod en fejl under login.' });
   }
 });
