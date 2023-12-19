@@ -1,8 +1,7 @@
 //root/server/routes/user.route.js
-
 const express = require('express');
 const router = express.Router();
-const connection = require('../db/database1.js'); // Opdater stien efter behov
+const connection = require('../db/database1.js');
 const bcrypt = require('bcrypt');
 
 const { sendMail } = require('../utility/mailUtility');
@@ -15,7 +14,7 @@ router.get('/users/customers', async (req, res) => {
     try {
         const pool = await connection.poolPromise;
 
-        // Udfør SQL-forespørgslen her
+        // SQL-queyr
         const [rows] = await pool.query('SELECT * FROM customers');
 
         res.send(rows);
@@ -108,19 +107,16 @@ router.post("/users/login", async (req, res) => {
 
 
 // Log ud
-
 router.get("/users/logout", async (req, res) => {
 
-  req.session.destroy(function(err) {
-    if (err) {
-        console.error("Error destroying session:", err);
-    }
-  });
-    res.json({ loggedOut: true });
+req.session.destroy(function(err) {
+  if (err) {
+      console.error("Error destroying session:", err);
+  }
+});
+  res.json({ loggedOut: true });
 });
 
-
-  
   // vis logget ind bruger ved at hente brugerens ID og navn fra sessionen
   router.get("/users/show", async (req, res) => {
     const { userId, name } = req.session;
@@ -129,10 +125,7 @@ router.get("/users/logout", async (req, res) => {
     } else {
       res.status(404).json({ error: "User not found" });
     }
-});
- 
-
-
+  }); 
 
 // eksporter så den kaldes i server.js
 module.exports = router;
