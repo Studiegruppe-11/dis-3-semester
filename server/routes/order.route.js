@@ -146,7 +146,7 @@ router.get('/orders/sandwich', async (req, res) => {
       for (const placedorder of productIds) {
         const query = `
           INSERT INTO placedorders (customer_id, product_id, date, status)
-          VALUES (?, ?, ?, ?)
+          VALUES (?, ?, ?, ?) 
         `;
     
         const values = [customer_id, placedorder, date, status];
