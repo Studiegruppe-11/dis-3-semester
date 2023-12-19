@@ -33,23 +33,21 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
-// Redis session storage (local host)
-
-
-// Create Redis Client
+// Lav Redis client
 const redisClient = redis.createClient();
 
+// Hvis der er en fejl i redis, log den
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 redisClient.on('connect', (err) => console.log('Connected to redis successfully'));
 
 redisClient.connect();
 
-//Configure session middleware to use Redis
+// Konfiguration af redis
 app.use(session({
     store: new RedisStore({ 
       client: redisClient,
       ttl: 60 *60 * 24 }), // I sekunder: 24 timer
-    secret: 'tester', // Eventuelt ændre denne
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {

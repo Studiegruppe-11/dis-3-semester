@@ -3,11 +3,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const nodemailer = require('nodemailer');
 
-// Gmail brugerens mail + applikationskode (normalt password kan ikke bruges)
-// Ligger også i .env filen på serveren
-// const gUser = 'skoleprojektdis@gmail.com';
-// const gPswd = 'gagj xqup tjcu xqdw';
-
+// Login variabler til Gmail
 const gUser = process.env.GMAIL_USER;
 const gPswd = process.env.GMAIL_PASS;
 
