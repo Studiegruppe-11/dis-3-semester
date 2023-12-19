@@ -6,6 +6,7 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 
+// Importer hjælpefunktioner til upload og hentning af billeder
 const { uploadImage } = require('../utility/multipleImgUploadUtility.js');
 const { fetchImagesFromCloudinary } = require('../utility/cdnFetchUtility.js');
 
@@ -27,12 +28,12 @@ router.post('/upload/images', upload.array('image', 8), async (req, res) => {
             fs.unlinkSync(tmpFilePath);
             console.log(result);
             console.log(result.url);
-            return result; // Sørg for, at dette er den URL, du ønsker at returnere
+            return result; 
         });
 
-        const results = await Promise.all(uploadPromises); // Gem URL'erne i 'results'
+        const results = await Promise.all(uploadPromises);
         console.log(results);
-        res.status(200).json({ message: 'Billeder uploadet med succes', urls: results }); // Brug 'results' her
+        res.status(200).json({ message: 'Billeder uploadet med succes', urls: results }); 
     } catch (error) {
         console.error('Fejl ved upload af billeder:', error);
         res.status(500).send('Fejl ved upload af billeder');
@@ -42,7 +43,7 @@ router.post('/upload/images', upload.array('image', 8), async (req, res) => {
 // Rute til at hente billeder fra Cloudinary
 router.get('/fetch', async (req, res) => {
     try {
-      const images = await fetchImagesFromCloudinary('joebilleder'); // Erstat med dit mappenavn
+      const images = await fetchImagesFromCloudinary('joebilleder');
       res.json(images);
     } catch (error) {
       console.error('Fejl i rute - henter billeder:', error);
