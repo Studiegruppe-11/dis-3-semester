@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 // Funktion til at sende mails, tager modtager, emne, tekst og html som parametre
 async function sendMail(recipients, subject, text, html) {
   const mailOptions = {
-    from: "Joe's",
+    from: "Joes, <gUser>",
     to: recipients,
     subject: subject,
     text: text,
