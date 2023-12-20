@@ -140,24 +140,23 @@ app.post('/smstext', (req, res) => {
     twiml.message('Serveren er online.');
     console.log('twilio virker');
   } else if (req.body.Body == 'dagens omsætning') {
+    console.log('dagens omsætning virker')
+    async () => {
+
+    try {
+      const response = await fetch("/totalRevenuetoday");
+      const result = await response.json();
+      if (result.total_price) {
     
-
-//  async () => {
-//     try {
-//       const response = await fetch("/totalRevenue");
-//       const result = await response.json();
-//       if (result.total_price) {
-   
-//         twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
-//       }
-//       else {
-//         twiml.message('Dagens omsætning er: 0 kr.');
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-
-//   }
+        twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
+      }
+      else {
+        twiml.message('Dagens omsætning er: 0 kr.');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
     
   } else {
     twiml.message('Prøv at skriv noget andet.');
