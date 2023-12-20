@@ -136,12 +136,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/smstext', (req, res) => {
   const twiml = new MessagingResponse();
 
-  if (req.body.Body == 'serverstatus') {
-    twiml.message('Serveren er online.');
-    console.log('twilio virker');
-  }else if (req.body.Body == 'test') {
+  if (req.body.Body == 'test') {
     console.log('test virker');
-    twiml.message('Serveren er online.');
+    twiml.message('test virker');
 
 
     
