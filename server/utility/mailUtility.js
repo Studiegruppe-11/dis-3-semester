@@ -1,5 +1,5 @@
 // root/server/utility/mailUtility.js
-const dotenv = require('dotenv')s;
+const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
 
 // Login variabler
