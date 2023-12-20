@@ -2,6 +2,8 @@
 
 ## Introduktion
 Dette skoleprojekt er en webapplikation, der er modelleret efter Joe & The Juice. Den er bygget med Node.js og Express og hostet på en DigitalOcean droplet. Applikationen indeholder brugerautentificering, juicebestilling, ordrestyring og upload af billeder. Antallet af commits er højt på grund af testning/implementering direkte på serveren.
+Dette projekt er udviklet til at køre på serveren og kan derfor ikke køres på localhost. 
+Projektet/ webapplikationen kan findes ved at indtaste serverens IP-adresse 164.90.228.42 eller domænenavnet joejuicexam.me i søgefeltet i en søgemaskine. 
 
 ## Nøglefunktioner
 - **Brugerautentificering:** Sikker login og registreringssystem.
@@ -25,16 +27,11 @@ Dette skoleprojekt er en webapplikation, der er modelleret efter Joe & The Juice
 - **Versionskontrol:** Git
 - **Hosting:** DigitalOcean
 
-## Miljøvariable
-1. Lav en kopi af ".env.template" filen i rodmappe
-2. Indtast dine legitimationsoplysninger for de givne variable
-3. Slet filtypenavnet ".template" fra filnavnet.
-4. Dvs. filnavnet skal være ".env" og placeres i rodmappen (src), ikke en undermappe.
-
 # Joe Juice Project (EN)
 
 ## Introduction
-This school project is a web application modeled after Joe & The Juice. It's built using Node.js and Express and hosted on a DigitalOcean droplet. The application features user authentication, juice ordering, order management, and image uploads. Commit count is high due testing/implementation directly on the server.
+This school project is a web application modeled after Joe & The Juice. It's built using Node.js and Express and hosted on a DigitalOcean droplet. The application features user authentication, juice ordering, order management, and image uploads. Commit count is high due testing/implementation directly on the server.This project is designed to run on the server and therefore cannot be executed on localhost. The project/web application can be accessed by entering the server's IP address 164.90.228.42 or the domain name joejuicexam.me in the search bar of a search engine.
+
 
 ## Key Features
 - **User Authentication:** Secure login and registration system.
@@ -58,8 +55,3 @@ This school project is a web application modeled after Joe & The Juice. It's bui
 - **Version Control:** Git
 - **Hosting:** DigitalOcean
 
-## Environment Variables
-1. Make a copy of the ".env.template" file in the root folder
-2. Enter your credentials for given variables
-3. Delete the file extension ".template" of the file name.
-4. I.e. file name should be ".env" and be placed in the root folder (src), not a sub-directory.
