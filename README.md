@@ -20,6 +20,7 @@ Dette skoleprojekt er en webapplikation, der er modelleret efter Joe & The Juice
 - **Real-time Opdateringer:** Socket.IO til real-tids opdateringer af ordrestatus.
 - **Automatiseret Udrulning:** GitHub webhook til automatisk udrulning ved commits.
 - **SMS Notifikationer:** Twilio integration til afsendelse af SMS serverstatus.
+- **Sikker kryptering:** Applikationen benytter HTTPS via Let's Encrypt for en sikker forbindelse
 
 ## Anvendte Teknologier
 - **Frontend:** HTML, CSS, JavaScript
