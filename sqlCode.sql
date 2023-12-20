@@ -1,6 +1,3 @@
--- Generated with https://www.mockaroo.com/ or chatGPT
-
-
 create table customers (
 	id INT,
 	first_name VARCHAR(50),
