@@ -152,7 +152,6 @@ app.post('/smstext', (req, res) => {
           twiml.message(`Dagens omsætning er: ${result.total_price} kr.`);
         }
       } catch (error) {
-        console.error(error);
       }
     }
     totalRevenuetoday();
