@@ -139,23 +139,6 @@ app.post('/smstext', (req, res) => {
   if (req.body.Body == 'serverstatus') {
     console.log('Twilio sms sendt');
     twiml.message('Serveren er online.');
-  }else if (req.body.Body == 'bestil') {
-    console.log('Twilio sms sendt');
-    twiml.message('Du kan bestille her: http://joejuicexam.me');
-  }else if (req.body.Body == 'dagens omsætning') {
-    console.log('Twilio sms sendt');
-    async function totalRevenuetoday() {
-      try {
-        const response = await fetch("/totalRevenuetoday");
-        const result = await response.json();
-        if (result.total_price) {
-          twiml.message(`Dagens omsætning er: ${result.total_price} kr.`);
-        }
-      } catch (error) {
-      }
-    }
-    totalRevenuetoday();
-
   } else {
     twiml.message('Prøv at skriv noget andet.');
   }
