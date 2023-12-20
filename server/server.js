@@ -136,29 +136,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/smstext', (req, res) => {
   const twiml = new MessagingResponse();
 
-  if (req.body.Body == 'test') {
-    console.log('twilio virker');
-    twiml.message('test virker.');
-  
-  //   async () => {
-
-  //   try {
-  //     const response = await fetch("/totalRevenuetoday");
-  //     const result = await response.json();
-  //     if (result.total_price) {
-    
-  //       twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
-  //     }
-  //     else {
-  //       twiml.message('Dagens omsætning er: 0 kr.');
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-    
+  if (req.body.Body == 'serverstatus') {
+    console.log('Twilio sms sendt');
+    twiml.message('Serveren er online.');
   } else {
-    console.log("skriv noget andet")
     twiml.message('Prøv at skriv noget andet.');
   }
 
