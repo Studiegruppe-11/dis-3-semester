@@ -141,22 +141,22 @@ app.post('/smstext', (req, res) => {
     console.log('twilio virker');
   } else if (req.body.Body == 'dagens omsætning') {
     console.log('dagens omsætning virker')
-    async () => {
+  //   async () => {
 
-    try {
-      const response = await fetch("/totalRevenuetoday");
-      const result = await response.json();
-      if (result.total_price) {
+  //   try {
+  //     const response = await fetch("/totalRevenuetoday");
+  //     const result = await response.json();
+  //     if (result.total_price) {
     
-        twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
-      }
-      else {
-        twiml.message('Dagens omsætning er: 0 kr.');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //       twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
+  //     }
+  //     else {
+  //       twiml.message('Dagens omsætning er: 0 kr.');
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
     
   } else {
     console.log("skriv noget andet")
