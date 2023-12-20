@@ -147,7 +147,7 @@ app.post('/smstext', (req, res) => {
 });
 
 
-
+console.log('Twilio sms server started')
 
 
 
