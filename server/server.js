@@ -139,17 +139,18 @@ app.post('/smstext', (req, res) => {
   if (req.body.Body == 'serverstatus') {
     console.log('Twilio sms sendt');
     twiml.message('Serveren er online.');
+  }else if (req.body.Body == 'bestil') {
+    console.log('Twilio sms sendt');
+    twiml.message('Du kan bestille her: http://joejuicexam.me');
+  }else if (req.body.Body == 'dagens omsætning') {
+    console.log('Twilio sms sendt');
+    twiml.message('Dagens omsætning er 483 kr.');
   } else {
     twiml.message('Prøv at skriv noget andet.');
   }
 
   res.type('text/xml').send(twiml.toString());
 });
-
-
-console.log('Twilio sms server started')
-
-
 
 
 
