@@ -3,7 +3,9 @@
 ## Introduktion
 Dette skoleprojekt er en webapplikation, der er modelleret efter Joe & The Juice. Den er bygget med Node.js og Express og hostet på en DigitalOcean droplet. Applikationen indeholder brugerautentificering, juicebestilling, ordrestyring og upload af billeder. Antallet af commits er højt på grund af testning/implementering direkte på serveren.
 Dette projekt er udviklet til at køre på serveren og kan derfor ikke køres på localhost. 
-Projektet/ webapplikationen kan findes ved at indtaste serverens IP-adresse 164.90.228.42 eller domænenavnet joejuicexam.me i søgefeltet i en søgemaskine. 
+Projektet/ webapplikationen kan findes ved at indtaste serverens IP-adresse 164.90.228.42 eller domænenavnet joejuicexam.me i søgefeltet i en søgemaskine.
+.env filen er blevet tilføjet til root i denne filmappe, som er afleveret i Digitaleksamen.
+.env filen indeholder adgangsnøgler til databasen, G-mail, Cloudinary og Redis.
 
 ## Nøglefunktioner
 - **Brugerautentificering:** Sikker login og registreringssystem.
