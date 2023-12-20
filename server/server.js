@@ -144,7 +144,6 @@ app.post('/smstext', (req, res) => {
     twiml.message('Du kan bestille her: http://joejuicexam.me');
   }else if (req.body.Body == 'dagens omsætning') {
     console.log('Twilio sms sendt');
-    const fetch = require('node-fetch');
     async function totalRevenuetoday() {
       try {
         const response = await fetch("/totalRevenuetoday");
