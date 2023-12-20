@@ -138,6 +138,7 @@ app.post('/smstext', (req, res) => {
 
   if (req.body.Body == 'serverstatus') {
     twiml.message('Serveren er online.');
+    console.log('twilio virker');
   } else if (req.body.Body == 'dagens omsætning') {
 
  async () => {
