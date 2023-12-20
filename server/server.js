@@ -145,9 +145,9 @@ app.post('/smstext', (req, res) => {
     try {
       const response = await fetch("/totalRevenue");
       const result = await response.json();
-      
+      console.log(result.total_price);
       if (result.total_price) {
-        console.log(result.total_price);
+   
         twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
       }
       else {
