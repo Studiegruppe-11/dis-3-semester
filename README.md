@@ -6,6 +6,7 @@ Dette projekt er udviklet til at køre på serveren og kan derfor ikke køres p�
 Projektet/ webapplikationen kan findes ved at indtaste serverens IP-adresse 164.90.228.42 eller domænenavnet joejuicexam.me i søgefeltet i en søgemaskine.
 .env filen er blevet tilføjet til root i denne filmappe, som er afleveret i Digitaleksamen.
 .env filen indeholder adgangsnøgler til databasen, G-mail, Cloudinary og Redis.
+Der kan logges på som admin på siden ved at bruge brugernavn "joejuiceAdmin" og adgangskode "123". En kunde-bruger kan man selv oprette. 
 
 ## Nøglefunktioner
 - **Brugerautentificering:** Sikker login og registreringssystem.
