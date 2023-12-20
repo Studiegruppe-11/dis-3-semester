@@ -1,13 +1,18 @@
 # Joe Juice Projekt
 
 ## Introduktion
-Dette skoleprojekt er en webapplikation, der er modelleret efter Joe & The Juice. Den er bygget med Node.js og Express og hostet på en DigitalOcean droplet. Applikationen indeholder brugerautentificering, juicebestilling, ordrestyring og upload af billeder. Antallet af commits er højt på grund af testning/implementering direkte på serveren.
+Dette skoleprojekt er en webapplikation, der er modelleret efter Joe & The Juice. Den er bygget med Node.js og Express og hostet på en DigitalOcean droplet. 
+Applikationen indeholder brugerautentificering, juicebestilling, ordrestyring og upload af billeder. 
+Antallet af commits er højt på grund af testning/implementering direkte på serveren.
+
+## Opsætning
+- Applikationen kan findes ved at indtaste serverens IP-adresse 164.90.228.42 eller domænenavnet "www.joejuicexam.me" i en browser.
+- Dette projekt er udviklet med henblik på at køre på serveren, og kan derfor ikke køres på localhost.
+- ".env" filen er blevet tilføjet til root mappen (src) i dette projekt, som er afleveret i Digitaleksamen.
+- ".env" filen indeholder adgangsnøgler til MySQL databasen, G-mail, Cloudinary og Redis.
 
 ## OBS
-- Dette projekt er udviklet med henblik på at køre på serveren og kan derfor ikke køres på localhost.
-- Applikationen kan findes ved at indtaste serverens IP-adresse 164.90.228.42 eller domænenavnet "www.joejuicexam.me" i en browser.
-- .env filen er blevet tilføjet til root mappen i dette projekt, som er afleveret i Digitaleksamen.
-- .env filen indeholder adgangsnøgler til MySQL databasen, G-mail, Cloudinary og Redis.
+
 - Der kan logges på som admin på siden ved at bruge brugernavn "joejuiceAdmin" og adgangskode "123". En kunde-bruger kan man selv oprette. 
 
 ## Link til github
