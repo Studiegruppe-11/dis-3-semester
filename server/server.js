@@ -16,7 +16,7 @@ const setupOrderSocket = require('./utility/orderSocket.js');
 
 // Til cloudinary
 const cloudinary = require('cloudinary').v2;
-const fileUpload = require('express-fileupload'); // For handling file uploads
+//const fileUpload = require('express-fileupload'); // For handling file uploads
 
 // Til github webhook for automatisk pull 
 const { exec } = require('child_process');
