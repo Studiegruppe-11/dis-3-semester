@@ -129,7 +129,46 @@ setupOrderSocket(http);
 
 
 //TWILIO START
+// const { MessagingResponse } = require('twilio').twiml;
+
+// app.use(bodyParser.urlencoded({ extended: false }));
+
+// app.post('/smstext', (req, res) => {
+//   const twiml = new MessagingResponse();
+
+//   if (req.body.Body == 'serverstatus') {
+//     twiml.message('Serveren er online.');
+//     console.log('twilio virker');
+//   } else if (req.body.Body == 'dagens omsætning') {
+    
+
+// //  async () => {
+// //     try {
+// //       const response = await fetch("/totalRevenue");
+// //       const result = await response.json();
+// //       if (result.total_price) {
+   
+// //         twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
+// //       }
+// //       else {
+// //         twiml.message('Dagens omsætning er: 0 kr.');
+// //       }
+// //     } catch (error) {
+// //       console.log(error);
+// //     }
+
+// //   }
+    
+//   } else {
+//     twiml.message('Prøv at skriv noget andet.');
+//   }
+
+//   res.type('text/xml').send(twiml.toString());
+// });
+
+
 const { MessagingResponse } = require('twilio').twiml;
+const https = require('https');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -140,30 +179,69 @@ app.post('/smstext', (req, res) => {
     twiml.message('Serveren er online.');
     console.log('twilio virker');
   } else if (req.body.Body == 'dagens omsætning') {
+    // Foretag en HTTPS GET-anmodning til totalrevenue-endpointet
+    const options = {
+      hostname: 'joejuicexam.me',
+      path: '/totalrevenue',
+      method: 'GET',
+    };
 
- async () => {
-    try {
-      const response = await fetch("/totalRevenue");
-      const result = await response.json();
-      if (result.total_price) {
-   
-        twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
-      }
-      else {
-        twiml.message('Dagens omsætning er: 0 kr.');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const request = https.request(options, (response) => {
+      let data = '';
 
-  }
-    
+      // Lyt efter dataarrangementer
+      response.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      // Lyt efter afslutningen af responsen
+      response.on('end', () => {
+        try {
+          // Parse JSON-dataen
+          const result = JSON.parse(data);
+          
+          if (result.total_price) {
+            twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
+            console.log('Dagens omsætning:', result.total_price + ' kr.');
+          } else {
+            twiml.message('Dagens omsætning er: 0 kr.');
+          }
+        } catch (error) {
+          console.error('Fejl ved parsing af JSON:', error.message);
+        }
+
+        res.type('text/xml').send(twiml.toString());
+      });
+    });
+
+    // Lyt efter fejl under anmodningen
+    request.on('error', (error) => {
+      console.error('Fejl ved anmodning:', error.message);
+      res.status(500).send('Internal Server Error');
+    });
+
+    // Afslut anmodningen
+    request.end();
   } else {
     twiml.message('Prøv at skriv noget andet.');
+    res.type('text/xml').send(twiml.toString());
   }
-
-  res.type('text/xml').send(twiml.toString());
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //TWILIO SLUT
 
