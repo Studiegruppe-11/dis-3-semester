@@ -147,6 +147,7 @@ app.post('/smstext', (req, res) => {
       const result = await response.json();
       
       if (result.total_price) {
+        console.log(result.total_price);
         twiml.message('Dagens omsætning er: ' + result.total_price + ' kr.');
       }
       else {
