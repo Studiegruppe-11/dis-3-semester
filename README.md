@@ -10,6 +10,9 @@ Dette skoleprojekt er en webapplikation, der er modelleret efter Joe & The Juice
 - .env filen indeholder adgangsnøgler til MySQL databasen, G-mail, Cloudinary og Redis.
 - Der kan logges på som admin på siden ved at bruge brugernavn "joejuiceAdmin" og adgangskode "123". En kunde-bruger kan man selv oprette. 
 
+## Link til github
+https://github.com/Studiegruppe-11/dis-3-semester
+
 ## Nøglefunktioner
 - **Brugerautentificering:** Sikker login og registreringssystem.
 - **Integreret Database:** Produkter, bruger- og admininformationer opbevares i MySQL.
