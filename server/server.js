@@ -11,8 +11,7 @@ const http = require("http").Server(app);
 const redis = require('redis');
 const RedisStore = require("connect-redis").default
 
-// setupPing bruges ikke?
-const setupPing = require('./utility/pingsocket.js');
+// Socket
 const setupOrderSocket = require('./utility/orderSocket.js');
 
 // Til cloudinary
@@ -125,21 +124,11 @@ app.post('/', function (req, res) {
 });
 
 
-// BEGGE SOCKETS KAN IKKE KØRE SAMTIDIGT. VENT MED AT SKRIV OM PINGSOCKET INDTIL VI FINDER UD AF OM DE KAN KØRE SAMMEN. 
-// ELLERS DROPPER VI BARE PINGSOCKET. 
-
-// Ping socket
-// setupPing(http)
-
 // Order socket. Opdatere ordrestatus i admin.html. S
 setupOrderSocket(http);
 
 
 //TWILIO START
-// twilio sms. omsætning for i dag og i går skal også kunne vælges. blot en select statement til db. 
-// twilio sms, hvor man skriver til et endpoint på serveren, som så sender en sms tilbage. endpoint defineret på twilio.com
-
-// Ryk nedenstående til en anden fil, så det ikke er i server.js. Evt. utilities.
 const { MessagingResponse } = require('twilio').twiml;
 
 app.use(bodyParser.urlencoded({ extended: false }));
