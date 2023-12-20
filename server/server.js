@@ -137,13 +137,9 @@ app.post('/smstext', (req, res) => {
   const twiml = new MessagingResponse();
 
   if (req.body.Body == 'test') {
-    console.log('test virker');
-    twiml.message('test virker');
-
-
-    
-  } else if (req.body.Body == 'todaysrevenue') {
-    console.log('todays revenue virker');
+    console.log('twilio virker');
+    twiml.message('test virker.');
+  
   //   async () => {
 
   //   try {
