@@ -10,19 +10,19 @@ const { sendMail } = require('../utility/mailUtility');
 const saltRounds = 10;
 
 // Endpoint for getting all customers
-router.get('/users/customers', async (req, res) => {
-    try {
-        const pool = await connection.poolPromise;
+// router.get('/users/customers', async (req, res) => {
+//     try {
+//         const pool = await connection.poolPromise;
 
-        // SQL-queyr
-        const [rows] = await pool.query('SELECT * FROM customers');
+//         // SQL-queyr
+//         const [rows] = await pool.query('SELECT * FROM customers');
 
-        res.send(rows);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send(error.message);
-    }
-});
+//         res.send(rows);
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send(error.message);
+//     }
+// });
 
 // Opret bruger i DB
 router.post('/users/create', async (req, res) => {
